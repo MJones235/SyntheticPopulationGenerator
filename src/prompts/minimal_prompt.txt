@@ -1,0 +1,21 @@
+Generate a household located in {city}.  
+
+The household should contain between 1 and 6 individuals.  
+For each individual provide:
+- "name" (a realistic name)
+- "age" (a plausible integer age)
+- "occupation" (a suitable job title, "Student" for school-aged children, and "Infant" for babies who are too young for school)
+
+Example:
+[
+    {
+        "name": "name of first person",
+        "age": "age of first person", 
+        "occupation": "occupation of first person"
+    },
+    {
+        ...
+    }
+]
+
+Return only a valid JSON array, with no additional text or explanation.  Even if the household contains only one person, still return an array.
