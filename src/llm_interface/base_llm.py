@@ -11,6 +11,8 @@ class BaseLLM(ABC):
     validating them, and retrying if necessary.
     """
 
+    is_local = False
+
     def __init__(self, max_retries: int = 3):
         self.max_retries = max_retries
 
@@ -20,12 +22,16 @@ class BaseLLM(ABC):
         Subclasses must implement how to call the LLM and return a raw text response.
         """
         raise NotImplementedError
+    
+    @abstractmethod
+    def get_model_metadata(self) -> str:
+        raise NotImplementedError
 
-    def generate_households(
+    def generate_household(
         self,
         prompt: str,
         json_schema: Dict[str, Any]
-    ) -> List[Dict[str, Any]]:
+    ) -> Dict[str, Any]:
         """
         Uses generate_text(prompt) to obtain a JSON array describing households,
         then validates it against the provided json_schema. 
@@ -42,7 +48,12 @@ class BaseLLM(ABC):
         current_prompt = prompt
 
         while attempts < self.max_retries:
-            raw_response = self.generate_text(current_prompt).strip()
+            try:
+                raw_response = self.generate_text(current_prompt).strip()
+            except Exception as e:
+                attempts += 1
+                print(f"Failed to generate response: {str(e)}.  Retrying...")
+                continue
 
             # Try to parse as JSON
             try:
@@ -57,6 +68,7 @@ class BaseLLM(ABC):
                     error=error_msg,
                     schema=json_schema,
                 )
+                print("Unable to parse response.  Retrying...")
                 continue  # Retry with corrected prompt
 
             # If JSON parse succeeded, we now validate the structure
@@ -74,6 +86,7 @@ class BaseLLM(ABC):
                     error=error_msg,
                     schema=json_schema,
                 )
+                print("Invalid JSON schema.  Retrying...")
 
         # If we exit the loop, all retries failed
         return []

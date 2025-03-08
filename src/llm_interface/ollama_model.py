@@ -4,6 +4,8 @@ from src.llm_interface.base_llm import BaseLLM
 from langchain_ollama import OllamaLLM
 
 class OllamaModel(BaseLLM):
+    is_local = True
+
     def __init__(self, model_name: str, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, max_retries: int = 3, format: str = "json", **kwargs):
         super().__init__(max_retries=max_retries)
         self.model_name = model_name
@@ -13,6 +15,9 @@ class OllamaModel(BaseLLM):
         self.format = format
         self.kwargs = kwargs
         self.llm = self._load_model()
+    
+    def get_model_metadata(self):
+        return f'OllamaModel("{self.model_name}", temperature={self.temperature}, top_p={self.top_p}, top_k={self.top_k})'
 
     def generate_text(self, prompt):
         response = self.llm.invoke(prompt)

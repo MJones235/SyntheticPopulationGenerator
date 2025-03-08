@@ -1,21 +1,25 @@
-Generate a household located in {city}.  
+Generate a household located in Newcastle, UK.  
 
-The household should contain between 1 and 6 individuals.  
-For each individual provide:
-- "name" (a realistic name)
-- "age" (a plausible integer age)
-- "occupation" (a suitable job title, "Student" for school-aged children, and "Infant" for babies who are too young for school)
+Each household should contain between 1 and 6 individuals.  
+For each individual, provide:
+- "name" (a realistic name).
+- "age" (a plausible integer age).
+- "gender" ("Male" or "Female").
+- "occupation" (a suitable job title, "Student" for school-aged children, and "Infant" for babies who are too young for school).
+- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Sibling", "Roommate").
 
-Example:
-[
-    {
-        "name": "name of first person",
-        "age": "age of first person", 
-        "occupation": "occupation of first person"
-    },
-    {
-        ...
-    }
-]
+**Important Instructions**:
+- **There must always be exactly one "Head" of household**.
+- **Children must inherit the surname of one of their parents**.
+- **Spouses may or may not share a surname with the Head**.
+- **Roommates and unrelated household members may have different surnames**.
+- Return **only** a JSON object with a `"household"` key.
+- Do **not** include additional text, explanations, or formatting.
 
-Return only a valid JSON array, with no additional text or explanation.  Even if the household contains only one person, still return an array.
+**Expected JSON format:**
+{
+    "household": [
+        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"},
+        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."},
+    ]
+}
