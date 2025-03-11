@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 import json
 import jsonschema
+import time
 
 class BaseLLM(ABC):
     """
@@ -18,6 +19,13 @@ class BaseLLM(ABC):
 
     @abstractmethod
     def generate_text(self, prompt: str) -> str:
+        """
+        Subclasses must implement how to call the LLM and return a raw text response.
+        """
+        raise NotImplementedError
+    
+    @abstractmethod
+    def generate_batch_text(self, prompt: list[str]) -> list[str]:
         """
         Subclasses must implement how to call the LLM and return a raw text response.
         """
@@ -90,6 +98,60 @@ class BaseLLM(ABC):
 
         # If we exit the loop, all retries failed
         return []
+
+    def generate_batch_households(self, prompts: List[str], json_schema: Dict[str, Any], max_parallel=1) -> List[Dict[str, Any]]:
+        """Generates multiple households in parallel using batch processing, schema validation, and controlled parallelism.
+        
+        Args:
+            prompts (List[str]): List of prompts instructing the model to return JSON data.
+            json_schema (Dict[str, Any]): A jsonschema dict to validate the structure.
+            max_parallel (int): Maximum number of households processed in parallel.
+
+        Returns:
+            tuple: (valid_households, failed_prompts)
+                - valid_households (List[Dict[str, Any]]): List of valid household dictionaries.
+                - failed_prompts (List[str]): List of prompts that failed after all retries.
+        """
+        failed_prompts = list(prompts)
+        valid_households = []
+
+        for attempt in range(self.max_retries):
+            if not failed_prompts:
+                break  # Exit if no failures
+
+            new_failed_prompts = []
+            batch_start = time.time()
+
+            for i in range(0, len(failed_prompts), max_parallel):
+                print(f"[INFO] {"Generating" if attempt == 0 else "Regenerating"} households {i+1} to {i+max_parallel}")
+                batch_prompts = failed_prompts[i : i + max_parallel]  # Process in chunks
+                try:
+                    batch_responses = self.generate_batch_text(batch_prompts)
+                except TimeoutError as e:
+                    print(f"[ERROR] LLM batch request timed out: {e}")
+                    new_failed_prompts.extend(batch_prompts)  # Retry entire batch later
+                    continue
+
+                for prompt, response in zip(batch_prompts, batch_responses):
+                    if response is None:
+                        print(f"[WARNING] Missing response. Retrying...")
+                        new_failed_prompts.append(prompt)
+                        continue
+
+                    try:
+                        data = json.loads(response)
+                        jsonschema.validate(instance=data, schema=json_schema)
+                        valid_households.append(data["household"])  # Extract and extend
+                    except (json.JSONDecodeError, jsonschema.ValidationError) as e:
+                        print(f"[ERROR] Response validation failed. Retrying...")
+                        new_failed_prompts.append(self._build_correction_prompt(prompt, response, f"Validation error: {e}", json_schema))
+
+            failed_prompts = new_failed_prompts
+            batch_end = time.time()
+            print(f"[INFO] Batch completed in {batch_end - batch_start:.2f} seconds.\n\n")
+
+        return valid_households
+
 
     def _build_correction_prompt(
         self,

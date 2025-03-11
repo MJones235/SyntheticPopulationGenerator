@@ -1,9 +1,10 @@
 import concurrent
 from typing import Any, Dict, List
+from src.analysis.household_size import compute_household_size_distribution_from_households
 from src.repositories.population_repository import PopulationRepository
 from src.llm_interface.model_factory import LLMFactory
-from src.llm_interface.ollama_model import OllamaModel
 from src.llm_interface.base_llm import BaseLLM
+import json
 
 class PopulationService:
     population_repository: PopulationRepository
@@ -21,24 +22,73 @@ class PopulationService:
             print("[ERROR] Error generating household. Skipping...")
             print(e)
             return None
-
-    def generate_households(self, n_households: int, model: BaseLLM, prompt: str, schema: str) -> list:
-        model_type = "ollama" if isinstance(model, OllamaModel) else ""
-        
-        model_kwargs = {
-            "model_name": model.model_name,
-            "temperature": model.temperature,
-            "top_p": model.top_p,
-            "top_k": model.top_k
+    
+    def _compute_statistics(self, households: List[List[Dict[str, Any]]]) -> Dict[str, Any]:
+        """Computes household statistics from generated data."""
+        return {
+            "num_households": len(households),
+            "size_distribution": compute_household_size_distribution_from_households(households)
         }
+    
+    def _generate_distribution_prompt(self, size_distribution: dict) -> str:
+        """Generates a structured text prompt based on household size distribution,
+        encouraging the LLM to align with real-world distributions rather than enforcing balance.
+        """
+        
+        sorted_sizes = sorted(size_distribution.items(), key=lambda x: x[1], reverse=True)
+        most_common = [f"{size}-person ({round(percent)}%)" for size, percent in sorted_sizes if percent > 0]
+        missing_sizes = [str(size) for size, percent in size_distribution.items() if percent == 0]
+        prompt_parts = []
+        
+        if most_common:
+            prompt_parts.append(f"Current household size distribution: {', '.join(most_common)}.")
 
-        Executor = concurrent.futures.ProcessPoolExecutor if model.is_local else concurrent.futures.ThreadPoolExecutor
+        if missing_sizes:
+            prompt_parts.append(f"No {', '.join(missing_sizes)}-person households have been generated yet.")
 
-        with Executor() as executor:
-            results = list(executor.map(self.generate_single_household, range(n_households), [n_households] * n_households,
-                [model_type] * n_households, [model_kwargs] * n_households, [prompt] * n_households, [schema] * n_households))
+        prompt_parts.append("Adjust future households to better reflect typical distributions for this location. "
+                            "Use your general knowledge to align household sizes with what is realistic in this area.")
 
-        return [h for h in results if h is not None]
+        return " ".join(prompt_parts)
+
+        
+    def _update_prompt_with_statistics(self, base_prompt: str, stats: Dict[str, Any] | None) -> str:
+        """Updates the LLM prompt to incorporate feedback from previous batches."""
+        if stats is None:
+            return base_prompt.replace("{HOUSEHOLD_STATS}", "")
+
+        stats_text = f"""
+        Statistics for households already generated:
+        {self._generate_distribution_prompt(stats["size_distribution"])}
+        """
+        return base_prompt.replace("{HOUSEHOLD_STATS}", stats_text.strip())
+
+    def generate_households(self, n_households: int, model: BaseLLM, base_prompt: str, schema: str, batch_size: int) -> list:
+        """Generates households in batches using batch processing and feedback-driven prompting."""
+        households = []
+        prompt = self._update_prompt_with_statistics(base_prompt, None)
+
+        for i in range(0, n_households, batch_size):
+            batch_count = min(batch_size, n_households - i)
+            is_last_batch = (i + batch_count) >= n_households
+
+            print(f"\n--- Generating Batch {i // batch_size + 1} ({batch_count} households) ---")
+
+            try:
+                batch_prompts = [prompt] * batch_count
+                batch_results = model.generate_batch_households(batch_prompts, schema)
+            except Exception as e:
+                print(f"[ERROR] Batch generation failed: {e}")
+                batch_results = []
+
+            households.extend(batch_results)
+
+            if not is_last_batch:
+                stats = self._compute_statistics(households)
+                prompt = self._update_prompt_with_statistics(base_prompt, stats)
+                print(f"Updated Statistics after Batch {i // batch_size + 1}: {json.dumps(stats, indent=2)}")
+
+        return households
     
     def get_by_id(self, id: str) -> Dict[str, Any]:
         return self.population_repository.get_population_by_id(id)

@@ -10,7 +10,7 @@ def plot_household_size(synthetic: str, census: Dict):
     synthetic = {size: synthetic.get(size, 0.0) for size in all_sizes}
     census = {size: census.get(size, 0.0) for size in all_sizes}
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(8, 3))
 
     bar_width = 0.4 
     indices = np.arange(len(all_sizes)) 
