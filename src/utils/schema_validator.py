@@ -1,9 +1,10 @@
 import jsonschema
+from src.services.file_service import FileService
 
 def validate_household(household_data: dict) -> bool:
     """Validates household data against the predefined schema."""
-    from src.file_loaders.schema_loader import load_schema
-    schema = load_schema("household_schema.json")
+    file_service = FileService()
+    schema = file_service.load_schema("household_schema.json")
     try:
         jsonschema.validate(instance=household_data, schema=schema)
         return True 

@@ -1,28 +1,21 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
-from src.repositories.population_repository import PopulationRepository
-from src.repositories.metadata_repository import MetadataRepository
+from src.services.population_service import PopulationService
+from src.services.metadata_service import MetadataService
+from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
 import os
 
 st.set_page_config(layout="wide")
 
-def load_html_report(report_path):
-    """Reads and returns the HTML content of a report."""
-    try:
-        with open(report_path, "r", encoding="utf-8") as file:
-            return file.read()
-    except FileNotFoundError:
-        return None
-
-
-metadata_repo = MetadataRepository()
-population_repo = PopulationRepository()
+file_service = FileService()
+metadata_service = MetadataService()
+population_service = PopulationService()
 
 st.title("📊 Population Browser")
 
-populations = metadata_repo.get_all_populations()
+populations = metadata_service.get()
 
 if not populations:
     st.warning("No populations found in the database.")
@@ -37,13 +30,13 @@ else:
     with tab1:
 
         # Fetch and display metadata
-        metadata = metadata_repo.get_metadata_by_population_id(selected_population_id)
+        metadata = metadata_service.get_by_id(selected_population_id)
         if metadata:
             st.subheader("📑 Population Metadata")
             st.json(metadata, expanded=False)
 
         # Fetch and display population data
-        individuals = population_repo.get_population_by_id(selected_population_id)
+        individuals = population_service.get_by_id(selected_population_id)
 
         if not individuals:
             st.warning("No data found for this population.")
@@ -56,7 +49,7 @@ else:
 
     with tab2:
         report_path = os.path.join("reports", f"{selected_population_id}.html")
-        report_html = load_html_report(report_path)
+        report_html = file_service.load_html_report(report_path)
         components.html(report_html, height=600, scrolling=True)
 
     with tab3:
