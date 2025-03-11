@@ -64,5 +64,10 @@ class DBManager:
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
 
+        CREATE TABLE IF NOT EXISTS analysis (
+            population_id TEXT PRIMARY KEY,
+            household_size_distribution TEXT,
+            FOREIGN KEY (population_id) REFERENCES metadata (population_id) ON DELETE CASCADE
+        );
         """
 

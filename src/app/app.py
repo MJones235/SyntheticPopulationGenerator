@@ -1,10 +1,12 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+from src.services.analysis_service import AnalysisService
 from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
+from src.utils.plots import plot_household_size
 import os
 
 st.set_page_config(layout="wide")
@@ -12,6 +14,7 @@ st.set_page_config(layout="wide")
 file_service = FileService()
 metadata_service = MetadataService()
 population_service = PopulationService()
+analysis_service = AnalysisService()
 
 st.title("📊 Population Browser")
 
@@ -53,4 +56,6 @@ else:
         components.html(report_html, height=600, scrolling=True)
 
     with tab3:
-        st.text(selected_population_id)
+        st.title("📊 Household Size Comparison")
+        analysis = analysis_service.get_by_id(selected_population_id)
+        st.pyplot(plot_household_size(analysis['household_size_distribution'], file_service.load_household_size(metadata['location'])))

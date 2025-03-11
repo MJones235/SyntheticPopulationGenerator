@@ -6,10 +6,10 @@ from src.llm_interface.ollama_model import OllamaModel
 from src.llm_interface.base_llm import BaseLLM
 
 class PopulationService:
-    population_repo: PopulationRepository
+    population_repository: PopulationRepository
 
     def __init__(self):
-        self.population_repo = PopulationRepository()
+        self.population_repository = PopulationRepository()
 
     def generate_single_household(self, n: int, n_total: int, model_type:str, model_kwargs: dict, prompt: str, schema: str):
         print(f"Generating household {n + 1}/{n_total}")
@@ -41,7 +41,7 @@ class PopulationService:
         return [h for h in results if h is not None]
     
     def get_by_id(self, id: str) -> Dict[str, Any]:
-        return self.population_repo.get_population_by_id(id)
+        return self.population_repository.get_population_by_id(id)
     
     def save_population(self, population_id: str, households: List[Dict[str, Any]]):
-        return self.population_repo.insert_population(population_id, households)
+        return self.population_repository.insert_population(population_id, households)

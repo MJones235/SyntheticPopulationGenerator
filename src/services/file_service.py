@@ -1,9 +1,13 @@
 import os
 import json
+from typing import Dict
+import pandas as pd
+import re
 
 class FileService:
     PROMPT_DIR = os.path.join(os.path.dirname(__file__), "../prompts")
     SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "../../data/schemas/")
+    CENSUS_DATA = os.path.join(os.path.dirname(__file__), "../../data/locations/")
 
     def load_prompt(self, filename: str, replacements: dict = None) -> str:
         """
@@ -39,3 +43,20 @@ class FileService:
                 return file.read()
         except FileNotFoundError:
             return None
+
+    def load_household_size(self, location: str) -> Dict:
+        try:
+            
+            filepath = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "household_size.csv")
+            census_df = pd.read_csv(filepath)
+            required_columns = ["C2021_HHSIZE_10_NAME", "OBS_VALUE"]
+            if not all(col in census_df.columns for col in required_columns):
+                raise ValueError(f"CSV file must contain columns: {required_columns}")
+
+            census_df["Household Size"] = census_df["C2021_HHSIZE_10_NAME"].apply(lambda x: int(re.search(r"\d+", x).group()))
+            household_size_distribution = dict(zip(census_df["Household Size"], census_df["OBS_VALUE"]))
+            return household_size_distribution
+
+        except Exception as e:
+            print(f"Error processing census data: {e}")
+            return {}

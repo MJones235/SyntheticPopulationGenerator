@@ -1,3 +1,4 @@
+from src.services.analysis_service import AnalysisService
 from src.services.metadata_service import MetadataService
 from src.services.report_service import ReportService
 from src.services.population_service import PopulationService
@@ -13,6 +14,7 @@ file_service = FileService()
 population_service = PopulationService()
 report_service = ReportService()
 metadata_service = MetadataService()
+analysis_service = AnalysisService()
 
 model = OllamaModel("llama3.2:3b", temperature=1, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
@@ -21,7 +23,7 @@ schema = file_service.load_schema("household_schema.json")
 
 population_id = str(uuid.uuid4())
 
-n_households = 10
+n_households = 300
 
 start_time = time.time()
 
@@ -48,6 +50,7 @@ try:
 
     metadata_service.save_metadata(metadata)
     population_service.save_population(population_id, households)
+    analysis_service.save_analysis(population_id)
 
 except Exception as e:
     print(f"An error occurred: {e}")
