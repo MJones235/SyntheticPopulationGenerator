@@ -1,17 +1,12 @@
-import json
 import subprocess
 from src.llm_interface.base_llm import BaseLLM
 from langchain_ollama import OllamaLLM
-import signal
-import threading
-import concurrent.futures
+import multiprocessing
 
 class OllamaModel(BaseLLM):
     is_local = True
-    TIMEOUT = 30
 
-    def __init__(self, model_name: str, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, max_retries: int = 3, format: str = "json", **kwargs):
-        super().__init__(max_retries=max_retries)
+    def __init__(self, model_name: str, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, format: str = "json", **kwargs):
         self.model_name = model_name
         self.temperature = temperature
         self.top_p = top_p
@@ -23,50 +18,36 @@ class OllamaModel(BaseLLM):
     def get_model_metadata(self):
         return f'OllamaModel("{self.model_name}", temperature={self.temperature}, top_p={self.top_p}, top_k={self.top_k})'
 
-    def generate_text(self, prompt):
-        response = self.llm.invoke(prompt)
-        return json.loads(response) if format == "json" else response
-    
-    def generate_batch_text(self, prompts):
-        def call_llm():
-            """Wrapper to invoke LLM batch mode."""
-            return self.llm.batch(prompts)  # Sends all prompts at once
+    def generate_text(self, prompt: str | list[str], timeout=30) -> str | list[str]:
+        def call_llm(queue):
+            """Function to execute the LLM request inside a separate process."""
+            try:
+                if isinstance(prompt, str):
+                    result = self.llm.invoke(prompt)
+                else:
+                    result = self.llm.batch(prompt)
+                queue.put(result)  # Send result to main process
+            except Exception as e:
+                queue.put(e)  # Send error to main process
 
-        def hard_timeout(signum, frame):
-            raise TimeoutError(f"LLM batch call exceeded {self.TIMEOUT} seconds.")
+        queue = multiprocessing.Queue()
+        process = multiprocessing.Process(target=call_llm, args=(queue,))
+        process.start()
+        process.join(timeout)
 
-        try:
-            if hasattr(signal, "signal"):  # Unix
-                signal.signal(signal.SIGALRM, hard_timeout)
-                signal.alarm(self.TIMEOUT)
-            else:  # Windows (use threading.Timer)
-                timer = threading.Timer(self.TIMEOUT, lambda: (_ for _ in ()).throw(TimeoutError(f"LLM batch call exceeded {self.TIMEOUT} seconds.")))
-                timer.start()
+        if process.is_alive():
+            print("[TIMEOUT] LLM call exceeded time limit. Terminating process...")
+            process.terminate() 
+            process.join()  
+            raise TimeoutError(f"LLM batch call timed out after {timeout} seconds.")
 
-            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(call_llm)
-                result = future.result(timeout=self.TIMEOUT)
+        if not queue.empty():
+            response = queue.get()
+            if isinstance(response, Exception):
+                raise response 
+            return response
 
-            return result 
-
-        except concurrent.futures.TimeoutError:
-            print(f"[WARNING] LLM batch generation SOFT timeout after {self.TIMEOUT} seconds.")
-            raise TimeoutError(f"LLM batch call timed out after {self.TIMEOUT} seconds.")
-
-        except TimeoutError as e:
-            print(f"[WARNING] LLM batch generation HARD timeout after {self.TIMEOUT} seconds.")
-            raise e
-
-        except Exception as e:
-            print(f"[ERROR] Unexpected error during LLM batch generation: {e}")
-            raise
-
-        finally:
-            if hasattr(signal, "alarm"):
-                signal.alarm(0)
-            elif 'timer' in locals():
-                timer.cancel()
-
+        raise TimeoutError("LLM call did not return a response.")
     
     def _load_model(self):
         available_models = self._get_available_models()

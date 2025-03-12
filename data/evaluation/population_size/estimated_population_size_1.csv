@@ -1,0 +1,116 @@
+Country,Region,BUA name,BUA size classification,Counts,Counts_1,Counts_2,Counts_3,Counts_4,Counts_5
+England,Yorkshire and The Humber,Rufforth,Minor,650,123,123,123,123,123
+England,West Midlands,Dudleston Heath,Minor,535,0,0,0,0,0
+England,South East,Godstone,Minor,2650,10300,10300,10300,10300,10300
+England,East Midlands,Charlesworth,Minor,855,1043,1234,1234,1234,1234
+England,North West,Rainow,Minor,620,1436,1436,1436,1436,1436
+England,North East,Hadston,Minor,2710,123,123,123,123,123
+England,East Midlands,Bilsby,Minor,235,0,0,0,0,0
+England,South West,Marnhull,Minor,1465,434,434,434,434,434
+England,South West,Bradworthy,Minor,725,1043,1043,1043,1043,1043
+England,South East,Burley Street,Minor,375,0,0,0,0,0
+England,South East,Nettlebed,Minor,780,1234,1043,1043,1043,1043
+England,South West,Probus,Minor,2565,1434,1234,1234,1234,1234
+England,West Midlands,Gorsley Common,Minor,665,0,0,0,0,0
+England,South West,St Newlyn East,Minor,1040,1234,1234,1234,1234,1234
+England,West Midlands,Gospel End,Minor,845,0,0,0,0,0
+England,South East,Twyford (Winchester),Minor,1480,14300,14300,14300,14300,14300
+England,South East,Tower Hill,Minor,325,0,0,0,0,0
+England,South East,Durfold Wood,Minor,400,0,0,0,0,0
+England,East of England,Martlesham,Minor,1980,10300,10300,10300,10300,10300
+England,South West,Kilve,Minor,355,0,0,0,0,0
+England,South East,North Chailey,Minor,1010,1030,1030,1030,1030,1030
+England,South East,Ninfield,Minor,1295,1234,1234,1234,1234,1234
+England,North West,Hurst Green (Ribble Valley),Minor,940,0,0,0,0,0
+England,North West,Whitworth,Small,6715,14300,14300,14300,14300,14300
+England,North West,Standish,Small,12940,14151,29151,29151,29151,29151
+England,Yorkshire and The Humber,Driffield,Small,13215,14300,14300,14300,14300,14300
+England,South East,Midhurst,Small,5370,6545,6545,6545,6545,6545
+England,North West,Wigton,Small,5395,6380,6370,6370,6370,6370
+England,East Midlands,Stapleford,Small,15045,13300,13300,13300,13300,13300
+England,East of England,Yaxley (Huntingdonshire),Small,9405,4345,4345,4345,4345,4345
+England,West Midlands,Bayston Hill,Small,5220,4445,4445,4445,4445,4445
+England,South East,Weybridge,Small,15915,11500,11500,11500,11500,11500
+England,South East,Godalming,Small,10450,22851,22851,22851,22851,22851
+England,North East,Shiremoor,Small,6955,10400,10300,10300,10300,10300
+England,East of England,Sawston,Small,7270,12300,12300,12300,12300,12300
+England,East Midlands,Ashby-de-la-Zouch,Small,15120,15551,20700,20700,20700,20700
+England,Yorkshire and The Humber,Moorends,Small,5195,0,0,0,0,0
+England,East Midlands,Horncastle,Small,7295,5555,5555,5555,5555,5555
+England,Yorkshire and The Humber,Sherburn in Elmet,Small,8570,10300,10300,10300,10300,10300
+England,South West,Somerton,Small,5100,1043,1043,1043,1043,1043
+England,North West,Little Lever,Small,12525,14300,14300,14300,14300,14300
+England,East Midlands,Lutterworth,Small,10520,10800,10800,10800,10800,10800
+England,Yorkshire and The Humber,North Anston,Small,6605,10400,10400,10400,10400,10400
+England,East of England,Wivenhoe,Small,7350,7325,7325,7325,7325,7325
+England,North West,Littleborough,Small,12160,14300,14300,14300,14300,14300
+England,North West,Shevington,Small,5320,10300,10300,10300,10300,10300
+England,East Midlands,Long Eaton,Medium,37820,32100,32100,32100,32100,32100
+England,South West,Newquay,Medium,24545,20693,21200,21200,21200,21200
+England,Yorkshire and The Humber,Barnsley,Medium,71405,245000,245000,245000,245000,245000
+England,North East,Washington,Medium,51320,10600,10600,10600,10600,10600
+England,North East,Billingham,Medium,33920,20351,20351,20351,20351,20351
+England,South West,Trowbridge,Medium,43750,39400,39400,39400,39400,39400
+England,North West,Dukinfield,Medium,21155,21151,21151,21151,21151,21151
+England,West Midlands,Coseley,Medium,25205,23451,23451,23451,23451,23451
+England,East Midlands,Kettering,Medium,63150,N/A,N/A,N/A,N/A,N/A
+England,West Midlands,Great Malvern,Medium,33185,31000,31000,31000,31000,31000
+England,East Midlands,Spalding,Medium,30550,9285,9285,9285,9285,9285
+England,South East,Burgess Hill,Medium,33355,11400,11400,11400,11400,11400
+England,South West,Weymouth,Medium,55535,53500,52900,52900,52900,52900
+England,South East,Shoreham-by-Sea,Medium,23660,29500,29500,29500,29500,29500
+England,East Midlands,Wigston,Medium,34730,44400,44400,44400,44400,44400
+England,East of England,Kempston,Medium,22785,24600,24600,24600,24600,24600
+England,North East,Hebburn,Medium,21345,25700,25851,25851,25851,25851
+England,West Midlands,Willenhall,Medium,49580,29451,29451,29451,29451,29451
+England,East Midlands,Kirkby-in-Ashfield,Medium,21270,20851,20851,20851,20851,20851
+England,East Midlands,Grantham,Medium,44905,14300,14300,14300,14300,14300
+England,South West,Barnstaple,Medium,31275,24500,24500,24500,24500,24500
+England,South West,Quedgeley and Hardwicke,Medium,21125,12300,12300,12300,12300,12300
+England,North West,Kendal,Medium,28940,29200,29200,29200,29200,29200
+England,North East,Sunderland,Large,168315,305000,305400,305400,305400,305400
+England,South East,Gillingham (Medway),Large,108480,104000,104000,104000,104000,104000
+England,North West,Oldham,Large,110720,225100,225100,225100,225100,225100
+England,West Midlands,Rugby,Large,78120,N/A,N/A,N/A,N/A,N/A
+England,South East,Guildford,Large,77880,158000,148000,148000,148000,148000
+England,East of England,Southend-on-Sea,Large,182305,185111,185111,185111,185111,185111
+England,North West,Blackburn (Blackburn with Darwen),Large,124955,117100,117100,117100,117100,117100
+England,South East,Maidstone,Large,109490,191000,191000,191000,191000,191000
+England,Yorkshire and The Humber,Harrogate,Large,75515,79400,79400,79400,79400,79400
+England,North West,Carlisle,Large,77730,71500,71500,71500,71500,71500
+England,North West,Rochdale,Large,111255,114100,114100,114100,114100,114100
+England,South West,Weston-super-Mare,Large,84605,69,N/A,N/A,N/A,N/A
+England,South East,Basingstoke,Large,117210,114000,114000,114000,114000,114000
+England,North West,Preston (Preston),Large,94490,141100,141100,141100,141100,141100
+England,South West,Bournemouth,Large,196455,212100,212100,212100,212100,212100
+England,North East,Hartlepool,Large,87995,99500,N/A,N/A,N/A,N/A
+England,West Midlands,Tamworth,Large,76090,79400,79400,79400,79400,79400
+England,East of England,Hemel Hempstead,Large,95985,109000,109000,109000,109000,109000
+England,West Midlands,Solihull,Large,107735,213100,213100,213100,213100,213100
+England,South West,Poole,Large,141005,147000,147000,147000,147000,147000
+England,Yorkshire and The Humber,Halifax,Large,88115,88600,88600,88600,88600,88600
+England,East of England,Stevenage,Large,94470,88,88,88,88,88
+England,South East,Crawley (Crawley),Large,120550,110000,110700,110700,110700,110700
+England,West Midlands,Coventry,Major,344285,345000,345000,345000,345000,345000
+England,South East,Reading,Major,203795,21800,23000,23000,23000,23000
+England,East of England,Norwich,Major,200770,143800,143000,143000,143000,143000
+England,East Midlands,Northampton,Major,243520,227100,227100,227100,227100,227100
+England,Yorkshire and The Humber,Leeds,Major,536280,798200,798200,798200,798200,798200
+England,Yorkshire and The Humber,Kingston upon Hull,Major,270810,264200,264200,264200,264200,264200
+England,East Midlands,Leicester,Major,406580,345800,345800,345800,345800,345800
+England,North West,Manchester,Major,470405,547500,547500,547500,547500,547500
+England,Yorkshire and The Humber,Sheffield,Major,500535,578705,578911,578911,578911,578911
+England,East Midlands,Derby,Major,275575,257000,257000,257000,257000,257000
+England,North East,Newcastle upon Tyne,Major,286445,291515,291515,291515,291515,291515
+England,West Midlands,Birmingham,Major,1121375,1431000,1431000,1431000,1431000,1431000
+England,West Midlands,Wolverhampton,Major,234025,59300,59300,59300,59300,59300
+England,South East,Brighton and Hove,Major,277105,155700,155700,155700,155700,155700
+England,South East,Southampton,Major,249620,253700,253700,253700,253700,253700
+England,South West,Plymouth,Major,266955,262700,262700,262700,262700,262700
+England,East of England,Luton,Major,233525,216100,216100,216100,216100,216100
+England,East Midlands,Nottingham,Major,299790,331000,331000,331000,331000,331000
+England,North West,Liverpool,Major,506565,498043,498043,498043,498043,498043
+England,Yorkshire and The Humber,Bradford,Major,333950,N/A,N/A,N/A,N/A,N/A
+England,South East,Portsmouth,Major,223305,205100,205100,205100,205100,205100
+England,West Midlands,Stoke-on-Trent,Major,260560,319000,319000,319000,319000,319000
+England,South West,Bristol,Major,425215,N/A,N/A,N/A,N/A,N/A

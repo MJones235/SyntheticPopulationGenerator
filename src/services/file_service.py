@@ -60,3 +60,16 @@ class FileService:
         except Exception as e:
             print(f"Error processing census data: {e}")
             return {}
+
+    def generate_unique_filename(self, directory: str, base_filename: str) -> str:
+        os.makedirs(directory, exist_ok=True)
+        filepath = os.path.join(directory, base_filename)
+        filename, extension = os.path.splitext(base_filename)
+
+        counter = 1
+        while os.path.exists(filepath):
+            new_filename = f"{filename}_{counter}{extension}"
+            filepath = os.path.join(directory, new_filename)
+            counter += 1
+
+        return filepath

@@ -1,0 +1,20 @@
+### Instruction:
+Provide the estimated population of the town, village, or city given below.
+Where possible, base your response on Census 2021 data from the UK Office for National Statistics (ONS).
+
+Return **only** your response in strict JSON format:
+
+{
+  "population_size": INTEGER
+}
+
+Guidelines:
+- If a reliable Census 2021 figure is available, return that number.
+- If an exact Census 2021 figure is unavailable, return an **informed estimate** based on general knowledge.
+
+Do not include any additional text, explanation, or formatting.
+
+### Input:
+Coventry
+
+### Response:

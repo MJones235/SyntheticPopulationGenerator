@@ -16,7 +16,7 @@ class PopulationService:
         print(f"Generating household {n + 1}/{n_total}")
         try:
             model = LLMFactory.get_provider(model_type, **model_kwargs)
-            result= model.generate_household(prompt, schema)
+            result= model.generate_json(prompt, schema)
             return result["household"]
         except Exception as e:
             print("[ERROR] Error generating household. Skipping...")
@@ -76,7 +76,7 @@ class PopulationService:
 
             try:
                 batch_prompts = [prompt] * batch_count
-                batch_results = model.generate_batch_households(batch_prompts, schema)
+                batch_results = model.generate_batch_json(batch_prompts, schema)
             except Exception as e:
                 print(f"[ERROR] Batch generation failed: {e}")
                 batch_results = []
