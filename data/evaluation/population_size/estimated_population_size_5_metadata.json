@@ -1,0 +1,10 @@
+{
+    "unique_id": "be5980ba-e4e4-4519-b21d-e97df2adb48e",
+    "model_name": "qwen2.5:14b",
+    "model_metadata": "OllamaModel(\"qwen2.5:14b\", temperature=0, top_p=0.95, top_k=40)",
+    "n_trials": 5,
+    "input_file": "sampled_population_size.csv",
+    "ouput_file": "estimated_population_size_5.csv",
+    "timestamp": "2025-03-12T22:59:52.897512",
+    "prompt_template": "population_size.txt"
+}

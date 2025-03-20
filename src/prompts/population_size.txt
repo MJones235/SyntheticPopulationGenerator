@@ -15,6 +15,6 @@ Guidelines:
 Do not include any additional text, explanation, or formatting.
 
 ### Input:
-Coventry
+{input}
 
 ### Response:

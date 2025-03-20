@@ -1,0 +1,116 @@
+Country,Region,BUA name,BUA size classification,Counts,Counts_1,Counts_2,Counts_3,Counts_4,Counts_5
+England,Yorkshire and The Humber,Rufforth,Minor,650,8534,8534,8534,8534,8534
+England,West Midlands,Dudleston Heath,Minor,535,345,345,345,345,345
+England,South East,Godstone,Minor,2650,4538,4538,4538,4538,4538
+England,East Midlands,Charlesworth,Minor,855,8543,8543,8543,8543,8543
+England,North West,Rainow,Minor,620,3456,3456,3456,3456,3456
+England,North East,Hadston,Minor,2710,456,456,456,456,456
+England,East Midlands,Bilsby,Minor,235,345,345,345,345,345
+England,South West,Marnhull,Minor,1465,345,345,345,345,345
+England,South West,Bradworthy,Minor,725,456,456,456,456,456
+England,South East,Burley Street,Minor,375,345,345,345,345,345
+England,South East,Nettlebed,Minor,780,345,345,345,345,345
+England,South West,Probus,Minor,2565,345,345,345,345,345
+England,West Midlands,Gorsley Common,Minor,665,456,456,456,456,456
+England,South West,St Newlyn East,Minor,1040,345,345,345,345,345
+England,West Midlands,Gospel End,Minor,845,345,345,345,345,345
+England,South East,Twyford (Winchester),Minor,1480,7543,7534,7534,7534,7534
+England,South East,Tower Hill,Minor,325,345,345,345,345,345
+England,South East,Durfold Wood,Minor,400,345,345,345,345,345
+England,East of England,Martlesham,Minor,1980,7534,7534,7534,7534,7534
+England,South West,Kilve,Minor,355,345,345,345,345,345
+England,South East,North Chailey,Minor,1010,345,345,345,345,345
+England,South East,Ninfield,Minor,1295,345,345,345,345,345
+England,North West,Hurst Green (Ribble Valley),Minor,940,345,345,345,345,345
+England,North West,Whitworth,Small,6715,34567,34567,34567,34567,34567
+England,North West,Standish,Small,12940,543,543,543,543,543
+England,Yorkshire and The Humber,Driffield,Small,13215,3456,4538,4538,4538,4538
+England,South East,Midhurst,Small,5370,4567,4567,4567,4567,4567
+England,North West,Wigton,Small,5395,8563,8563,8563,8563,8563
+England,East Midlands,Stapleford,Small,15045,8534,8543,8543,8543,8543
+England,East of England,Yaxley (Huntingdonshire),Small,9405,7543,7543,7543,7543,7543
+England,West Midlands,Bayston Hill,Small,5220,456,456,456,456,456
+England,South East,Weybridge,Small,15915,16584,16534,16534,16534,16534
+England,South East,Godalming,Small,10450,35784,34567,34567,34567,34567
+England,North East,Shiremoor,Small,6955,4567,4567,4567,4567,4567
+England,East of England,Sawston,Small,7270,7534,7534,7534,7534,7534
+England,East Midlands,Ashby-de-la-Zouch,Small,15120,345,345,345,345,345
+England,Yorkshire and The Humber,Moorends,Small,5195,345,345,345,345,345
+England,East Midlands,Horncastle,Small,7295,35486,35486,35486,35486,35486
+England,Yorkshire and The Humber,Sherburn in Elmet,Small,8570,345,345,345,345,345
+England,South West,Somerton,Small,5100,3456,3456,3456,3456,3456
+England,North West,Little Lever,Small,12525,354,354,354,354,354
+England,East Midlands,Lutterworth,Small,10520,8534,8534,8534,8534,8534
+England,Yorkshire and The Humber,North Anston,Small,6605,8534,8534,8534,8534,8534
+England,East of England,Wivenhoe,Small,7350,345,3456,3456,3456,3456
+England,North West,Littleborough,Small,12160,12345,12345,12345,12345,12345
+England,North West,Shevington,Small,5320,7543,7543,7543,7543,7543
+England,East Midlands,Long Eaton,Medium,37820,3548,3548,3548,3548,3548
+England,South West,Newquay,Medium,24545,34567,34567,34567,34567,34567
+England,Yorkshire and The Humber,Barnsley,Medium,71405,35974,35974,35974,35974,35974
+England,North East,Washington,Medium,51320,654321,654321,654321,654321,654321
+England,North East,Billingham,Medium,33920,45389,45389,45389,45389,45389
+England,South West,Trowbridge,Medium,43750,3456,3456,3456,3456,3456
+England,North West,Dukinfield,Medium,21155,3548,3456,3456,3456,3456
+England,West Midlands,Coseley,Medium,25205,3456,3456,3456,3456,3456
+England,East Midlands,Kettering,Medium,63150,45389,45389,45389,45389,45389
+England,West Midlands,Great Malvern,Medium,33185,3456,35674,35674,35674,35674
+England,East Midlands,Spalding,Medium,30550,53784,53784,53784,53784,53784
+England,South East,Burgess Hill,Medium,33355,7854,7854,7854,7854,7854
+England,South West,Weymouth,Medium,55535,34567,34567,34567,34567,34567
+England,South East,Shoreham-by-Sea,Medium,23660,4538,4538,4538,4538,4538
+England,East Midlands,Wigston,Medium,34730,12345,12345,12345,12345,12345
+England,East of England,Kempston,Medium,22785,7543,7534,7534,7534,7534
+England,North East,Hebburn,Medium,21345,3548,3548,3548,3548,3548
+England,West Midlands,Willenhall,Medium,49580,35478,35489,35489,35489,35489
+England,East Midlands,Kirkby-in-Ashfield,Medium,21270,3456,3456,3456,3456,3456
+England,East Midlands,Grantham,Medium,44905,43758,43758,43758,43758,43758
+England,South West,Barnstaple,Medium,31275,15348,15348,15348,15348,15348
+England,South West,Quedgeley and Hardwicke,Medium,21125,345,345,345,345,345
+England,North West,Kendal,Medium,28940,13564,13564,13564,13564,13564
+England,North East,Sunderland,Large,168315,35984,35974,35974,35974,35974
+England,South East,Gillingham (Medway),Large,108480,N/A,N/A,N/A,N/A,N/A
+England,North West,Oldham,Large,110720,53764,53784,53784,53784,53784
+England,West Midlands,Rugby,Large,78120,86534,86534,86534,86534,86534
+England,South East,Guildford,Large,77880,34567,34567,34567,34567,34567
+England,East of England,Southend-on-Sea,Large,182305,N/A,35764,35764,35764,35764
+England,North West,Blackburn (Blackburn with Darwen),Large,124955,N/A,N/A,N/A,N/A,N/A
+England,South East,Maidstone,Large,109490,43587,43587,43587,43587,43587
+England,Yorkshire and The Humber,Harrogate,Large,75515,43587,43587,43587,43587,43587
+England,North West,Carlisle,Large,77730,35974,35974,35974,35974,35974
+England,North West,Rochdale,Large,111255,35974,35974,35974,35974,35974
+England,South West,Weston-super-Mare,Large,84605,35674,N/A,N/A,N/A,N/A
+England,South East,Basingstoke,Large,117210,34567,34567,34567,34567,34567
+England,North West,Preston (Preston),Large,94490,35974,35974,35974,35974,35974
+England,South West,Bournemouth,Large,196455,34567,34567,34567,34567,34567
+England,North East,Hartlepool,Large,87995,35974,35974,35974,35974,35974
+England,West Midlands,Tamworth,Large,76090,35964,35964,35964,35964,35964
+England,East of England,Hemel Hempstead,Large,95985,23568,37568,37568,37568,37568
+England,West Midlands,Solihull,Large,107735,53784,53784,53784,53784,53784
+England,South West,Poole,Large,141005,53784,53964,53964,53964,53964
+England,Yorkshire and The Humber,Halifax,Large,88115,57834,57364,57364,57364,57364
+England,East of England,Stevenage,Large,94470,53964,53948,53948,53948,53948
+England,South East,Crawley (Crawley),Large,120550,43587,43586,43586,43586,43586
+England,West Midlands,Coventry,Major,344285,35974,35974,35974,35974,35974
+England,South East,Reading,Major,203795,3456,3456,3456,3456,3456
+England,East of England,Norwich,Major,200770,N/A,N/A,N/A,N/A,N/A
+England,East Midlands,Northampton,Major,243520,33874,33874,33874,33874,33874
+England,Yorkshire and The Humber,Leeds,Major,536280,38956,38956,38956,38956,38956
+England,Yorkshire and The Humber,Kingston upon Hull,Major,270810,N/A,35974,35974,35974,35974
+England,East Midlands,Leicester,Major,406580,35794,35794,35794,35794,35794
+England,North West,Manchester,Major,470405,385674,385674,385674,385674,385674
+England,Yorkshire and The Humber,Sheffield,Major,500535,53964,53964,53964,53964,53964
+England,East Midlands,Derby,Major,275575,29538,29538,29538,29538,29538
+England,North East,Newcastle upon Tyne,Major,286445,N/A,N/A,N/A,N/A,N/A
+England,West Midlands,Birmingham,Major,1121375,300000,300000,300000,300000,300000
+England,West Midlands,Wolverhampton,Major,234025,35784,35784,35784,35784,35784
+England,South East,Brighton and Hove,Major,277105,53476,35764,35764,35764,35764
+England,South East,Southampton,Major,249620,N/A,N/A,N/A,N/A,N/A
+England,South West,Plymouth,Major,266955,35974,35974,35974,35974,35974
+England,East of England,Luton,Major,233525,65347,53784,53784,53784,53784
+England,East Midlands,Nottingham,Major,299790,30547,30547,30547,30547,30547
+England,North West,Liverpool,Major,506565,837546,837546,837546,837546,837546
+England,Yorkshire and The Humber,Bradford,Major,333950,35974,35974,35974,35974,35974
+England,South East,Portsmouth,Major,223305,N/A,N/A,N/A,N/A,N/A
+England,West Midlands,Stoke-on-Trent,Major,260560,35764,N/A,N/A,N/A,N/A
+England,South West,Bristol,Major,425215,59734,59734,59734,59734,59734

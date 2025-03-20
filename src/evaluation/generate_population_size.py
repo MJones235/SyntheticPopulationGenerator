@@ -14,7 +14,7 @@ from src.llm_interface.ollama_model import OllamaModel
 ###############
 
 var_name = "population_size"
-model = OllamaModel("deepseek-r1:7b", temperature=0)
+model = OllamaModel("phi3:14b", temperature=0)
 n_trials = 5
 
 ###############
@@ -46,11 +46,10 @@ results = []
 for _, row in tqdm(df.iterrows(), total=len(df), desc="Querying LLM"):
     location = row["BUA name"]
     prompt = file_service.load_prompt(f"{var_name}.txt", {"input": location})
-    print(location)
     responses = []
     for _ in range(n_trials):
         try:
-            response = model.generate_json(prompt, schema, n_attempts=1, timeout=10).get(var_name, "N/A")
+            response = model.generate_json(prompt, schema, n_attempts=1, timeout=15).get(var_name, "N/A")
         except Exception:
             response = "N/A"
         responses.append(response)
