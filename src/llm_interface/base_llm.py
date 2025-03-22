@@ -13,6 +13,8 @@ class BaseLLM(ABC):
     """
 
     is_local = False
+    model_name: str
+    temperature: float
 
     @abstractmethod
     def generate_text(self, prompt: str | list[str], timeout: int) -> str | list[str]:

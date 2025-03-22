@@ -69,5 +69,28 @@ class DBManager:
             household_size_distribution TEXT,
             FOREIGN KEY (population_id) REFERENCES metadata (population_id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS estimation_metadata (
+            run_id TEXT PRIMARY KEY,
+            variable TEXT,
+            model_name TEXT,
+            n_trials INTEGER,
+            prompt_template TEXT,
+            schema_name TEXT,
+            input_hash TEXT,
+            run_timestamp TEXT
+        );
+
+        CREATE TABLE IF NOT EXISTS estimations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_id TEXT,
+            location TEXT,
+            category TEXT,
+            ground_truth REAL,
+            trial_number INTEGER,
+            prediction REAL,
+            timestamp TEXT,
+            FOREIGN KEY (run_id) REFERENCES estimation_metadata(run_id) ON DELETE CASCADE
+        );
         """
 
