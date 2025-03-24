@@ -84,8 +84,10 @@ class DBManager:
         CREATE TABLE IF NOT EXISTS estimations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             run_id TEXT,
+            variable TEXT,                  -- e.g., "population_size", "age_distribution"
             location TEXT,
-            category TEXT,
+            category TEXT,                  -- e.g., "Major", "Minor"
+            subcategory TEXT,               -- e.g., "Aged 10–14 Female", "Unemployed"
             ground_truth REAL,
             trial_number INTEGER,
             prediction REAL,

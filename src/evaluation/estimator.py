@@ -54,6 +54,13 @@ class Estimator:
             "run_timestamp": datetime.now().isoformat()
         })
 
+        if self.variable == "age_distribution":
+            self._run_distribution_mode()
+        else:
+            self._run_standard_mode()
+
+
+    def _run_standard_mode(self):
         for _, row in tqdm(self.df.iterrows(), total=len(self.df), desc=f"Estimating {self.variable}"):
             location = row["BUA name"]
             category = row["BUA size classification"]
@@ -69,8 +76,10 @@ class Estimator:
 
                 self.estimation_repo.insert_estimation({
                     "run_id": self.run_id,
+                    "variable": self.variable,
                     "location": location,
                     "category": category,
+                    "subcategory": None,
                     "ground_truth": gt,
                     "trial_number": trial + 1,
                     "prediction": pred,
@@ -78,4 +87,48 @@ class Estimator:
                 })
 
 
+    def _run_distribution_mode(self):
+        metadata_cols = ["BUA name", "Region", "Country", "BUA size classification"]
+        value_cols = [col for col in self.df.columns if col not in metadata_cols]
+
+        for _, row in tqdm(self.df.iterrows(), total=len(self.df), desc="Estimating age distribution"):
+            location = row["BUA name"]
+            category = row["BUA size classification"]
+
+            for col in value_cols:
+                try:
+                    parts = col.rsplit(" ", 1)
+                    age_band, sex = parts[0], parts[1]
+                except Exception:
+                    continue  # skip malformed columns
+
+                subcategory = f"{age_band} {sex}"
+                gt = float(row[col]) if is_number(row[col]) else None
+
+                prompt_input = {
+                    "LOCATION": location,
+                    "AGE": age_band,
+                    "SEX": sex
+                }
+
+                prompt = self.file_service.load_prompt(self.prompt_template, prompt_input)
+
+                for trial in range(self.n_trials):
+                    try:
+                        response = self.model.generate_json(prompt, self.schema, n_attempts=1).get("percentage", "N/A")
+                        pred = float(response) if is_number(response) else None
+                    except Exception:
+                        pred = None
+
+                    self.estimation_repo.insert_estimation({
+                        "run_id": self.run_id,
+                        "variable": self.variable,
+                        "location": location,
+                        "category": category,
+                        "subcategory": subcategory,
+                        "ground_truth": gt,
+                        "trial_number": trial + 1,
+                        "prediction": pred,
+                        "timestamp": datetime.now().isoformat()
+                    })
 

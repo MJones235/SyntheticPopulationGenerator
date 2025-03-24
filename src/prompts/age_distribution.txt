@@ -1,0 +1,23 @@
+### Instruction:
+Estimate the proportion of the population in the given place that falls into the specified **age and sex** category.
+
+Where possible, base your response on Census 2021 data from the UK Office for National Statistics (ONS).
+
+Return **only** your response in strict JSON format:
+
+{
+  "percentage": FLOAT  // A percentage between 0 and 100
+}
+
+Guidelines:
+- If a reliable Census 2021 percentage is available for the specified category, return that figure.
+- If exact Census data is unavailable, return an **informed estimate** based on typical UK demographic patterns for similar places.
+
+Do not include any additional text, explanation, or formatting.
+
+### Input:
+Place: {LOCATION}
+Age Group: {AGE}  
+Sex: {SEX}
+
+### Response:

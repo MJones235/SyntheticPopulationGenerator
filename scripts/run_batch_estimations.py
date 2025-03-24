@@ -2,13 +2,16 @@ import traceback
 from src.evaluation.estimator import Estimator
 from src.llm_interface.ollama_model import OllamaModel
 
-VARIABLES = ["population_size"]
+VARIABLES = [
+    # "population_size"
+    "age_distribution"
+]
 
 MODELS = [
+    {"name": "llama3.1:8b"},
+    # {"name": "llama3.2:3b"},
     {"name": "deepseek-r1:7b"},
     {"name": "gemma2:9b"},
-    {"name": "llama3.1:8b"},
-    {"name": "llama3.2:3b"},
     {"name": "mistral:latest"},
     {"name": "phi3:14b"},
     {"name": "qwen2.5:14b"},
