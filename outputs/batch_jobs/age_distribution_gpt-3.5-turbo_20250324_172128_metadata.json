@@ -1,0 +1,4152 @@
+{
+  "run_id": "2094c805-11c1-4459-9eab-48a6b9981c97",
+  "variable": "age_distribution",
+  "n_trials": 1,
+  "prompt_template": "age_distribution.txt",
+  "schema_name": "age_distribution_schema.json",
+  "input_hash": "d6ddd5f7b41f54f3fc5ac637b5d81c5ff9698ef084c5fdfcf225070b89d122f3",
+  "model": "gpt-3.5-turbo",
+  "batch_id": "batch_67e19499fd3881908f9b675023fccfae",
+  "metadata": {
+    "Birmingham_Aged 10 to 14 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.5
+    },
+    "Birmingham_Aged 10 to 14 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.8
+    },
+    "Birmingham_Aged 15 to 19 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.8
+    },
+    "Birmingham_Aged 15 to 19 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.8
+    },
+    "Birmingham_Aged 20 to 24 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.3
+    },
+    "Birmingham_Aged 20 to 24 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.0
+    },
+    "Birmingham_Aged 25 to 29 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.8
+    },
+    "Birmingham_Aged 25 to 29 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.6
+    },
+    "Birmingham_Aged 30 to 34 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.0
+    },
+    "Birmingham_Aged 30 to 34 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Birmingham_Aged 35 to 39 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.7
+    },
+    "Birmingham_Aged 35 to 39 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.4
+    },
+    "Birmingham_Aged 4 years and under Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.3
+    },
+    "Birmingham_Aged 4 years and under Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.4
+    },
+    "Birmingham_Aged 40 to 44 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.3
+    },
+    "Birmingham_Aged 40 to 44 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.1
+    },
+    "Birmingham_Aged 45 to 49 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Birmingham_Aged 45 to 49 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Birmingham_Aged 5 to 9 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.5
+    },
+    "Birmingham_Aged 5 to 9 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.7
+    },
+    "Birmingham_Aged 50 to 54 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.0
+    },
+    "Birmingham_Aged 50 to 54 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.0
+    },
+    "Birmingham_Aged 55 to 59 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.7
+    },
+    "Birmingham_Aged 55 to 59 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.7
+    },
+    "Birmingham_Aged 60 to 64 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.3
+    },
+    "Birmingham_Aged 60 to 64 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.3
+    },
+    "Birmingham_Aged 65 to 69 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Birmingham_Aged 65 to 69 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.8
+    },
+    "Birmingham_Aged 70 to 74 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.7
+    },
+    "Birmingham_Aged 70 to 74 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.5
+    },
+    "Birmingham_Aged 75 to 79 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.3
+    },
+    "Birmingham_Aged 75 to 79 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.1
+    },
+    "Birmingham_Aged 80 to 84 years Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Birmingham_Aged 80 to 84 years Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Birmingham_Aged 85 years and over Female_0": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.1
+    },
+    "Birmingham_Aged 85 years and over Male_0": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Bradford_Aged 10 to 14 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 4.1
+    },
+    "Bradford_Aged 10 to 14 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 4.3
+    },
+    "Bradford_Aged 15 to 19 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.9
+    },
+    "Bradford_Aged 15 to 19 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 4.0
+    },
+    "Bradford_Aged 20 to 24 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.6
+    },
+    "Bradford_Aged 20 to 24 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.4
+    },
+    "Bradford_Aged 25 to 29 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.5
+    },
+    "Bradford_Aged 25 to 29 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.3
+    },
+    "Bradford_Aged 30 to 34 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.0
+    },
+    "Bradford_Aged 30 to 34 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.5
+    },
+    "Bradford_Aged 35 to 39 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.9
+    },
+    "Bradford_Aged 35 to 39 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.6
+    },
+    "Bradford_Aged 4 years and under Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.7
+    },
+    "Bradford_Aged 4 years and under Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.8
+    },
+    "Bradford_Aged 40 to 44 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.4
+    },
+    "Bradford_Aged 40 to 44 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.3
+    },
+    "Bradford_Aged 45 to 49 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Bradford_Aged 45 to 49 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.0
+    },
+    "Bradford_Aged 5 to 9 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.9
+    },
+    "Bradford_Aged 5 to 9 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 4.0
+    },
+    "Bradford_Aged 50 to 54 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.9
+    },
+    "Bradford_Aged 50 to 54 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.9
+    },
+    "Bradford_Aged 55 to 59 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.5
+    },
+    "Bradford_Aged 55 to 59 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.5
+    },
+    "Bradford_Aged 60 to 64 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.3
+    },
+    "Bradford_Aged 60 to 64 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.2
+    },
+    "Bradford_Aged 65 to 69 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Bradford_Aged 65 to 69 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.8
+    },
+    "Bradford_Aged 70 to 74 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.6
+    },
+    "Bradford_Aged 70 to 74 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.4
+    },
+    "Bradford_Aged 75 to 79 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.0
+    },
+    "Bradford_Aged 75 to 79 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 0.8
+    },
+    "Bradford_Aged 80 to 84 years Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 0.9
+    },
+    "Bradford_Aged 80 to 84 years Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Bradford_Aged 85 years and over Female_1": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.0
+    },
+    "Bradford_Aged 85 years and over Male_1": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.5
+    },
+    "Brighton and Hove_Aged 10 to 14 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.5
+    },
+    "Brighton and Hove_Aged 10 to 14 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.6
+    },
+    "Brighton and Hove_Aged 15 to 19 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.3
+    },
+    "Brighton and Hove_Aged 15 to 19 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.1
+    },
+    "Brighton and Hove_Aged 20 to 24 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 5.4
+    },
+    "Brighton and Hove_Aged 20 to 24 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.7
+    },
+    "Brighton and Hove_Aged 25 to 29 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.8
+    },
+    "Brighton and Hove_Aged 25 to 29 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.7
+    },
+    "Brighton and Hove_Aged 30 to 34 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.7
+    },
+    "Brighton and Hove_Aged 30 to 34 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.7
+    },
+    "Brighton and Hove_Aged 35 to 39 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.6
+    },
+    "Brighton and Hove_Aged 35 to 39 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Brighton and Hove_Aged 4 years and under Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.0
+    },
+    "Brighton and Hove_Aged 4 years and under Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.2
+    },
+    "Brighton and Hove_Aged 40 to 44 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.6
+    },
+    "Brighton and Hove_Aged 40 to 44 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.4
+    },
+    "Brighton and Hove_Aged 45 to 49 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.7
+    },
+    "Brighton and Hove_Aged 45 to 49 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.7
+    },
+    "Brighton and Hove_Aged 5 to 9 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.3
+    },
+    "Brighton and Hove_Aged 5 to 9 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.4
+    },
+    "Brighton and Hove_Aged 50 to 54 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.8
+    },
+    "Brighton and Hove_Aged 50 to 54 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.8
+    },
+    "Brighton and Hove_Aged 55 to 59 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.3
+    },
+    "Brighton and Hove_Aged 55 to 59 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.4
+    },
+    "Brighton and Hove_Aged 60 to 64 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.4
+    },
+    "Brighton and Hove_Aged 60 to 64 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.5
+    },
+    "Brighton and Hove_Aged 65 to 69 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.0
+    },
+    "Brighton and Hove_Aged 65 to 69 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.9
+    },
+    "Brighton and Hove_Aged 70 to 74 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.9
+    },
+    "Brighton and Hove_Aged 70 to 74 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.8
+    },
+    "Brighton and Hove_Aged 75 to 79 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.4
+    },
+    "Brighton and Hove_Aged 75 to 79 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.1
+    },
+    "Brighton and Hove_Aged 80 to 84 years Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.1
+    },
+    "Brighton and Hove_Aged 80 to 84 years Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Brighton and Hove_Aged 85 years and over Female_2": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.3
+    },
+    "Brighton and Hove_Aged 85 years and over Male_2": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Bristol_Aged 10 to 14 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.7
+    },
+    "Bristol_Aged 10 to 14 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.7
+    },
+    "Bristol_Aged 15 to 19 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.2
+    },
+    "Bristol_Aged 15 to 19 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.1
+    },
+    "Bristol_Aged 20 to 24 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 5.2
+    },
+    "Bristol_Aged 20 to 24 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 5.1
+    },
+    "Bristol_Aged 25 to 29 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 4.8
+    },
+    "Bristol_Aged 25 to 29 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 4.8
+    },
+    "Bristol_Aged 30 to 34 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.7
+    },
+    "Bristol_Aged 30 to 34 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 4.6
+    },
+    "Bristol_Aged 35 to 39 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.9
+    },
+    "Bristol_Aged 35 to 39 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 4.0
+    },
+    "Bristol_Aged 4 years and under Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.6
+    },
+    "Bristol_Aged 4 years and under Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.8
+    },
+    "Bristol_Aged 40 to 44 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.2
+    },
+    "Bristol_Aged 40 to 44 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.3
+    },
+    "Bristol_Aged 45 to 49 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.8
+    },
+    "Bristol_Aged 45 to 49 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Bristol_Aged 5 to 9 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.8
+    },
+    "Bristol_Aged 5 to 9 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.9
+    },
+    "Bristol_Aged 50 to 54 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.7
+    },
+    "Bristol_Aged 50 to 54 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.8
+    },
+    "Bristol_Aged 55 to 59 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.6
+    },
+    "Bristol_Aged 55 to 59 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.6
+    },
+    "Bristol_Aged 60 to 64 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.2
+    },
+    "Bristol_Aged 60 to 64 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.1
+    },
+    "Bristol_Aged 65 to 69 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Bristol_Aged 65 to 69 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.7
+    },
+    "Bristol_Aged 70 to 74 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.7
+    },
+    "Bristol_Aged 70 to 74 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.6
+    },
+    "Bristol_Aged 75 to 79 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.3
+    },
+    "Bristol_Aged 75 to 79 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.1
+    },
+    "Bristol_Aged 80 to 84 years Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Bristol_Aged 80 to 84 years Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Bristol_Aged 85 years and over Female_3": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.1
+    },
+    "Bristol_Aged 85 years and over Male_3": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Coventry_Aged 10 to 14 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.1
+    },
+    "Coventry_Aged 10 to 14 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.3
+    },
+    "Coventry_Aged 15 to 19 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.8
+    },
+    "Coventry_Aged 15 to 19 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 4.0
+    },
+    "Coventry_Aged 20 to 24 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.4
+    },
+    "Coventry_Aged 20 to 24 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.9
+    },
+    "Coventry_Aged 25 to 29 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.5
+    },
+    "Coventry_Aged 25 to 29 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.5
+    },
+    "Coventry_Aged 30 to 34 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.8
+    },
+    "Coventry_Aged 30 to 34 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Coventry_Aged 35 to 39 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.5
+    },
+    "Coventry_Aged 35 to 39 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.4
+    },
+    "Coventry_Aged 4 years and under Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Coventry_Aged 4 years and under Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.0
+    },
+    "Coventry_Aged 40 to 44 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.2
+    },
+    "Coventry_Aged 40 to 44 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.1
+    },
+    "Coventry_Aged 45 to 49 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Coventry_Aged 45 to 49 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Coventry_Aged 5 to 9 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.1
+    },
+    "Coventry_Aged 5 to 9 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Coventry_Aged 50 to 54 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.0
+    },
+    "Coventry_Aged 50 to 54 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.1
+    },
+    "Coventry_Aged 55 to 59 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.8
+    },
+    "Coventry_Aged 55 to 59 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.9
+    },
+    "Coventry_Aged 60 to 64 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.3
+    },
+    "Coventry_Aged 60 to 64 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.4
+    },
+    "Coventry_Aged 65 to 69 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.0
+    },
+    "Coventry_Aged 65 to 69 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.9
+    },
+    "Coventry_Aged 70 to 74 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.9
+    },
+    "Coventry_Aged 70 to 74 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.7
+    },
+    "Coventry_Aged 75 to 79 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.5
+    },
+    "Coventry_Aged 75 to 79 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.3
+    },
+    "Coventry_Aged 80 to 84 years Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.2
+    },
+    "Coventry_Aged 80 to 84 years Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.9
+    },
+    "Coventry_Aged 85 years and over Female_4": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.3
+    },
+    "Coventry_Aged 85 years and over Male_4": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Derby_Aged 10 to 14 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.1
+    },
+    "Derby_Aged 10 to 14 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.4
+    },
+    "Derby_Aged 15 to 19 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 2.9
+    },
+    "Derby_Aged 15 to 19 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.2
+    },
+    "Derby_Aged 20 to 24 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.4
+    },
+    "Derby_Aged 20 to 24 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.6
+    },
+    "Derby_Aged 25 to 29 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.6
+    },
+    "Derby_Aged 25 to 29 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.6
+    },
+    "Derby_Aged 30 to 34 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.7
+    },
+    "Derby_Aged 30 to 34 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.5
+    },
+    "Derby_Aged 35 to 39 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.6
+    },
+    "Derby_Aged 35 to 39 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Derby_Aged 4 years and under Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Derby_Aged 4 years and under Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.0
+    },
+    "Derby_Aged 40 to 44 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.2
+    },
+    "Derby_Aged 40 to 44 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.1
+    },
+    "Derby_Aged 45 to 49 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.1
+    },
+    "Derby_Aged 45 to 49 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.2
+    },
+    "Derby_Aged 5 to 9 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Derby_Aged 5 to 9 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Derby_Aged 50 to 54 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.3
+    },
+    "Derby_Aged 50 to 54 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.3
+    },
+    "Derby_Aged 55 to 59 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.1
+    },
+    "Derby_Aged 55 to 59 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.0
+    },
+    "Derby_Aged 60 to 64 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.5
+    },
+    "Derby_Aged 60 to 64 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.5
+    },
+    "Derby_Aged 65 to 69 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.2
+    },
+    "Derby_Aged 65 to 69 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.1
+    },
+    "Derby_Aged 70 to 74 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Derby_Aged 70 to 74 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.0
+    },
+    "Derby_Aged 75 to 79 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.6
+    },
+    "Derby_Aged 75 to 79 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.4
+    },
+    "Derby_Aged 80 to 84 years Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.3
+    },
+    "Derby_Aged 80 to 84 years Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.0
+    },
+    "Derby_Aged 85 years and over Female_5": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.4
+    },
+    "Derby_Aged 85 years and over Male_5": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.8
+    },
+    "Kingston upon Hull_Aged 10 to 14 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.0
+    },
+    "Kingston upon Hull_Aged 10 to 14 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.2
+    },
+    "Kingston upon Hull_Aged 15 to 19 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 2.8
+    },
+    "Kingston upon Hull_Aged 15 to 19 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.0
+    },
+    "Kingston upon Hull_Aged 20 to 24 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.6
+    },
+    "Kingston upon Hull_Aged 20 to 24 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.7
+    },
+    "Kingston upon Hull_Aged 25 to 29 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.9
+    },
+    "Kingston upon Hull_Aged 25 to 29 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.7
+    },
+    "Kingston upon Hull_Aged 30 to 34 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.0
+    },
+    "Kingston upon Hull_Aged 30 to 34 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.8
+    },
+    "Kingston upon Hull_Aged 35 to 39 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.5
+    },
+    "Kingston upon Hull_Aged 35 to 39 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Kingston upon Hull_Aged 4 years and under Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Kingston upon Hull_Aged 4 years and under Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.1
+    },
+    "Kingston upon Hull_Aged 40 to 44 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.9
+    },
+    "Kingston upon Hull_Aged 40 to 44 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.0
+    },
+    "Kingston upon Hull_Aged 45 to 49 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.0
+    },
+    "Kingston upon Hull_Aged 45 to 49 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.1
+    },
+    "Kingston upon Hull_Aged 5 to 9 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Kingston upon Hull_Aged 5 to 9 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Kingston upon Hull_Aged 50 to 54 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.2
+    },
+    "Kingston upon Hull_Aged 50 to 54 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.3
+    },
+    "Kingston upon Hull_Aged 55 to 59 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.2
+    },
+    "Kingston upon Hull_Aged 55 to 59 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.2
+    },
+    "Kingston upon Hull_Aged 60 to 64 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.8
+    },
+    "Kingston upon Hull_Aged 60 to 64 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.8
+    },
+    "Kingston upon Hull_Aged 65 to 69 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.3
+    },
+    "Kingston upon Hull_Aged 65 to 69 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.3
+    },
+    "Kingston upon Hull_Aged 70 to 74 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Kingston upon Hull_Aged 70 to 74 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.1
+    },
+    "Kingston upon Hull_Aged 75 to 79 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.4
+    },
+    "Kingston upon Hull_Aged 75 to 79 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.2
+    },
+    "Kingston upon Hull_Aged 80 to 84 years Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.1
+    },
+    "Kingston upon Hull_Aged 80 to 84 years Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.9
+    },
+    "Kingston upon Hull_Aged 85 years and over Female_6": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.2
+    },
+    "Kingston upon Hull_Aged 85 years and over Male_6": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Leeds_Aged 10 to 14 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.9
+    },
+    "Leeds_Aged 10 to 14 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.0
+    },
+    "Leeds_Aged 15 to 19 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.6
+    },
+    "Leeds_Aged 15 to 19 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.5
+    },
+    "Leeds_Aged 20 to 24 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 5.8
+    },
+    "Leeds_Aged 20 to 24 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 5.1
+    },
+    "Leeds_Aged 25 to 29 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 4.3
+    },
+    "Leeds_Aged 25 to 29 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 4.1
+    },
+    "Leeds_Aged 30 to 34 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.1
+    },
+    "Leeds_Aged 30 to 34 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.8
+    },
+    "Leeds_Aged 35 to 39 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.7
+    },
+    "Leeds_Aged 35 to 39 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Leeds_Aged 4 years and under Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Leeds_Aged 4 years and under Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.0
+    },
+    "Leeds_Aged 40 to 44 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.1
+    },
+    "Leeds_Aged 40 to 44 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.1
+    },
+    "Leeds_Aged 45 to 49 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.8
+    },
+    "Leeds_Aged 45 to 49 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Leeds_Aged 5 to 9 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.0
+    },
+    "Leeds_Aged 5 to 9 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.2
+    },
+    "Leeds_Aged 50 to 54 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.9
+    },
+    "Leeds_Aged 50 to 54 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.8
+    },
+    "Leeds_Aged 55 to 59 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.7
+    },
+    "Leeds_Aged 55 to 59 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.6
+    },
+    "Leeds_Aged 60 to 64 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.3
+    },
+    "Leeds_Aged 60 to 64 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.2
+    },
+    "Leeds_Aged 65 to 69 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Leeds_Aged 65 to 69 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.8
+    },
+    "Leeds_Aged 70 to 74 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.8
+    },
+    "Leeds_Aged 70 to 74 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.6
+    },
+    "Leeds_Aged 75 to 79 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.2
+    },
+    "Leeds_Aged 75 to 79 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.0
+    },
+    "Leeds_Aged 80 to 84 years Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Leeds_Aged 80 to 84 years Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Leeds_Aged 85 years and over Female_7": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.1
+    },
+    "Leeds_Aged 85 years and over Male_7": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Leicester_Aged 10 to 14 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.3
+    },
+    "Leicester_Aged 10 to 14 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.5
+    },
+    "Leicester_Aged 15 to 19 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.7
+    },
+    "Leicester_Aged 15 to 19 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.7
+    },
+    "Leicester_Aged 20 to 24 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.7
+    },
+    "Leicester_Aged 20 to 24 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.6
+    },
+    "Leicester_Aged 25 to 29 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.7
+    },
+    "Leicester_Aged 25 to 29 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.6
+    },
+    "Leicester_Aged 30 to 34 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.8
+    },
+    "Leicester_Aged 30 to 34 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Leicester_Aged 35 to 39 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.8
+    },
+    "Leicester_Aged 35 to 39 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.6
+    },
+    "Leicester_Aged 4 years and under Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Leicester_Aged 4 years and under Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.1
+    },
+    "Leicester_Aged 40 to 44 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.3
+    },
+    "Leicester_Aged 40 to 44 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.3
+    },
+    "Leicester_Aged 45 to 49 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.1
+    },
+    "Leicester_Aged 45 to 49 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.0
+    },
+    "Leicester_Aged 5 to 9 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Leicester_Aged 5 to 9 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.4
+    },
+    "Leicester_Aged 50 to 54 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.0
+    },
+    "Leicester_Aged 50 to 54 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.0
+    },
+    "Leicester_Aged 55 to 59 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.7
+    },
+    "Leicester_Aged 55 to 59 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.7
+    },
+    "Leicester_Aged 60 to 64 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.4
+    },
+    "Leicester_Aged 60 to 64 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.4
+    },
+    "Leicester_Aged 65 to 69 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.0
+    },
+    "Leicester_Aged 65 to 69 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.9
+    },
+    "Leicester_Aged 70 to 74 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.7
+    },
+    "Leicester_Aged 70 to 74 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.6
+    },
+    "Leicester_Aged 75 to 79 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.2
+    },
+    "Leicester_Aged 75 to 79 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.0
+    },
+    "Leicester_Aged 80 to 84 years Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 0.9
+    },
+    "Leicester_Aged 80 to 84 years Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Leicester_Aged 85 years and over Female_8": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.0
+    },
+    "Leicester_Aged 85 years and over Male_8": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Liverpool_Aged 10 to 14 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.6
+    },
+    "Liverpool_Aged 10 to 14 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.7
+    },
+    "Liverpool_Aged 15 to 19 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.5
+    },
+    "Liverpool_Aged 15 to 19 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.4
+    },
+    "Liverpool_Aged 20 to 24 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 5.2
+    },
+    "Liverpool_Aged 20 to 24 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.8
+    },
+    "Liverpool_Aged 25 to 29 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.9
+    },
+    "Liverpool_Aged 25 to 29 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.8
+    },
+    "Liverpool_Aged 30 to 34 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.9
+    },
+    "Liverpool_Aged 30 to 34 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.8
+    },
+    "Liverpool_Aged 35 to 39 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.5
+    },
+    "Liverpool_Aged 35 to 39 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.3
+    },
+    "Liverpool_Aged 4 years and under Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.7
+    },
+    "Liverpool_Aged 4 years and under Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.8
+    },
+    "Liverpool_Aged 40 to 44 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.9
+    },
+    "Liverpool_Aged 40 to 44 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 2.8
+    },
+    "Liverpool_Aged 45 to 49 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.7
+    },
+    "Liverpool_Aged 45 to 49 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.7
+    },
+    "Liverpool_Aged 5 to 9 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.7
+    },
+    "Liverpool_Aged 5 to 9 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.8
+    },
+    "Liverpool_Aged 50 to 54 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.1
+    },
+    "Liverpool_Aged 50 to 54 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.0
+    },
+    "Liverpool_Aged 55 to 59 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.4
+    },
+    "Liverpool_Aged 55 to 59 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.0
+    },
+    "Liverpool_Aged 60 to 64 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 3.0
+    },
+    "Liverpool_Aged 60 to 64 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.8
+    },
+    "Liverpool_Aged 65 to 69 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.4
+    },
+    "Liverpool_Aged 65 to 69 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.3
+    },
+    "Liverpool_Aged 70 to 74 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Liverpool_Aged 70 to 74 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.0
+    },
+    "Liverpool_Aged 75 to 79 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.5
+    },
+    "Liverpool_Aged 75 to 79 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.2
+    },
+    "Liverpool_Aged 80 to 84 years Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.2
+    },
+    "Liverpool_Aged 80 to 84 years Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.9
+    },
+    "Liverpool_Aged 85 years and over Female_9": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.2
+    },
+    "Liverpool_Aged 85 years and over Male_9": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Luton_Aged 10 to 14 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.6
+    },
+    "Luton_Aged 10 to 14 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.8
+    },
+    "Luton_Aged 15 to 19 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.2
+    },
+    "Luton_Aged 15 to 19 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.5
+    },
+    "Luton_Aged 20 to 24 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.3
+    },
+    "Luton_Aged 20 to 24 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.5
+    },
+    "Luton_Aged 25 to 29 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.7
+    },
+    "Luton_Aged 25 to 29 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.6
+    },
+    "Luton_Aged 30 to 34 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.1
+    },
+    "Luton_Aged 30 to 34 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.8
+    },
+    "Luton_Aged 35 to 39 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 4.0
+    },
+    "Luton_Aged 35 to 39 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.8
+    },
+    "Luton_Aged 4 years and under Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.5
+    },
+    "Luton_Aged 4 years and under Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.6
+    },
+    "Luton_Aged 40 to 44 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.6
+    },
+    "Luton_Aged 40 to 44 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.7
+    },
+    "Luton_Aged 45 to 49 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.0
+    },
+    "Luton_Aged 45 to 49 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.3
+    },
+    "Luton_Aged 5 to 9 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.6
+    },
+    "Luton_Aged 5 to 9 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.8
+    },
+    "Luton_Aged 50 to 54 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.0
+    },
+    "Luton_Aged 50 to 54 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.2
+    },
+    "Luton_Aged 55 to 59 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.7
+    },
+    "Luton_Aged 55 to 59 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.8
+    },
+    "Luton_Aged 60 to 64 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.2
+    },
+    "Luton_Aged 60 to 64 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.3
+    },
+    "Luton_Aged 65 to 69 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Luton_Aged 65 to 69 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.7
+    },
+    "Luton_Aged 70 to 74 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.5
+    },
+    "Luton_Aged 70 to 74 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.4
+    },
+    "Luton_Aged 75 to 79 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.2
+    },
+    "Luton_Aged 75 to 79 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.0
+    },
+    "Luton_Aged 80 to 84 years Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Luton_Aged 80 to 84 years Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Luton_Aged 85 years and over Female_10": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.0
+    },
+    "Luton_Aged 85 years and over Male_10": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.6
+    },
+    "Manchester_Aged 10 to 14 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.2
+    },
+    "Manchester_Aged 10 to 14 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.3
+    },
+    "Manchester_Aged 15 to 19 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 4.1
+    },
+    "Manchester_Aged 15 to 19 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 4.0
+    },
+    "Manchester_Aged 20 to 24 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 6.3
+    },
+    "Manchester_Aged 20 to 24 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 5.9
+    },
+    "Manchester_Aged 25 to 29 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 5.0
+    },
+    "Manchester_Aged 25 to 29 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 5.0
+    },
+    "Manchester_Aged 30 to 34 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.3
+    },
+    "Manchester_Aged 30 to 34 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 4.4
+    },
+    "Manchester_Aged 35 to 39 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.8
+    },
+    "Manchester_Aged 35 to 39 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.8
+    },
+    "Manchester_Aged 4 years and under Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.0
+    },
+    "Manchester_Aged 4 years and under Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.1
+    },
+    "Manchester_Aged 40 to 44 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.2
+    },
+    "Manchester_Aged 40 to 44 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.3
+    },
+    "Manchester_Aged 45 to 49 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.7
+    },
+    "Manchester_Aged 45 to 49 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Manchester_Aged 5 to 9 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Manchester_Aged 5 to 9 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Manchester_Aged 50 to 54 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.6
+    },
+    "Manchester_Aged 50 to 54 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.8
+    },
+    "Manchester_Aged 55 to 59 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.3
+    },
+    "Manchester_Aged 55 to 59 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.3
+    },
+    "Manchester_Aged 60 to 64 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 1.8
+    },
+    "Manchester_Aged 60 to 64 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 1.9
+    },
+    "Manchester_Aged 65 to 69 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.4
+    },
+    "Manchester_Aged 65 to 69 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.4
+    },
+    "Manchester_Aged 70 to 74 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.1
+    },
+    "Manchester_Aged 70 to 74 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.1
+    },
+    "Manchester_Aged 75 to 79 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 0.9
+    },
+    "Manchester_Aged 75 to 79 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 0.7
+    },
+    "Manchester_Aged 80 to 84 years Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 0.7
+    },
+    "Manchester_Aged 80 to 84 years Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.5
+    },
+    "Manchester_Aged 85 years and over Female_11": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 0.7
+    },
+    "Manchester_Aged 85 years and over Male_11": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.4
+    },
+    "Newcastle upon Tyne_Aged 10 to 14 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.7
+    },
+    "Newcastle upon Tyne_Aged 10 to 14 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.8
+    },
+    "Newcastle upon Tyne_Aged 15 to 19 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 4.1
+    },
+    "Newcastle upon Tyne_Aged 15 to 19 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.8
+    },
+    "Newcastle upon Tyne_Aged 20 to 24 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 6.2
+    },
+    "Newcastle upon Tyne_Aged 20 to 24 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 6.3
+    },
+    "Newcastle upon Tyne_Aged 25 to 29 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.8
+    },
+    "Newcastle upon Tyne_Aged 25 to 29 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 4.0
+    },
+    "Newcastle upon Tyne_Aged 30 to 34 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.6
+    },
+    "Newcastle upon Tyne_Aged 30 to 34 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.5
+    },
+    "Newcastle upon Tyne_Aged 35 to 39 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.3
+    },
+    "Newcastle upon Tyne_Aged 35 to 39 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.3
+    },
+    "Newcastle upon Tyne_Aged 4 years and under Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.5
+    },
+    "Newcastle upon Tyne_Aged 4 years and under Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.6
+    },
+    "Newcastle upon Tyne_Aged 40 to 44 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.8
+    },
+    "Newcastle upon Tyne_Aged 40 to 44 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 2.8
+    },
+    "Newcastle upon Tyne_Aged 45 to 49 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.7
+    },
+    "Newcastle upon Tyne_Aged 45 to 49 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.7
+    },
+    "Newcastle upon Tyne_Aged 5 to 9 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.7
+    },
+    "Newcastle upon Tyne_Aged 5 to 9 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.9
+    },
+    "Newcastle upon Tyne_Aged 50 to 54 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.8
+    },
+    "Newcastle upon Tyne_Aged 50 to 54 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.8
+    },
+    "Newcastle upon Tyne_Aged 55 to 59 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.9
+    },
+    "Newcastle upon Tyne_Aged 55 to 59 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.9
+    },
+    "Newcastle upon Tyne_Aged 60 to 64 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.6
+    },
+    "Newcastle upon Tyne_Aged 60 to 64 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.5
+    },
+    "Newcastle upon Tyne_Aged 65 to 69 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.2
+    },
+    "Newcastle upon Tyne_Aged 65 to 69 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.0
+    },
+    "Newcastle upon Tyne_Aged 70 to 74 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.0
+    },
+    "Newcastle upon Tyne_Aged 70 to 74 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.9
+    },
+    "Newcastle upon Tyne_Aged 75 to 79 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.4
+    },
+    "Newcastle upon Tyne_Aged 75 to 79 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.2
+    },
+    "Newcastle upon Tyne_Aged 80 to 84 years Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.2
+    },
+    "Newcastle upon Tyne_Aged 80 to 84 years Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Newcastle upon Tyne_Aged 85 years and over Female_12": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.3
+    },
+    "Newcastle upon Tyne_Aged 85 years and over Male_12": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Northampton_Aged 10 to 14 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.2
+    },
+    "Northampton_Aged 10 to 14 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.4
+    },
+    "Northampton_Aged 15 to 19 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.0
+    },
+    "Northampton_Aged 15 to 19 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.0
+    },
+    "Northampton_Aged 20 to 24 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 20 to 24 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 25 to 29 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.6
+    },
+    "Northampton_Aged 25 to 29 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.5
+    },
+    "Northampton_Aged 30 to 34 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.1
+    },
+    "Northampton_Aged 30 to 34 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.9
+    },
+    "Northampton_Aged 35 to 39 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.9
+    },
+    "Northampton_Aged 35 to 39 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.8
+    },
+    "Northampton_Aged 4 years and under Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.0
+    },
+    "Northampton_Aged 4 years and under Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.1
+    },
+    "Northampton_Aged 40 to 44 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.5
+    },
+    "Northampton_Aged 40 to 44 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.6
+    },
+    "Northampton_Aged 45 to 49 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 45 to 49 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 5 to 9 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Northampton_Aged 5 to 9 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 50 to 54 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 50 to 54 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.3
+    },
+    "Northampton_Aged 55 to 59 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.0
+    },
+    "Northampton_Aged 55 to 59 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.0
+    },
+    "Northampton_Aged 60 to 64 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.5
+    },
+    "Northampton_Aged 60 to 64 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.3
+    },
+    "Northampton_Aged 65 to 69 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.1
+    },
+    "Northampton_Aged 65 to 69 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.9
+    },
+    "Northampton_Aged 70 to 74 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.1
+    },
+    "Northampton_Aged 70 to 74 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.9
+    },
+    "Northampton_Aged 75 to 79 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.4
+    },
+    "Northampton_Aged 75 to 79 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.3
+    },
+    "Northampton_Aged 80 to 84 years Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.1
+    },
+    "Northampton_Aged 80 to 84 years Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Northampton_Aged 85 years and over Female_13": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.2
+    },
+    "Northampton_Aged 85 years and over Male_13": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Norwich_Aged 10 to 14 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.5
+    },
+    "Norwich_Aged 10 to 14 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.7
+    },
+    "Norwich_Aged 15 to 19 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.2
+    },
+    "Norwich_Aged 15 to 19 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.2
+    },
+    "Norwich_Aged 20 to 24 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.9
+    },
+    "Norwich_Aged 20 to 24 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.5
+    },
+    "Norwich_Aged 25 to 29 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.8
+    },
+    "Norwich_Aged 25 to 29 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.7
+    },
+    "Norwich_Aged 30 to 34 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.7
+    },
+    "Norwich_Aged 30 to 34 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.8
+    },
+    "Norwich_Aged 35 to 39 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.4
+    },
+    "Norwich_Aged 35 to 39 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Norwich_Aged 4 years and under Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.3
+    },
+    "Norwich_Aged 4 years and under Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.4
+    },
+    "Norwich_Aged 40 to 44 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.0
+    },
+    "Norwich_Aged 40 to 44 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.2
+    },
+    "Norwich_Aged 45 to 49 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Norwich_Aged 45 to 49 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.0
+    },
+    "Norwich_Aged 5 to 9 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.6
+    },
+    "Norwich_Aged 5 to 9 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.7
+    },
+    "Norwich_Aged 50 to 54 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.0
+    },
+    "Norwich_Aged 50 to 54 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.1
+    },
+    "Norwich_Aged 55 to 59 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.9
+    },
+    "Norwich_Aged 55 to 59 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.0
+    },
+    "Norwich_Aged 60 to 64 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.6
+    },
+    "Norwich_Aged 60 to 64 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.4
+    },
+    "Norwich_Aged 65 to 69 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.4
+    },
+    "Norwich_Aged 65 to 69 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.1
+    },
+    "Norwich_Aged 70 to 74 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.5
+    },
+    "Norwich_Aged 70 to 74 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.2
+    },
+    "Norwich_Aged 75 to 79 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.8
+    },
+    "Norwich_Aged 75 to 79 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.6
+    },
+    "Norwich_Aged 80 to 84 years Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.4
+    },
+    "Norwich_Aged 80 to 84 years Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.1
+    },
+    "Norwich_Aged 85 years and over Female_14": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.7
+    },
+    "Norwich_Aged 85 years and over Male_14": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 1.0
+    },
+    "Nottingham_Aged 10 to 14 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.8
+    },
+    "Nottingham_Aged 10 to 14 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.0
+    },
+    "Nottingham_Aged 15 to 19 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 4.9
+    },
+    "Nottingham_Aged 15 to 19 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 4.9
+    },
+    "Nottingham_Aged 20 to 24 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 7.2
+    },
+    "Nottingham_Aged 20 to 24 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 6.8
+    },
+    "Nottingham_Aged 25 to 29 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.9
+    },
+    "Nottingham_Aged 25 to 29 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.7
+    },
+    "Nottingham_Aged 30 to 34 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.9
+    },
+    "Nottingham_Aged 30 to 34 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Nottingham_Aged 35 to 39 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.3
+    },
+    "Nottingham_Aged 35 to 39 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.2
+    },
+    "Nottingham_Aged 4 years and under Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.7
+    },
+    "Nottingham_Aged 4 years and under Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.9
+    },
+    "Nottingham_Aged 40 to 44 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.9
+    },
+    "Nottingham_Aged 40 to 44 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 2.9
+    },
+    "Nottingham_Aged 45 to 49 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.7
+    },
+    "Nottingham_Aged 45 to 49 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.8
+    },
+    "Nottingham_Aged 5 to 9 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.9
+    },
+    "Nottingham_Aged 5 to 9 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.0
+    },
+    "Nottingham_Aged 50 to 54 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.8
+    },
+    "Nottingham_Aged 50 to 54 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.7
+    },
+    "Nottingham_Aged 55 to 59 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.6
+    },
+    "Nottingham_Aged 55 to 59 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.6
+    },
+    "Nottingham_Aged 60 to 64 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.1
+    },
+    "Nottingham_Aged 60 to 64 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.1
+    },
+    "Nottingham_Aged 65 to 69 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.7
+    },
+    "Nottingham_Aged 65 to 69 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.6
+    },
+    "Nottingham_Aged 70 to 74 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.5
+    },
+    "Nottingham_Aged 70 to 74 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.5
+    },
+    "Nottingham_Aged 75 to 79 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.1
+    },
+    "Nottingham_Aged 75 to 79 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.0
+    },
+    "Nottingham_Aged 80 to 84 years Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 0.9
+    },
+    "Nottingham_Aged 80 to 84 years Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.7
+    },
+    "Nottingham_Aged 85 years and over Female_15": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 0.9
+    },
+    "Nottingham_Aged 85 years and over Male_15": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.5
+    },
+    "Plymouth_Aged 10 to 14 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.8
+    },
+    "Plymouth_Aged 10 to 14 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 15 to 19 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.0
+    },
+    "Plymouth_Aged 15 to 19 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.0
+    },
+    "Plymouth_Aged 20 to 24 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.1
+    },
+    "Plymouth_Aged 20 to 24 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.9
+    },
+    "Plymouth_Aged 25 to 29 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.4
+    },
+    "Plymouth_Aged 25 to 29 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.4
+    },
+    "Plymouth_Aged 30 to 34 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.5
+    },
+    "Plymouth_Aged 30 to 34 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.4
+    },
+    "Plymouth_Aged 35 to 39 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.3
+    },
+    "Plymouth_Aged 35 to 39 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.3
+    },
+    "Plymouth_Aged 4 years and under Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.4
+    },
+    "Plymouth_Aged 4 years and under Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.6
+    },
+    "Plymouth_Aged 40 to 44 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 40 to 44 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 45 to 49 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.0
+    },
+    "Plymouth_Aged 45 to 49 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 5 to 9 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.8
+    },
+    "Plymouth_Aged 5 to 9 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 50 to 54 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.4
+    },
+    "Plymouth_Aged 50 to 54 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.3
+    },
+    "Plymouth_Aged 55 to 59 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.3
+    },
+    "Plymouth_Aged 55 to 59 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.3
+    },
+    "Plymouth_Aged 60 to 64 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 60 to 64 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.9
+    },
+    "Plymouth_Aged 65 to 69 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.5
+    },
+    "Plymouth_Aged 65 to 69 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.4
+    },
+    "Plymouth_Aged 70 to 74 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.6
+    },
+    "Plymouth_Aged 70 to 74 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.4
+    },
+    "Plymouth_Aged 75 to 79 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 2.0
+    },
+    "Plymouth_Aged 75 to 79 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.7
+    },
+    "Plymouth_Aged 80 to 84 years Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.4
+    },
+    "Plymouth_Aged 80 to 84 years Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.1
+    },
+    "Plymouth_Aged 85 years and over Female_16": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.6
+    },
+    "Plymouth_Aged 85 years and over Male_16": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.9
+    },
+    "Portsmouth_Aged 10 to 14 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.7
+    },
+    "Portsmouth_Aged 10 to 14 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.9
+    },
+    "Portsmouth_Aged 15 to 19 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.3
+    },
+    "Portsmouth_Aged 15 to 19 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.5
+    },
+    "Portsmouth_Aged 20 to 24 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.4
+    },
+    "Portsmouth_Aged 20 to 24 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.8
+    },
+    "Portsmouth_Aged 25 to 29 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.6
+    },
+    "Portsmouth_Aged 25 to 29 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.5
+    },
+    "Portsmouth_Aged 30 to 34 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.9
+    },
+    "Portsmouth_Aged 30 to 34 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Portsmouth_Aged 35 to 39 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.6
+    },
+    "Portsmouth_Aged 35 to 39 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.5
+    },
+    "Portsmouth_Aged 4 years and under Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.6
+    },
+    "Portsmouth_Aged 4 years and under Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.7
+    },
+    "Portsmouth_Aged 40 to 44 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.0
+    },
+    "Portsmouth_Aged 40 to 44 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.0
+    },
+    "Portsmouth_Aged 45 to 49 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Portsmouth_Aged 45 to 49 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.0
+    },
+    "Portsmouth_Aged 5 to 9 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.8
+    },
+    "Portsmouth_Aged 5 to 9 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 2.9
+    },
+    "Portsmouth_Aged 50 to 54 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.3
+    },
+    "Portsmouth_Aged 50 to 54 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.2
+    },
+    "Portsmouth_Aged 55 to 59 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.2
+    },
+    "Portsmouth_Aged 55 to 59 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.1
+    },
+    "Portsmouth_Aged 60 to 64 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.6
+    },
+    "Portsmouth_Aged 60 to 64 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.6
+    },
+    "Portsmouth_Aged 65 to 69 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.2
+    },
+    "Portsmouth_Aged 65 to 69 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.0
+    },
+    "Portsmouth_Aged 70 to 74 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Portsmouth_Aged 70 to 74 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.0
+    },
+    "Portsmouth_Aged 75 to 79 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.6
+    },
+    "Portsmouth_Aged 75 to 79 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.4
+    },
+    "Portsmouth_Aged 80 to 84 years Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.2
+    },
+    "Portsmouth_Aged 80 to 84 years Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.9
+    },
+    "Portsmouth_Aged 85 years and over Female_17": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.4
+    },
+    "Portsmouth_Aged 85 years and over Male_17": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.8
+    },
+    "Reading_Aged 10 to 14 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.9
+    },
+    "Reading_Aged 10 to 14 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.0
+    },
+    "Reading_Aged 15 to 19 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.2
+    },
+    "Reading_Aged 15 to 19 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.3
+    },
+    "Reading_Aged 20 to 24 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.2
+    },
+    "Reading_Aged 20 to 24 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.1
+    },
+    "Reading_Aged 25 to 29 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 4.0
+    },
+    "Reading_Aged 25 to 29 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.9
+    },
+    "Reading_Aged 30 to 34 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.3
+    },
+    "Reading_Aged 30 to 34 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 4.1
+    },
+    "Reading_Aged 35 to 39 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 4.1
+    },
+    "Reading_Aged 35 to 39 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 4.0
+    },
+    "Reading_Aged 4 years and under Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.7
+    },
+    "Reading_Aged 4 years and under Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.9
+    },
+    "Reading_Aged 40 to 44 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.6
+    },
+    "Reading_Aged 40 to 44 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.7
+    },
+    "Reading_Aged 45 to 49 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.1
+    },
+    "Reading_Aged 45 to 49 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.4
+    },
+    "Reading_Aged 5 to 9 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.9
+    },
+    "Reading_Aged 5 to 9 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.1
+    },
+    "Reading_Aged 50 to 54 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.1
+    },
+    "Reading_Aged 50 to 54 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.2
+    },
+    "Reading_Aged 55 to 59 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.9
+    },
+    "Reading_Aged 55 to 59 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.8
+    },
+    "Reading_Aged 60 to 64 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.3
+    },
+    "Reading_Aged 60 to 64 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.4
+    },
+    "Reading_Aged 65 to 69 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.8
+    },
+    "Reading_Aged 65 to 69 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 1.8
+    },
+    "Reading_Aged 70 to 74 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.7
+    },
+    "Reading_Aged 70 to 74 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.6
+    },
+    "Reading_Aged 75 to 79 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.2
+    },
+    "Reading_Aged 75 to 79 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.1
+    },
+    "Reading_Aged 80 to 84 years Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Reading_Aged 80 to 84 years Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Reading_Aged 85 years and over Female_18": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.0
+    },
+    "Reading_Aged 85 years and over Male_18": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Sheffield_Aged 10 to 14 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.8
+    },
+    "Sheffield_Aged 10 to 14 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.0
+    },
+    "Sheffield_Aged 15 to 19 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.4
+    },
+    "Sheffield_Aged 15 to 19 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.5
+    },
+    "Sheffield_Aged 20 to 24 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 4.8
+    },
+    "Sheffield_Aged 20 to 24 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 4.9
+    },
+    "Sheffield_Aged 25 to 29 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.8
+    },
+    "Sheffield_Aged 25 to 29 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.7
+    },
+    "Sheffield_Aged 30 to 34 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.7
+    },
+    "Sheffield_Aged 30 to 34 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.5
+    },
+    "Sheffield_Aged 35 to 39 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.3
+    },
+    "Sheffield_Aged 35 to 39 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.1
+    },
+    "Sheffield_Aged 4 years and under Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.7
+    },
+    "Sheffield_Aged 4 years and under Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.8
+    },
+    "Sheffield_Aged 40 to 44 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 2.9
+    },
+    "Sheffield_Aged 40 to 44 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 2.9
+    },
+    "Sheffield_Aged 45 to 49 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.9
+    },
+    "Sheffield_Aged 45 to 49 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 2.8
+    },
+    "Sheffield_Aged 5 to 9 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.8
+    },
+    "Sheffield_Aged 5 to 9 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.0
+    },
+    "Sheffield_Aged 50 to 54 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.2
+    },
+    "Sheffield_Aged 50 to 54 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.2
+    },
+    "Sheffield_Aged 55 to 59 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.0
+    },
+    "Sheffield_Aged 55 to 59 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.0
+    },
+    "Sheffield_Aged 60 to 64 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.6
+    },
+    "Sheffield_Aged 60 to 64 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.6
+    },
+    "Sheffield_Aged 65 to 69 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.2
+    },
+    "Sheffield_Aged 65 to 69 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.1
+    },
+    "Sheffield_Aged 70 to 74 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Sheffield_Aged 70 to 74 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.0
+    },
+    "Sheffield_Aged 75 to 79 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.7
+    },
+    "Sheffield_Aged 75 to 79 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.4
+    },
+    "Sheffield_Aged 80 to 84 years Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.3
+    },
+    "Sheffield_Aged 80 to 84 years Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.0
+    },
+    "Sheffield_Aged 85 years and over Female_19": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.4
+    },
+    "Sheffield_Aged 85 years and over Male_19": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.8
+    },
+    "Southampton_Aged 10 to 14 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 2.7
+    },
+    "Southampton_Aged 10 to 14 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 15 to 19 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 3.2
+    },
+    "Southampton_Aged 15 to 19 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.5
+    },
+    "Southampton_Aged 20 to 24 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 5.1
+    },
+    "Southampton_Aged 20 to 24 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 5.4
+    },
+    "Southampton_Aged 25 to 29 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 4.2
+    },
+    "Southampton_Aged 25 to 29 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 4.1
+    },
+    "Southampton_Aged 30 to 34 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 4.1
+    },
+    "Southampton_Aged 30 to 34 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 4.0
+    },
+    "Southampton_Aged 35 to 39 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.6
+    },
+    "Southampton_Aged 35 to 39 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.7
+    },
+    "Southampton_Aged 4 years and under Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.7
+    },
+    "Southampton_Aged 4 years and under Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 40 to 44 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.3
+    },
+    "Southampton_Aged 40 to 44 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.3
+    },
+    "Southampton_Aged 45 to 49 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 45 to 49 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.1
+    },
+    "Southampton_Aged 5 to 9 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 5 to 9 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.0
+    },
+    "Southampton_Aged 50 to 54 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 50 to 54 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 2.9
+    },
+    "Southampton_Aged 55 to 59 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 2.7
+    },
+    "Southampton_Aged 55 to 59 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 2.8
+    },
+    "Southampton_Aged 60 to 64 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.4
+    },
+    "Southampton_Aged 60 to 64 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.4
+    },
+    "Southampton_Aged 65 to 69 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 1.9
+    },
+    "Southampton_Aged 65 to 69 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.0
+    },
+    "Southampton_Aged 70 to 74 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 1.9
+    },
+    "Southampton_Aged 70 to 74 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 1.7
+    },
+    "Southampton_Aged 75 to 79 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.4
+    },
+    "Southampton_Aged 75 to 79 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.2
+    },
+    "Southampton_Aged 80 to 84 years Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.0
+    },
+    "Southampton_Aged 80 to 84 years Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 0.8
+    },
+    "Southampton_Aged 85 years and over Female_20": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.2
+    },
+    "Southampton_Aged 85 years and over Male_20": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Stoke-on-Trent_Aged 10 to 14 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 10 to 14 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.3
+    },
+    "Stoke-on-Trent_Aged 15 to 19 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 2.8
+    },
+    "Stoke-on-Trent_Aged 15 to 19 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.1
+    },
+    "Stoke-on-Trent_Aged 20 to 24 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 20 to 24 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.4
+    },
+    "Stoke-on-Trent_Aged 25 to 29 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.4
+    },
+    "Stoke-on-Trent_Aged 25 to 29 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.3
+    },
+    "Stoke-on-Trent_Aged 30 to 34 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.8
+    },
+    "Stoke-on-Trent_Aged 30 to 34 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.6
+    },
+    "Stoke-on-Trent_Aged 35 to 39 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.4
+    },
+    "Stoke-on-Trent_Aged 35 to 39 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.4
+    },
+    "Stoke-on-Trent_Aged 4 years and under Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 3.0
+    },
+    "Stoke-on-Trent_Aged 4 years and under Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.0
+    },
+    "Stoke-on-Trent_Aged 40 to 44 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.0
+    },
+    "Stoke-on-Trent_Aged 40 to 44 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.0
+    },
+    "Stoke-on-Trent_Aged 45 to 49 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.0
+    },
+    "Stoke-on-Trent_Aged 45 to 49 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.1
+    },
+    "Stoke-on-Trent_Aged 5 to 9 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 5 to 9 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.3
+    },
+    "Stoke-on-Trent_Aged 50 to 54 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 50 to 54 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.3
+    },
+    "Stoke-on-Trent_Aged 55 to 59 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 55 to 59 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.2
+    },
+    "Stoke-on-Trent_Aged 60 to 64 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.8
+    },
+    "Stoke-on-Trent_Aged 60 to 64 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.8
+    },
+    "Stoke-on-Trent_Aged 65 to 69 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.4
+    },
+    "Stoke-on-Trent_Aged 65 to 69 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.4
+    },
+    "Stoke-on-Trent_Aged 70 to 74 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.4
+    },
+    "Stoke-on-Trent_Aged 70 to 74 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.2
+    },
+    "Stoke-on-Trent_Aged 75 to 79 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.8
+    },
+    "Stoke-on-Trent_Aged 75 to 79 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.6
+    },
+    "Stoke-on-Trent_Aged 80 to 84 years Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.3
+    },
+    "Stoke-on-Trent_Aged 80 to 84 years Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.0
+    },
+    "Stoke-on-Trent_Aged 85 years and over Female_21": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.3
+    },
+    "Stoke-on-Trent_Aged 85 years and over Male_21": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.7
+    },
+    "Wolverhampton_Aged 10 to 14 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Female",
+      "ground_truth": 3.3
+    },
+    "Wolverhampton_Aged 10 to 14 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 10 to 14 years Male",
+      "ground_truth": 3.4
+    },
+    "Wolverhampton_Aged 15 to 19 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Female",
+      "ground_truth": 2.8
+    },
+    "Wolverhampton_Aged 15 to 19 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 15 to 19 years Male",
+      "ground_truth": 3.0
+    },
+    "Wolverhampton_Aged 20 to 24 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Female",
+      "ground_truth": 2.9
+    },
+    "Wolverhampton_Aged 20 to 24 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 20 to 24 years Male",
+      "ground_truth": 3.1
+    },
+    "Wolverhampton_Aged 25 to 29 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Female",
+      "ground_truth": 3.3
+    },
+    "Wolverhampton_Aged 25 to 29 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 25 to 29 years Male",
+      "ground_truth": 3.1
+    },
+    "Wolverhampton_Aged 30 to 34 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Female",
+      "ground_truth": 3.7
+    },
+    "Wolverhampton_Aged 30 to 34 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 30 to 34 years Male",
+      "ground_truth": 3.3
+    },
+    "Wolverhampton_Aged 35 to 39 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Female",
+      "ground_truth": 3.6
+    },
+    "Wolverhampton_Aged 35 to 39 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 35 to 39 years Male",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 4 years and under Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Female",
+      "ground_truth": 2.9
+    },
+    "Wolverhampton_Aged 4 years and under Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 4 years and under Male",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 40 to 44 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Female",
+      "ground_truth": 3.3
+    },
+    "Wolverhampton_Aged 40 to 44 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 40 to 44 years Male",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 45 to 49 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Female",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 45 to 49 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 45 to 49 years Male",
+      "ground_truth": 3.3
+    },
+    "Wolverhampton_Aged 5 to 9 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Female",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 5 to 9 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 5 to 9 years Male",
+      "ground_truth": 3.4
+    },
+    "Wolverhampton_Aged 50 to 54 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Female",
+      "ground_truth": 3.4
+    },
+    "Wolverhampton_Aged 50 to 54 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 50 to 54 years Male",
+      "ground_truth": 3.5
+    },
+    "Wolverhampton_Aged 55 to 59 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Female",
+      "ground_truth": 3.2
+    },
+    "Wolverhampton_Aged 55 to 59 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 55 to 59 years Male",
+      "ground_truth": 3.1
+    },
+    "Wolverhampton_Aged 60 to 64 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Female",
+      "ground_truth": 2.8
+    },
+    "Wolverhampton_Aged 60 to 64 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 60 to 64 years Male",
+      "ground_truth": 2.7
+    },
+    "Wolverhampton_Aged 65 to 69 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Female",
+      "ground_truth": 2.4
+    },
+    "Wolverhampton_Aged 65 to 69 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 65 to 69 years Male",
+      "ground_truth": 2.2
+    },
+    "Wolverhampton_Aged 70 to 74 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Female",
+      "ground_truth": 2.2
+    },
+    "Wolverhampton_Aged 70 to 74 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 70 to 74 years Male",
+      "ground_truth": 2.0
+    },
+    "Wolverhampton_Aged 75 to 79 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Female",
+      "ground_truth": 1.7
+    },
+    "Wolverhampton_Aged 75 to 79 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 75 to 79 years Male",
+      "ground_truth": 1.4
+    },
+    "Wolverhampton_Aged 80 to 84 years Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Female",
+      "ground_truth": 1.4
+    },
+    "Wolverhampton_Aged 80 to 84 years Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 80 to 84 years Male",
+      "ground_truth": 1.1
+    },
+    "Wolverhampton_Aged 85 years and over Female_22": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Female",
+      "ground_truth": 1.6
+    },
+    "Wolverhampton_Aged 85 years and over Male_22": {
+      "category": "Major",
+      "subcategory": "Aged 85 years and over Male",
+      "ground_truth": 0.9
+    }
+  }
+}

@@ -1,0 +1,472 @@
+{
+  "run_id": "d942401b-93c9-4dc3-9dea-5c72d0c3a1b6",
+  "variable": "population_size",
+  "model": "gpt-4o-mini",
+  "n_trials": 1,
+  "prompt_template": "population_size.txt",
+  "schema_name": "population_size_schema.json",
+  "input_hash": "",
+  "batch_id": "batch_67e179525c0c8190b8d10b45886647f7",
+  "metadata": {
+    "Rufforth_0": {
+      "category": "Minor",
+      "ground_truth": 650.0
+    },
+    "Dudleston Heath_1": {
+      "category": "Minor",
+      "ground_truth": 535.0
+    },
+    "Godstone_2": {
+      "category": "Minor",
+      "ground_truth": 2650.0
+    },
+    "Charlesworth_3": {
+      "category": "Minor",
+      "ground_truth": 855.0
+    },
+    "Rainow_4": {
+      "category": "Minor",
+      "ground_truth": 620.0
+    },
+    "Hadston_5": {
+      "category": "Minor",
+      "ground_truth": 2710.0
+    },
+    "Bilsby_6": {
+      "category": "Minor",
+      "ground_truth": 235.0
+    },
+    "Marnhull_7": {
+      "category": "Minor",
+      "ground_truth": 1465.0
+    },
+    "Bradworthy_8": {
+      "category": "Minor",
+      "ground_truth": 725.0
+    },
+    "Burley Street_9": {
+      "category": "Minor",
+      "ground_truth": 375.0
+    },
+    "Nettlebed_10": {
+      "category": "Minor",
+      "ground_truth": 780.0
+    },
+    "Probus_11": {
+      "category": "Minor",
+      "ground_truth": 2565.0
+    },
+    "Gorsley Common_12": {
+      "category": "Minor",
+      "ground_truth": 665.0
+    },
+    "St Newlyn East_13": {
+      "category": "Minor",
+      "ground_truth": 1040.0
+    },
+    "Gospel End_14": {
+      "category": "Minor",
+      "ground_truth": 845.0
+    },
+    "Twyford (Winchester)_15": {
+      "category": "Minor",
+      "ground_truth": 1480.0
+    },
+    "Tower Hill_16": {
+      "category": "Minor",
+      "ground_truth": 325.0
+    },
+    "Durfold Wood_17": {
+      "category": "Minor",
+      "ground_truth": 400.0
+    },
+    "Martlesham_18": {
+      "category": "Minor",
+      "ground_truth": 1980.0
+    },
+    "Kilve_19": {
+      "category": "Minor",
+      "ground_truth": 355.0
+    },
+    "North Chailey_20": {
+      "category": "Minor",
+      "ground_truth": 1010.0
+    },
+    "Ninfield_21": {
+      "category": "Minor",
+      "ground_truth": 1295.0
+    },
+    "Hurst Green (Ribble Valley)_22": {
+      "category": "Minor",
+      "ground_truth": 940.0
+    },
+    "Whitworth_23": {
+      "category": "Small",
+      "ground_truth": 6715.0
+    },
+    "Standish_24": {
+      "category": "Small",
+      "ground_truth": 12940.0
+    },
+    "Driffield_25": {
+      "category": "Small",
+      "ground_truth": 13215.0
+    },
+    "Midhurst_26": {
+      "category": "Small",
+      "ground_truth": 5370.0
+    },
+    "Wigton_27": {
+      "category": "Small",
+      "ground_truth": 5395.0
+    },
+    "Stapleford_28": {
+      "category": "Small",
+      "ground_truth": 15045.0
+    },
+    "Yaxley (Huntingdonshire)_29": {
+      "category": "Small",
+      "ground_truth": 9405.0
+    },
+    "Bayston Hill_30": {
+      "category": "Small",
+      "ground_truth": 5220.0
+    },
+    "Weybridge_31": {
+      "category": "Small",
+      "ground_truth": 15915.0
+    },
+    "Godalming_32": {
+      "category": "Small",
+      "ground_truth": 10450.0
+    },
+    "Shiremoor_33": {
+      "category": "Small",
+      "ground_truth": 6955.0
+    },
+    "Sawston_34": {
+      "category": "Small",
+      "ground_truth": 7270.0
+    },
+    "Ashby-de-la-Zouch_35": {
+      "category": "Small",
+      "ground_truth": 15120.0
+    },
+    "Moorends_36": {
+      "category": "Small",
+      "ground_truth": 5195.0
+    },
+    "Horncastle_37": {
+      "category": "Small",
+      "ground_truth": 7295.0
+    },
+    "Sherburn in Elmet_38": {
+      "category": "Small",
+      "ground_truth": 8570.0
+    },
+    "Somerton_39": {
+      "category": "Small",
+      "ground_truth": 5100.0
+    },
+    "Little Lever_40": {
+      "category": "Small",
+      "ground_truth": 12525.0
+    },
+    "Lutterworth_41": {
+      "category": "Small",
+      "ground_truth": 10520.0
+    },
+    "North Anston_42": {
+      "category": "Small",
+      "ground_truth": 6605.0
+    },
+    "Wivenhoe_43": {
+      "category": "Small",
+      "ground_truth": 7350.0
+    },
+    "Littleborough_44": {
+      "category": "Small",
+      "ground_truth": 12160.0
+    },
+    "Shevington_45": {
+      "category": "Small",
+      "ground_truth": 5320.0
+    },
+    "Long Eaton_46": {
+      "category": "Medium",
+      "ground_truth": 37820.0
+    },
+    "Newquay_47": {
+      "category": "Medium",
+      "ground_truth": 24545.0
+    },
+    "Barnsley_48": {
+      "category": "Medium",
+      "ground_truth": 71405.0
+    },
+    "Washington_49": {
+      "category": "Medium",
+      "ground_truth": 51320.0
+    },
+    "Billingham_50": {
+      "category": "Medium",
+      "ground_truth": 33920.0
+    },
+    "Trowbridge_51": {
+      "category": "Medium",
+      "ground_truth": 43750.0
+    },
+    "Dukinfield_52": {
+      "category": "Medium",
+      "ground_truth": 21155.0
+    },
+    "Coseley_53": {
+      "category": "Medium",
+      "ground_truth": 25205.0
+    },
+    "Kettering_54": {
+      "category": "Medium",
+      "ground_truth": 63150.0
+    },
+    "Great Malvern_55": {
+      "category": "Medium",
+      "ground_truth": 33185.0
+    },
+    "Spalding_56": {
+      "category": "Medium",
+      "ground_truth": 30550.0
+    },
+    "Burgess Hill_57": {
+      "category": "Medium",
+      "ground_truth": 33355.0
+    },
+    "Weymouth_58": {
+      "category": "Medium",
+      "ground_truth": 55535.0
+    },
+    "Shoreham-by-Sea_59": {
+      "category": "Medium",
+      "ground_truth": 23660.0
+    },
+    "Wigston_60": {
+      "category": "Medium",
+      "ground_truth": 34730.0
+    },
+    "Kempston_61": {
+      "category": "Medium",
+      "ground_truth": 22785.0
+    },
+    "Hebburn_62": {
+      "category": "Medium",
+      "ground_truth": 21345.0
+    },
+    "Willenhall_63": {
+      "category": "Medium",
+      "ground_truth": 49580.0
+    },
+    "Kirkby-in-Ashfield_64": {
+      "category": "Medium",
+      "ground_truth": 21270.0
+    },
+    "Grantham_65": {
+      "category": "Medium",
+      "ground_truth": 44905.0
+    },
+    "Barnstaple_66": {
+      "category": "Medium",
+      "ground_truth": 31275.0
+    },
+    "Quedgeley and Hardwicke_67": {
+      "category": "Medium",
+      "ground_truth": 21125.0
+    },
+    "Kendal_68": {
+      "category": "Medium",
+      "ground_truth": 28940.0
+    },
+    "Sunderland_69": {
+      "category": "Large",
+      "ground_truth": 168315.0
+    },
+    "Gillingham (Medway)_70": {
+      "category": "Large",
+      "ground_truth": 108480.0
+    },
+    "Oldham_71": {
+      "category": "Large",
+      "ground_truth": 110720.0
+    },
+    "Rugby_72": {
+      "category": "Large",
+      "ground_truth": 78120.0
+    },
+    "Guildford_73": {
+      "category": "Large",
+      "ground_truth": 77880.0
+    },
+    "Southend-on-Sea_74": {
+      "category": "Large",
+      "ground_truth": 182305.0
+    },
+    "Blackburn (Blackburn with Darwen)_75": {
+      "category": "Large",
+      "ground_truth": 124955.0
+    },
+    "Maidstone_76": {
+      "category": "Large",
+      "ground_truth": 109490.0
+    },
+    "Harrogate_77": {
+      "category": "Large",
+      "ground_truth": 75515.0
+    },
+    "Carlisle_78": {
+      "category": "Large",
+      "ground_truth": 77730.0
+    },
+    "Rochdale_79": {
+      "category": "Large",
+      "ground_truth": 111255.0
+    },
+    "Weston-super-Mare_80": {
+      "category": "Large",
+      "ground_truth": 84605.0
+    },
+    "Basingstoke_81": {
+      "category": "Large",
+      "ground_truth": 117210.0
+    },
+    "Preston (Preston)_82": {
+      "category": "Large",
+      "ground_truth": 94490.0
+    },
+    "Bournemouth_83": {
+      "category": "Large",
+      "ground_truth": 196455.0
+    },
+    "Hartlepool_84": {
+      "category": "Large",
+      "ground_truth": 87995.0
+    },
+    "Tamworth_85": {
+      "category": "Large",
+      "ground_truth": 76090.0
+    },
+    "Hemel Hempstead_86": {
+      "category": "Large",
+      "ground_truth": 95985.0
+    },
+    "Solihull_87": {
+      "category": "Large",
+      "ground_truth": 107735.0
+    },
+    "Poole_88": {
+      "category": "Large",
+      "ground_truth": 141005.0
+    },
+    "Halifax_89": {
+      "category": "Large",
+      "ground_truth": 88115.0
+    },
+    "Stevenage_90": {
+      "category": "Large",
+      "ground_truth": 94470.0
+    },
+    "Crawley (Crawley)_91": {
+      "category": "Large",
+      "ground_truth": 120550.0
+    },
+    "Coventry_92": {
+      "category": "Major",
+      "ground_truth": 344285.0
+    },
+    "Reading_93": {
+      "category": "Major",
+      "ground_truth": 203795.0
+    },
+    "Norwich_94": {
+      "category": "Major",
+      "ground_truth": 200770.0
+    },
+    "Northampton_95": {
+      "category": "Major",
+      "ground_truth": 243520.0
+    },
+    "Leeds_96": {
+      "category": "Major",
+      "ground_truth": 536280.0
+    },
+    "Kingston upon Hull_97": {
+      "category": "Major",
+      "ground_truth": 270810.0
+    },
+    "Leicester_98": {
+      "category": "Major",
+      "ground_truth": 406580.0
+    },
+    "Manchester_99": {
+      "category": "Major",
+      "ground_truth": 470405.0
+    },
+    "Sheffield_100": {
+      "category": "Major",
+      "ground_truth": 500535.0
+    },
+    "Derby_101": {
+      "category": "Major",
+      "ground_truth": 275575.0
+    },
+    "Newcastle upon Tyne_102": {
+      "category": "Major",
+      "ground_truth": 286445.0
+    },
+    "Birmingham_103": {
+      "category": "Major",
+      "ground_truth": 1121375.0
+    },
+    "Wolverhampton_104": {
+      "category": "Major",
+      "ground_truth": 234025.0
+    },
+    "Brighton and Hove_105": {
+      "category": "Major",
+      "ground_truth": 277105.0
+    },
+    "Southampton_106": {
+      "category": "Major",
+      "ground_truth": 249620.0
+    },
+    "Plymouth_107": {
+      "category": "Major",
+      "ground_truth": 266955.0
+    },
+    "Luton_108": {
+      "category": "Major",
+      "ground_truth": 233525.0
+    },
+    "Nottingham_109": {
+      "category": "Major",
+      "ground_truth": 299790.0
+    },
+    "Liverpool_110": {
+      "category": "Major",
+      "ground_truth": 506565.0
+    },
+    "Bradford_111": {
+      "category": "Major",
+      "ground_truth": 333950.0
+    },
+    "Portsmouth_112": {
+      "category": "Major",
+      "ground_truth": 223305.0
+    },
+    "Stoke-on-Trent_113": {
+      "category": "Major",
+      "ground_truth": 260560.0
+    },
+    "Bristol_114": {
+      "category": "Major",
+      "ground_truth": 425215.0
+    }
+  }
+}

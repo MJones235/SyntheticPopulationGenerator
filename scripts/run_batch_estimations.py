@@ -1,4 +1,5 @@
 import traceback
+from llm_interface.model_factory import LLMFactory
 from src.evaluation.estimator import Estimator
 from src.llm_interface.ollama_model import OllamaModel
 
@@ -8,14 +9,14 @@ VARIABLES = [
 ]
 
 MODELS = [
-    {"name": "llama3.1:8b"},
-    # {"name": "llama3.2:3b"},
-    {"name": "deepseek-r1:7b"},
-    {"name": "gemma2:9b"},
-    {"name": "mistral:latest"},
-    {"name": "phi3:14b"},
-    {"name": "qwen2.5:14b"},
-    {"name": "qwen2.5:7b"},
+    {"name": "llama3.1:8b", "type": "ollama"},
+    {"name": "llama3.2:3b", "type": "ollama"},
+    {"name": "deepseek-r1:7b", "type": "ollama"},
+    {"name": "gemma2:9b", "type": "ollama"},
+    {"name": "mistral:latest", "type": "ollama"},
+    {"name": "phi3:14b", "type": "ollama"},
+    {"name": "qwen2.5:14b", "type": "ollama"},
+    {"name": "qwen2.5:7b", "type": "ollama"},
 ]
 
 def run_batch():
@@ -23,7 +24,7 @@ def run_batch():
         for model_cfg in MODELS:
             try:
                 print(f"\n🧪 Running estimation: {model_cfg['name']} on {variable}")
-                model = OllamaModel(model_cfg["name"], temperature=0)
+                model = LLMFactory.get_provider(model_cfg["type"], model_name=model_cfg["name"], temperature=0)
                 n_trials = 1
 
                 estimator = Estimator(
