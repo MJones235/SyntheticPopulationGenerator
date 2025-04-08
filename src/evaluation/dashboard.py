@@ -109,20 +109,20 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
         return {}, [], []
 
     df = load_data(variable)
-    
+    filtered_df = df.copy()
+
     if isinstance(selected_models, str):
         selected_models = [selected_models]
-
-    df = df[df["model_name"].isin(selected_models)]
+    filtered_df = filtered_df[filtered_df["model_name"].isin(selected_models)]
 
     if variable == "population_size":
         if selected_category is None:
             return {}, [], []
 
-        df = df[df["BUA size classification"] == selected_category]
+        filtered_df = filtered_df[filtered_df["BUA size classification"] == selected_category]
 
         df_grouped = (
-            df.groupby(["location", "model_name", "BUA size classification"])
+            filtered_df.groupby(["location", "model_name", "BUA size classification"])
             .agg(ground_truth=("ground_truth", "first"), prediction=("prediction", "median"))
             .reset_index()
         )
@@ -143,46 +143,58 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
             name="Actual (Census)",
         )
 
-        mc = MetricsCalculator(df_grouped)
+        mc = MetricsCalculator(filtered_df)
         summary = mc.summary_by_group(group_cols=["BUA size classification", "model_name"])
 
     elif variable == "age_distribution":
         if selected_location is None:
             return {}, [], []
-        
+
         normalise = "normalised" in normalise_toggle
         if normalise:
-            df["prediction"] = (
-                df.groupby(["location", "model_name"])["prediction"]
+            filtered_df["prediction"] = (
+                filtered_df.groupby(["location", "model_name"])["prediction"]
                 .transform(lambda x: x / x.sum() * 100)
             )
-            df["ground_truth"] = (
-                df.groupby(["location"])["ground_truth"]
+            filtered_df["ground_truth"] = (
+                filtered_df.groupby(["location"])["ground_truth"]
                 .transform(lambda x: x / x.sum() * 100)
             )
 
-
-        df = df[df["location"] == selected_location].copy()
-        df[["age_band", "sex"]] = df["subcategory"].str.extract(r"^(.*)\s+(Male|Female)$")
+        filtered_df = filtered_df[filtered_df["location"] == selected_location].copy()
+        filtered_df[["age_band", "sex"]] = filtered_df["subcategory"].str.extract(r"^(.*)\s+(Male|Female)$")
 
         mc = MetricsCalculator(df)
-        summary = mc.summary_by_group(group_cols=["model_name"])
+        
+        # Compute both raw and normalised metrics
+        raw_metrics = MetricsCalculator(df).summary_by_group(group_cols=["model_name"])        
+
+        norm_metrics = MetricsCalculator(
+            df.assign(
+                prediction=df.groupby(["location", "model_name"])["prediction"].transform(lambda x: x / x.sum() * 100),
+                ground_truth=df.groupby(["location", "model_name"])["ground_truth"].transform(lambda x: x / x.sum() * 100)
+            )
+        ).summary_by_group(group_cols=["model_name"])
+
+        summary = pd.merge(
+            raw_metrics.rename(columns={"MAE": "mae_raw", "MPE": "mpe_raw"}),
+            norm_metrics.rename(columns={"MAE": "mae_norm", "MPE": "mpe_norm"}),
+            on="model_name"
+        )
 
         fig = go.Figure()
         sexes = ["Male", "Female"]
-
 
         def age_band_sort_key(age_band):
             import re
             match = re.search(r"(\d+)", age_band)
             return int(match.group(1)) if match else float("inf")
 
-        age_bands = sorted(df["age_band"].dropna().unique(), key=age_band_sort_key)
-
+        age_bands = sorted(filtered_df["age_band"].dropna().unique(), key=age_band_sort_key)
 
         for model in selected_models:
             for sex in sexes:
-                d = df[(df["model_name"] == model) & (df["sex"] == sex)]
+                d = filtered_df[(filtered_df["model_name"] == model) & (filtered_df["sex"] == sex)]
                 d = d.set_index("age_band").reindex(age_bands).reset_index()
                 values = d["prediction"].fillna(0)
                 values = -values if sex == "Male" else values
@@ -195,7 +207,7 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
                 )
 
         for sex in sexes:
-            d = df[df["sex"] == sex]
+            d = filtered_df[filtered_df["sex"] == sex]
             d = d.set_index("age_band").reindex(age_bands).reset_index()
             values = d["ground_truth"].fillna(0)
             values = -values if sex == "Male" else values
@@ -221,4 +233,4 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
     return fig, summary.to_dict("records"), columns
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run(debug=False)
