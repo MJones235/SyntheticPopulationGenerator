@@ -16,20 +16,20 @@ report_service = ReportService()
 metadata_service = MetadataService()
 analysis_service = AnalysisService()
 
-model = OllamaModel("llama3.1:8b", temperature=1, top_p=0.85, top_k=100)
+model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
 prompt = file_service.load_prompt("minimal_prompt.txt", {"LOCATION": location})
 schema = file_service.load_schema("household_schema.json")
 
 population_id = str(uuid.uuid4())
 
-n_households = 50
-batch_size = 24
+n_households = 300
+batch_size = 10
 
 start_time = time.time()
 
 try:
-    households = population_service.generate_households(n_households, model, prompt, schema, batch_size)
+    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location)
 
     execution_time = time.time() - start_time
 

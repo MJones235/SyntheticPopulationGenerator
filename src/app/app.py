@@ -6,7 +6,7 @@ from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
-from src.utils.plots import plot_household_size
+from src.utils.plots import plot_age_pyramid, plot_household_size
 import os
 
 st.set_page_config(layout="wide")
@@ -56,6 +56,14 @@ else:
         components.html(report_html, height=600, scrolling=True)
 
     with tab3:
-        st.title("📊 Household Size Comparison")
+        st.title("Household Size Comparison")
         analysis = analysis_service.get_by_id(selected_population_id)
         st.pyplot(plot_household_size(analysis['household_size_distribution'], file_service.load_household_size(metadata['location'])))
+
+        st.title("Age Distribution Comparison")
+        if not df.empty:
+            try:
+                census_age_df = file_service.load_age_pyramid(metadata["location"])
+                st.pyplot(plot_age_pyramid(df, census_age_df))
+            except Exception as e:
+                st.error(f"Failed to load or plot age pyramid: {e}")

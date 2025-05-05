@@ -1,27 +1,39 @@
 Generate a household located in {LOCATION}.  
 
-Each household should contain between 1 and 6 individuals.  
+Each household should contain between 1 and 8 individuals.  
 For each individual, provide:
 - "name" (a realistic name).
 - "age" (a plausible integer age).
 - "gender" ("Male" or "Female").
-- "occupation" (a suitable job title, "Student" for school-aged children, and "Infant" for babies who are too young for school).
-- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Sibling", "Roommate").
+- "occupation" (for adults: a suitable job title, "Retired" or "Unemployed"; for children: "Child").
+- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Roommate").
 
 **Important Instructions**:
 - **There must always be exactly one "Head" of household**.
-- **Children must inherit the surname of one of their parents**.
-- **Spouses may or may not share a surname with the Head**.
-- **Roommates and unrelated household members may have different surnames**.
+- **Households should reflect a wide variety of types**, such as:
+    - Single-person households
+    - Couples without children
+    - Families with children
+    - Multi-generational families
+    - Older adults living alone or with a partner
+    - Shared houses for students or young professionals
 - Return **only** a JSON object with a `"household"` key.
 - Do **not** include additional text, explanations, or formatting.
 
-{HOUSEHOLD_STATS}
+**Expected JSON format for 1-person households:**
+{
+    "household": [
+        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"}
+    ]
+}
 
-**Expected JSON format:**
+**Expected JSON format for 3-person households:**
 {
     "household": [
         {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"},
         {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."},
+        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."},
     ]
 }
+
+{HOUSEHOLD_STATS}

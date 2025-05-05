@@ -60,6 +60,51 @@ class FileService:
         except Exception as e:
             print(f"Error processing census data: {e}")
             return {}
+        
+
+    def load_age_pyramid(self, location: str) -> pd.DataFrame:
+        try:
+            csv_path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "age_group.csv")
+            df = pd.read_csv(csv_path)
+
+            # Clean column names
+            df.columns = df.columns.str.strip()
+            df["Percentage per BUA"] = df["Percentage per BUA"].astype(float)
+
+            # Clean up age group labels
+            df["Age"] = (
+                df["Age"]
+                .str.replace(r"Aged (\d+) years and under", r"0–\1", regex=True)
+                .str.replace(r"Aged (\d+) to (\d+) years", r"\1–\2", regex=True)
+                .str.replace(r"Aged (\d+) years and over", r"\1+", regex=True)
+                .str.strip()
+            )
+
+            print("Cleaned census age labels:", df["Age"].unique())
+
+            # Pivot into age_group × sex → percentage
+            pyramid_df = df.pivot_table(index="Age", columns="Sex", values="Percentage per BUA", aggfunc="sum").fillna(0)
+
+            # Standardize sex column names
+            pyramid_df.columns = [c.strip().capitalize() for c in pyramid_df.columns]
+            pyramid_df = pyramid_df.reindex(columns=["Male", "Female"], fill_value=0)
+
+            # Sort by age group
+            def sort_key(label):
+                import re
+                match = re.match(r"(\d+)", label)
+                return int(match.group(1)) if match else float("inf")
+
+            pyramid_df = pyramid_df.sort_index(key=lambda x: x.map(sort_key))
+            pyramid_df = pyramid_df.reset_index().rename(columns={"Age": "age_group"})
+
+            return pyramid_df
+
+        except Exception as e:
+            print(f"Failed to load age pyramid for {location}: {e}")
+            return pd.DataFrame(columns=["Male", "Female"])
+
+
 
     def generate_unique_filename(self, directory: str, base_filename: str) -> str:
         os.makedirs(directory, exist_ok=True)
@@ -73,3 +118,5 @@ class FileService:
             counter += 1
 
         return filepath
+    
+
