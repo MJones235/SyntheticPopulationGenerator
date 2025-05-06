@@ -1,12 +1,13 @@
-Generate a household located in {LOCATION}.  
+Your task is to generate a single household in {LOCATION}.  
+Your goal is to contribute to a realistic, demographically balanced synthetic population. 
 
 Each household should contain between 1 and 8 individuals.  
 For each individual, provide:
-- "name" (a realistic name).
+- "name" (a realistic full name).
 - "age" (a plausible integer age).
 - "gender" ("Male" or "Female").
 - "occupation" (for adults: a suitable job title, "Retired" or "Unemployed"; for children: "Child").
-- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Roommate").
+- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Roommate", "Grandchild").
 
 **Important Instructions**:
 - **There must always be exactly one "Head" of household**.
@@ -36,4 +37,10 @@ For each individual, provide:
     ]
 }
 
+Use the following statistical guidance to help correct biases across previously generated households.
+
 {HOUSEHOLD_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}

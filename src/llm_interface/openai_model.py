@@ -4,10 +4,12 @@ from src.llm_interface.base_llm import BaseLLM
 class OpenAIModel(BaseLLM):
     is_local = False
 
-    def __init__(self, model_name: str = "gpt-4", api_key: str = None, temperature: float = 0.7, **kwargs):
+    def __init__(self, model_name: str = "gpt-4", api_key: str = None, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, **kwargs):
         self.model_name = model_name
         self.client = OpenAI(api_key=api_key)
         self.temperature = temperature
+        self.top_p = top_p
+        self.top_k = top_k
         self.kwargs = kwargs
 
     def get_model_metadata(self) -> str:

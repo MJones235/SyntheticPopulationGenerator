@@ -80,8 +80,6 @@ class FileService:
                 .str.strip()
             )
 
-            print("Cleaned census age labels:", df["Age"].unique())
-
             # Pivot into age_group × sex → percentage
             pyramid_df = df.pivot_table(index="Age", columns="Sex", values="Percentage per BUA", aggfunc="sum").fillna(0)
 

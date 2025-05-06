@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+from llm_interface.openai_model import OpenAIModel
 from src.services.analysis_service import AnalysisService
 from src.services.metadata_service import MetadataService
 from src.services.report_service import ReportService
@@ -16,14 +19,16 @@ report_service = ReportService()
 metadata_service = MetadataService()
 analysis_service = AnalysisService()
 
-model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
+# model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
+load_dotenv("secrets.env")
+model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
 prompt = file_service.load_prompt("minimal_prompt.txt", {"LOCATION": location})
 schema = file_service.load_schema("household_schema.json")
 
 population_id = str(uuid.uuid4())
 
-n_households = 300
+n_households = 200
 batch_size = 10
 
 start_time = time.time()
