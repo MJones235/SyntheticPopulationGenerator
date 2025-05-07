@@ -30,11 +30,13 @@ population_id = str(uuid.uuid4())
 
 n_households = 300
 batch_size = 10
+include_stats = False
+include_guidance = True
 
 start_time = time.time()
 
 try:
-    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location)
+    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location, include_stats, include_guidance)
 
     execution_time = time.time() - start_time
 
