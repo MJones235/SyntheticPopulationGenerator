@@ -28,12 +28,11 @@ For each individual, provide:
     ]
 }
 
-**Expected JSON format for 3-person households:**
+**Expected JSON format for 2-person households:**
 {
     "household": [
         {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"},
-        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."},
-        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."},
+        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."}
     ]
 }
 

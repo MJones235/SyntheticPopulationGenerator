@@ -4,7 +4,6 @@ import pandas as pd
 
 from src.services.file_service import FileService
 from src.analysis.distributions import compute_broad_age_distribution, compute_gender_distribution, compute_household_size_distribution, compute_target_broad_age_distribution
-from src.utils.age_bands import assign_broad_age_band
 
 def generate_distribution_prompt(
     observed_distribution: dict,
@@ -19,7 +18,7 @@ def generate_distribution_prompt(
     total_target = sum(target_distribution.values())
 
     feedback_lines = [f"{guidance_label} Distribution (so far):"] if include_stats else []
-    suggestions = [f"📌 {guidance_label} Guidance:"] if include_guidance else []
+    suggestions = [f"📌 Guidance:"] if include_guidance else []
 
     increase = []
     decrease = []
@@ -71,9 +70,9 @@ def update_prompt_with_statistics(
             .replace("{HOUSEHOLD_STATS}", "")
             .replace("{AGE_STATS}", "")
             .replace("{GENDER_STATS}", "")
-        )
+        ).strip()
 
-    guidance_text = """Feedback from previous households:
+    guidance_text = """Feedback from previously generated households:
 The following statistics show the patterns of households generated so far. 
 Your task is to improve the realism and diversity of the entire population by generating a household that nudges the distribution toward the targets.
 """
@@ -136,4 +135,4 @@ Your task is to improve the realism and diversity of the entire population by ge
         .replace("{HOUSEHOLD_STATS}", size_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())
         .replace("{GENDER_STATS}", gender_stats_text.strip())
-    )
+    ).strip()
