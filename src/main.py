@@ -30,7 +30,7 @@ population_id = str(uuid.uuid4())
 
 n_households = 300
 batch_size = 10
-include_stats = False
+include_stats = True
 include_guidance = True
 
 start_time = time.time()
