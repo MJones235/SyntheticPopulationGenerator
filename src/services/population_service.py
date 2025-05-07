@@ -77,8 +77,8 @@ class PopulationService:
         if not (increase or decrease):
             suggestions.append("- The current distribution is close to target. Continue generating diverse household types.")
 
-        return "\n".join(feedback_lines + [""] + suggestions)
-    
+        # return "\n".join(feedback_lines + [""] + suggestions)
+        return "\n".join(suggestions)
 
     def _generate_age_distribution_prompt(self, synthetic_df: pd.DataFrame, census_df: pd.DataFrame, threshold: int = 5) -> str:
         # Assign broad bands to synthetic ages
@@ -130,7 +130,9 @@ class PopulationService:
         if not (increase or decrease):
             suggestions.append("- The current age structure is well balanced. Continue maintaining diversity.")
 
-        return "\n".join(lines + [""] + suggestions)
+        # return "\n".join(lines + [""] + suggestions)
+        return "\n".join(suggestions)
+
 
     def _generate_gender_distribution_prompt(self, synthetic_df: pd.DataFrame, threshold: int = 5) -> str:
         gender_counts = synthetic_df["gender"].str.capitalize().value_counts(normalize=True) * 100
@@ -140,8 +142,8 @@ class PopulationService:
         }
     
         target = {"Male": 50.0, "Female": 50.0}
-        lines = ["📊 Gender Distribution (so far):"]
-        suggestions = []
+        lines = ["Gender Distribution (so far):"]
+        suggestions = ["📌 Guidance:"]
 
         for gender in ["Male", "Female"]:
             obs_pct = round(gender_stats.get(gender, 0.0), 1)
@@ -158,18 +160,24 @@ class PopulationService:
         if not suggestions:
             suggestions.append("- The current gender distribution is balanced. Continue maintaining this balance.")
 
-        return "\n".join(lines + [""] + ["📌 Guidance:"] + suggestions)
+        # return "\n".join(lines + [""] + suggestions)
+        return "\n".join(suggestions)
+
 
 
     def _update_prompt_with_statistics(self, base_prompt: str, stats: Dict[str, Any] | None, location: str) -> str:
         """Updates the LLM prompt to incorporate feedback from previous batches."""
         if stats is None:
-            return base_prompt.replace("{HOUSEHOLD_STATS}", "").replace("{AGE_STATS}", "").replace("{GENDER_STATS}", "")
+            return base_prompt.replace("{GUIDANCE}", "").replace("{HOUSEHOLD_STATS}", "").replace("{AGE_STATS}", "").replace("{GENDER_STATS}", "")
 
-        size_stats_text = self._generate_distribution_prompt(stats["size_distribution"], location, 4)
-        age_stats_text = self._generate_age_distribution_prompt(stats["synthetic_df"], stats["census_df"], 4)
-        gender_stats_text = self._generate_gender_distribution_prompt(stats["synthetic_df"], 2)
-        return base_prompt.replace("{HOUSEHOLD_STATS}", size_stats_text.strip()).replace("{AGE_STATS}", age_stats_text.strip()).replace("{GENDER_STATS}", gender_stats_text.strip())
+        guidance_text = """Feedback from previous households:
+The following statistics show the patterns of households generated so far. 
+Your task is to improve the realism and diversity of the entire population by generating a household that nudges the distribution toward the targets.
+"""
+        size_stats_text = self._generate_distribution_prompt(stats["size_distribution"], location, 2)
+        age_stats_text = self._generate_age_distribution_prompt(stats["synthetic_df"], stats["census_df"], 2)
+        gender_stats_text = self._generate_gender_distribution_prompt(stats["synthetic_df"], 1)
+        return base_prompt.replace("{GUIDANCE}", guidance_text).replace("{HOUSEHOLD_STATS}", size_stats_text.strip()).replace("{AGE_STATS}", age_stats_text.strip()).replace("{GENDER_STATS}", gender_stats_text.strip())
 
     def generate_households(self, n_households: int, model: BaseLLM, base_prompt: str, schema: str, batch_size: int, location: str) -> list:
         """Generates households in batches using batch processing and feedback-driven prompting."""

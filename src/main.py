@@ -28,7 +28,7 @@ schema = file_service.load_schema("household_schema.json")
 
 population_id = str(uuid.uuid4())
 
-n_households = 200
+n_households = 300
 batch_size = 10
 
 start_time = time.time()

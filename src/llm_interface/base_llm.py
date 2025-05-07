@@ -97,6 +97,7 @@ class BaseLLM(ABC):
                         jsonschema.validate(instance=data, schema=json_schema)
                         valid_responses.append(data["household"])  # Extract and extend
                     except (json.JSONDecodeError, jsonschema.ValidationError) as e:
+                        print(e)
                         print(f"[ERROR] Response validation failed. Retrying...")
                         new_failed_prompts.append(self._build_correction_prompt(prompt, response, f"Validation error: {e}", json_schema))
 

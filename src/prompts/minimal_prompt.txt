@@ -37,7 +37,7 @@ For each individual, provide:
     ]
 }
 
-Use the following statistical guidance to help correct biases across previously generated households.
+{GUIDANCE}
 
 {HOUSEHOLD_STATS}
 
