@@ -18,7 +18,7 @@ class PopulationService:
         """Generates households in batches using batch processing and feedback-driven prompting."""
         households = []
         target_age_distribution = self.file_service.load_age_pyramid(location)
-        prompt = update_prompt_with_statistics(base_prompt, None, target_age_distribution, location, include_stats, include_guidance)
+        prompt = update_prompt_with_statistics(base_prompt, None, target_age_distribution, location, 0, include_stats, include_guidance)
 
         for i in range(0, n_households, batch_size):
             batch_count = min(batch_size, n_households - i)
@@ -42,7 +42,7 @@ class PopulationService:
                     [dict(**person, household_id=i + 1) for i, household in enumerate(households) for person in household]
                 )
 
-                prompt = update_prompt_with_statistics(base_prompt, synthetic_df, target_age_distribution, location, include_stats, include_guidance)
+                prompt = update_prompt_with_statistics(base_prompt, synthetic_df, target_age_distribution, location, i, include_stats, include_guidance)
 
         return households
     

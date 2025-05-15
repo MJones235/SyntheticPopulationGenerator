@@ -17,8 +17,8 @@ def generate_distribution_prompt(
     total_obs = sum(observed_distribution.values())
     total_target = sum(target_distribution.values())
 
-    feedback_lines = [f"{guidance_label} Distribution (so far):"] if include_stats else []
-    suggestions = [f"📌 Guidance:"] if include_guidance else []
+    feedback_lines = [f"{guidance_label} Distribution:"] if include_stats else []
+    suggestions = [f"{guidance_label} Guidance:"] if include_guidance else []
 
     increase = []
     decrease = []
@@ -34,7 +34,7 @@ def generate_distribution_prompt(
 
         label = label_func(key)
         if include_stats:
-            feedback_lines.append(f"- {label}: {obs_pct:.1f}% (target: {tgt_pct:.1f}%)")
+            feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%")
 
         diff = obs_pct - tgt_pct
         if include_guidance and abs(diff) >= threshold:
@@ -49,7 +49,7 @@ def generate_distribution_prompt(
         if decrease:
             suggestions.append(f"- Decrease: {', '.join(decrease)}.")
         if not (increase or decrease):
-            suggestions.append(f"- The current {guidance_label.lower()} distribution is close to target. Continue generating diverse data.")
+            suggestions.append(f"- The current {guidance_label.lower()} distribution is close to target.")
 
     return "\n".join(feedback_lines + [""] + suggestions if feedback_lines else suggestions).strip()
 
@@ -59,6 +59,7 @@ def update_prompt_with_statistics(
     synthetic_df: pd.DataFrame | None,
     target_age_distribution: pd.DataFrame,
     location: str,
+    n_households_generated: int = 0,
     include_stats: bool = True,
     include_guidance: bool = True
 ) -> str:
@@ -66,16 +67,34 @@ def update_prompt_with_statistics(
     if synthetic_df is None:
         return (
             base_prompt
+            .replace("{N_HOUSEHOLDS}", str(n_households_generated))
             .replace("{GUIDANCE}", "")
             .replace("{HOUSEHOLD_STATS}", "")
             .replace("{AGE_STATS}", "")
             .replace("{GENDER_STATS}", "")
         ).strip()
 
-    guidance_text = """Feedback from previously generated households:
-The following statistics show the patterns of households generated so far. 
-Your task is to improve the realism and diversity of the entire population by generating a household that nudges the distribution toward the targets.
+    if include_stats:
+        guidance_text = """
+The following statistics show the current state of the synthetic population.
+Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
+Your task is to generate a household that nudges the distribution toward the target.
+Select a household size that is currently underrepresented.
+If possible, include individuals from underrepresented age groups.  
+Maintain an even gender balance across the full population.
+Ensure that the household structure remains realistic.
 """
+    elif include_guidance:
+        guidance_text = """
+The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
+Select a household size that is currently underrepresented.
+If possible, include individuals from underrepresented age groups.  
+Maintain an even gender balance across the full population.
+Ensure that the household structure remains realistic.
+"""
+
+    else:
+        guidance_text = ""
 
     # Household Size Distribution
     observed_size_dist = compute_household_size_distribution(synthetic_df)
@@ -131,6 +150,7 @@ Your task is to improve the realism and diversity of the entire population by ge
 
     return (
         base_prompt
+        .replace("{N_HOUSEHOLDS}", str(n_households_generated))
         .replace("{GUIDANCE}", guidance_text.strip())
         .replace("{HOUSEHOLD_STATS}", size_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())

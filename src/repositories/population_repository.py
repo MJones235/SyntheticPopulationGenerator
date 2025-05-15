@@ -17,11 +17,11 @@ class PopulationRepository(BaseRepository):
                     "id": str(uuid.uuid4()),
                     "population_id": population_id,
                     "household_id": household_id,
-                    "name": person["name"],
-                    "age": person["age"],
-                    "gender": person["gender"],
-                    "occupation": person["occupation"],
-                    "relationship": person["relationship"]
+                    "name": person.get("name", ""),
+                    "age": person.get("age", -1),
+                    "gender": person.get("gender", ""),
+                    "occupation": person.get("occupation", ""),
+                    "relationship": person.get("relationship_to_head", "")
                 })
 
     def get_population_by_id(self, population_id: str) -> List[Dict[str, Any]]:

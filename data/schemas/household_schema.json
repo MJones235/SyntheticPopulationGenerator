@@ -9,13 +9,11 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "name": {"type": "string", "minLength": 1},
                     "age": {"type": "integer", "minimum": 0, "maximum": 120},
                     "gender": {"type": "string", "enum": ["Male", "Female"]},
-                    "occupation": {"type": "string", "minLength": 1},
-                    "relationship": {"type": "string", "minLength": 1}
+                    "relationship_to_head": {"type": "string", "minLength": 1}
                 },
-                "required": ["name", "age", "gender", "occupation", "relationship"],
+                "required": ["age", "gender", "relationship_to_head"],
                 "additionalProperties": false
             }
         }

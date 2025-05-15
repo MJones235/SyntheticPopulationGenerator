@@ -24,7 +24,7 @@ if not populations:
     st.warning("No populations found in the database.")
 else:
     # Create dropdown menu with timestamps as labels
-    population_dict = {f"{p['timestamp']} - {p['location']} - {p['num_households']} households": p['population_id'] for p in populations}
+    population_dict = {f"{p['timestamp']} - {p['model']} - {p['num_households']} households - stats {bool(p['include_stats'])} - guidance {bool(p['include_guidance'])}": p['population_id'] for p in populations}
     selected_label = st.selectbox("Select a Population:", list(population_dict.keys()))
     selected_population_id = population_dict[selected_label]
 

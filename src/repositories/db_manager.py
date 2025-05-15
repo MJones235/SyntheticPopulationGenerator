@@ -61,7 +61,9 @@ class DBManager:
             num_households INTEGER,
             execution_time REAL,
             prompt TEXT,
-            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            include_stats BOOLEAN,
+            include_guidance BOOLEAN
         );
 
         CREATE TABLE IF NOT EXISTS analysis (
