@@ -47,6 +47,7 @@ class DBManager:
             age INTEGER,
             gender TEXT,
             occupation TEXT,
+            occupation_category INTEGER,
             relationship TEXT,
             FOREIGN KEY (population_id) REFERENCES metadata (population_id) ON DELETE CASCADE
         );

@@ -102,6 +102,27 @@ class FileService:
             print(f"Failed to load age pyramid for {location}: {e}")
             return pd.DataFrame(columns=["Male", "Female"])
 
+    def load_occupation_distribution(self, location: str) -> dict:
+        try:
+            csv_path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "occupation.csv")
+            df = pd.read_csv(csv_path)
+
+            # Rename for consistency
+            df = df.rename(columns={
+                "Occupation (current) (10 categories) Code": "occupation_category_code",
+                "Observation": "value"
+            })
+
+            df["percentage"] = df["value"] / df["value"].sum() * 100
+            df["percentage"] = df["percentage"].round(1)
+
+            occupation_distribution = dict(zip(df["occupation_category_code"], df["percentage"]))
+            return occupation_distribution
+
+        except Exception as e:
+            print(f"Failed to load occupation distribution: {e}")
+            return {}
+
 
 
     def generate_unique_filename(self, directory: str, base_filename: str) -> str:

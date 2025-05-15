@@ -21,7 +21,7 @@ analysis_service = AnalysisService()
 
 # model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
-model = OpenAIModel(model_name="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
+model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
 n_households = 500
 
@@ -32,8 +32,8 @@ population_id = str(uuid.uuid4())
 
 
 batch_size = 10
-include_stats = True
-include_guidance = False
+include_stats = False
+include_guidance = True
 
 start_time = time.time()
 

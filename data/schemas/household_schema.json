@@ -11,9 +11,11 @@
                 "properties": {
                     "age": {"type": "integer", "minimum": 0, "maximum": 120},
                     "gender": {"type": "string", "enum": ["Male", "Female"]},
-                    "relationship_to_head": {"type": "string", "minLength": 1}
+                    "relationship_to_head": {"type": "string", "minLength": 1},
+                    "occupation_category": {"type": "integer", "minimum": 0, "maximum": 10},
+                    "occupation": {"type": "string", "minLength": 1}
                 },
-                "required": ["age", "gender", "relationship_to_head"],
+                "required": ["age", "gender", "relationship_to_head", "occupation_category", "occupation"],
                 "additionalProperties": false
             }
         }

@@ -20,6 +20,7 @@ class PopulationRepository(BaseRepository):
                     "name": person.get("name", ""),
                     "age": person.get("age", -1),
                     "gender": person.get("gender", ""),
+                    "occupation_category": person.get("occupation_category", -1),
                     "occupation": person.get("occupation", ""),
                     "relationship": person.get("relationship_to_head", "")
                 })

@@ -16,6 +16,10 @@ def compute_gender_distribution(df: pd.DataFrame) -> dict:
     dist = df["gender"].str.capitalize().value_counts(normalize=True) * 100
     return dist.round(1).to_dict()
 
+def compute_occupation_distribution(df: pd.DataFrame) -> dict:
+    dist = df["occupation_category"].value_counts(normalize=True) * 100
+    return dist.round(1).to_dict()
+
 def compute_broad_age_distribution(df: pd.DataFrame) -> dict:
     df = df.copy()
     df["age_band"] = assign_broad_age_band(df["age"])

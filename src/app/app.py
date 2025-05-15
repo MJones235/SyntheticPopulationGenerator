@@ -1,12 +1,13 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+from src.analysis.distributions import compute_occupation_distribution
 from src.services.analysis_service import AnalysisService
 from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
-from src.utils.plots import plot_age_pyramid, plot_household_size
+from src.utils.plots import plot_age_pyramid, plot_household_size, plot_occupations
 import os
 
 st.set_page_config(layout="wide")
@@ -48,7 +49,7 @@ else:
             styled_df = assign_household_colors(df)
             st.subheader("👥 Population Data")
             st.write(f"Displaying **{len(df)} individuals** from **Population ID: {selected_population_id}**")
-            st.dataframe(styled_df, column_order=('name', 'age', 'gender', 'occupation', 'relationship'))
+            st.dataframe(styled_df, column_order=('name', 'age', 'gender', 'occupation_category', 'occupation', 'relationship'))
 
     with tab2:
         report_path = os.path.join("reports", f"{selected_population_id}.html")
@@ -65,5 +66,14 @@ else:
             try:
                 census_age_df = file_service.load_age_pyramid(metadata["location"])
                 st.pyplot(plot_age_pyramid(df, census_age_df))
+            except Exception as e:
+                st.error(f"Failed to load or plot age pyramid: {e}")
+
+        st.title("Occupation Comparison")
+        if not df.empty:
+            try:
+                census_occupation = file_service.load_occupation_distribution(metadata["location"])
+                synthetic_occupation = compute_occupation_distribution(df)
+                st.pyplot(plot_occupations(synthetic_occupation, census_occupation))
             except Exception as e:
                 st.error(f"Failed to load or plot age pyramid: {e}")

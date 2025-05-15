@@ -18,14 +18,28 @@ All major household types should be represented, including:
 
 {GENDER_STATS}
 
+{OCCUPATION_STATS}
+
 Return a JSON object with a single key `"household"`, which maps to a list of one or more people.
 Each person must be represented as an object with the following fields:
 
 - `"age"`: an integer 
 - `"gender"`: a string, either `"Male"` or `"Female"`  
 - `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
-  - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`  
+  - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`.  The head should be an adult.  
   - Other valid values include: `"Spouse"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Sibling"`, `"Roommate"`
+- `occupation_category`: a number from 1 to 10 representing the standard occupational cateogry:
+  1. Managers, directors and senior officials  
+  2. Professional occupations  
+  3. Associate professional and technical occupations  
+  4. Administrative and secretarial occupations  
+  5. Skilled trades occupations  
+  6. Caring, leisure and other service occupations  
+  7. Sales and customer service occupations  
+  8. Process, plant and machine operatives  
+  9. Elementary occupations  
+  10. Does not apply
+- `occupation`: a string giving a specific job title that matches the selected occupation_category (e.g., "Plumber" for category 5). If the person is not employed, use a status label such as "Child", "Student", "Unemployed", or "Retired".
 
 Note: A 1-person household (just the head) is a valid and realistic structure. You are encouraged to generate this if 1-person households are underrepresented.
 

@@ -78,3 +78,25 @@ def plot_age_pyramid(synthetic_df: pd.DataFrame, census_df: pd.DataFrame):
     ax.set_title("Age Pyramid: Synthetic vs Census")
     ax.legend(loc="lower right")
     return fig
+
+def plot_occupations(synthetic: dict, census: dict):
+    all_categories = sorted(set(synthetic.keys()).union(set(census.keys())))
+    synthetic = {size: synthetic.get(size, 0.0) for size in all_categories}
+    census = {size: census.get(size, 0.0) for size in all_categories}
+
+    fig, ax = plt.subplots(figsize=(8, 3))
+
+    bar_width = 0.4 
+    indices = np.arange(len(all_categories)) 
+
+    ax.bar(indices - bar_width / 2, census.values(), bar_width, label="Census Data", color="blue", alpha=0.6)
+    ax.bar(indices + bar_width / 2, synthetic.values(), bar_width, label="Synthetic Data", color="orange", alpha=0.6)
+
+    ax.set_xlabel("Standard Occupation Category")
+    ax.set_ylabel("Percentage (%)")
+    ax.set_title("Comparison of Occupation Distribution")
+    ax.set_xticks(indices)
+    ax.set_xticklabels(all_categories) 
+    ax.legend()
+
+    return fig

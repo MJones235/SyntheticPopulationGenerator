@@ -1,9 +1,8 @@
-from typing import Any, Callable, Dict, List
-
+from typing import Any, Callable
 import pandas as pd
 
 from src.services.file_service import FileService
-from src.analysis.distributions import compute_broad_age_distribution, compute_gender_distribution, compute_household_size_distribution, compute_target_broad_age_distribution
+from src.analysis.distributions import compute_broad_age_distribution, compute_gender_distribution, compute_household_size_distribution, compute_occupation_distribution, compute_target_broad_age_distribution
 
 def generate_distribution_prompt(
     observed_distribution: dict,
@@ -72,6 +71,7 @@ def update_prompt_with_statistics(
             .replace("{HOUSEHOLD_STATS}", "")
             .replace("{AGE_STATS}", "")
             .replace("{GENDER_STATS}", "")
+            .replace("{OCCUPATION_STATS}", "")
         ).strip()
 
     if include_stats:
@@ -148,6 +148,24 @@ Ensure that the household structure remains realistic.
         include_guidance=include_guidance
     )
 
+    # Occupation Distribution
+    observed_occupation_dist = compute_occupation_distribution(synthetic_df)
+
+    target_occupation_dist = FileService().load_occupation_distribution(location)
+
+    def occupation_label(occupation):
+        return f"cateogry {occupation}"
+
+    occupation_stats_text = generate_distribution_prompt(
+        observed_distribution=observed_occupation_dist,
+        target_distribution=target_occupation_dist,
+        label_func=occupation_label,
+        guidance_label="Occupation",
+        threshold=2,
+        include_stats=include_stats,
+        include_guidance=include_guidance
+    )
+
     return (
         base_prompt
         .replace("{N_HOUSEHOLDS}", str(n_households_generated))
@@ -155,4 +173,5 @@ Ensure that the household structure remains realistic.
         .replace("{HOUSEHOLD_STATS}", size_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())
         .replace("{GENDER_STATS}", gender_stats_text.strip())
+        .replace("{OCCUPATION_STATS}", occupation_stats_text.strip())
     ).strip()
