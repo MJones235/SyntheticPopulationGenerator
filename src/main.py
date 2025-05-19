@@ -19,11 +19,11 @@ report_service = ReportService()
 metadata_service = MetadataService()
 analysis_service = AnalysisService()
 
-# model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
+model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
-model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
+# model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
-n_households = 500
+n_households = 300
 
 prompt = file_service.load_prompt("minimal_prompt_2.txt", {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)})
 schema = file_service.load_schema("household_schema.json")
@@ -32,13 +32,14 @@ population_id = str(uuid.uuid4())
 
 
 batch_size = 10
-include_stats = False
+include_stats = True
 include_guidance = True
+compute_household_size = False
 
 start_time = time.time()
 
 try:
-    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location, include_stats, include_guidance)
+    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location, include_stats, include_guidance, compute_household_size)
 
     execution_time = time.time() - start_time
 

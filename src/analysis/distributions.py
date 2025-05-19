@@ -35,3 +35,4 @@ def compute_target_broad_age_distribution(census_df: pd.DataFrame) -> dict:
     distribution = (age_totals / age_totals.sum() * 100).round(1)
 
     return distribution.to_dict()
+

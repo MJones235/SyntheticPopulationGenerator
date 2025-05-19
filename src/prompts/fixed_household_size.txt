@@ -2,17 +2,11 @@ You are generating a realistic synthetic population for {LOCATION}.
 
 The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
 
-Across the entire population, the distributions of household size, age, occupation and gender should reflect those reported in the 2021 UK Census. 
+Across the entire population, the distributions of age, gender and occupation should reflect those reported in the 2021 UK Census. 
 
-All major household types should be represented, including:
-- Single-person
-- Couples
-- Families
-- Houseshares
+The household should contain exactly {NUM_PEOPLE}.
 
 {GUIDANCE}
-
-{HOUSEHOLD_STATS}
 
 {AGE_STATS}
 
@@ -20,7 +14,7 @@ All major household types should be represented, including:
 
 {OCCUPATION_STATS}
 
-Return a JSON object with a single key `"household"`, which maps to a list of one or more people.
+Return a JSON object with a single key `"household"`, which maps to a list of {NUM_PEOPLE}.
 Each person must be represented as an object with the following fields:
 
 - `"age"`: an integer 
@@ -40,7 +34,5 @@ Each person must be represented as an object with the following fields:
   9. Elementary occupations  
   10. Does not apply
 - `occupation`: a string giving a specific job title that matches the selected occupation_category (e.g., "Plumber" for category 5). If the person is not employed, use a status label such as "Child", "Student", "Unemployed", or "Retired".
-
-Note: A 1-person household (just the head) is a valid and realistic structure. You are encouraged to generate this if 1-person households are underrepresented.
 
 Output only the JSON object — do not include markdown formatting, code fences, or backticks.

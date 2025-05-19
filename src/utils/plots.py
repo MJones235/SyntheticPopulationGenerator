@@ -4,6 +4,7 @@ import json
 import numpy as np
 import pandas as pd
 
+from src.analysis.classifiers import classify_household_structure
 from src.utils.age_bands import assign_broad_age_band, get_broad_age_band_labels
 
 def plot_household_size(synthetic: str, census: Dict):
@@ -98,5 +99,91 @@ def plot_occupations(synthetic: dict, census: dict):
     ax.set_xticks(indices)
     ax.set_xticklabels(all_categories) 
     ax.legend()
+
+    return fig
+
+def plot_age_diff(synthetic_df: pd.DataFrame):
+    head_child_diffs = []
+    parent_head_diffs = []
+    head_spouse_diffs = []
+
+    for _, group in synthetic_df.groupby("household_id"):
+        head = group[group["relationship"] == "Head"]
+        children = group[group["relationship"] == "Child"]
+        parents = group[group["relationship"] == "Parent"]
+        spouses = group[group["relationship"] == "Spouse"]
+
+        if not head.empty:
+            head_age = head.iloc[0]["age"]
+
+            # Head–Child
+            for _, child in children.iterrows():
+                diff = head_age - child["age"]
+                head_child_diffs.append(diff)
+
+            # Parent–Head
+            for _, parent in parents.iterrows():
+                diff = parent["age"] - head_age
+                parent_head_diffs.append(diff)
+
+            # Head–Spouse
+            for _, spouse in spouses.iterrows():
+                diff = head_age - spouse["age"]
+                head_spouse_diffs.append(diff)
+
+
+    # Create the figure with subplots
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
+
+    axes[0].hist(head_child_diffs, bins=15, color="lightblue", edgecolor="black")
+    axes[0].set_title("Head–Child Age Differences")
+    axes[0].set_xlabel("Years")
+    axes[0].set_ylabel("Count")
+    axes[0].grid(True)
+
+    axes[1].hist(parent_head_diffs, bins=15, color="lightgreen", edgecolor="black")
+    axes[1].set_title("Parent–Head Age Differences")
+    axes[1].set_xlabel("Years")
+    axes[1].grid(True)
+
+    axes[2].hist(head_spouse_diffs, bins=15, color="salmon", edgecolor="black")
+    axes[2].set_title("Head-Spouse Age Differences")
+    axes[2].set_xlabel("Years")
+    axes[2].grid(True)
+
+    fig.suptitle("Intra-Household Age Differences")
+    fig.tight_layout()
+
+    return fig
+
+def plot_household_structure_bar(df: pd.DataFrame) -> plt.Figure:
+
+    household_labels = df.groupby("household_id").apply(classify_household_structure)
+    label_counts = household_labels.value_counts().sort_values(ascending=False)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.bar(label_counts.index, label_counts.values, color="steelblue", edgecolor="black")
+    ax.set_title("Frequency of Household Types by Relationship Configuration")
+    ax.set_xlabel("Household Type")
+    ax.set_ylabel("Number of Households")
+    ax.set_xticklabels(label_counts.index, rotation=45, ha="right")
+    ax.grid(axis='y')
+
+    return fig
+
+def plot_occupation_titles(df: pd.DataFrame) -> plt.Figure:
+    top_occupations = (
+        df["occupation"]
+        .value_counts()
+        .head(25)
+    )
+
+    # Plot horizontal bar chart
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.barh(top_occupations.index[::-1], top_occupations.values[::-1], color="steelblue", edgecolor="black")
+    ax.set_title("Top 25 Occupations")
+    ax.set_xlabel("Number of Individuals")
+    ax.set_ylabel("Occupation Title")
+    ax.grid(axis='x')
 
     return fig

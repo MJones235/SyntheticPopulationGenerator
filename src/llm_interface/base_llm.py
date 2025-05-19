@@ -83,6 +83,7 @@ class BaseLLM(ABC):
                 try:
                     batch_responses = self.generate_text(batch_prompts, timeout)
                 except Exception as e:
+                    print(f"[ERROR] Batch generation failed: {e}")
                     new_failed_prompts.extend(batch_prompts) 
                     continue
 

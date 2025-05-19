@@ -1,5 +1,5 @@
 from typing import Any, Dict, List
-
+import random
 import pandas as pd
 from src.prompts.statistics_feedback import update_prompt_with_statistics
 from src.services.file_service import FileService
@@ -14,10 +14,34 @@ class PopulationService:
         self.population_repository = PopulationRepository()
         self.file_service = FileService()
 
-    def generate_households(self, n_households: int, model: BaseLLM, base_prompt: str, schema: str, batch_size: int, location: str, include_stats: bool, include_guidance: bool) -> list:
+    def generate_households(self, n_households: int, model: BaseLLM, base_prompt: str, schema: str, batch_size: int, location: str, include_stats: bool, include_guidance: bool, compute_household_size: bool = False) -> list:
         """Generates households in batches using batch processing and feedback-driven prompting."""
         households = []
         target_age_distribution = self.file_service.load_age_pyramid(location)
+        
+        if compute_household_size:
+            size_distribution = self.file_service.load_household_size(location) 
+            total = sum(size_distribution.values())
+            size_distribution = {k: v / total for k, v in size_distribution.items()}
+            size_counts = {
+                size: int(round(n_households * proportion))
+                for size, proportion in size_distribution.items()
+            }
+
+            size_plan = []
+            for size, count in size_counts.items():
+                size_plan.extend([size] * count)
+
+            random.shuffle(size_plan)
+
+            while len(size_plan) < n_households:
+                size_plan.append(random.choice(list(size_distribution.keys())))
+            while len(size_plan) > n_households:
+                size_plan.pop()
+
+        else:
+            size_plan = [None] * n_households
+
         prompt = update_prompt_with_statistics(base_prompt, None, target_age_distribution, location, 0, include_stats, include_guidance)
 
         for i in range(0, n_households, batch_size):
@@ -26,10 +50,16 @@ class PopulationService:
 
             print(f"\n--- Generating Batch {i // batch_size + 1} ({batch_count} households) ---")
 
-            print(f"Prompt: {prompt}")
+            batch_prompts = []
+
+            for j in range(batch_count):
+                target_size = size_plan[i + j]
+                prompt_with_target_size = prompt.replace("{NUM_PEOPLE}", str(target_size) + (" person" if target_size == 1 else " people"))
+                batch_prompts.append(prompt_with_target_size)
+
+            print(f"Prompt (first in batch): {batch_prompts[0]}")
 
             try:
-                batch_prompts = [prompt] * batch_count
                 batch_results = model.generate_batch_json(batch_prompts, schema, max_parallel=1, timeout=45)
             except Exception as e:
                 print(f"[ERROR] Batch generation failed: {e}")

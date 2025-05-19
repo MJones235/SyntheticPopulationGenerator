@@ -1,4 +1,4 @@
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 import pandas as pd
 
 from src.services.file_service import FileService
@@ -60,8 +60,7 @@ def update_prompt_with_statistics(
     location: str,
     n_households_generated: int = 0,
     include_stats: bool = True,
-    include_guidance: bool = True
-) -> str:
+    include_guidance: bool = True) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
         return (

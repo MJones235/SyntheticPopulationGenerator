@@ -7,7 +7,7 @@ from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
-from src.utils.plots import plot_age_pyramid, plot_household_size, plot_occupations
+from src.utils.plots import plot_age_pyramid, plot_household_size, plot_household_structure_bar, plot_occupation_titles, plot_occupations, plot_age_diff
 import os
 
 st.set_page_config(layout="wide")
@@ -75,5 +75,20 @@ else:
                 census_occupation = file_service.load_occupation_distribution(metadata["location"])
                 synthetic_occupation = compute_occupation_distribution(df)
                 st.pyplot(plot_occupations(synthetic_occupation, census_occupation))
+                st.pyplot(plot_occupation_titles(df))
             except Exception as e:
-                st.error(f"Failed to load or plot age pyramid: {e}")
+                st.error(f"Failed to load or plot occupation: {e}")
+
+        st.title("Parent-Child Age Difference")
+        if not df.empty:
+            try:
+                st.pyplot(plot_age_diff(df))
+            except Exception as e:
+                st.error(f"Failed to load or plot age diff: {e}")
+
+        st.title("Household Composition")
+        if not df.empty:
+            try:
+                st.pyplot(plot_household_structure_bar(df))
+            except Exception as e:
+                st.error(f"Failed to load or plot household composition: {e}")
