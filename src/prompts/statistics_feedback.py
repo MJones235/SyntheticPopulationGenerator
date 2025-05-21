@@ -60,7 +60,8 @@ def update_prompt_with_statistics(
     location: str,
     n_households_generated: int = 0,
     include_stats: bool = True,
-    include_guidance: bool = True) -> str:
+    include_guidance: bool = True,
+    use_microdata: bool = False) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
         return (
@@ -74,20 +75,50 @@ def update_prompt_with_statistics(
         ).strip()
 
     if include_stats:
-        guidance_text = """
+        if use_microdata:
+            guidance_text = """
+The following statistics show the current state of the synthetic population.
+Each section displays the distribution of individuals or households so far, alongside target percentages from the 2021 Census.
+Your primary task is to preserve the known characteristics of the anchor person and build a plausible household around them.
+This includes retaining their age, gender, and other known attributes as given.
+Where additional household members must be generated, you should use the census data to:
+- Nudge the overall population toward the target distributions.
+- Select a household size that is currently underrepresented.
+- If possible, include individuals from underrepresented age groups.
+- Include underrepresented occupations.
+- Maintain an even gender balance across the full population.
+All household structures must remain realistic and demographically plausible.
+"""
+        else:
+            guidance_text = """
 The following statistics show the current state of the synthetic population.
 Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
 Your task is to generate a household that nudges the distribution toward the target.
 Select a household size that is currently underrepresented.
-If possible, include individuals from underrepresented age groups.  
+If possible, include individuals from underrepresented age groups. 
+Include underrepresented occupations. 
 Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
     elif include_guidance:
-        guidance_text = """
+        if use_microdata:
+            guidance_text = """
+The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
+Your first priority is to preserve the known attributes of the anchor person and construct a plausible household around them.
+Where additional household members must be generated, you should use the census data to:
+- Nudge the overall population toward the target distributions.
+- Select a household size that is currently underrepresented.
+- If possible, include individuals from underrepresented age groups.
+- Include underrepresented occupations.
+- Maintain an even gender balance across the full population.
+All household structures must remain realistic and demographically plausible.
+"""
+        else:
+            guidance_text = """
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
 Select a household size that is currently underrepresented.
 If possible, include individuals from underrepresented age groups.  
+Include underrepresented occupations.
 Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """

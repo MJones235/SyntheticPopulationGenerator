@@ -19,28 +19,34 @@ report_service = ReportService()
 metadata_service = MetadataService()
 analysis_service = AnalysisService()
 
-model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
+# model = OllamaModel("phi3:14b", temperature=1, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
-# model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
+model = OpenAIModel(model_name="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
-n_households = 300
+region = "E12000001"
+n_households = 500
+batch_size = 10
+include_stats = False
+include_guidance = False
+compute_household_size = False
+use_microdata = True
 
-prompt = file_service.load_prompt("minimal_prompt_2.txt", {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)})
+if use_microdata:
+    prompt_file = "microdata.txt"
+elif compute_household_size:
+    prompt_file = "fixed_household_size.txt"
+else:
+    prompt_file = "minimal_prompt_2.txt"
+
+prompt = file_service.load_prompt(prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)})
 schema = file_service.load_schema("household_schema.json")
 
 population_id = str(uuid.uuid4())
 
-
-batch_size = 10
-include_stats = True
-include_guidance = True
-compute_household_size = False
-
 start_time = time.time()
 
 try:
-    households = population_service.generate_households(n_households, model, prompt, schema, batch_size, location, include_stats, include_guidance, compute_household_size)
-
+    households = population_service.generate_households(n_households, model, prompt, schema, location, region, batch_size, include_stats, include_guidance, use_microdata, compute_household_size)
     execution_time = time.time() - start_time
 
     flat_data = [person for household in households for person in household]

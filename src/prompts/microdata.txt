@@ -1,0 +1,43 @@
+You are generating a realistic synthetic population for {LOCATION}.
+
+You will now generate one new household to add to this population.
+
+You will be provided with the details of one individual who is known to be part of the population. Your task is to generate a plausible household around this anchor person, using UK census patterns.
+
+Here is the anchor person:
+{ANCHOR_PERSON}
+
+{GUIDANCE}
+
+{HOUSEHOLD_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+{OCCUPATION_STATS}
+
+Return a JSON object with a single key `"household"`, which maps to a list of one or more people.
+Each person must be represented as an object with the following fields:
+
+- `"age"`: an integer 
+- `"gender"`: a string, either `"Male"` or `"Female"`  
+- `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
+  - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`. The head should be an adult. This may or may not be the anchor person.  
+  - Other valid values include: `"Partner"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Sibling"`, `"Roommate"`, `"Other"`
+- `occupation_category`: a number from 1 to 10 representing the standard occupational cateogry:
+  1. Managers, directors and senior officials  
+  2. Professional occupations  
+  3. Associate professional and technical occupations  
+  4. Administrative and secretarial occupations  
+  5. Skilled trades occupations  
+  6. Caring, leisure and other service occupations  
+  7. Sales and customer service occupations  
+  8. Process, plant and machine operatives  
+  9. Elementary occupations  
+  10. Does not apply
+- `occupation`: a string giving a specific job title that matches the selected occupation_category. If the person is not employed, use a status label such as "Child", "Student", "Unemployed", or "Retired".
+
+If the anchor person lives alone, return only them as a 1-person household.
+
+Output only the JSON object — do not include markdown formatting, code fences, or backticks.

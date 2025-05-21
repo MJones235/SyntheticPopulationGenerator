@@ -105,13 +105,13 @@ def plot_occupations(synthetic: dict, census: dict):
 def plot_age_diff(synthetic_df: pd.DataFrame):
     head_child_diffs = []
     parent_head_diffs = []
-    head_spouse_diffs = []
+    head_partner_diffs = []
 
     for _, group in synthetic_df.groupby("household_id"):
         head = group[group["relationship"] == "Head"]
         children = group[group["relationship"] == "Child"]
         parents = group[group["relationship"] == "Parent"]
-        spouses = group[group["relationship"] == "Spouse"]
+        partners = group[group["relationship"] == "Partner"]
 
         if not head.empty:
             head_age = head.iloc[0]["age"]
@@ -126,10 +126,10 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
                 diff = parent["age"] - head_age
                 parent_head_diffs.append(diff)
 
-            # Head–Spouse
-            for _, spouse in spouses.iterrows():
-                diff = head_age - spouse["age"]
-                head_spouse_diffs.append(diff)
+            # Head–Partner
+            for _, partner in partners.iterrows():
+                diff = head_age - partner["age"]
+                head_partner_diffs.append(diff)
 
 
     # Create the figure with subplots
@@ -146,8 +146,8 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
     axes[1].set_xlabel("Years")
     axes[1].grid(True)
 
-    axes[2].hist(head_spouse_diffs, bins=15, color="salmon", edgecolor="black")
-    axes[2].set_title("Head-Spouse Age Differences")
+    axes[2].hist(head_partner_diffs, bins=15, color="salmon", edgecolor="black")
+    axes[2].set_title("Head-Partner Age Differences")
     axes[2].set_xlabel("Years")
     axes[2].grid(True)
 
@@ -156,18 +156,33 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
     return fig
 
-def plot_household_structure_bar(df: pd.DataFrame) -> plt.Figure:
+def plot_household_structure_bar(df: pd.DataFrame, census_df: pd.DataFrame) -> plt.Figure:
 
     household_labels = df.groupby("household_id").apply(classify_household_structure)
-    label_counts = household_labels.value_counts().sort_values(ascending=False)
+    synthetic_counts = household_labels.value_counts(normalize=True) * 100
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.bar(label_counts.index, label_counts.values, color="steelblue", edgecolor="black")
-    ax.set_title("Frequency of Household Types by Relationship Configuration")
-    ax.set_xlabel("Household Type")
-    ax.set_ylabel("Number of Households")
-    ax.set_xticklabels(label_counts.index, rotation=45, ha="right")
-    ax.grid(axis='y')
+    combined = pd.DataFrame({
+        "Synthetic": synthetic_counts
+    }).join(
+        census_df.set_index("Household Composition")["Value"].rename("Census"),
+        how="outer"
+    ).fillna(0)
+
+    combined = combined.sort_values("Census", ascending=False)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bar_width = 0.4
+    x = range(len(combined))
+    ax.bar([i - bar_width/2 for i in x], combined["Census"], width=bar_width, label="Census", color="royalblue")
+    ax.bar([i + bar_width/2 for i in x], combined["Synthetic"], width=bar_width, label="Synthetic", color="orange")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(combined.index, rotation=45, ha="right")
+    ax.set_ylabel("Percentage of Households")
+    ax.set_title("Comparison of Household Composition: Census vs Synthetic")
+    ax.legend()
+    ax.grid(axis="y")
 
     return fig
 

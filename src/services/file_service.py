@@ -8,6 +8,7 @@ class FileService:
     PROMPT_DIR = os.path.join(os.path.dirname(__file__), "../prompts")
     SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "../../data/schemas/")
     CENSUS_DATA = os.path.join(os.path.dirname(__file__), "../../data/locations/")
+    MICRODATA = os.path.join(os.path.dirname(__file__), "../../data/microdata/publicmicrodatateachingsample.csv")
 
     def load_prompt(self, filename: str, replacements: dict = None) -> str:
         """
@@ -61,6 +62,24 @@ class FileService:
             print(f"Error processing census data: {e}")
             return {}
         
+    def load_household_composition(self, location: str) -> Dict:
+        try:
+            
+            filepath = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "household_composition.csv")
+            census_df = pd.read_csv(filepath)
+            required_columns = ["Household composition (8 categories)", "Observation"]
+            if not all(col in census_df.columns for col in required_columns):
+                raise ValueError(f"CSV file must contain columns: {required_columns}")
+
+            census_df["Household Composition"] = census_df["Household composition (8 categories)"]
+            total = census_df["Observation"].sum()
+            census_df["Value"] = census_df["Observation"].apply(lambda x: x / total * 100)
+            return census_df[["Household Composition", "Value"]]
+
+        except Exception as e:
+            print(f"Error processing census data: {e}")
+            return {}
+
 
     def load_age_pyramid(self, location: str) -> pd.DataFrame:
         try:
@@ -138,4 +157,12 @@ class FileService:
 
         return filepath
     
+    def load_microdata(self, region: str) -> pd.DataFrame:
+        try:
+            df = pd.read_csv(self.MICRODATA)
+            df = df[df["region"] == region]
+            return df
+        except Exception as e:
+            print(f"Error loading microdata for {region}: {e}")
+            return pd.DataFrame()
 

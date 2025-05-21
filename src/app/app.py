@@ -89,6 +89,7 @@ else:
         st.title("Household Composition")
         if not df.empty:
             try:
-                st.pyplot(plot_household_structure_bar(df))
+                census_composition_df = file_service.load_household_composition(metadata["location"])
+                st.pyplot(plot_household_structure_bar(df, census_composition_df))
             except Exception as e:
                 st.error(f"Failed to load or plot household composition: {e}")

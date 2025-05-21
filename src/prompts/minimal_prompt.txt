@@ -7,7 +7,7 @@ For each individual, provide:
 - "age" (a plausible integer age).
 - "gender" ("Male" or "Female").
 - "occupation" (for adults: a suitable job title, "Retired" or "Unemployed"; for children: "Child").
-- "relationship" (must be one of: "Head", "Spouse", "Child", "Parent", "Roommate", "Grandchild").
+- "relationship" (must be one of: "Head", "Partner", "Child", "Parent", "Roommate", "Grandchild").
 
 **Important Instructions**:
 - **There must always be exactly one "Head" of household**.
