@@ -104,14 +104,12 @@ def plot_occupations(synthetic: dict, census: dict):
 
 def plot_age_diff(synthetic_df: pd.DataFrame):
     head_child_diffs = []
-    parent_head_diffs = []
     head_partner_diffs = []
 
     for _, group in synthetic_df.groupby("household_id"):
         head = group[group["relationship"] == "Head"]
         children = group[group["relationship"] == "Child"]
-        parents = group[group["relationship"] == "Parent"]
-        partners = group[group["relationship"] == "Partner"]
+        partners = group[group["relationship"].isin(["Partner", "Spouse"])]
 
         if not head.empty:
             head_age = head.iloc[0]["age"]
@@ -121,11 +119,6 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
                 diff = head_age - child["age"]
                 head_child_diffs.append(diff)
 
-            # Parent–Head
-            for _, parent in parents.iterrows():
-                diff = parent["age"] - head_age
-                parent_head_diffs.append(diff)
-
             # Head–Partner
             for _, partner in partners.iterrows():
                 diff = head_age - partner["age"]
@@ -133,7 +126,7 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
 
     # Create the figure with subplots
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
 
     axes[0].hist(head_child_diffs, bins=15, color="lightblue", edgecolor="black")
     axes[0].set_title("Head–Child Age Differences")
@@ -141,15 +134,10 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
     axes[0].set_ylabel("Count")
     axes[0].grid(True)
 
-    axes[1].hist(parent_head_diffs, bins=15, color="lightgreen", edgecolor="black")
-    axes[1].set_title("Parent–Head Age Differences")
+    axes[1].hist(head_partner_diffs, bins=15, color="salmon", edgecolor="black")
+    axes[1].set_title("Head-Partner Age Differences")
     axes[1].set_xlabel("Years")
     axes[1].grid(True)
-
-    axes[2].hist(head_partner_diffs, bins=15, color="salmon", edgecolor="black")
-    axes[2].set_title("Head-Partner Age Differences")
-    axes[2].set_xlabel("Years")
-    axes[2].grid(True)
 
     fig.suptitle("Intra-Household Age Differences")
     fig.tight_layout()

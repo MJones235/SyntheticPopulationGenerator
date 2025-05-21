@@ -28,8 +28,8 @@ n_households = 500
 batch_size = 10
 include_stats = False
 include_guidance = False
-compute_household_size = False
-use_microdata = True
+compute_household_size = True
+use_microdata = False
 
 if use_microdata:
     prompt_file = "microdata.txt"

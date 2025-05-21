@@ -27,7 +27,7 @@ Each person must be represented as an object with the following fields:
 - `"gender"`: a string, either `"Male"` or `"Female"`  
 - `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
   - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`.  The head should be an adult.  
-  - Other valid values include: `"Partner"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Sibling"`, `"Roommate"`
+  - Other valid values are: `"Partner"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Housemate"`, `"Other"`
 - `occupation_category`: a number from 1 to 10 representing the standard occupational cateogry:
   1. Managers, directors and senior officials  
   2. Professional occupations  

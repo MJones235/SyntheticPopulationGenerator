@@ -81,10 +81,10 @@ The following statistics show the current state of the synthetic population.
 Each section displays the distribution of individuals or households so far, alongside target percentages from the 2021 Census.
 Your primary task is to preserve the known characteristics of the anchor person and build a plausible household around them.
 This includes retaining their age, gender, and other known attributes as given.
-Where additional household members must be generated, you should use the census data to:
+Where additional household members must be generated, you should use the census data, where possible, to:
 - Nudge the overall population toward the target distributions.
 - Select a household size that is currently underrepresented.
-- If possible, include individuals from underrepresented age groups.
+- Include individuals from underrepresented age groups.
 - Include underrepresented occupations.
 - Maintain an even gender balance across the full population.
 All household structures must remain realistic and demographically plausible.
@@ -105,10 +105,10 @@ Ensure that the household structure remains realistic.
             guidance_text = """
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
 Your first priority is to preserve the known attributes of the anchor person and construct a plausible household around them.
-Where additional household members must be generated, you should use the census data to:
+Where additional household members must be generated, you should use the census data, where possible, to:
 - Nudge the overall population toward the target distributions.
 - Select a household size that is currently underrepresented.
-- If possible, include individuals from underrepresented age groups.
+- Include individuals from underrepresented age groups.
 - Include underrepresented occupations.
 - Maintain an even gender balance across the full population.
 All household structures must remain realistic and demographically plausible.
@@ -138,7 +138,7 @@ Ensure that the household structure remains realistic.
         target_distribution=target_size_dist,
         label_func=household_label,
         guidance_label="Household Size",
-        threshold=2,
+        threshold=0.5,
         include_stats=include_stats,
         include_guidance=include_guidance
     )
@@ -157,7 +157,7 @@ Ensure that the household structure remains realistic.
         target_distribution=target_age_dist,
         label_func=age_label,
         guidance_label="Age Group",
-        threshold=2,
+        threshold=1,
         include_stats=include_stats,
         include_guidance=include_guidance
     )
@@ -173,7 +173,7 @@ Ensure that the household structure remains realistic.
         target_distribution={"Male": 50.0, "Female": 50.0},
         label_func=gender_label,
         guidance_label="Gender",
-        threshold=1,
+        threshold=0.5,
         include_stats=include_stats,
         include_guidance=include_guidance
     )
@@ -191,7 +191,7 @@ Ensure that the household structure remains realistic.
         target_distribution=target_occupation_dist,
         label_func=occupation_label,
         guidance_label="Occupation",
-        threshold=2,
+        threshold=0.5,
         include_stats=include_stats,
         include_guidance=include_guidance
     )
