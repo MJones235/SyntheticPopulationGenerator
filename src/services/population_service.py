@@ -30,6 +30,7 @@ class PopulationService:
         include_guidance: bool,
         use_microdata: bool = False,
         compute_household_size: bool = False,
+        include_target: bool = True
     ) -> List[Dict[str, Any]]:
         households = []
         target_age_distribution = self.file_service.load_age_pyramid(location)
@@ -69,6 +70,7 @@ class PopulationService:
             include_stats=include_stats,
             include_guidance=include_guidance,
             use_microdata=use_microdata,
+            include_target=include_target
         )
 
         for i in range(0, n_households, batch_size):
@@ -112,10 +114,11 @@ class PopulationService:
                     synthetic_df=synthetic_df,
                     target_age_distribution=target_age_distribution,
                     location=location,
-                    n_households_generated=i,
+                    n_households_generated=(i + batch_count),
                     include_stats=include_stats,
                     include_guidance=include_guidance,
                     use_microdata=use_microdata,
+                    include_target=include_target
                 )
 
         return households

@@ -1,3 +1,4 @@
+import re
 from typing import Any, Callable, Optional
 import pandas as pd
 
@@ -11,7 +12,8 @@ def generate_distribution_prompt(
     guidance_label: str,
     threshold: int = 10,
     include_stats: bool = True,
-    include_guidance: bool = True
+    include_guidance: bool = True,
+    include_target: bool = True
 ) -> str:
     total_obs = sum(observed_distribution.values())
     total_target = sum(target_distribution.values())
@@ -33,7 +35,10 @@ def generate_distribution_prompt(
 
         label = label_func(key)
         if include_stats:
-            feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%")
+            if include_target:
+                feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%")
+            else:
+                feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%")
 
         diff = obs_pct - tgt_pct
         if include_guidance and abs(diff) >= threshold:
@@ -61,10 +66,11 @@ def update_prompt_with_statistics(
     n_households_generated: int = 0,
     include_stats: bool = True,
     include_guidance: bool = True,
-    use_microdata: bool = False) -> str:
+    use_microdata: bool = False,
+    include_target: bool = True) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
-        return (
+        prompt =  (
             base_prompt
             .replace("{N_HOUSEHOLDS}", str(n_households_generated))
             .replace("{GUIDANCE}", "")
@@ -72,7 +78,10 @@ def update_prompt_with_statistics(
             .replace("{AGE_STATS}", "")
             .replace("{GENDER_STATS}", "")
             .replace("{OCCUPATION_STATS}", "")
-        ).strip()
+        )
+
+        return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
+
 
     if include_stats:
         if use_microdata:
@@ -90,7 +99,8 @@ Where additional household members must be generated, you should use the census 
 All household structures must remain realistic and demographically plausible.
 """
         else:
-            guidance_text = """
+            if include_target:
+                guidance_text = """
 The following statistics show the current state of the synthetic population.
 Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
 Your task is to generate a household that nudges the distribution toward the target.
@@ -100,6 +110,18 @@ Include underrepresented occupations.
 Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
+            else:
+                guidance_text = """
+The following statistics describe the current distribution of individuals and households in the synthetic population.
+Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
+Use your knowledge of UK demographics to identify which values appear over- or underrepresented, and adjust accordingly.
+Select a household size that appears underrepresented.
+If appropriate, include individuals from underrepresented age groups.
+Incorporate occupations that are less common in the current data.
+Maintain an even gender balance across the population.
+Ensure that the household structure remains plausible and realistic.
+"""
+
     elif include_guidance:
         if use_microdata:
             guidance_text = """
@@ -140,7 +162,8 @@ Ensure that the household structure remains realistic.
         guidance_label="Household Size",
         threshold=0.5,
         include_stats=include_stats,
-        include_guidance=include_guidance
+        include_guidance=include_guidance,
+        include_target=include_target
     )
 
     # Age Distribution
@@ -159,7 +182,8 @@ Ensure that the household structure remains realistic.
         guidance_label="Age Group",
         threshold=1,
         include_stats=include_stats,
-        include_guidance=include_guidance
+        include_guidance=include_guidance,
+        include_target=include_target
     )
 
     # Gender Distribution
@@ -175,7 +199,8 @@ Ensure that the household structure remains realistic.
         guidance_label="Gender",
         threshold=0.5,
         include_stats=include_stats,
-        include_guidance=include_guidance
+        include_guidance=include_guidance,
+        include_target=include_target
     )
 
     # Occupation Distribution
@@ -193,10 +218,11 @@ Ensure that the household structure remains realistic.
         guidance_label="Occupation",
         threshold=0.5,
         include_stats=include_stats,
-        include_guidance=include_guidance
+        include_guidance=include_guidance,
+        include_target=include_target
     )
 
-    return (
+    prompt = (
         base_prompt
         .replace("{N_HOUSEHOLDS}", str(n_households_generated))
         .replace("{GUIDANCE}", guidance_text.strip())
@@ -205,3 +231,6 @@ Ensure that the household structure remains realistic.
         .replace("{GENDER_STATS}", gender_stats_text.strip())
         .replace("{OCCUPATION_STATS}", occupation_stats_text.strip())
     ).strip()
+
+    return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
+
