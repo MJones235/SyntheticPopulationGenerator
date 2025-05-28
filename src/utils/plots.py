@@ -146,17 +146,41 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
 def plot_household_structure_bar(df: pd.DataFrame, census_df: pd.DataFrame) -> plt.Figure:
 
+    label_map = {
+        "One-person household: Aged 66 years and over": "One-person: 66+ years",
+        "One-person household: Other": "One-person: <66 years",
+        "Single family household: Lone parent household": "Lone parent",
+        "Single family household: Couple family household: No children": "Couple: No children",
+        "Single family household: Couple family household: Dependent children": "Couple: Dependent children",
+        "Single family household: Couple family household: All children non-dependent": "Couple: Non-dependent children",
+        "Other household types": "Other",
+    }
+
+    label_order = [
+        "One-person: <66 years",
+        "One-person: 66+ years",
+        "Lone parent",
+        "Couple: No children",
+        "Couple: Dependent children",
+        "Couple: Non-dependent children",
+        "Other"
+    ]
+
+
     household_labels = df.groupby("household_id").apply(classify_household_structure)
     synthetic_counts = household_labels.value_counts(normalize=True) * 100
+    synthetic_counts.index = synthetic_counts.index.map(lambda x: label_map.get(x, x))
+
+    census_df["Short Label"] = census_df["Household Composition"].map(lambda x: label_map.get(x, x))
+    census_df = census_df.groupby("Short Label")["Value"].sum().reset_index()
+    census_counts = census_df.groupby("Short Label")["Value"].sum()
 
     combined = pd.DataFrame({
-        "Synthetic": synthetic_counts
-    }).join(
-        census_df.set_index("Household Composition")["Value"].rename("Census"),
-        how="outer"
-    ).fillna(0)
+        "Synthetic": synthetic_counts,
+        "Census": census_counts
+    }).fillna(0)
 
-    combined = combined.sort_values("Census", ascending=False)
+    combined = combined.loc[[label for label in label_order if label in combined.index]]
 
     fig, ax = plt.subplots(figsize=(12, 6))
 

@@ -64,9 +64,14 @@ def render_controls(variable):
         ], style={"display": "block" if variable == "population_size" else "none"}),
 
         html.Div([
-            html.Label("Select Location:"),
-            dcc.Dropdown(id="location-dropdown", options=location_options, value=locations[0])
-        ], style={"display": "block" if variable == "age_distribution" else "none"}),
+            html.Label("Select Location(s):"),
+            dcc.Dropdown(
+                id="location-dropdown", 
+                options=location_options, 
+                value=locations[0] if variable == "age_distribution" else locations,
+                multi=(variable != "age_distribution")
+            )
+        ]),
 
         html.Br(),
         html.Label("Select Model(s):"),
@@ -88,6 +93,24 @@ def render_controls(variable):
         ], style={"display": "block" if variable == "age_distribution" else "none"})
         
     ])
+
+@app.callback(
+    dash.Output("location-dropdown", "options"),
+    dash.Output("location-dropdown", "value"),
+    dash.Input("category-dropdown", "value"),
+    dash.Input("variable-dropdown", "value"),
+    prevent_initial_call=True
+)
+def update_location_options(selected_category, variable):
+    if variable != "population_size" or not selected_category:
+        return [], []
+
+    df = load_data("population_size")
+    filtered = df[df["BUA size classification"] == selected_category]
+    locations = sorted(filtered["location"].dropna().unique())
+    options = [{"label": loc, "value": loc} for loc in locations]
+    return options, locations  # all selected by default
+
 
 # Shared callback
 @app.callback(
@@ -116,10 +139,17 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
     filtered_df = filtered_df[filtered_df["model_name"].isin(selected_models)]
 
     if variable == "population_size":
-        if selected_category is None:
+        if selected_category is None or not selected_location:
             return {}, [], []
+        
+        if isinstance(selected_location, str):
+            selected_location = [selected_location]
 
-        filtered_df = filtered_df[filtered_df["BUA size classification"] == selected_category]
+        filtered_df = filtered_df[
+            (filtered_df["BUA size classification"] == selected_category) &
+            (filtered_df["location"].isin(selected_location))
+        ]
+
 
         df_grouped = (
             filtered_df.groupby(["location", "model_name", "BUA size classification"])
@@ -134,6 +164,7 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
             color="model_name",
             barmode="group",
             title="Median Predicted vs Actual Population",
+            color_discrete_sequence=px.colors.qualitative.Set2
         )
         fig.add_scatter(
             x=df_grouped["location"],
@@ -198,12 +229,15 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
                 d = d.set_index("age_band").reindex(age_bands).reset_index()
                 values = d["prediction"].fillna(0)
                 values = -values if sex == "Male" else values
+                color = "blue" if sex == "Male" else "red"
 
                 fig.add_bar(
                     y=d["age_band"],
                     x=values,
                     name=f"{model} ({sex})",
-                    orientation="h"
+                    orientation="h",
+                    marker=dict(color=color),
+                    opacity=0.6
                 )
 
         for sex in sexes:
@@ -211,14 +245,15 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
             d = d.set_index("age_band").reindex(age_bands).reset_index()
             values = d["ground_truth"].fillna(0)
             values = -values if sex == "Male" else values
+            color = "blue" if sex == "Male" else "red"
 
             fig.add_bar(
                 y=d["age_band"],
                 x=values,
                 name=f"Ground Truth ({sex})",
                 orientation="h",
-                marker=dict(color="black"),
-                opacity=0.4
+                marker=dict(color=color),
+                opacity=0.2
             )
 
         fig.update_layout(

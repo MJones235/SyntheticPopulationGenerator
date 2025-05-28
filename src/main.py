@@ -24,7 +24,7 @@ load_dotenv("secrets.env")
 model = OpenAIModel(model_name="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.7, top_p=0.85, top_k=100)
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 500
+n_households = 300
 batch_size = 10
 include_stats = True
 include_target = False
