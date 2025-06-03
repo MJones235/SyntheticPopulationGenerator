@@ -50,12 +50,13 @@ class FileService:
             
             filepath = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "household_size.csv")
             census_df = pd.read_csv(filepath)
-            required_columns = ["C2021_HHSIZE_10_NAME", "OBS_VALUE"]
+            required_columns = ["Household size (9 categories) Code", "Observation"]
             if not all(col in census_df.columns for col in required_columns):
                 raise ValueError(f"CSV file must contain columns: {required_columns}")
 
-            census_df["Household Size"] = census_df["C2021_HHSIZE_10_NAME"].apply(lambda x: int(re.search(r"\d+", x).group()))
-            household_size_distribution = dict(zip(census_df["Household Size"], census_df["OBS_VALUE"]))
+            total = census_df["Observation"].sum()
+            census_df["Value"] = census_df["Observation"].apply(lambda x: x / total * 100)
+            household_size_distribution = dict(zip(census_df["Household size (9 categories) Code"], census_df["Value"]))
             return household_size_distribution
 
         except Exception as e:
@@ -88,11 +89,12 @@ class FileService:
 
             # Clean column names
             df.columns = df.columns.str.strip()
-            df["Percentage per BUA"] = df["Percentage per BUA"].astype(float)
+            df["Percentage per BUA"] = df["Observation"] / df["Observation"].sum() * 100
+            df["Percentage per BUA"] = df["Percentage per BUA"].round(1)
 
             # Clean up age group labels
-            df["Age"] = (
-                df["Age"]
+            df["Age (B) (18 categories)"] = (
+                df["Age (B) (18 categories)"]
                 .str.replace(r"Aged (\d+) years and under", r"0–\1", regex=True)
                 .str.replace(r"Aged (\d+) to (\d+) years", r"\1–\2", regex=True)
                 .str.replace(r"Aged (\d+) years and over", r"\1+", regex=True)
@@ -100,7 +102,7 @@ class FileService:
             )
 
             # Pivot into age_group × sex → percentage
-            pyramid_df = df.pivot_table(index="Age", columns="Sex", values="Percentage per BUA", aggfunc="sum").fillna(0)
+            pyramid_df = df.pivot_table(index="Age (B) (18 categories)", columns="Sex (2 categories)", values="Percentage per BUA", aggfunc="sum").fillna(0)
 
             # Standardize sex column names
             pyramid_df.columns = [c.strip().capitalize() for c in pyramid_df.columns]
@@ -113,7 +115,7 @@ class FileService:
                 return int(match.group(1)) if match else float("inf")
 
             pyramid_df = pyramid_df.sort_index(key=lambda x: x.map(sort_key))
-            pyramid_df = pyramid_df.reset_index().rename(columns={"Age": "age_group"})
+            pyramid_df = pyramid_df.reset_index().rename(columns={"Age (B) (18 categories)": "age_group"})
 
             return pyramid_df
 

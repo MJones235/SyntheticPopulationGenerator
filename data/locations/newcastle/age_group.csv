@@ -1,37 +1,37 @@
-Country code,Country,Region code,Region,BUA code,BUA name,BUA size classification,Age,Sex, Counts ,Percentage per BUA
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 4 years and under,Female," 7,265 ",2.5
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 4 years and under,Male," 7,570 ",2.6
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 5 to 9 years,Female," 7,795 ",2.7
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 5 to 9 years,Male," 8,170 ",2.9
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 10 to 14 years,Female," 7,600 ",2.7
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 10 to 14 years,Male," 8,090 ",2.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 15 to 19 years,Female," 11,680 ",4.1
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 15 to 19 years,Male," 10,970 ",3.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 20 to 24 years,Female," 17,775 ",6.2
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 20 to 24 years,Male," 18,175 ",6.3
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 25 to 29 years,Female," 10,975 ",3.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 25 to 29 years,Male," 11,330 ",4.0
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 30 to 34 years,Female," 10,330 ",3.6
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 30 to 34 years,Male," 9,940 ",3.5
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 35 to 39 years,Female," 9,320 ",3.3
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 35 to 39 years,Male," 9,390 ",3.3
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 40 to 44 years,Female," 7,950 ",2.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 40 to 44 years,Male," 8,140 ",2.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 45 to 49 years,Female," 7,610 ",2.7
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 45 to 49 years,Male," 7,655 ",2.7
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 50 to 54 years,Female," 7,935 ",2.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 50 to 54 years,Male," 7,880 ",2.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 55 to 59 years,Female," 8,245 ",2.9
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 55 to 59 years,Male," 8,170 ",2.9
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 60 to 64 years,Female," 7,420 ",2.6
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 60 to 64 years,Male," 7,245 ",2.5
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 65 to 69 years,Female," 6,190 ",2.2
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 65 to 69 years,Male," 5,865 ",2.0
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 70 to 74 years,Female," 5,705 ",2.0
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 70 to 74 years,Male," 5,315 ",1.9
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 75 to 79 years,Female," 3,930 ",1.4
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 75 to 79 years,Male," 3,430 ",1.2
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 80 to 84 years,Female," 3,345 ",1.2
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 80 to 84 years,Male," 2,240 ",0.8
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 85 years and over,Female," 3,690 ",1.3
-E92000001,England,E12000001,North East,E63000077,Newcastle upon Tyne,Major,Aged 85 years and over,Male," 2,110 ",0.7
+Upper tier local authorities Code,Upper tier local authorities,Age (B) (18 categories) Code,Age (B) (18 categories),Sex (2 categories) Code,Sex (2 categories),Observation
+E08000021,Newcastle upon Tyne,1,Aged 4 years and under,1,Female,7618
+E08000021,Newcastle upon Tyne,1,Aged 4 years and under,2,Male,8033
+E08000021,Newcastle upon Tyne,2,Aged 5 to 9 years,1,Female,8133
+E08000021,Newcastle upon Tyne,2,Aged 5 to 9 years,2,Male,8571
+E08000021,Newcastle upon Tyne,3,Aged 10 to 14 years,1,Female,7943
+E08000021,Newcastle upon Tyne,3,Aged 10 to 14 years,2,Male,8460
+E08000021,Newcastle upon Tyne,4,Aged 15 to 19 years,1,Female,12027
+E08000021,Newcastle upon Tyne,4,Aged 15 to 19 years,2,Male,11328
+E08000021,Newcastle upon Tyne,5,Aged 20 to 24 years,1,Female,18115
+E08000021,Newcastle upon Tyne,5,Aged 20 to 24 years,2,Male,18530
+E08000021,Newcastle upon Tyne,6,Aged 25 to 29 years,1,Female,11567
+E08000021,Newcastle upon Tyne,6,Aged 25 to 29 years,2,Male,11823
+E08000021,Newcastle upon Tyne,7,Aged 30 to 34 years,1,Female,10830
+E08000021,Newcastle upon Tyne,7,Aged 30 to 34 years,2,Male,10416
+E08000021,Newcastle upon Tyne,8,Aged 35 to 39 years,1,Female,9782
+E08000021,Newcastle upon Tyne,8,Aged 35 to 39 years,2,Male,9812
+E08000021,Newcastle upon Tyne,9,Aged 40 to 44 years,1,Female,8405
+E08000021,Newcastle upon Tyne,9,Aged 40 to 44 years,2,Male,8540
+E08000021,Newcastle upon Tyne,10,Aged 45 to 49 years,1,Female,8016
+E08000021,Newcastle upon Tyne,10,Aged 45 to 49 years,2,Male,8044
+E08000021,Newcastle upon Tyne,11,Aged 50 to 54 years,1,Female,8429
+E08000021,Newcastle upon Tyne,11,Aged 50 to 54 years,2,Male,8332
+E08000021,Newcastle upon Tyne,12,Aged 55 to 59 years,1,Female,8735
+E08000021,Newcastle upon Tyne,12,Aged 55 to 59 years,2,Male,8625
+E08000021,Newcastle upon Tyne,13,Aged 60 to 64 years,1,Female,7866
+E08000021,Newcastle upon Tyne,13,Aged 60 to 64 years,2,Male,7630
+E08000021,Newcastle upon Tyne,14,Aged 65 to 69 years,1,Female,6505
+E08000021,Newcastle upon Tyne,14,Aged 65 to 69 years,2,Male,6170
+E08000021,Newcastle upon Tyne,15,Aged 70 to 74 years,1,Female,6109
+E08000021,Newcastle upon Tyne,15,Aged 70 to 74 years,2,Male,5679
+E08000021,Newcastle upon Tyne,16,Aged 75 to 79 years,1,Female,4203
+E08000021,Newcastle upon Tyne,16,Aged 75 to 79 years,2,Male,3660
+E08000021,Newcastle upon Tyne,17,Aged 80 to 84 years,1,Female,3568
+E08000021,Newcastle upon Tyne,17,Aged 80 to 84 years,2,Male,2405
+E08000021,Newcastle upon Tyne,18,Aged 85 years and over,1,Female,3951
+E08000021,Newcastle upon Tyne,18,Aged 85 years and over,2,Male,2265
