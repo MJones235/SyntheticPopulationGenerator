@@ -64,7 +64,11 @@ class DBManager:
             prompt TEXT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             include_stats BOOLEAN,
-            include_guidance BOOLEAN
+            include_guidance BOOLEAN,
+            include_target BOOLEAN,
+            compute_household_size BOOLEAN,
+            use_microdata BOOLEAN,
+            no_occupation BOOLEAN
         );
 
         CREATE TABLE IF NOT EXISTS analysis (

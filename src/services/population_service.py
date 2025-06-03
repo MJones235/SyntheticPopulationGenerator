@@ -30,7 +30,8 @@ class PopulationService:
         include_guidance: bool,
         use_microdata: bool = False,
         compute_household_size: bool = False,
-        include_target: bool = True
+        include_target: bool = True,
+        no_occupation: bool = False
     ) -> List[Dict[str, Any]]:
         households = []
         target_age_distribution = self.file_service.load_age_pyramid(location)
@@ -70,7 +71,8 @@ class PopulationService:
             include_stats=include_stats,
             include_guidance=include_guidance,
             use_microdata=use_microdata,
-            include_target=include_target
+            include_target=include_target,
+            no_occupation=no_occupation
         )
 
         for i in range(0, n_households, batch_size):
@@ -118,7 +120,8 @@ class PopulationService:
                     include_stats=include_stats,
                     include_guidance=include_guidance,
                     use_microdata=use_microdata,
-                    include_target=include_target
+                    include_target=include_target,
+                    no_occupation=no_occupation
                 )
 
         return households

@@ -146,14 +146,8 @@ def convert_microdata_row(row: pd.Series) -> Dict[str, Any]:
     return {
         "age": decode_age(row["resident_age_7d"]),
         "gender": decode_sex(row["sex"]),
-        "residence_type": decode_residence_type(row["residence_type"]),
         "household_type": decode_household_type(row["hh_families_type_6a"]),
-        "partnership_status": decode_partnership_status(row["legal_partnership_status_6a"]),
         "economic_activity": decode_economic_activity(row["economic_activity_status_10m"]),
         "occupation": decode_occupation(row["occupation_10a"]),
         "industry": decode_industry(row["industry_10a"]),
-        "ethnicity": decode_ethnicity(row["ethnic_group_tb_6a"]),
-        "country_of_birth": decode_country_of_birth(row["country_of_birth_3a"]),
-        "religion": decode_religion(row["religion_tb"]),
-        "health_in_general": decode_health(row["health_in_general"]),
     }

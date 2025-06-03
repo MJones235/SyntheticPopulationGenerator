@@ -67,7 +67,8 @@ def update_prompt_with_statistics(
     include_stats: bool = True,
     include_guidance: bool = True,
     use_microdata: bool = False,
-    include_target: bool = True) -> str:
+    include_target: bool = True,
+    no_occupation: bool = False) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
         prompt =  (
@@ -82,32 +83,31 @@ def update_prompt_with_statistics(
 
         return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
 
+    occupation_line = "Include underrepresented occupations.\n" if not no_occupation else ""
 
     if include_stats:
         if use_microdata:
-            guidance_text = """
+            guidance_text = f"""
 The following statistics show the current state of the synthetic population.
 Each section displays the distribution of individuals or households so far, alongside target percentages from the 2021 Census.
 Your primary task is to preserve the known characteristics of the anchor person and build a plausible household around them.
 This includes retaining their age, gender, and other known attributes as given.
 Where additional household members must be generated, you should use the census data, where possible, to:
-- Nudge the overall population toward the target distributions.
-- Select a household size that is currently underrepresented.
-- Include individuals from underrepresented age groups.
-- Include underrepresented occupations.
-- Maintain an even gender balance across the full population.
+Nudge the overall population toward the target distributions.
+Select a household size that is currently underrepresented.
+Include individuals from underrepresented age groups.
+{occupation_line}Maintain an even gender balance across the full population.
 All household structures must remain realistic and demographically plausible.
 """
         else:
             if include_target:
-                guidance_text = """
+                guidance_text = f"""
 The following statistics show the current state of the synthetic population.
 Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
 Your task is to generate a household that nudges the distribution toward the target.
 Select a household size that is currently underrepresented.
 If possible, include individuals from underrepresented age groups. 
-Include underrepresented occupations. 
-Maintain an even gender balance across the full population.
+{occupation_line}Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
             else:
@@ -117,31 +117,28 @@ Your task is to generate one new household that helps bring this population clos
 Use your knowledge of UK demographics to identify which values appear over- or underrepresented, and adjust accordingly.
 Select a household size that appears underrepresented.
 If appropriate, include individuals from underrepresented age groups.
-Incorporate occupations that are less common in the current data.
-Maintain an even gender balance across the population.
+{occupation_line}Maintain an even gender balance across the population.
 Ensure that the household structure remains plausible and realistic.
 """
 
     elif include_guidance:
         if use_microdata:
-            guidance_text = """
+            guidance_text = f"""
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
 Your first priority is to preserve the known attributes of the anchor person and construct a plausible household around them.
 Where additional household members must be generated, you should use the census data, where possible, to:
-- Nudge the overall population toward the target distributions.
-- Select a household size that is currently underrepresented.
-- Include individuals from underrepresented age groups.
-- Include underrepresented occupations.
-- Maintain an even gender balance across the full population.
+Nudge the overall population toward the target distributions.
+Select a household size that is currently underrepresented.
+Include individuals from underrepresented age groups.
+{occupation_line}Maintain an even gender balance across the full population.
 All household structures must remain realistic and demographically plausible.
 """
         else:
-            guidance_text = """
+            guidance_text = f"""
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
 Select a household size that is currently underrepresented.
 If possible, include individuals from underrepresented age groups.  
-Include underrepresented occupations.
-Maintain an even gender balance across the full population.
+{occupation_line}Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
 
@@ -203,24 +200,27 @@ Ensure that the household structure remains realistic.
         include_target=include_target
     )
 
-    # Occupation Distribution
-    observed_occupation_dist = compute_occupation_distribution(synthetic_df)
+    if not no_occupation:
+        # Occupation Distribution
+        observed_occupation_dist = compute_occupation_distribution(synthetic_df)
 
-    target_occupation_dist = FileService().load_occupation_distribution(location)
+        target_occupation_dist = FileService().load_occupation_distribution(location)
 
-    def occupation_label(occupation):
-        return f"cateogry {occupation}"
+        def occupation_label(occupation):
+            return f"cateogry {occupation}"
 
-    occupation_stats_text = generate_distribution_prompt(
-        observed_distribution=observed_occupation_dist,
-        target_distribution=target_occupation_dist,
-        label_func=occupation_label,
-        guidance_label="Occupation",
-        threshold=0.5,
-        include_stats=include_stats,
-        include_guidance=include_guidance,
-        include_target=include_target
-    )
+        occupation_stats_text = generate_distribution_prompt(
+            observed_distribution=observed_occupation_dist,
+            target_distribution=target_occupation_dist,
+            label_func=occupation_label,
+            guidance_label="Occupation",
+            threshold=0.5,
+            include_stats=include_stats,
+            include_guidance=include_guidance,
+            include_target=include_target
+        )
+    else:
+        occupation_stats_text = ""
 
     prompt = (
         base_prompt
