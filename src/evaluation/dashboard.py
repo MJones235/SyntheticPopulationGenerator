@@ -1,3 +1,4 @@
+import re
 from src.evaluation.metrics_calculator import MetricsCalculator
 from src.repositories.dashboard_repository import DashboardRepository
 import pandas as pd
@@ -14,7 +15,7 @@ def load_data(variable: str) -> pd.DataFrame:
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 server = app.server 
 
-VARIABLE_OPTIONS = ["population_size", "age_distribution"]
+VARIABLE_OPTIONS = ["population_size", "age_distribution_2", "household_size"]
 
 app.layout = html.Div([
     html.H1("LLM Estimation Dashboard", style={"textAlign": "center"}),
@@ -58,9 +59,13 @@ def render_controls(variable):
     location_options = [{"label": l, "value": l} for l in locations]
 
     return html.Div([
-        html.Div([
-            html.Label("Select BUA Size:"),
-            dcc.Dropdown(id="category-dropdown", options=category_options, value=categories[0])
+    html.Div([
+        html.Label("Select BUA Size:"),
+            dcc.Dropdown(
+                id="category-dropdown",
+                options=category_options,
+                value=categories[0] if variable == "population_size" and len(categories) > 0 else None
+            )
         ], style={"display": "block" if variable == "population_size" else "none"}),
 
         html.Div([
@@ -68,8 +73,8 @@ def render_controls(variable):
             dcc.Dropdown(
                 id="location-dropdown", 
                 options=location_options, 
-                value=locations[0] if variable == "age_distribution" else locations,
-                multi=(variable != "age_distribution")
+                value=locations[0] if variable in ["age_distribution_2", "household_size"] else locations,
+                multi=(variable == "population_size")
             )
         ]),
 
@@ -78,20 +83,8 @@ def render_controls(variable):
         dcc.Dropdown(
             id="model-dropdown",
             options=model_options,
-            value=models[0] if variable == "age_distribution" else models,
-            multi=(variable == "population_size")
-        ),
-
-        html.Br(),
-        html.Div([
-            html.Label("Normalised View:"),
-            dcc.Checklist(
-                id="normalise-toggle",
-                options=[{"label": "Show normalised percentages", "value": "normalised"}],
-                value=[]
-            )
-        ], style={"display": "block" if variable == "age_distribution" else "none"})
-        
+            multi=True
+        ),        
     ])
 
 @app.callback(
@@ -123,11 +116,10 @@ def update_location_options(selected_category, variable):
         dash.Input("variable-dropdown", "value"),
         dash.Input("category-dropdown", "value"),
         dash.Input("location-dropdown", "value"),
-        dash.Input("model-dropdown", "value"),
-        dash.Input("normalise-toggle", "value")
+        dash.Input("model-dropdown", "value")
     ]
 )
-def update_dashboard(variable, selected_category, selected_location, selected_models, normalise_toggle):
+def update_dashboard(variable, selected_category, selected_location, selected_models):
     if selected_models is None:
         return {}, [], []
 
@@ -177,92 +169,92 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
         mc = MetricsCalculator(filtered_df)
         summary = mc.summary_by_group(group_cols=["BUA size classification", "model_name"])
 
-    elif variable == "age_distribution":
+    elif variable == "age_distribution_2":
+        if selected_location is None:
+            return {}, [], []
+        
+        model_colors = {model: color for model, color in zip(selected_models, px.colors.qualitative.Set2)}
+        filtered_df = filtered_df[filtered_df["location"] == selected_location].copy()
+        filtered_df["age_band"] = filtered_df["subcategory"]
+
+        mc = MetricsCalculator(filtered_df)
+        summary = mc.summary_by_group(group_cols=["model_name"])
+
+        age_bands = sorted(filtered_df["age_band"].dropna().unique(), key=lambda x: int(x.split("-")[0]) if "-" in x else 80)
+
+        fig = go.Figure()
+
+        for model in selected_models:
+            d = filtered_df[filtered_df["model_name"] == model]
+            d = d.set_index("age_band").reindex(age_bands).reset_index()
+            fig.add_bar(
+                x=d["age_band"],
+                y=d["prediction"],
+                name=f"{model} (Prediction)",
+                marker=dict(color=model_colors[model])
+            )
+
+        d_truth = filtered_df.drop_duplicates(subset=["age_band"])[["age_band", "ground_truth"]].set_index("age_band").reindex(age_bands).reset_index()
+        fig.add_bar(
+            x=d_truth["age_band"],
+            y=d_truth["ground_truth"],
+            name="Ground Truth",
+            marker_color="black",
+            opacity=0.4
+        )
+
+        fig.update_layout(
+            title=f"Age Distribution in {selected_location}",
+            xaxis_title="Age Band",
+            yaxis_title="Percentage of Population",
+            barmode="group"
+        )
+    
+    elif variable == "household_size":
         if selected_location is None:
             return {}, [], []
 
-        normalise = "normalised" in normalise_toggle
-        if normalise:
-            filtered_df["prediction"] = (
-                filtered_df.groupby(["location", "model_name"])["prediction"]
-                .transform(lambda x: x / x.sum() * 100)
-            )
-            filtered_df["ground_truth"] = (
-                filtered_df.groupby(["location"])["ground_truth"]
-                .transform(lambda x: x / x.sum() * 100)
-            )
-
+        model_colors = {model: color for model, color in zip(selected_models, px.colors.qualitative.Set2)}
         filtered_df = filtered_df[filtered_df["location"] == selected_location].copy()
-        filtered_df[["age_band", "sex"]] = filtered_df["subcategory"].str.extract(r"^(.*)\s+(Male|Female)$")
+        filtered_df["household_size"] = filtered_df["subcategory"]
 
-        mc = MetricsCalculator(df)
-        
-        # Compute both raw and normalised metrics
-        raw_metrics = MetricsCalculator(df).summary_by_group(group_cols=["model_name"])        
+        mc = MetricsCalculator(filtered_df)
+        summary = mc.summary_by_group(group_cols=["model_name"])
 
-        norm_metrics = MetricsCalculator(
-            df.assign(
-                prediction=df.groupby(["location", "model_name"])["prediction"].transform(lambda x: x / x.sum() * 100),
-                ground_truth=df.groupby(["location", "model_name"])["ground_truth"].transform(lambda x: x / x.sum() * 100)
-            )
-        ).summary_by_group(group_cols=["model_name"])
-
-        summary = pd.merge(
-            raw_metrics.rename(columns={"MAE": "mae_raw", "MPE": "mpe_raw"}),
-            norm_metrics.rename(columns={"MAE": "mae_norm", "MPE": "mpe_norm"}),
-            on="model_name"
+        size_order = sorted(
+            filtered_df["household_size"].dropna().unique(),
+            key=lambda x: int(re.search(r"\d+", x).group()) if re.search(r"\d+", x) else 99
         )
 
         fig = go.Figure()
-        sexes = ["Male", "Female"]
-
-        def age_band_sort_key(age_band):
-            import re
-            match = re.search(r"(\d+)", age_band)
-            return int(match.group(1)) if match else float("inf")
-
-        age_bands = sorted(filtered_df["age_band"].dropna().unique(), key=age_band_sort_key)
 
         for model in selected_models:
-            for sex in sexes:
-                d = filtered_df[(filtered_df["model_name"] == model) & (filtered_df["sex"] == sex)]
-                d = d.set_index("age_band").reindex(age_bands).reset_index()
-                values = d["prediction"].fillna(0)
-                values = -values if sex == "Male" else values
-                color = "blue" if sex == "Male" else "red"
-
-                fig.add_bar(
-                    y=d["age_band"],
-                    x=values,
-                    name=f"{model} ({sex})",
-                    orientation="h",
-                    marker=dict(color=color),
-                    opacity=0.6
-                )
-
-        for sex in sexes:
-            d = filtered_df[filtered_df["sex"] == sex]
-            d = d.set_index("age_band").reindex(age_bands).reset_index()
-            values = d["ground_truth"].fillna(0)
-            values = -values if sex == "Male" else values
-            color = "blue" if sex == "Male" else "red"
-
+            d = filtered_df[filtered_df["model_name"] == model]
+            d = d.set_index("household_size").reindex(size_order).reset_index()
             fig.add_bar(
-                y=d["age_band"],
-                x=values,
-                name=f"Ground Truth ({sex})",
-                orientation="h",
-                marker=dict(color=color),
-                opacity=0.2
+                x=d["household_size"],
+                y=d["prediction"],
+                name=f"{model} (Prediction)",
+                marker=dict(color=model_colors[model])
             )
 
-        fig.update_layout(
-            title=f"Population Pyramid for {selected_location}",
-            barmode="overlay",
-            xaxis_title="Percentage of Population",
-            yaxis_title="Age Group",
-            xaxis_tickformat=".1f"
+        d_truth = filtered_df.drop_duplicates(subset=["household_size"])[["household_size", "ground_truth"]].set_index("household_size").reindex(size_order).reset_index()
+        fig.add_bar(
+            x=d_truth["household_size"],
+            y=d_truth["ground_truth"],
+            name="Ground Truth",
+            marker_color="black",
+            opacity=0.4
         )
+
+        fig.update_layout(
+            title=f"Household Size Distribution in {selected_location}",
+            xaxis_title="Household Size",
+            yaxis_title="Percentage of Households",
+            barmode="group"
+        )
+
+
 
     columns = [{"name": col, "id": col} for col in summary.columns]
     return fig, summary.to_dict("records"), columns

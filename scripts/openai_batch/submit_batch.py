@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 from src.evaluation.estimator import Estimator
 
 # --- Config
-VARIABLE = "age_distribution"
+VARIABLE = "household_size"
 MODEL = "gpt-4o"
 TEMPERATURE = 0.0
 
-BATCH_PART = 2
+BATCH_PART = 1
 MAX_PROMPTS = 450
 
 # --- Setup
@@ -20,6 +20,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # --- Initialize Estimator (only used for prompt/metadata generation)
 estimator = Estimator(variable=VARIABLE, model=None, n_trials=1)
 prompts, metadata_dict = estimator.get_batch_prompts_and_metadata()
+
 
 start_idx = (BATCH_PART - 1) * MAX_PROMPTS
 end_idx = start_idx + MAX_PROMPTS

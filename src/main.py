@@ -30,12 +30,12 @@ model = OpenAIModel(
 )
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 20
+n_households = 300
 batch_size = 10
 include_stats = True
 include_target = True
 include_guidance = False
-compute_household_size = True
+compute_household_size = False
 use_microdata = False
 no_occupation = False
 

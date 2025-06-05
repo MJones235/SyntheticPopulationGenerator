@@ -1,0 +1,957 @@
+{
+  "run_id": "23abb402-5c66-43c1-ad42-1ce3d58277de",
+  "variable": "age_distribution_2",
+  "n_trials": 1,
+  "prompt_template": "age_distribution_2.txt",
+  "schema_name": "age_distribution_schema.json",
+  "input_hash": "9320437cb6b4c0e97eb51f5c283c0bb54f96dbc3fa0f914ac60d4b9f8e68c28b",
+  "model": "gpt-4o",
+  "batch_id": "batch_6841a7847a708190879d1d7cae680e9f",
+  "metadata": {
+    "Kingston upon Hull_0-9_0": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.47
+    },
+    "Kingston upon Hull_10-19_1": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.07
+    },
+    "Kingston upon Hull_20-29_2": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 14.85
+    },
+    "Kingston upon Hull_30-39_3": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.8
+    },
+    "Kingston upon Hull_40-49_4": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.02
+    },
+    "Kingston upon Hull_50-59_5": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.91
+    },
+    "Kingston upon Hull_60-69_6": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 10.17
+    },
+    "Kingston upon Hull_70-79_7": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.92
+    },
+    "Kingston upon Hull_80+_8": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.79
+    },
+    "Derby_0-9_9": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.29
+    },
+    "Derby_10-19_10": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.75
+    },
+    "Derby_20-29_11": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 14.14
+    },
+    "Derby_30-39_12": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 13.98
+    },
+    "Derby_40-49_13": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.59
+    },
+    "Derby_50-59_14": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.78
+    },
+    "Derby_60-69_15": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.43
+    },
+    "Derby_70-79_16": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 7.36
+    },
+    "Derby_80+_17": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.68
+    },
+    "Leicester_0-9_18": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.78
+    },
+    "Leicester_10-19_19": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 14.64
+    },
+    "Leicester_20-29_20": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 17.2
+    },
+    "Leicester_30-39_21": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.85
+    },
+    "Leicester_40-49_22": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.81
+    },
+    "Leicester_50-59_23": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.22
+    },
+    "Leicester_60-69_24": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 8.48
+    },
+    "Leicester_70-79_25": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 5.05
+    },
+    "Leicester_80+_26": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 2.96
+    },
+    "Nottingham_0-9_27": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.45
+    },
+    "Nottingham_10-19_28": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 15.6
+    },
+    "Nottingham_20-29_29": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 20.98
+    },
+    "Nottingham_30-39_30": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.03
+    },
+    "Nottingham_40-49_31": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.11
+    },
+    "Nottingham_50-59_32": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 10.78
+    },
+    "Nottingham_60-69_33": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 7.67
+    },
+    "Nottingham_70-79_34": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 5.15
+    },
+    "Nottingham_80+_35": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.22
+    },
+    "Stoke-on-Trent_0-9_36": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.62
+    },
+    "Stoke-on-Trent_10-19_37": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.36
+    },
+    "Stoke-on-Trent_20-29_38": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 13.2
+    },
+    "Stoke-on-Trent_30-39_39": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.2
+    },
+    "Stoke-on-Trent_40-49_40": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.03
+    },
+    "Stoke-on-Trent_50-59_41": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.88
+    },
+    "Stoke-on-Trent_60-69_42": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 10.34
+    },
+    "Stoke-on-Trent_70-79_43": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 7.97
+    },
+    "Stoke-on-Trent_80+_44": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.39
+    },
+    "Bristol_0-9_45": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.16
+    },
+    "Bristol_10-19_46": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 11.68
+    },
+    "Bristol_20-29_47": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 19.46
+    },
+    "Bristol_30-39_48": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 17.28
+    },
+    "Bristol_40-49_49": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.34
+    },
+    "Bristol_50-59_50": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 10.88
+    },
+    "Bristol_60-69_51": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 7.92
+    },
+    "Bristol_70-79_52": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 5.78
+    },
+    "Bristol_80+_53": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.51
+    },
+    "Plymouth_0-9_54": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 10.7
+    },
+    "Plymouth_10-19_55": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 11.69
+    },
+    "Plymouth_20-29_56": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 14.78
+    },
+    "Plymouth_30-39_57": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 13.51
+    },
+    "Plymouth_40-49_58": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.84
+    },
+    "Plymouth_50-59_59": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 13.2
+    },
+    "Plymouth_60-69_60": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 10.64
+    },
+    "Plymouth_70-79_61": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 8.65
+    },
+    "Plymouth_80+_62": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.98
+    },
+    "Luton_0-9_63": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 14.51
+    },
+    "Luton_10-19_64": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 14.12
+    },
+    "Luton_20-29_65": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 14.25
+    },
+    "Luton_30-39_66": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 15.77
+    },
+    "Luton_40-49_67": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 13.59
+    },
+    "Luton_50-59_68": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.63
+    },
+    "Luton_60-69_69": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 7.87
+    },
+    "Luton_70-79_70": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 4.95
+    },
+    "Luton_80+_71": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.3
+    },
+    "Reading_0-9_72": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.89
+    },
+    "Reading_10-19_73": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.19
+    },
+    "Reading_20-29_74": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 16.79
+    },
+    "Reading_30-39_75": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 17.35
+    },
+    "Reading_40-49_76": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 13.85
+    },
+    "Reading_50-59_77": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.61
+    },
+    "Reading_60-69_78": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 7.62
+    },
+    "Reading_70-79_79": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 5.34
+    },
+    "Reading_80+_80": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.34
+    },
+    "Brighton and Hove_0-9_81": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 8.95
+    },
+    "Brighton and Hove_10-19_82": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 11.53
+    },
+    "Brighton and Hove_20-29_83": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 17.64
+    },
+    "Brighton and Hove_30-39_84": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.42
+    },
+    "Brighton and Hove_40-49_85": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 14.3
+    },
+    "Brighton and Hove_50-59_86": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 14.17
+    },
+    "Brighton and Hove_60-69_87": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 8.86
+    },
+    "Brighton and Hove_70-79_88": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.27
+    },
+    "Brighton and Hove_80+_89": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.85
+    },
+    "Portsmouth_0-9_90": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.25
+    },
+    "Portsmouth_10-19_91": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.57
+    },
+    "Portsmouth_20-29_92": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 17.02
+    },
+    "Portsmouth_30-39_93": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.84
+    },
+    "Portsmouth_40-49_94": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.88
+    },
+    "Portsmouth_50-59_95": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.57
+    },
+    "Portsmouth_60-69_96": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.07
+    },
+    "Portsmouth_70-79_97": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.77
+    },
+    "Portsmouth_80+_98": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.02
+    },
+    "Southampton_0-9_99": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.35
+    },
+    "Southampton_10-19_100": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.29
+    },
+    "Southampton_20-29_101": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 18.82
+    },
+    "Southampton_30-39_102": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 15.47
+    },
+    "Southampton_40-49_103": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.46
+    },
+    "Southampton_50-59_104": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.16
+    },
+    "Southampton_60-69_105": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 8.56
+    },
+    "Southampton_70-79_106": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.28
+    },
+    "Southampton_80+_107": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.62
+    },
+    "Manchester_0-9_108": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.85
+    },
+    "Manchester_10-19_109": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 14.27
+    },
+    "Manchester_20-29_110": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 20.74
+    },
+    "Manchester_30-39_111": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 16.32
+    },
+    "Manchester_40-49_112": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.11
+    },
+    "Manchester_50-59_113": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 10.34
+    },
+    "Manchester_60-69_114": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 6.91
+    },
+    "Manchester_70-79_115": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 4.17
+    },
+    "Manchester_80+_116": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 2.29
+    },
+    "Liverpool_0-9_117": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 10.92
+    },
+    "Liverpool_10-19_118": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.16
+    },
+    "Liverpool_20-29_119": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 17.98
+    },
+    "Liverpool_30-39_120": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.49
+    },
+    "Liverpool_40-49_121": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.18
+    },
+    "Liverpool_50-59_122": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.31
+    },
+    "Liverpool_60-69_123": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 10.28
+    },
+    "Liverpool_70-79_124": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.84
+    },
+    "Liverpool_80+_125": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.84
+    },
+    "Sheffield_0-9_126": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.18
+    },
+    "Sheffield_10-19_127": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.49
+    },
+    "Sheffield_20-29_128": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 16.42
+    },
+    "Sheffield_30-39_129": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 13.28
+    },
+    "Sheffield_40-49_130": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.57
+    },
+    "Sheffield_50-59_131": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.72
+    },
+    "Sheffield_60-69_132": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.76
+    },
+    "Sheffield_70-79_133": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 7.82
+    },
+    "Sheffield_80+_134": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.77
+    },
+    "Newcastle upon Tyne_0-9_135": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 10.78
+    },
+    "Newcastle upon Tyne_10-19_136": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 13.25
+    },
+    "Newcastle upon Tyne_20-29_137": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 20.0
+    },
+    "Newcastle upon Tyne_30-39_138": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 13.61
+    },
+    "Newcastle upon Tyne_40-49_139": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 11.0
+    },
+    "Newcastle upon Tyne_50-59_140": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.37
+    },
+    "Newcastle upon Tyne_60-69_141": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.39
+    },
+    "Newcastle upon Tyne_70-79_142": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.55
+    },
+    "Newcastle upon Tyne_80+_143": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.06
+    },
+    "Birmingham_0-9_144": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 13.65
+    },
+    "Birmingham_10-19_145": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 14.8
+    },
+    "Birmingham_20-29_146": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 15.36
+    },
+    "Birmingham_30-39_147": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.45
+    },
+    "Birmingham_40-49_148": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.41
+    },
+    "Birmingham_50-59_149": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.58
+    },
+    "Birmingham_60-69_150": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 8.32
+    },
+    "Birmingham_70-79_151": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 5.71
+    },
+    "Birmingham_80+_152": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 3.71
+    },
+    "Coventry_0-9_153": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.28
+    },
+    "Coventry_10-19_154": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 13.76
+    },
+    "Coventry_20-29_155": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 16.24
+    },
+    "Coventry_30-39_156": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.37
+    },
+    "Coventry_40-49_157": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.17
+    },
+    "Coventry_50-59_158": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 11.89
+    },
+    "Coventry_60-69_159": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 8.6
+    },
+    "Coventry_70-79_160": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.56
+    },
+    "Coventry_80+_161": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.14
+    },
+    "Wolverhampton_0-9_162": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 12.91
+    },
+    "Wolverhampton_10-19_163": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.65
+    },
+    "Wolverhampton_20-29_164": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 12.47
+    },
+    "Wolverhampton_30-39_165": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.12
+    },
+    "Wolverhampton_40-49_166": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 13.02
+    },
+    "Wolverhampton_50-59_167": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 13.1
+    },
+    "Wolverhampton_60-69_168": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.82
+    },
+    "Wolverhampton_70-79_169": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 7.16
+    },
+    "Wolverhampton_80+_170": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.76
+    },
+    "Bradford_0-9_171": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 13.85
+    },
+    "Bradford_10-19_172": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 14.48
+    },
+    "Bradford_20-29_173": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 12.39
+    },
+    "Bradford_30-39_174": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 13.95
+    },
+    "Bradford_40-49_175": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.71
+    },
+    "Bradford_50-59_176": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.16
+    },
+    "Bradford_60-69_177": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.68
+    },
+    "Bradford_70-79_178": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 6.73
+    },
+    "Bradford_80+_179": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.04
+    },
+    "Leeds_0-9_180": {
+      "category": null,
+      "subcategory": "0-9",
+      "ground_truth": 11.87
+    },
+    "Leeds_10-19_181": {
+      "category": null,
+      "subcategory": "10-19",
+      "ground_truth": 12.31
+    },
+    "Leeds_20-29_182": {
+      "category": null,
+      "subcategory": "20-29",
+      "ground_truth": 16.14
+    },
+    "Leeds_30-39_183": {
+      "category": null,
+      "subcategory": "30-39",
+      "ground_truth": 14.44
+    },
+    "Leeds_40-49_184": {
+      "category": null,
+      "subcategory": "40-49",
+      "ground_truth": 12.41
+    },
+    "Leeds_50-59_185": {
+      "category": null,
+      "subcategory": "50-59",
+      "ground_truth": 12.19
+    },
+    "Leeds_60-69_186": {
+      "category": null,
+      "subcategory": "60-69",
+      "ground_truth": 9.16
+    },
+    "Leeds_70-79_187": {
+      "category": null,
+      "subcategory": "70-79",
+      "ground_truth": 7.18
+    },
+    "Leeds_80+_188": {
+      "category": null,
+      "subcategory": "80+",
+      "ground_truth": 4.29
+    }
+  }
+}

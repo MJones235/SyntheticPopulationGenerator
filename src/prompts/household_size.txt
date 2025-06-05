@@ -1,0 +1,13 @@
+You are tasked with retrieving demographic information from the 2021 Census for England and Wales.
+
+Given the following location, which is an Upper Tier Local Authority, return the percentage of households that fall into the specified household size category. If exact Census data is unavailable, return an informed estimate.
+
+Location: {LOCATION}  
+Household Size: {HOUSEHOLD_SIZE_DESCRIPTION}
+
+Return only your response in strict JSON format:
+
+```json
+{
+  "percentage": FLOAT  // A percentage between 0 and 100
+}

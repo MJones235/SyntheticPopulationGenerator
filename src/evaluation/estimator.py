@@ -16,8 +16,12 @@ VARIABLE_CONFIG = {
         "prompt": "population_size.txt",
         "schema": "population_size_schema.json",
     },
-    "age_distribution": {
-        "prompt": "age_distribution.txt",
+    "age_distribution_2": {
+        "prompt": "age_distribution_2.txt",
+        "schema": "age_distribution_schema.json",
+    },
+    "household_size": {
+        "prompt": "household_size.txt",
         "schema": "age_distribution_schema.json",
     },
 }
@@ -34,7 +38,7 @@ class Estimator:
         self.prompt_template = VARIABLE_CONFIG[variable]["prompt"]
         self.schema_name = VARIABLE_CONFIG[variable]["schema"]
 
-        self.data_path = f"data/evaluation/{variable}/sampled_{variable}.csv"
+        self.data_path = f"data/evaluation/{variable}/resampled_data.csv"
         self.df = pd.read_csv(self.data_path)
         self.input_hash = hashlib.sha256(self.df.to_csv(index=False).encode()).hexdigest()
         self.schema = self.file_service.load_schema(self.schema_name)
@@ -98,36 +102,42 @@ class Estimator:
                     "ground_truth": gt
                 }
 
-        elif self.variable == "age_distribution":
-            metadata_cols = ["BUA name", "Region", "Country", "BUA size classification"]
-            value_cols = [col for col in self.df.columns if col not in metadata_cols]
-
+        elif self.variable == "age_distribution_2":
             for i, row in self.df.iterrows():
-                location = row["BUA name"]
-                category = row["BUA size classification"]
+                location = row["Upper tier local authorities"]
+                age_band = row["Age Bin"]
+                gt = float(row["Percentage"]) if is_number(row["Percentage"]) else None
+                custom_id = f"{location}_{age_band}_{i}"
 
-                for col in value_cols:
-                    try:
-                        age_band, sex = col.rsplit(" ", 1)
-                    except ValueError:
-                        continue
+                prompt_input = {
+                    "LOCATION": location,
+                    "AGE_BAND": age_band
+                }
+                prompt = self.file_service.load_prompt(self.prompt_template, prompt_input)
+                prompts.append((custom_id, prompt))
+                metadata[custom_id] = {
+                    "category": None,
+                    "subcategory": age_band,
+                    "ground_truth": gt
+                }
 
-                    subcategory = f"{age_band} {sex}"
-                    gt = float(row[col]) if is_number(row[col]) else None
-                    custom_id = f"{location}_{subcategory}_{i}"
+        elif self.variable == "household_size":
+            for i, row in self.df.iterrows():
+                location = row["Upper tier local authorities"]
+                hh_size = row["Household size (9 categories)"]
+                gt = float(row["Percentage"]) if is_number(row["Percentage"]) else None
+                custom_id = f"{location}_{hh_size}_{i}"
 
-                    prompt_input = {
-                        "LOCATION": location,
-                        "AGE": age_band,
-                        "SEX": sex
-                    }
-                    prompt = self.file_service.load_prompt(self.prompt_template, prompt_input)
-
-                    prompts.append((custom_id, prompt))
-                    metadata[custom_id] = {
-                        "category": category,
-                        "subcategory": subcategory,
-                        "ground_truth": gt
-                    }
+                prompt_input = {
+                    "LOCATION": location,
+                    "HOUSEHOLD_SIZE_DESCRIPTION": hh_size
+                }
+                prompt = self.file_service.load_prompt(self.prompt_template, prompt_input)
+                prompts.append((custom_id, prompt))
+                metadata[custom_id] = {
+                    "category": None,
+                    "subcategory": hh_size,
+                    "ground_truth": gt
+                }
 
         return prompts, metadata

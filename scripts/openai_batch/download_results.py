@@ -35,7 +35,7 @@ def parse_and_insert(jsonl_path, metadata: dict):
 
                 try:
                     data = json.loads(content)
-                    if variable == "age_distribution":
+                    if variable == "age_distribution_2" or variable == "household_size":
                         value = data.get("percentage")
                     else:
                         value = data.get(variable)

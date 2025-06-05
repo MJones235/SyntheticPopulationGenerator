@@ -60,6 +60,7 @@ class BaseLLM(ABC):
                     error=error_msg,
                     schema=json_schema,
                 )
+                print(raw_response)
                 print("Unable to parse response.  Retrying...")
                 continue 
 

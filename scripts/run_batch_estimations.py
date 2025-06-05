@@ -1,19 +1,20 @@
 import traceback
-from llm_interface.model_factory import LLMFactory
+from src.llm_interface.model_factory import LLMFactory
 from src.evaluation.estimator import Estimator
 from src.llm_interface.ollama_model import OllamaModel
 
 VARIABLES = [
     # "population_size"
-    "age_distribution"
+    # "age_distribution_2"
+    "household_size"
 ]
 
 MODELS = [
-    {"name": "llama3.1:8b", "type": "ollama"},
-    {"name": "llama3.2:3b", "type": "ollama"},
-    {"name": "deepseek-r1:7b", "type": "ollama"},
-    {"name": "gemma2:9b", "type": "ollama"},
-    {"name": "mistral:latest", "type": "ollama"},
+    # {"name": "llama3.1:8b", "type": "ollama"},
+    # {"name": "llama3.2:3b", "type": "ollama"},
+    # {"name": "deepseek-r1:7b", "type": "ollama"},
+    # {"name": "gemma2:9b", "type": "ollama"},
+    # {"name": "mistral:latest", "type": "ollama"},
     {"name": "phi3:14b", "type": "ollama"},
     {"name": "qwen2.5:14b", "type": "ollama"},
     {"name": "qwen2.5:7b", "type": "ollama"},

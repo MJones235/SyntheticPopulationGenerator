@@ -136,7 +136,7 @@ If possible, include individuals from underrepresented age groups.
 Ensure that the household structure remains realistic.
 """
             else:
-                guidance_text = """
+                guidance_text = f"""
 The following statistics describe the current distribution of individuals and households in the synthetic population.
 Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
 Use your knowledge of UK demographics to identify which values appear over- or underrepresented, and adjust accordingly.

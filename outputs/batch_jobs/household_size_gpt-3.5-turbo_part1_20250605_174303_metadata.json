@@ -1,0 +1,852 @@
+{
+  "run_id": "8f3b7dc9-a7cf-4bca-bfd0-1d5220c82bea",
+  "variable": "household_size",
+  "n_trials": 1,
+  "prompt_template": "household_size.txt",
+  "schema_name": "age_distribution_schema.json",
+  "input_hash": "0f83a7271d74a2cbfaeac9cb64355975ba1a7978962e5f8161a397680ca63147",
+  "model": "gpt-3.5-turbo",
+  "batch_id": "batch_6841c9195ca48190beee06d7bbeae335",
+  "metadata": {
+    "Kingston upon Hull_1 person in household_0": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 34.16
+    },
+    "Kingston upon Hull_2 people in household_1": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 32.02
+    },
+    "Kingston upon Hull_3 people in household_2": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.94
+    },
+    "Kingston upon Hull_4 people in household_3": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.46
+    },
+    "Kingston upon Hull_5 people in household_4": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.33
+    },
+    "Kingston upon Hull_6 people in household_5": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.36
+    },
+    "Kingston upon Hull_7 people in household_6": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.48
+    },
+    "Kingston upon Hull_8 or more people in household_7": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.26
+    },
+    "Derby_1 person in household_8": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 31.29
+    },
+    "Derby_2 people in household_9": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 31.93
+    },
+    "Derby_3 people in household_10": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.54
+    },
+    "Derby_4 people in household_11": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.61
+    },
+    "Derby_5 people in household_12": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.95
+    },
+    "Derby_6 people in household_13": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.89
+    },
+    "Derby_7 people in household_14": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.77
+    },
+    "Derby_8 or more people in household_15": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 1.01
+    },
+    "Leicester_1 person in household_16": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 27.61
+    },
+    "Leicester_2 people in household_17": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 25.53
+    },
+    "Leicester_3 people in household_18": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 16.44
+    },
+    "Leicester_4 people in household_19": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 15.19
+    },
+    "Leicester_5 people in household_20": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 8.21
+    },
+    "Leicester_6 people in household_21": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 3.74
+    },
+    "Leicester_7 people in household_22": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 1.66
+    },
+    "Leicester_8 or more people in household_23": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 1.62
+    },
+    "Nottingham_1 person in household_24": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 33.65
+    },
+    "Nottingham_2 people in household_25": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 30.13
+    },
+    "Nottingham_3 people in household_26": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 14.99
+    },
+    "Nottingham_4 people in household_27": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.45
+    },
+    "Nottingham_5 people in household_28": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 5.43
+    },
+    "Nottingham_6 people in household_29": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 2.5
+    },
+    "Nottingham_7 people in household_30": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 1.03
+    },
+    "Nottingham_8 or more people in household_31": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.83
+    },
+    "Stoke-on-Trent_1 person in household_32": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.77
+    },
+    "Stoke-on-Trent_2 people in household_33": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 33.38
+    },
+    "Stoke-on-Trent_3 people in household_34": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.7
+    },
+    "Stoke-on-Trent_4 people in household_35": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 10.94
+    },
+    "Stoke-on-Trent_5 people in household_36": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.56
+    },
+    "Stoke-on-Trent_6 people in household_37": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.62
+    },
+    "Stoke-on-Trent_7 people in household_38": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.65
+    },
+    "Stoke-on-Trent_8 or more people in household_39": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.39
+    },
+    "Bristol_1 person in household_40": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 30.19
+    },
+    "Bristol_2 people in household_41": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 33.52
+    },
+    "Bristol_3 people in household_42": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.72
+    },
+    "Bristol_4 people in household_43": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 13.17
+    },
+    "Bristol_5 people in household_44": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.59
+    },
+    "Bristol_6 people in household_45": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.68
+    },
+    "Bristol_7 people in household_46": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.62
+    },
+    "Bristol_8 or more people in household_47": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.5
+    },
+    "Plymouth_1 person in household_48": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.59
+    },
+    "Plymouth_2 people in household_49": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 35.07
+    },
+    "Plymouth_3 people in household_50": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.41
+    },
+    "Plymouth_4 people in household_51": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.46
+    },
+    "Plymouth_5 people in household_52": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 3.74
+    },
+    "Plymouth_6 people in household_53": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.18
+    },
+    "Plymouth_7 people in household_54": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.33
+    },
+    "Plymouth_8 or more people in household_55": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.21
+    },
+    "Luton_1 person in household_56": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 26.69
+    },
+    "Luton_2 people in household_57": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 25.93
+    },
+    "Luton_3 people in household_58": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 16.66
+    },
+    "Luton_4 people in household_59": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 14.6
+    },
+    "Luton_5 people in household_60": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 8.2
+    },
+    "Luton_6 people in household_61": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 4.22
+    },
+    "Luton_7 people in household_62": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 2.02
+    },
+    "Luton_8 or more people in household_63": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 1.66
+    },
+    "Reading_1 person in household_64": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 28.46
+    },
+    "Reading_2 people in household_65": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 31.3
+    },
+    "Reading_3 people in household_66": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 17.1
+    },
+    "Reading_4 people in household_67": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 14.16
+    },
+    "Reading_5 people in household_68": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 5.44
+    },
+    "Reading_6 people in household_69": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 2.11
+    },
+    "Reading_7 people in household_70": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.86
+    },
+    "Reading_8 or more people in household_71": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.56
+    },
+    "Brighton and Hove_1 person in household_72": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 34.68
+    },
+    "Brighton and Hove_2 people in household_73": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 33.58
+    },
+    "Brighton and Hove_3 people in household_74": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 14.93
+    },
+    "Brighton and Hove_4 people in household_75": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.73
+    },
+    "Brighton and Hove_5 people in household_76": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 3.5
+    },
+    "Brighton and Hove_6 people in household_77": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.14
+    },
+    "Brighton and Hove_7 people in household_78": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.29
+    },
+    "Brighton and Hove_8 or more people in household_79": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.16
+    },
+    "Portsmouth_1 person in household_80": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.04
+    },
+    "Portsmouth_2 people in household_81": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 32.27
+    },
+    "Portsmouth_3 people in household_82": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 16.17
+    },
+    "Portsmouth_4 people in household_83": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.52
+    },
+    "Portsmouth_5 people in household_84": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.68
+    },
+    "Portsmouth_6 people in household_85": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.5
+    },
+    "Portsmouth_7 people in household_86": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.55
+    },
+    "Portsmouth_8 or more people in household_87": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.26
+    },
+    "Southampton_1 person in household_88": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.96
+    },
+    "Southampton_2 people in household_89": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 32.15
+    },
+    "Southampton_3 people in household_90": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.29
+    },
+    "Southampton_4 people in household_91": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.06
+    },
+    "Southampton_5 people in household_92": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.82
+    },
+    "Southampton_6 people in household_93": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.78
+    },
+    "Southampton_7 people in household_94": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.58
+    },
+    "Southampton_8 or more people in household_95": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.37
+    },
+    "Manchester_1 person in household_96": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 33.33
+    },
+    "Manchester_2 people in household_97": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 29.18
+    },
+    "Manchester_3 people in household_98": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 14.99
+    },
+    "Manchester_4 people in household_99": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.4
+    },
+    "Manchester_5 people in household_100": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 5.97
+    },
+    "Manchester_6 people in household_101": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 2.92
+    },
+    "Manchester_7 people in household_102": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 1.26
+    },
+    "Manchester_8 or more people in household_103": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.94
+    },
+    "Liverpool_1 person in household_104": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 36.79
+    },
+    "Liverpool_2 people in household_105": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 30.04
+    },
+    "Liverpool_3 people in household_106": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.81
+    },
+    "Liverpool_4 people in household_107": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.12
+    },
+    "Liverpool_5 people in household_108": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.03
+    },
+    "Liverpool_6 people in household_109": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.38
+    },
+    "Liverpool_7 people in household_110": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.51
+    },
+    "Liverpool_8 or more people in household_111": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.32
+    },
+    "Sheffield_1 person in household_112": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.66
+    },
+    "Sheffield_2 people in household_113": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 33.47
+    },
+    "Sheffield_3 people in household_114": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.09
+    },
+    "Sheffield_4 people in household_115": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.92
+    },
+    "Sheffield_5 people in household_116": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.35
+    },
+    "Sheffield_6 people in household_117": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.55
+    },
+    "Sheffield_7 people in household_118": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.56
+    },
+    "Sheffield_8 or more people in household_119": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.4
+    },
+    "Newcastle upon Tyne_1 person in household_120": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 34.23
+    },
+    "Newcastle upon Tyne_2 people in household_121": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 31.92
+    },
+    "Newcastle upon Tyne_3 people in household_122": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.26
+    },
+    "Newcastle upon Tyne_4 people in household_123": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 11.34
+    },
+    "Newcastle upon Tyne_5 people in household_124": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.3
+    },
+    "Newcastle upon Tyne_6 people in household_125": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.8
+    },
+    "Newcastle upon Tyne_7 people in household_126": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.66
+    },
+    "Newcastle upon Tyne_8 or more people in household_127": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.49
+    },
+    "Birmingham_1 person in household_128": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 31.46
+    },
+    "Birmingham_2 people in household_129": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 26.69
+    },
+    "Birmingham_3 people in household_130": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.11
+    },
+    "Birmingham_4 people in household_131": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.87
+    },
+    "Birmingham_5 people in household_132": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 6.98
+    },
+    "Birmingham_6 people in household_133": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 3.7
+    },
+    "Birmingham_7 people in household_134": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 1.72
+    },
+    "Birmingham_8 or more people in household_135": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 1.48
+    },
+    "Coventry_1 person in household_136": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 30.4
+    },
+    "Coventry_2 people in household_137": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 29.66
+    },
+    "Coventry_3 people in household_138": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 16.82
+    },
+    "Coventry_4 people in household_139": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 13.76
+    },
+    "Coventry_5 people in household_140": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 5.83
+    },
+    "Coventry_6 people in household_141": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 2.12
+    },
+    "Coventry_7 people in household_142": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.89
+    },
+    "Coventry_8 or more people in household_143": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.52
+    },
+    "Wolverhampton_1 person in household_144": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 30.88
+    },
+    "Wolverhampton_2 people in household_145": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 29.05
+    },
+    "Wolverhampton_3 people in household_146": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 16.68
+    },
+    "Wolverhampton_4 people in household_147": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 13.89
+    },
+    "Wolverhampton_5 people in household_148": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 6.03
+    },
+    "Wolverhampton_6 people in household_149": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 2.23
+    },
+    "Wolverhampton_7 people in household_150": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.8
+    },
+    "Wolverhampton_8 or more people in household_151": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.45
+    },
+    "Bradford_1 person in household_152": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 30.78
+    },
+    "Bradford_2 people in household_153": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 29.6
+    },
+    "Bradford_3 people in household_154": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 14.72
+    },
+    "Bradford_4 people in household_155": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.31
+    },
+    "Bradford_5 people in household_156": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 6.63
+    },
+    "Bradford_6 people in household_157": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 3.17
+    },
+    "Bradford_7 people in household_158": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 1.52
+    },
+    "Bradford_8 or more people in household_159": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 1.26
+    },
+    "Leeds_1 person in household_160": {
+      "category": null,
+      "subcategory": "1 person in household",
+      "ground_truth": 32.62
+    },
+    "Leeds_2 people in household_161": {
+      "category": null,
+      "subcategory": "2 people in household",
+      "ground_truth": 33.14
+    },
+    "Leeds_3 people in household_162": {
+      "category": null,
+      "subcategory": "3 people in household",
+      "ground_truth": 15.13
+    },
+    "Leeds_4 people in household_163": {
+      "category": null,
+      "subcategory": "4 people in household",
+      "ground_truth": 12.36
+    },
+    "Leeds_5 people in household_164": {
+      "category": null,
+      "subcategory": "5 people in household",
+      "ground_truth": 4.3
+    },
+    "Leeds_6 people in household_165": {
+      "category": null,
+      "subcategory": "6 people in household",
+      "ground_truth": 1.54
+    },
+    "Leeds_7 people in household_166": {
+      "category": null,
+      "subcategory": "7 people in household",
+      "ground_truth": 0.54
+    },
+    "Leeds_8 or more people in household_167": {
+      "category": null,
+      "subcategory": "8 or more people in household",
+      "ground_truth": 0.37
+    }
+  }
+}
