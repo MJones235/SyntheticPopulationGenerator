@@ -3,7 +3,14 @@ from typing import Any, Callable, Optional
 import pandas as pd
 
 from src.services.file_service import FileService
-from src.analysis.distributions import compute_broad_age_distribution, compute_gender_distribution, compute_household_size_distribution, compute_occupation_distribution, compute_target_broad_age_distribution
+from src.analysis.distributions import (
+    compute_age_distribution,
+    compute_gender_distribution,
+    compute_household_size_distribution,
+    compute_occupation_distribution,
+    compute_target_age_distribution,
+)
+
 
 def generate_distribution_prompt(
     observed_distribution: dict,
@@ -13,7 +20,7 @@ def generate_distribution_prompt(
     threshold: int = 10,
     include_stats: bool = True,
     include_guidance: bool = True,
-    include_target: bool = True
+    include_target: bool = True,
 ) -> str:
     total_obs = sum(observed_distribution.values())
     total_target = sum(target_distribution.values())
@@ -24,11 +31,21 @@ def generate_distribution_prompt(
     increase = []
     decrease = []
 
-    all_keys = sorted(set(observed_distribution.keys()) | set(target_distribution.keys()))
+    all_keys = sorted(
+        set(observed_distribution.keys()) | set(target_distribution.keys())
+    )
 
     for key in all_keys:
-        obs_pct = (observed_distribution.get(key, 0) / total_obs) * 100 if total_obs > 0 else 0
-        tgt_pct = (target_distribution.get(key, 0) / total_target) * 100 if total_target > 0 else 0
+        obs_pct = (
+            (observed_distribution.get(key, 0) / total_obs) * 100
+            if total_obs > 0
+            else 0
+        )
+        tgt_pct = (
+            (target_distribution.get(key, 0) / total_target) * 100
+            if total_target > 0
+            else 0
+        )
 
         if obs_pct == 0.0 and tgt_pct == 0.0:
             continue
@@ -36,7 +53,9 @@ def generate_distribution_prompt(
         label = label_func(key)
         if include_stats:
             if include_target:
-                feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%")
+                feedback_lines.append(
+                    f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%"
+                )
             else:
                 feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%")
 
@@ -53,9 +72,13 @@ def generate_distribution_prompt(
         if decrease:
             suggestions.append(f"- Decrease: {', '.join(decrease)}.")
         if not (increase or decrease):
-            suggestions.append(f"- The current {guidance_label.lower()} distribution is close to target.")
+            suggestions.append(
+                f"- The current {guidance_label.lower()} distribution is close to target."
+            )
 
-    return "\n".join(feedback_lines + [""] + suggestions if feedback_lines else suggestions).strip()
+    return "\n".join(
+        feedback_lines + [""] + suggestions if feedback_lines else suggestions
+    ).strip()
 
 
 def update_prompt_with_statistics(
@@ -68,12 +91,12 @@ def update_prompt_with_statistics(
     include_guidance: bool = True,
     use_microdata: bool = False,
     include_target: bool = True,
-    no_occupation: bool = False) -> str:
+    no_occupation: bool = False,
+) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
-        prompt =  (
-            base_prompt
-            .replace("{N_HOUSEHOLDS}", str(n_households_generated))
+        prompt = (
+            base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
             .replace("{GUIDANCE}", "")
             .replace("{HOUSEHOLD_STATS}", "")
             .replace("{AGE_STATS}", "")
@@ -83,7 +106,9 @@ def update_prompt_with_statistics(
 
         return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
 
-    occupation_line = "Include underrepresented occupations.\n" if not no_occupation else ""
+    occupation_line = (
+        "Include underrepresented occupations.\n" if not no_occupation else ""
+    )
 
     if include_stats:
         if use_microdata:
@@ -160,17 +185,15 @@ Ensure that the household structure remains realistic.
         threshold=0.5,
         include_stats=include_stats,
         include_guidance=include_guidance,
-        include_target=include_target
+        include_target=include_target,
     )
 
     # Age Distribution
-    syn_age_dist = compute_broad_age_distribution(synthetic_df)
-    target_age_dist = compute_target_broad_age_distribution(target_age_distribution)
-
+    syn_age_dist = compute_age_distribution(synthetic_df)
+    target_age_dist = compute_target_age_distribution(target_age_distribution)
 
     def age_label(band):
         return f"{band} years"
-
 
     age_stats_text = generate_distribution_prompt(
         observed_distribution=syn_age_dist,
@@ -180,7 +203,7 @@ Ensure that the household structure remains realistic.
         threshold=1,
         include_stats=include_stats,
         include_guidance=include_guidance,
-        include_target=include_target
+        include_target=include_target,
     )
 
     # Gender Distribution
@@ -197,7 +220,7 @@ Ensure that the household structure remains realistic.
         threshold=0.5,
         include_stats=include_stats,
         include_guidance=include_guidance,
-        include_target=include_target
+        include_target=include_target,
     )
 
     if not no_occupation:
@@ -217,14 +240,13 @@ Ensure that the household structure remains realistic.
             threshold=0.5,
             include_stats=include_stats,
             include_guidance=include_guidance,
-            include_target=include_target
+            include_target=include_target,
         )
     else:
         occupation_stats_text = ""
 
     prompt = (
-        base_prompt
-        .replace("{N_HOUSEHOLDS}", str(n_households_generated))
+        base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
         .replace("{GUIDANCE}", guidance_text.strip())
         .replace("{HOUSEHOLD_STATS}", size_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())
@@ -233,4 +255,3 @@ Ensure that the household structure remains realistic.
     ).strip()
 
     return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
-
