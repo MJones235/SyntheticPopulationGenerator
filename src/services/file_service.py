@@ -89,8 +89,8 @@ class FileService:
 
             # Clean column names
             df.columns = df.columns.str.strip()
-            df["Percentage per BUA"] = df["Observation"] / df["Observation"].sum() * 100
-            df["Percentage per BUA"] = df["Percentage per BUA"].round(1)
+            df["Percentage"] = df["Observation"] / df["Observation"].sum() * 100
+            df["Percentage"] = df["Percentage"].round(1)
 
             # Clean up age group labels
             df["Age (B) (18 categories)"] = (
@@ -102,7 +102,7 @@ class FileService:
             )
 
             # Pivot into age_group × sex → percentage
-            pyramid_df = df.pivot_table(index="Age (B) (18 categories)", columns="Sex (2 categories)", values="Percentage per BUA", aggfunc="sum").fillna(0)
+            pyramid_df = df.pivot_table(index="Age (B) (18 categories)", columns="Sex (2 categories)", values="Percentage", aggfunc="sum").fillna(0)
 
             # Standardize sex column names
             pyramid_df.columns = [c.strip().capitalize() for c in pyramid_df.columns]
