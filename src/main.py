@@ -28,7 +28,7 @@ model = OpenAIModel(
     top_p=0.85,
     top_k=100,
 )
-location = "Newcastle, UK"
+location = "Liverpool, UK"
 region = "E12000001"
 n_households = 300
 batch_size = 10
