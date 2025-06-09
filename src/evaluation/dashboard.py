@@ -40,7 +40,11 @@ app.layout = html.Div([
     dash_table.DataTable(
         id="summary-table",
         style_table={"overflowX": "auto"}
-    )
+    ),
+
+    html.H3("Distribution Across All Locations by Category and Model"),
+    dcc.Graph(id="boxplot-graph"),
+
 ])
 
 @app.callback(
@@ -110,7 +114,8 @@ def update_location_options(selected_category, variable):
     [
         dash.Output("main-graph", "figure"),
         dash.Output("summary-table", "data"),
-        dash.Output("summary-table", "columns")
+        dash.Output("summary-table", "columns"),
+        dash.Output("boxplot-graph", "figure"),
     ],
     [
         dash.Input("variable-dropdown", "value"),
@@ -177,7 +182,7 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
         filtered_df = filtered_df[filtered_df["location"] == selected_location].copy()
         filtered_df["age_band"] = filtered_df["subcategory"]
 
-        mc = MetricsCalculator(filtered_df)
+        mc = MetricsCalculator(df)
         summary = mc.summary_by_group(group_cols=["model_name"])
 
         age_bands = sorted(filtered_df["age_band"].dropna().unique(), key=lambda x: int(x.split("-")[0]) if "-" in x else 80)
@@ -208,6 +213,39 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
             xaxis_title="Age Band",
             yaxis_title="Percentage of Population",
             barmode="group"
+        )
+
+        df_long = pd.concat([
+            df[["location", "subcategory", "prediction", "model_name"]].rename(columns={"prediction": "value", "model_name": "model"}),
+            df[["location", "subcategory", "ground_truth"]].rename(columns={"ground_truth": "value"}).assign(model="Ground Truth")
+        ])
+
+
+        df_long = df_long.dropna(subset=["value"])
+        df_long["subcategory"] = df_long["subcategory"].astype(str)
+        df_long = df_long[df_long["model"].isin(selected_models) | (df_long["model"] == "Ground Truth")]
+
+        # Create boxplot
+        boxplot_fig = px.box(
+            df_long,
+            x="subcategory",
+            y="value",
+            color="model",
+            color_discrete_sequence=px.colors.qualitative.Set2,
+            points="outliers",
+            title="Distribution Across Locations by Age Group and Model",
+            labels={"value": "Percentage of Population", "subcategory": "Age Group"},
+            category_orders={"subcategory": sorted(df_long["subcategory"].unique(), key=lambda x: int(x.split("-")[0]) if "-" in x else 80)}
+        )
+
+        boxplot_fig.update_layout(
+            yaxis=dict(
+                tickmode='linear',
+                tick0=0,
+                dtick=2.5,
+                minor=dict(ticklen=4, tickcolor="rgba(200,200,200,0.3)", tick0=0, dtick=0.5, showgrid=True)
+            ),
+            boxmode="group"
         )
     
     elif variable == "household_size":
@@ -252,12 +290,44 @@ def update_dashboard(variable, selected_category, selected_location, selected_mo
             xaxis_title="Household Size",
             yaxis_title="Percentage of Households",
             barmode="group"
+        )       
+
+        df_long = pd.concat([
+            df[["location", "subcategory", "prediction", "model_name"]].rename(columns={"prediction": "value", "model_name": "model"}),
+            df[["location", "subcategory", "ground_truth"]].rename(columns={"ground_truth": "value"}).assign(model="Ground Truth")
+        ])
+
+
+        df_long = df_long.dropna(subset=["value"])
+        df_long["subcategory"] = df_long["subcategory"].astype(str)
+        df_long = df_long[df_long["model"].isin(selected_models) | (df_long["model"] == "Ground Truth")]
+
+        # Create boxplot
+        boxplot_fig = px.box(
+            df_long,
+            x="subcategory",
+            y="value",
+            color="model",
+            color_discrete_sequence=px.colors.qualitative.Set2,
+            points="outliers",
+            title="Distribution Across Locations by Household Size and Model",
+            labels={"value": "Percentage of Households", "subcategory": "Household Size"},
+            category_orders={"subcategory": sorted(df_long["subcategory"].unique(), key=lambda x: int(x.split("-")[0]) if "-" in x else 80)}
         )
 
+        boxplot_fig.update_layout(
+            yaxis=dict(
+                tickmode='linear',
+                tick0=0,
+                dtick=2.5,
+                minor=dict(ticklen=4, tickcolor="rgba(200,200,200,0.3)", tick0=0, dtick=0.5, showgrid=True)
+            ),
+            boxmode="group"
+        ) 
 
 
     columns = [{"name": col, "id": col} for col in summary.columns]
-    return fig, summary.to_dict("records"), columns
+    return fig, summary.to_dict("records"), columns, boxplot_fig
 
 if __name__ == "__main__":
     app.run(debug=False)

@@ -57,6 +57,7 @@ class FileService:
             total = census_df["Observation"].sum()
             census_df["Value"] = census_df["Observation"].apply(lambda x: x / total * 100)
             household_size_distribution = dict(zip(census_df["Household size (9 categories) Code"], census_df["Value"]))
+            household_size_distribution.pop(0)
             return household_size_distribution
 
         except Exception as e:

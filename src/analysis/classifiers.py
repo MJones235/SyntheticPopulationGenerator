@@ -32,3 +32,27 @@ def classify_household_structure(group: pd.DataFrame) -> str:
         return "Single family household: Lone parent household"
 
     return "Other household types"
+
+
+def household_type_labels():
+    label_map = {
+        "One-person household: Aged 66 years and over": "One-person: 66+ years",
+        "One-person household: Other": "One-person: <66 years",
+        "Single family household: Lone parent household": "Lone parent",
+        "Single family household: Couple family household: No children": "Couple: No children",
+        "Single family household: Couple family household: Dependent children": "Couple: Dependent children",
+        "Single family household: Couple family household: All children non-dependent": "Couple: Non-dependent children",
+        "Other household types": "Other",
+    }
+
+    label_order = [
+        "One-person: <66 years",
+        "One-person: 66+ years",
+        "Lone parent",
+        "Couple: No children",
+        "Couple: Dependent children",
+        "Couple: Non-dependent children",
+        "Other",
+    ]
+
+    return label_map, label_order

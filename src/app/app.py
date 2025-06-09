@@ -10,6 +10,8 @@ from src.utils.colour_generator import assign_household_colors
 from src.utils.plots import plot_age_pyramid, plot_household_size, plot_household_structure_bar, plot_occupation_titles, plot_occupations, plot_age_diff
 import os
 
+from src.analysis.similarity_metrics import compute_similarity_metrics
+
 st.set_page_config(layout="wide")
 
 file_service = FileService()
@@ -25,7 +27,7 @@ if not populations:
     st.warning("No populations found in the database.")
 else:
     # Create dropdown menu with timestamps as labels
-    population_dict = {f"{p['timestamp']} - {p['model']} - {p['num_households']} households - {'stats, ' if bool(p['include_stats']) else ''}{'guidance, ' if bool(p['include_guidance']) else ''}{'target, ' if bool(p['include_target']) else ''}{'microdata, ' if bool(p['use_microdata']) else ''}{'fixed household size, ' if bool(p['compute_household_size']) else ''}{'no occupation, ' if bool(p['no_occupation']) else ''}": p['population_id'] for p in populations}
+    population_dict = {f"{p['timestamp']} - {p['model']} - {p['location']} - {p['num_households']} households - {'stats, ' if bool(p['include_stats']) else ''}{'guidance, ' if bool(p['include_guidance']) else ''}{'target, ' if bool(p['include_target']) else ''}{'microdata, ' if bool(p['use_microdata']) else ''}{'fixed household size, ' if bool(p['compute_household_size']) else ''}{'no occupation, ' if bool(p['no_occupation']) else ''}": p['population_id'] for p in populations}
     selected_label = st.selectbox("Select a Population:", list(population_dict.keys()))
     selected_population_id = population_dict[selected_label]
 
@@ -57,6 +59,14 @@ else:
         components.html(report_html, height=600, scrolling=True)
 
     with tab3:
+        st.title("Metrics")
+        if not df.empty:
+            try:
+                results = compute_similarity_metrics(df, metadata["location"])
+                st.dataframe(results)
+            except Exception as e:
+                st.error(f"Failed to compute similarity metrics: {e}")
+        
         st.title("Household Size Comparison")
         analysis = analysis_service.get_by_id(selected_population_id)
         st.pyplot(plot_household_size(analysis['household_size_distribution'], file_service.load_household_size(metadata['location'])))

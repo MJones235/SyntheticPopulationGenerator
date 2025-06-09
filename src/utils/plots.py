@@ -4,7 +4,8 @@ import json
 import numpy as np
 import pandas as pd
 
-from src.analysis.classifiers import classify_household_structure
+from src.analysis.similarity_metrics import get_census_age_pyramid, get_census_household_composition, get_synthetic_age_pyramid, get_synthetic_household_composition
+from src.analysis.classifiers import classify_household_structure, household_type_labels
 from src.utils.age_bands import assign_age_band, get_age_band_labels
 
 
@@ -48,33 +49,9 @@ def plot_household_size(synthetic: str, census: Dict):
 
 
 def plot_age_pyramid(synthetic_df: pd.DataFrame, census_df: pd.DataFrame):
-    # Assign broad age bands to synthetic population
-    synthetic_df = synthetic_df.copy()
-    synthetic_df["age_group"] = assign_age_band(synthetic_df["age"])
-    synthetic_df["gender"] = synthetic_df["gender"].str.capitalize()
-    synthetic_df["count"] = 1
 
-    # Aggregate synthetic data by age_group and gender
-    syn_grouped = (
-        synthetic_df.groupby(["age_group", "gender"])["count"].sum().unstack().fillna(0)
-    )
-    syn_pct = syn_grouped.divide(syn_grouped.sum().sum()).multiply(100)
-
-    # Use the same broad bands and align census
-    bins, age_labels = get_age_band_labels()
-    census_df = census_df.copy()
-    census_df = census_df.reset_index().rename(columns={"age_group": "raw_group"})
-    census_df["numeric_age"] = (
-        census_df["raw_group"].str.extract(r"(\d+)", expand=False).astype(float)
-    )
-    census_df["age_group"] = assign_age_band(census_df["numeric_age"])
-
-    census_grouped = census_df.groupby("age_group")[["Male", "Female"]].sum()
-    census_pct = census_grouped.divide(census_grouped.sum().sum()).multiply(100)
-
-    # Reindex both to ensure matching age group order
-    syn_pct = syn_pct.reindex(age_labels).fillna(0)
-    census_pct = census_pct.reindex(age_labels).fillna(0)
+    syn_pct = get_synthetic_age_pyramid(synthetic_df)
+    census_pct = get_census_age_pyramid(census_df)
 
     # Plot
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -195,42 +172,16 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 def plot_household_structure_bar(
     df: pd.DataFrame, census_df: pd.DataFrame
 ) -> plt.Figure:
-
-    label_map = {
-        "One-person household: Aged 66 years and over": "One-person: 66+ years",
-        "One-person household: Other": "One-person: <66 years",
-        "Single family household: Lone parent household": "Lone parent",
-        "Single family household: Couple family household: No children": "Couple: No children",
-        "Single family household: Couple family household: Dependent children": "Couple: Dependent children",
-        "Single family household: Couple family household: All children non-dependent": "Couple: Non-dependent children",
-        "Other household types": "Other",
-    }
-
-    label_order = [
-        "One-person: <66 years",
-        "One-person: 66+ years",
-        "Lone parent",
-        "Couple: No children",
-        "Couple: Dependent children",
-        "Couple: Non-dependent children",
-        "Other",
-    ]
-
-    household_labels = df.groupby("household_id").apply(classify_household_structure)
-    synthetic_counts = household_labels.value_counts(normalize=True) * 100
-    synthetic_counts.index = synthetic_counts.index.map(lambda x: label_map.get(x, x))
-
-    census_df["Short Label"] = census_df["Household Composition"].map(
-        lambda x: label_map.get(x, x)
-    )
-    census_df = census_df.groupby("Short Label")["Value"].sum().reset_index()
-    census_counts = census_df.groupby("Short Label")["Value"].sum()
+    _, label_order = household_type_labels()
+    synthetic_counts = get_synthetic_household_composition(df)
+    census_counts = get_census_household_composition(census_df)
 
     combined = pd.DataFrame(
         {"Synthetic": synthetic_counts, "Census": census_counts}
     ).fillna(0)
 
     combined = combined.loc[[label for label in label_order if label in combined.index]]
+
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
