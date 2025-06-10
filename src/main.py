@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 from llm_interface.openai_model import OpenAIModel
+from src.services.experiment_run_service import ExperimentRunService
+from src.services.experiments_service import ExperimentService
 from src.services.analysis_service import AnalysisService
 from src.services.metadata_service import MetadataService
 from src.services.report_service import ReportService
@@ -18,23 +20,27 @@ population_service = PopulationService()
 report_service = ReportService()
 metadata_service = MetadataService()
 analysis_service = AnalysisService()
+experiments_service = ExperimentService()
+experiment_run_service = ExperimentRunService()
 
-# model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
+model = OllamaModel("llama3.2:3b", temperature=0.7, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
+"""
 model = OpenAIModel(
-    model_name="gpt-4o-mini",
+    model_name="gpt-3.5-turbo",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
     top_k=100,
 )
+"""
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 300
+n_households = 500
 batch_size = 10
-include_stats = False
-include_target = False
-include_guidance = True
+include_stats = True
+include_target = True
+include_guidance = False
 compute_household_size = False
 use_microdata = False
 no_occupation = False
@@ -57,53 +63,88 @@ if no_occupation:
 else:
     schema = file_service.load_schema("household_schema.json")
 
-population_id = str(uuid.uuid4())
 
-start_time = time.time()
+n_runs = 20
+experiment_id = str(uuid.uuid4())
+experiment_start_time = time.time()
 
-try:
-    households = population_service.generate_households(
-        n_households,
-        model,
-        prompt,
-        schema,
-        location,
-        region,
-        batch_size,
-        include_stats,
-        include_guidance,
-        use_microdata,
-        compute_household_size,
-        include_target,
-        no_occupation,
-    )
-    execution_time = time.time() - start_time
+for run in range(n_runs):
 
-    flat_data = [person for household in households for person in household]
-    df = pd.DataFrame(flat_data)
-    report_filename = report_service.generate_report(population_id, df)
+    population_id = str(uuid.uuid4())
 
-    metadata = {
-        "population_id": population_id,
-        "location": location,
-        "model": model.model_name,
-        "temperature": model.temperature,
-        "top_p": model.top_p,
-        "top_k": model.top_k,
-        "num_households": len(households),
-        "execution_time": execution_time,
-        "prompt": prompt,
-        "include_stats": include_stats,
-        "include_guidance": include_guidance,
-        "include_target": include_target,
-        "use_microdata": use_microdata,
-        "compute_household_size": compute_household_size,
-        "no_occupation": no_occupation,
-    }
+    start_time = time.time()
 
-    metadata_service.save_metadata(metadata)
-    population_service.save_population(population_id, households)
-    analysis_service.save_analysis(population_id)
+    try:
+        households = population_service.generate_households(
+            n_households,
+            model,
+            prompt,
+            schema,
+            location,
+            region,
+            batch_size,
+            include_stats,
+            include_guidance,
+            use_microdata,
+            compute_household_size,
+            include_target,
+            no_occupation,
+        )
+        execution_time = time.time() - start_time
 
-except Exception as e:
-    print(f"An error occurred: {e}")
+        flat_data = [person for household in households for person in household]
+        df = pd.DataFrame(flat_data)
+        report_filename = report_service.generate_report(population_id, df)
+
+        metadata = {
+            "population_id": population_id,
+            "location": location,
+            "model": model.model_name,
+            "temperature": model.temperature,
+            "top_p": model.top_p,
+            "top_k": model.top_k,
+            "num_households": len(households),
+            "execution_time": execution_time,
+            "prompt": prompt,
+            "include_stats": include_stats,
+            "include_guidance": include_guidance,
+            "include_target": include_target,
+            "use_microdata": use_microdata,
+            "compute_household_size": compute_household_size,
+            "no_occupation": no_occupation,
+        }
+
+        run = {
+            "experiment_id": experiment_id,
+            "run_number": run,
+            "population_id": population_id,
+            "execution_time": execution_time,
+        }
+
+        metadata_service.save_metadata(metadata)
+        population_service.save_population(population_id, households)
+        analysis_service.save_analysis(population_id)
+        experiment_run_service.save_run(run)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+experiment_execution_time = experiment_start_time - time.time()
+experiment = {
+    "experiment_id": experiment_id,
+    "location": location,
+    "model": model.model_name,
+    "temperature": model.temperature,
+    "top_p": model.top_p,
+    "top_k": model.top_k,
+    "execution_time": execution_time,
+    "prompt": prompt,
+    "include_stats": include_stats,
+    "include_guidance": include_guidance,
+    "include_target": include_target,
+    "use_microdata": use_microdata,
+    "compute_household_size": compute_household_size,
+    "no_occupation": no_occupation,
+}
+
+experiments_service.save_experiment(experiment)

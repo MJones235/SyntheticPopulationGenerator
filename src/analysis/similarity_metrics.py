@@ -99,3 +99,31 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str):
         {'Variable': 'Household Composition', **hh_type_result}
     ])
 
+
+def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str) -> pd.DataFrame:
+    all_metrics = []
+
+    for df in populations:
+        try:
+            metrics = compute_similarity_metrics(df, location)
+            all_metrics.append(metrics.set_index("Variable"))
+        except Exception:
+            continue
+
+    if not all_metrics:
+        return pd.DataFrame()
+
+    # Each metric is a DataFrame with index=Variable, columns=["JSD", "TVD"]
+    # Stack them into two lists: one per metric
+    jsd_matrix = pd.DataFrame([m["JSD"] for m in all_metrics])
+    tvd_matrix = pd.DataFrame([m["TVD"] for m in all_metrics])
+
+    result = pd.DataFrame({
+        "Variable": jsd_matrix.columns,
+        "Mean JSD": jsd_matrix.mean(),
+        "95% CI JSD": 1.96 * jsd_matrix.std() / np.sqrt(len(jsd_matrix)),
+        "Mean TVD": tvd_matrix.mean(),
+        "95% CI TVD": 1.96 * tvd_matrix.std() / np.sqrt(len(tvd_matrix)),
+    }).reset_index(drop=True)
+
+    return result

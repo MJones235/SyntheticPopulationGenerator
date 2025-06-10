@@ -101,5 +101,34 @@ class DBManager:
             timestamp TEXT,
             FOREIGN KEY (run_id) REFERENCES estimation_metadata(run_id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS experiments (
+            experiment_id TEXT PRIMARY KEY, 
+            location TEXT,
+            model TEXT,
+            temperature REAL,
+            top_p REAL,
+            top_k INTEGER,
+            execution_time REAL,
+            prompt TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            include_stats BOOLEAN,
+            include_guidance BOOLEAN,
+            include_target BOOLEAN,
+            compute_household_size BOOLEAN,
+            use_microdata BOOLEAN,
+            no_occupation BOOLEAN
+        );
+
+        CREATE TABLE IF NOT EXISTS experiment_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            experiment_id TEXT,
+            run_number INTEGER,
+            population_id TEXT,
+            execution_time REAL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (experiment_id) REFERENCES experiments (experiment_id) ON DELETE CASCADE,
+            FOREIGN KEY (population_id) REFERENCES metadata (population_id) ON DELETE CASCADE
+        );
         """
 
