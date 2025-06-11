@@ -38,9 +38,9 @@ location = "Newcastle, UK"
 region = "E12000001"
 n_households = 500
 batch_size = 10
-include_stats = True
-include_target = True
-include_guidance = False
+include_stats = False
+include_target = False
+include_guidance = True
 compute_household_size = False
 use_microdata = False
 no_occupation = False
@@ -69,7 +69,7 @@ experiment_id = str(uuid.uuid4())
 experiment_start_time = time.time()
 
 for run in range(n_runs):
-
+    print(f"\n\n\nStarting run {run + 1}\n\n\n")
     population_id = str(uuid.uuid4())
 
     start_time = time.time()
@@ -137,7 +137,7 @@ experiment = {
     "temperature": model.temperature,
     "top_p": model.top_p,
     "top_k": model.top_k,
-    "execution_time": execution_time,
+    "execution_time": experiment_execution_time,
     "prompt": prompt,
     "include_stats": include_stats,
     "include_guidance": include_guidance,

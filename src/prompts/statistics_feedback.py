@@ -214,7 +214,7 @@ Ensure that the household structure remains realistic.
 
     gender_stats_text = generate_distribution_prompt(
         observed_distribution=gender_dist,
-        target_distribution={"Male": 50.0, "Female": 50.0},
+        target_distribution={"Male": 49.4, "Female": 50.6},
         label_func=gender_label,
         guidance_label="Gender",
         threshold=0.5,

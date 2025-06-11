@@ -13,7 +13,7 @@ from src.utils.plots import plot_age_pyramid, plot_household_size, plot_househol
 import os
 
 from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_similarity_metrics
-from src.utils.aggregate_plots import plot_household_size_aggregate
+from src.utils.aggregate_plots import plot_age_pyramid_aggregate, plot_household_size_aggregate, plot_household_structure_bar_aggregate, plot_occupations_aggregate
 
 st.set_page_config(layout="wide")
 
@@ -56,12 +56,14 @@ else:
             # Load all populations
             population_dfs = []
             hh_size_distributions = []
+            occupation_distributions = []
             for pid in population_ids:
                 try:
                     df = pd.DataFrame(population_service.get_by_id(pid))
                     population_dfs.append(df)
                     analysis = analysis_service.get_by_id(pid)
                     hh_size_distributions.append(analysis["household_size_distribution"])
+                    occupation_distributions.append(compute_occupation_distribution(df))
                 except Exception as e:
                     st.warning(f"Failed to load run {pid}: {e}")
 
@@ -72,11 +74,12 @@ else:
 
                 census_household = file_service.load_household_size(location)
                 st.pyplot(plot_household_size_aggregate(hh_size_distributions, census_household))
-
-                # Optional: show age/occupation/household composition graphs with CI
-                # st.pyplot(plot_age_pyramid_aggregate(population_dfs, census_age_df))
-                # st.pyplot(plot_occupations_aggregate(...))
-                # st.pyplot(plot_household_structure_bar_aggregate(...))
+                census_age_df = file_service.load_age_pyramid(location)
+                st.pyplot(plot_age_pyramid_aggregate(population_dfs, census_age_df))
+                census_occupation = file_service.load_occupation_distribution(location)
+                st.pyplot(plot_occupations_aggregate(occupation_distributions, census_occupation))
+                census_composition_df = file_service.load_household_composition(location)
+                st.pyplot(plot_household_structure_bar_aggregate(population_dfs, census_composition_df))
             else:
                 st.warning("No valid population data available for aggregate analysis.")
 
