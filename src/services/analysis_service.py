@@ -21,19 +21,12 @@ class AnalysisService:
     def compute_household_size_distribution(self, population_id: str) -> Dict[int, float]:
         """Computes household size distribution as percentages for a given synthetic population."""
         
-        # Fetch population data from the database
         individuals = self.population_repository.get_population_by_id(population_id)
         if not individuals:
             return {}
 
-        # Count the number of people in each household
         household_sizes = Counter([person["household_id"] for person in individuals])
-
-        # Convert to frequency distribution (household size → count of households with that size)
         household_size_distribution = Counter(household_sizes.values())
-
-        # Convert raw counts to percentages
         total_households = sum(household_size_distribution.values())
         household_size_percentages = {size: (count / total_households) * 100 for size, count in household_size_distribution.items()}
-
         return household_size_percentages

@@ -1,40 +1,14 @@
-Your task is to generate a single household in {LOCATION}.  
-Your goal is to contribute to a realistic, demographically balanced synthetic population. 
+You are generating a realistic synthetic population for {LOCATION}.
 
-Each household should contain between 1 and 8 individuals.  
-For each individual, provide:
-- "name" (a realistic full name).
-- "age" (a plausible integer age).
-- "gender" ("Male" or "Female").
-- "occupation" (for adults: a suitable job title, "Retired" or "Unemployed"; for children: "Child").
-- "relationship" (must be one of: "Head", "Partner", "Child", "Parent", "Roommate", "Grandchild").
+The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
 
-**Important Instructions**:
-- **There must always be exactly one "Head" of household**.
-- **Households should reflect a wide variety of types**, such as:
-    - Single-person households
-    - Couples without children
-    - Families with children
-    - Multi-generational families
-    - Older adults living alone or with a partner
-    - Shared houses for students or young professionals
-- Return **only** a JSON object with a `"household"` key.
-- Do **not** include additional text, explanations, or formatting.
+Across the entire population, the distributions of household size, age, occupation and gender should reflect those reported in the 2021 UK Census. 
 
-**Expected JSON format for 1-person households:**
-{
-    "household": [
-        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"}
-    ]
-}
-
-**Expected JSON format for 2-person households:**
-{
-    "household": [
-        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "Head"},
-        {"name": "...", "age": ..., "gender": "...", "occupation": "...", "relationship": "..."}
-    ]
-}
+All major household types should be represented, including:
+- Single-person
+- Couples
+- Families
+- Houseshares
 
 {GUIDANCE}
 
@@ -43,3 +17,30 @@ For each individual, provide:
 {AGE_STATS}
 
 {GENDER_STATS}
+
+{OCCUPATION_STATS}
+
+Return a JSON object with a single key `"household"`, which maps to a list of one or more people.
+Each person must be represented as an object with the following fields:
+
+- `"age"`: an integer 
+- `"gender"`: a string, either `"Male"` or `"Female"`  
+- `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
+  - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`.  The head should be an adult.  
+  - Other valid values are: `"Partner"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Housemate"`, `"Other"`
+- `occupation_category`: a number from 1 to 10 representing the standard occupational cateogry:
+  1. Managers, directors and senior officials  
+  2. Professional occupations  
+  3. Associate professional and technical occupations  
+  4. Administrative and secretarial occupations  
+  5. Skilled trades occupations  
+  6. Caring, leisure and other service occupations  
+  7. Sales and customer service occupations  
+  8. Process, plant and machine operatives  
+  9. Elementary occupations  
+  10. Does not apply
+- `occupation`: a string giving a specific job title that matches the selected occupation_category (e.g., "Plumber" for category 5). If the person is not employed, use a status label such as "Child", "Student", "Unemployed", or "Retired".
+
+Note: A 1-person household (just the head) is a valid and realistic structure. You are encouraged to generate this if 1-person households are underrepresented.
+
+Output only the JSON object — do not include markdown formatting, code fences, or backticks.

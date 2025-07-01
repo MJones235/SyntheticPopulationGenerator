@@ -52,7 +52,7 @@ elif compute_household_size:
 elif no_occupation:
     prompt_file = "no_occupation.txt"
 else:
-    prompt_file = "minimal_prompt_2.txt"
+    prompt_file = "minimal_prompt.txt"
 
 prompt = file_service.load_prompt(
     prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}
@@ -69,7 +69,6 @@ experiment_id = str(uuid.uuid4())
 experiment_start_time = time.time()
 
 for run in range(n_runs):
-    print(f"\n\n\nStarting run {run + 1}\n\n\n")
     population_id = str(uuid.uuid4())
 
     start_time = time.time()
@@ -89,6 +88,7 @@ for run in range(n_runs):
             compute_household_size,
             include_target,
             no_occupation,
+            run+1
         )
         execution_time = time.time() - start_time
 

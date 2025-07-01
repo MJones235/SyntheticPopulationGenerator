@@ -1,6 +1,6 @@
 import os
 import json
-from typing import Dict
+from typing import Any, Dict, List, Optional, Union
 import pandas as pd
 import re
 
@@ -11,13 +11,7 @@ class FileService:
     MICRODATA = os.path.join(os.path.dirname(__file__), "../../data/microdata/individual_uk.csv")
 
     def load_prompt(self, filename: str, replacements: dict = None) -> str:
-        """
-        Load a prompt file from the `prompts/` directory and optionally replace placeholders.
-
-        :param filename: Name of the prompt file (e.g., "minimal_prompt.txt")
-        :param replacements: Dictionary of placeholders to replace (e.g., {"city": "Newcastle"})
-        :return: The formatted prompt string
-        """
+        """Loads a prompt from file and applies replacements."""
         filepath = os.path.join(self.PROMPT_DIR, filename)
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"Prompt file not found: {filepath}")
@@ -46,47 +40,27 @@ class FileService:
             return None
 
     def load_household_size(self, location: str) -> Dict:
-        try:
-            
-            filepath = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "household_size.csv")
-            census_df = pd.read_csv(filepath)
-            required_columns = ["Household size (9 categories) Code", "Observation"]
-            if not all(col in census_df.columns for col in required_columns):
-                raise ValueError(f"CSV file must contain columns: {required_columns}")
+        return self._load_distribution(
+            location, "household_size.csv",
+            key_col="Household size (9 categories) Code",
+            value_col="Observation",
+            drop_keys=[0]
+        )
 
-            total = census_df["Observation"].sum()
-            census_df["Value"] = census_df["Observation"].apply(lambda x: x / total * 100)
-            household_size_distribution = dict(zip(census_df["Household size (9 categories) Code"], census_df["Value"]))
-            household_size_distribution.pop(0)
-            return household_size_distribution
-
-        except Exception as e:
-            print(f"Error processing census data: {e}")
-            return {}
         
     def load_household_composition(self, location: str) -> Dict:
-        try:
-            
-            filepath = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "household_composition.csv")
-            census_df = pd.read_csv(filepath)
-            required_columns = ["Household composition (8 categories)", "Observation"]
-            if not all(col in census_df.columns for col in required_columns):
-                raise ValueError(f"CSV file must contain columns: {required_columns}")
-
-            census_df["Household Composition"] = census_df["Household composition (8 categories)"]
-            total = census_df["Observation"].sum()
-            census_df["Value"] = census_df["Observation"].apply(lambda x: x / total * 100)
-            return census_df[["Household Composition", "Value"]]
-
-        except Exception as e:
-            print(f"Error processing census data: {e}")
-            return {}
+        return self._load_distribution(
+            location, "household_composition.csv",
+            key_col="Household composition (8 categories)",
+            value_col="Observation",
+            return_type="dataframe",
+            rename_key="Household Composition"
+        )
 
 
     def load_age_pyramid(self, location: str) -> pd.DataFrame:
         try:
-            csv_path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "age_group.csv")
-            df = pd.read_csv(csv_path)
+            df = self._load_csv(location, "age_group.csv")
 
             # Clean column names
             df.columns = df.columns.str.strip()
@@ -125,27 +99,11 @@ class FileService:
             return pd.DataFrame(columns=["Male", "Female"])
 
     def load_occupation_distribution(self, location: str) -> dict:
-        try:
-            csv_path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "occupation.csv")
-            df = pd.read_csv(csv_path)
-
-            # Rename for consistency
-            df = df.rename(columns={
-                "Occupation (current) (10 categories) Code": "occupation_category_code",
-                "Observation": "value"
-            })
-
-            df["percentage"] = df["value"] / df["value"].sum() * 100
-            df["percentage"] = df["percentage"].round(1)
-
-            occupation_distribution = dict(zip(df["occupation_category_code"], df["percentage"]))
-            return occupation_distribution
-
-        except Exception as e:
-            print(f"Failed to load occupation distribution: {e}")
-            return {}
-
-
+        return self._load_distribution(
+            location, "occupation.csv",
+            key_col="Occupation (current) (10 categories) Code",
+            value_col="Observation"
+        )
 
     def generate_unique_filename(self, directory: str, base_filename: str) -> str:
         os.makedirs(directory, exist_ok=True)
@@ -169,3 +127,45 @@ class FileService:
             print(f"Error loading microdata for {region}: {e}")
             return pd.DataFrame()
 
+    def _load_distribution(
+        self,
+        location: str,
+        filename: str,
+        key_col: str,
+        value_col: str,
+        return_type: str = "dict",
+        drop_keys: Optional[List[Any]] = None,
+        rename_key: Optional[str] = None,
+    ) -> Union[Dict, pd.DataFrame]:
+        try:
+            df = self._load_csv(location, filename)
+            df = self._validate_columns(df, [key_col, value_col])
+
+            if rename_key:
+                df[rename_key] = df[key_col]
+                key_col = rename_key
+
+            total = df[value_col].sum()
+            df["Value"] = df[value_col] / total * 100
+            df["Value"] = df["Value"].round(1)
+
+            if drop_keys:
+                df = df[~df[key_col].isin(drop_keys)]
+
+            if return_type == "dict":
+                return dict(zip(df[key_col], df["Value"]))
+            else:
+                return df[[key_col, "Value"]]
+
+        except Exception as e:
+            print(f"Error processing {filename} for {location}: {e}")
+            return {} if return_type == "dict" else pd.DataFrame()
+
+    def _validate_columns(self, df: pd.DataFrame, required_columns: List[str]) -> pd.DataFrame:
+        if not all(col in df.columns for col in required_columns):
+            raise ValueError(f"CSV must contain columns: {required_columns}")
+        return df
+    
+    def _load_csv(self, location: str, filename: str) -> pd.DataFrame:
+        path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), filename)
+        return pd.read_csv(path)
