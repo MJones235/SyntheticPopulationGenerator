@@ -142,12 +142,39 @@ def decode_industry(code: int) -> str:
     }
     return mapping.get(code, "Unknown")
 
-def convert_microdata_row(row: pd.Series) -> Dict[str, Any]:
-    return {
-        "age": decode_age(row["resident_age_7d"]),
-        "gender": decode_sex(row["sex"]),
-        "household_type": decode_household_type(row["hh_families_type_6a"]),
-        "economic_activity": decode_economic_activity(row["economic_activity_status_10m"]),
-        "occupation": decode_occupation(row["occupation_10a"]),
-        "industry": decode_industry(row["industry_10a"]),
-    }
+def convert_microdata_row(row: pd.Series) -> str:
+    paragraph = f"This individual is a {decode_sex(row["sex"])} {decode_age(row["resident_age_7d"]).lower()}. They live in a {decode_household_type(row["hh_families_type_6a"]).lower()}."
+
+    econ_status = decode_economic_activity(row["economic_activity_status_10m"]).lower()
+    occupation = decode_occupation(row["occupation_10a"])
+    industry = decode_industry(row["industry_10a"])
+
+    if "self-employed" in econ_status:
+        industry_text = f"in the {industry} sector" if "does not apply" not in industry.lower() else ""
+        paragraph += " They are self-employed"
+        if industry_text:
+            paragraph += f" {industry_text}"
+        paragraph += "."
+    elif "in employment" in econ_status:
+        occupation_text = f"in an occupation categorised as {occupation.lower()}" if "does not apply" not in occupation.lower() else "in an unspecified role"
+        industry_text = f"in the {industry} sector" if "does not apply" not in industry.lower() else ""
+        paragraph += f" They are currently employed, {occupation_text}"
+        if industry_text:
+            paragraph += f" {industry_text}"
+        paragraph += "."
+    elif "unemployed" in econ_status:
+        paragraph += " They are currently unemployed and seeking work."
+    elif "student" in econ_status:
+        paragraph += " They are a student."
+    elif "retired" in econ_status:
+        paragraph += " They are retired."
+    elif "looking after home" in econ_status:
+        paragraph += " They are not in paid employment and are looking after their home or family."
+    elif "long-term sick" in econ_status:
+        paragraph += " They are not in paid employment due to long-term sickness or disability."
+    elif "inactive" in econ_status:
+        paragraph += " They are economically inactive."
+    else:
+        paragraph += f" Their economic status is: {econ_status}."
+
+    return paragraph

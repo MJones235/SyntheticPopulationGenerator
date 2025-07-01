@@ -7,8 +7,8 @@ import re
 class FileService:
     PROMPT_DIR = os.path.join(os.path.dirname(__file__), "../prompts")
     SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "../../data/schemas/")
-    CENSUS_DATA = os.path.join(os.path.dirname(__file__), "../../data/locations/")
-    MICRODATA = os.path.join(os.path.dirname(__file__), "../../data/microdata/publicmicrodatateachingsample.csv")
+    CENSUS_DATA = os.path.join(os.path.dirname(__file__), "../../data/aggregate/")
+    MICRODATA = os.path.join(os.path.dirname(__file__), "../../data/microdata/individual_uk.csv")
 
     def load_prompt(self, filename: str, replacements: dict = None) -> str:
         """

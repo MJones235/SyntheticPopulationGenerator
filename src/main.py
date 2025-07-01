@@ -23,7 +23,7 @@ analysis_service = AnalysisService()
 experiments_service = ExperimentService()
 experiment_run_service = ExperimentRunService()
 
-model = OllamaModel("llama3.2:3b", temperature=0.7, top_p=0.85, top_k=100)
+model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
 """
 model = OpenAIModel(
@@ -38,9 +38,9 @@ location = "Newcastle, UK"
 region = "E12000001"
 n_households = 500
 batch_size = 10
-include_stats = False
-include_target = False
-include_guidance = True
+include_stats = True
+include_target = True
+include_guidance = False
 compute_household_size = False
 use_microdata = False
 no_occupation = False
