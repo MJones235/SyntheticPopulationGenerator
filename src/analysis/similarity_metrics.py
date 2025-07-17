@@ -29,7 +29,7 @@ def get_synthetic_age_pyramid(df: pd.DataFrame):
 
     # Aggregate synthetic data by age_group and gender
     syn_grouped = (
-        synthetic_df.groupby(["age_group", "gender"])["count"].sum().unstack().fillna(0)
+        synthetic_df.groupby(["age_group", "gender"], observed=False)["count"].sum().unstack().fillna(0)
     )
     syn_pct = syn_grouped.divide(syn_grouped.sum().sum()).multiply(100)
     _, age_labels = get_age_band_labels()
@@ -37,41 +37,42 @@ def get_synthetic_age_pyramid(df: pd.DataFrame):
 
 def get_census_age_pyramid(df: pd.DataFrame):
     _, age_labels = get_age_band_labels()
+
     census_df = df.copy()
-    census_df = census_df.reset_index().rename(columns={"age_group": "raw_group"})
+    census_df["age_group"] = census_df["age_group"].str.strip()
+
+    # Extract lower bound of age (e.g., from "25–29" get 25, from "85+" get 85)
     census_df["numeric_age"] = (
-        census_df["raw_group"].str.extract(r"(\d+)", expand=False).astype(float)
+        census_df["age_group"]
+        .str.extract(r"^(\d+)", expand=False)
+        .astype(float)
     )
-    census_df["age_group"] = assign_age_band(census_df["numeric_age"])
 
-    census_grouped = census_df.groupby("age_group")[["Male", "Female"]].sum()
-    census_pct = census_grouped.divide(census_grouped.sum().sum()).multiply(100)
+    # Assign new broader age bands
+    census_df["broad_age_band"] = assign_age_band(census_df["numeric_age"])
 
-    return census_pct.reindex(age_labels).fillna(0)
+    # Group by new age band and sum percentages
+    grouped = census_df.groupby("broad_age_band", observed=False)[["Male", "Female"]].sum()
 
-def get_synthetic_household_composition(df: pd.DataFrame):
+    # Reindex to standard order
+    grouped = grouped.reindex(age_labels).fillna(0)
+
+    return grouped
+
+
+def get_synthetic_household_composition(df: pd.DataFrame, relationship_col: str = "relationship"):
     label_map, _ = household_type_labels()
-    household_labels = df.groupby("household_id").apply(classify_household_structure)
+    household_labels = df.groupby("household_id").apply(lambda x: classify_household_structure(x, relationship_col))
     synthetic_counts = household_labels.value_counts(normalize=True) * 100
     synthetic_counts.index = synthetic_counts.index.map(lambda x: label_map.get(x, x))
     return synthetic_counts
-
-
-def get_census_household_composition(df: pd.DataFrame):
-    census_df = df.copy()
-    label_map, _ = household_type_labels()
-    census_df["Short Label"] = census_df["Household Composition"].map(
-    lambda x: label_map.get(x, x)
-    )
-    census_df = census_df.groupby("Short Label")["Value"].sum().reset_index()
-    return census_df.groupby("Short Label")["Value"].sum()
 
 
 def compute_similarity_metrics(df: pd.DataFrame, location: str):
     hh_size_synth = list(compute_household_size_distribution(df).values())
     hh_size_census = list(FileService().load_household_size(location).values())
     hh_size_result = compute_metrics(hh_size_synth, hh_size_census)
-
+    
     age_synth = get_synthetic_age_pyramid(df).stack().to_list()
     age_census = get_census_age_pyramid(FileService().load_age_pyramid(location)).stack().to_list()
     age_result = compute_metrics(age_synth, age_census)
@@ -85,7 +86,8 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str):
     occupation_result = compute_metrics(occupation_synth, occupation_census)
 
     hh_type_synth = get_synthetic_household_composition(df)
-    hh_type_census = get_census_household_composition(FileService().load_household_composition(location))
+    hh_type_census = FileService().load_household_composition(location)
+
     combined = pd.DataFrame(
         {"Synthetic": hh_type_synth, "Census": hh_type_census}
     ).fillna(0)
@@ -131,3 +133,21 @@ def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str) ->
     }).reset_index(drop=True)
 
     return result
+
+
+def compute_convergence_curve(df, location, step=200, max_points=10000):
+    results = []
+
+    for i in range(step, min(len(df), max_points), step):
+        partial_df = df.iloc[:i]
+        try:
+            metrics_df = compute_similarity_metrics(partial_df, location)
+            metrics_df["n_individuals"] = i
+            results.append(metrics_df)
+        except Exception as e:
+            print(f"Error at {i} individuals: {e}")
+
+    if not results:
+        return pd.DataFrame()
+
+    return pd.concat(results).reset_index(drop=True)

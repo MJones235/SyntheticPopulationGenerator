@@ -1,10 +1,10 @@
 import pandas as pd
 
-def classify_household_structure(group: pd.DataFrame) -> str:
+def classify_household_structure(group: pd.DataFrame, relationship_col: str = "relationship") -> str:
     n = len(group)
-    roles = set(group["relationship"])
-    head = group[group["relationship"] == "Head"]
-    children = group[group["relationship"] == "Child"]
+    roles = set(group[relationship_col])
+    head = group[group[relationship_col] == "Head"]
+    children = group[group[relationship_col] == "Child"]
 
     if head.empty:
         return "No head of household"
@@ -36,22 +36,22 @@ def classify_household_structure(group: pd.DataFrame) -> str:
 
 def household_type_labels():
     label_map = {
-        "One-person household: Aged 66 years and over": "One-person: 66+ years",
-        "One-person household: Other": "One-person: <66 years",
+        "One-person household: Aged 66 years and over": "One-person aged 66+ years",
+        "One-person household: Other": "One-person aged <66 years",
         "Single family household: Lone parent household": "Lone parent",
-        "Single family household: Couple family household: No children": "Couple: No children",
-        "Single family household: Couple family household: Dependent children": "Couple: Dependent children",
-        "Single family household: Couple family household: All children non-dependent": "Couple: Non-dependent children",
+        "Single family household: Couple family household: No children": "Couple",
+        "Single family household: Couple family household: Dependent children": "Couple with dependent children",
+        "Single family household: Couple family household: All children non-dependent": "Couple with non-dependent children",
         "Other household types": "Other",
     }
 
     label_order = [
-        "One-person: <66 years",
-        "One-person: 66+ years",
+        "One-person aged <66 years",
+        "One-person aged 66+ years",
         "Lone parent",
-        "Couple: No children",
-        "Couple: Dependent children",
-        "Couple: Non-dependent children",
+        "Couple",
+        "Couple with dependent children",
+        "Couple with non-dependent children",
         "Other",
     ]
 

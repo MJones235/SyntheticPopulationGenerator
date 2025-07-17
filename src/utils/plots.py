@@ -5,9 +5,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from src.analysis.similarity_metrics import get_census_age_pyramid, get_census_household_composition, get_synthetic_age_pyramid, get_synthetic_household_composition
-from src.analysis.classifiers import classify_household_structure, household_type_labels
-from src.utils.age_bands import assign_age_band, get_age_band_labels
+from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid, get_synthetic_household_composition
+from src.analysis.classifiers import  household_type_labels
 
 
 def plot_household_size(synthetic: str, census: Dict):
@@ -175,10 +174,9 @@ def plot_household_structure_bar(
 ) -> plt.Figure:
     _, label_order = household_type_labels()
     synthetic_counts = get_synthetic_household_composition(df)
-    census_counts = get_census_household_composition(census_df)
 
     combined = pd.DataFrame(
-        {"Synthetic": synthetic_counts, "Census": census_counts}
+        {"Synthetic": synthetic_counts, "Census": census_df}
     ).fillna(0)
 
     combined = combined.loc[[label for label in label_order if label in combined.index]]

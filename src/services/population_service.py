@@ -1,4 +1,3 @@
-import json
 from typing import Any, Dict, List, Optional
 import random
 import pandas as pd
@@ -32,11 +31,11 @@ class PopulationService:
         compute_household_size: bool = False,
         include_target: bool = True,
         no_occupation: bool = False,
-        n_run: int = 1
+        n_run: int = 1,
+        no_household_composition: bool = False
     ) -> List[Dict[str, Any]]:
         
         households = []
-        target_age_distribution = self.file_service.load_age_pyramid(location)
         size_plan = self._plan_household_sizes(n_households, location) if compute_household_size else [None] * n_households
 
         if use_microdata:
@@ -46,14 +45,14 @@ class PopulationService:
         prompt = prepare_prompt(
             base_prompt,
             synthetic_df=None,
-            target_age_distribution=target_age_distribution,
             location=location,
             n_households_generated=0,
             include_stats=include_stats,
             include_guidance=include_guidance,
             use_microdata=use_microdata,
             include_target=include_target,
-            no_occupation=no_occupation
+            no_occupation=no_occupation,
+            no_household_composition=no_household_composition
         )
 
         for i in range(0, n_households, batch_size):
@@ -81,14 +80,14 @@ class PopulationService:
                 prompt = prepare_prompt(
                     base_prompt,
                     synthetic_df=synthetic_df,
-                    target_age_distribution=target_age_distribution,
                     location=location,
                     n_households_generated=(i + batch_count),
                     include_stats=include_stats,
                     include_guidance=include_guidance,
                     use_microdata=use_microdata,
                     include_target=include_target,
-                    no_occupation=no_occupation
+                    no_occupation=no_occupation,
+                    no_household_composition=no_household_composition
                 )
 
         return households
@@ -120,7 +119,7 @@ class PopulationService:
             if sampled_rows is not None:
                 row = sampled_rows.iloc[i]
                 anchor = convert_microdata_row(row)
-                prompt_filled = prompt_template.replace("{ANCHOR_PERSON}", json.dumps(anchor))
+                prompt_filled = prompt_template.replace("{ANCHOR_PERSON}", anchor)
             else:
                 prompt_filled = prompt_template.replace(
                     "{NUM_PEOPLE}",

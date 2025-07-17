@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from llm_interface.azure_model import AzureModel
 from llm_interface.openai_model import OpenAIModel
 from src.services.experiment_run_service import ExperimentRunService
 from src.services.experiments_service import ExperimentService
@@ -23,27 +24,35 @@ analysis_service = AnalysisService()
 experiments_service = ExperimentService()
 experiment_run_service = ExperimentRunService()
 
-model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
+# model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
-"""
-model = OpenAIModel(
-    model_name="gpt-3.5-turbo",
-    api_key=os.getenv("OPENAI_API_KEY"),
+
+model = AzureModel(
+    model_name="Phi-4-reasoning",
+    api_key=os.getenv("AZURE_API_KEY"),
     temperature=0.7,
     top_p=0.85,
     top_k=100,
 )
-"""
+#model = OpenAIModel(
+#    model_name="gpt-4o",
+#    api_key=os.getenv("OPENAI_API_KEY"),
+#    temperature=0.7,
+#    top_p=0.85,
+#    top_k=100
+#)
+
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 500
+n_households = 100
 batch_size = 10
 include_stats = True
-include_target = True
+include_target = False
 include_guidance = False
 compute_household_size = False
 use_microdata = False
-no_occupation = False
+no_occupation = True
+no_household_composition = True
 
 if use_microdata:
     prompt_file = "microdata.txt"
@@ -64,7 +73,7 @@ else:
     schema = file_service.load_schema("household_schema.json")
 
 
-n_runs = 20
+n_runs = 1
 experiment_id = str(uuid.uuid4())
 experiment_start_time = time.time()
 
@@ -88,7 +97,8 @@ for run in range(n_runs):
             compute_household_size,
             include_target,
             no_occupation,
-            run+1
+            run+1,
+            no_household_composition
         )
         execution_time = time.time() - start_time
 
@@ -112,6 +122,7 @@ for run in range(n_runs):
             "use_microdata": use_microdata,
             "compute_household_size": compute_household_size,
             "no_occupation": no_occupation,
+            "no_household_composition": no_household_composition,
         }
 
         run = {
@@ -145,6 +156,7 @@ experiment = {
     "use_microdata": use_microdata,
     "compute_household_size": compute_household_size,
     "no_occupation": no_occupation,
+    "no_household_composition": no_household_composition,
 }
 
 experiments_service.save_experiment(experiment)

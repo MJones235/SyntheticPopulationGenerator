@@ -23,11 +23,7 @@ def plot_household_size_aggregate(synthetic_runs: list[str], census: dict):
     data = []
     for run in parsed_runs:
         normed = {k: run.get(k, 0.0) for k in all_keys}
-        print(run)
-        print(normed)
         data.append([normed[k] for k in all_keys])
-
-    print(data)
 
     data = np.array(data)
     mean = data.mean(axis=0)
@@ -188,7 +184,7 @@ def plot_occupations_aggregate(synthetic_dicts: list[dict], census: dict):
 def plot_household_structure_bar_aggregate(
     dfs: list[pd.DataFrame], census_df: pd.DataFrame
 ) -> plt.Figure:
-    from src.analysis.similarity_metrics import get_synthetic_household_composition, get_census_household_composition
+    from src.analysis.similarity_metrics import get_synthetic_household_composition
     from src.analysis.classifiers import household_type_labels
 
     _, label_order = household_type_labels()
@@ -218,7 +214,7 @@ def plot_household_structure_bar_aggregate(
     ci = 1.96 * stds / np.sqrt(data.shape[0])
 
     # Census composition
-    census_counts = get_census_household_composition(census_df)
+    census_counts = census_df
     census_pct = [census_counts.get(label, 0.0) for label in label_order]
     total_census = sum(census_pct)
     if total_census > 0:

@@ -2,17 +2,19 @@ You are generating a realistic synthetic population for {LOCATION}.
 
 The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
 
-Across the entire population, the distributions of household size, age, occupation and gender should reflect those reported in the 2021 UK Census. 
-
-All major household types should be represented, including:
-- Single-person
-- Couples
-- Families
-- Houseshares
-
 {GUIDANCE}
 
-{HOUSEHOLD_STATS}
+--------------------------------
+
+Household Context:
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+--------------------------------
+
+Individual-Level Context:
 
 {AGE_STATS}
 
@@ -20,8 +22,20 @@ All major household types should be represented, including:
 
 {OCCUPATION_STATS}
 
-Return a JSON object with a single key `"household"`, which maps to a list of one or more people.
-Each person must be represented as an object with the following fields:
+--------------------------------
+
+You must first choose:
+- `"household_size"`: An integer from 1 to 8
+- `"household_type"`:
+  - `"One-person aged <66 years"`
+  - `"One-person aged 66+ years"`
+  - `"Lone parent"`
+  - `"Couple"`
+  - `"Couple with dependent children"`
+  - `"Couple with non-dependent children"`
+  - `"Other"` (e.g. 2+ unrelated housemates)
+
+Each individual within the household must be represented as an object with the following fields:
 
 - `"age"`: an integer 
 - `"gender"`: a string, either `"Male"` or `"Female"`  
@@ -41,6 +55,21 @@ Each person must be represented as an object with the following fields:
   10. Does not apply
 - `occupation`: a string giving a specific job title that matches the selected occupation_category (e.g., "Plumber" for category 5). If the person is not employed, use a status label such as "Child", "Student", "Unemployed", or "Retired".
 
-Note: A 1-person household (just the head) is a valid and realistic structure. You are encouraged to generate this if 1-person households are underrepresented.
+Return a JSON object with the following structure:
+
+```json
+{
+  "household_size": ...,
+  "household_type": "...",
+  "household": [
+    {
+      "age": ...,
+      "gender": "...",
+      "relationship_to_head": "...",
+      "occupation_category": ...,
+      "occupation": "..."
+    }
+  ]
+}
 
 Output only the JSON object — do not include markdown formatting, code fences, or backticks.

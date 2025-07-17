@@ -11,8 +11,9 @@ from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
 from src.utils.plots import plot_age_pyramid, plot_household_size, plot_household_structure_bar, plot_occupation_titles, plot_occupations, plot_age_diff
 import os
+import altair as alt
 
-from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_similarity_metrics
+from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_convergence_curve, compute_similarity_metrics
 from src.utils.aggregate_plots import plot_age_pyramid_aggregate, plot_household_size_aggregate, plot_household_structure_bar_aggregate, plot_occupations_aggregate
 
 st.set_page_config(layout="wide")
@@ -31,7 +32,7 @@ experiments = experiment_service.get()
 if not experiments:
     st.warning("No experiments found in the database.")
 else:
-    experiment_dict = {f"{p['timestamp']} - {p['model']} - {p['location']} - {'stats, ' if bool(p['include_stats']) else ''}{'guidance, ' if bool(p['include_guidance']) else ''}{'target, ' if bool(p['include_target']) else ''}{'microdata, ' if bool(p['use_microdata']) else ''}{'fixed household size, ' if bool(p['compute_household_size']) else ''}{'no occupation, ' if bool(p['no_occupation']) else ''}": p['experiment_id'] for p in experiments}
+    experiment_dict = {f"{p['timestamp']} - {p['model']} - {p['location']} - {'stats, ' if bool(p['include_stats']) else ''}{'guidance, ' if bool(p['include_guidance']) else ''}{'target, ' if bool(p['include_target']) else ''}{'microdata, ' if bool(p['use_microdata']) else ''}{'fixed household size, ' if bool(p['compute_household_size']) else ''}{'no occupation, ' if bool(p['no_occupation']) else ''} {'no household composition, ' if bool(p['no_household_composition']) else ''}": p['experiment_id'] for p in experiments}
     selected_exp_label = st.selectbox("Select an Experiment:", list(experiment_dict.keys()))
     selected_experiment_id = experiment_dict[selected_exp_label]
 
@@ -120,6 +121,7 @@ else:
             st.title("Household Size Comparison")
             analysis = analysis_service.get_by_id(selected_population_id)
             st.pyplot(plot_household_size(analysis['household_size_distribution'], file_service.load_household_size(metadata['location'])))
+        
 
             st.title("Age Distribution Comparison")
             if not df.empty:
@@ -153,3 +155,24 @@ else:
                     st.pyplot(plot_household_structure_bar(df, census_composition_df))
                 except Exception as e:
                     st.error(f"Failed to load or plot household composition: {e}")
+
+            st.title("Convergence Curve")
+            if not df.empty:
+                try:
+                    convergence_df = compute_convergence_curve(df, metadata["location"], 20)
+                    convergence_long = convergence_df.melt(
+                        id_vars=["Variable", "n_individuals"],
+                        value_vars=["JSD"], 
+                        var_name="Metric",
+                        value_name="Value"
+                    )
+                    chart = alt.Chart(convergence_long).mark_line().encode(
+                        x="n_individuals:Q",
+                        y="Value:Q",
+                        color="Variable:N"
+                    ).properties(width=750, height=400)
+
+                    st.altair_chart(chart, use_container_width=True)
+
+                except Exception as e:
+                    st.error(f"Failed to compute or plot convergence curve: {e}")

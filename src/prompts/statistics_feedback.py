@@ -1,7 +1,8 @@
 import re
-from typing import Any, Callable, Optional
+from typing import Any, Callable
 import pandas as pd
 
+from src.analysis.similarity_metrics import get_synthetic_household_composition
 from src.services.file_service import FileService
 from src.analysis.distributions import (
     compute_age_distribution,
@@ -81,23 +82,15 @@ def generate_distribution_prompt(
     ).strip()
 
 def _build_guidance_text(use_microdata: bool, include_stats: bool, include_target: bool, include_guidance: bool, no_occupation: bool) -> str:
-    occupation_line = (
-        "Include underrepresented occupations.\n" if not no_occupation else ""
-    )
-
     if include_stats:
         if use_microdata:
             return f"""
 The following statistics show the current state of the synthetic population.
-Each section displays the distribution of individuals or households so far, alongside target percentages from the 2021 Census.
+Each section displays the distribution of individuals so far, alongside target percentages from the 2021 Census.
 Your primary task is to preserve the known characteristics of the anchor person and build a plausible household around them.
 This includes retaining their age, gender, and other known attributes as given.
-Where additional household members must be generated, you should use the census data, where possible, to:
-Nudge the overall population toward the target distributions.
-Select a household size that is currently underrepresented.
-Include individuals from underrepresented age groups.
-{occupation_line}Maintain an even gender balance across the full population.
-All household structures must remain realistic and demographically plausible.
+Where additional household members must be generated, you should use the census data, where possible, to nudge the overall population toward the target distributions.
+Ensure that the household structure remains realistic.
 """
         else:
             if include_target:
@@ -105,9 +98,6 @@ All household structures must remain realistic and demographically plausible.
 The following statistics show the current state of the synthetic population.
 Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
 Your task is to generate a household that nudges the distribution toward the target.
-Select a household size that is currently underrepresented.
-If possible, include individuals from underrepresented age groups. 
-{occupation_line}Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
             else:
@@ -115,29 +105,20 @@ Ensure that the household structure remains realistic.
 The following statistics describe the current distribution of individuals and households in the synthetic population.
 Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
 Use your knowledge of UK demographics to identify which values appear over- or underrepresented, and adjust accordingly.
-Select a household size that appears underrepresented.
-If appropriate, include individuals from underrepresented age groups.
-{occupation_line}Maintain an even gender balance across the population.
-Ensure that the household structure remains plausible and realistic.
+Ensure that the household structure remains realistic.
 """
     elif include_guidance:
         if use_microdata:
             return f"""
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
 Your first priority is to preserve the known attributes of the anchor person and construct a plausible household around them.
-Where additional household members must be generated, you should use the census data, where possible, to:
-Nudge the overall population toward the target distributions.
-Select a household size that is currently underrepresented.
-Include individuals from underrepresented age groups.
-{occupation_line}Maintain an even gender balance across the full population.
-All household structures must remain realistic and demographically plausible.
+Where additional household members must be generated, you should use the census data, where possible, to nudge the overall population toward the target distributions.
+Ensure that the household structure remains realistic.
 """
         else:
             return f"""
 The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
-Select a household size that is currently underrepresented.
-If possible, include individuals from underrepresented age groups.  
-{occupation_line}Maintain an even gender balance across the full population.
+Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
 Ensure that the household structure remains realistic.
 """
 
@@ -148,7 +129,6 @@ Ensure that the household structure remains realistic.
 def update_prompt_with_statistics(
     base_prompt: str,
     synthetic_df: pd.DataFrame | None,
-    target_age_distribution: pd.DataFrame,
     location: str,
     n_households_generated: int = 0,
     include_stats: bool = True,
@@ -156,13 +136,16 @@ def update_prompt_with_statistics(
     use_microdata: bool = False,
     include_target: bool = True,
     no_occupation: bool = False,
+    no_household_composition: bool = False,
+
 ) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
         prompt = (
             base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
             .replace("{GUIDANCE}", "")
-            .replace("{HOUSEHOLD_STATS}", "")
+            .replace("{HOUSEHOLD_SIZE_STATS}", "")
+            .replace("{HOUSEHOLD_COMPOSITION_STATS}", "")
             .replace("{AGE_STATS}", "")
             .replace("{GENDER_STATS}", "")
             .replace("{OCCUPATION_STATS}", "")
@@ -175,7 +158,7 @@ def update_prompt_with_statistics(
     def build_dist(obs_fn, tgt_fn, label_fn, label, threshold):
         return generate_distribution_prompt(
             observed_distribution=obs_fn(),
-            target_distribution=tgt_fn(),
+            target_distribution=tgt_fn() if include_target or include_guidance else {},
             label_func=label_fn,
             guidance_label=label,
             threshold=threshold,
@@ -194,9 +177,19 @@ def update_prompt_with_statistics(
         0.5,
     )
 
+    composition_stats_text = ""
+    if not no_household_composition:
+        composition_stats_text = build_dist(
+            lambda: get_synthetic_household_composition(synthetic_df, "relationship_to_head").to_dict(),
+            lambda: fs.load_household_composition(location),
+            lambda composition: composition,
+            "Household Composition",
+            0.5,
+        )
+
     gender_stats_text = build_dist(
         lambda: compute_gender_distribution(synthetic_df),
-        lambda: {"Male": 49.4, "Female": 50.6},
+        lambda: fs.load_sex_distribution(location),
         lambda gender: gender,
         "Gender",
         0.5,
@@ -204,7 +197,7 @@ def update_prompt_with_statistics(
 
     age_stats_text = build_dist(
         lambda: compute_age_distribution(synthetic_df),
-        lambda: compute_target_age_distribution(target_age_distribution),
+        lambda: compute_target_age_distribution(fs.load_age_pyramid(location)),
         lambda band: f"{band} years",
         "Age Group",
         1,
@@ -223,7 +216,8 @@ def update_prompt_with_statistics(
     prompt = (
         base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
         .replace("{GUIDANCE}", guidance_text.strip())
-        .replace("{HOUSEHOLD_STATS}", size_stats_text.strip())
+        .replace("{HOUSEHOLD_SIZE_STATS}", size_stats_text.strip())
+        .replace("{HOUSEHOLD_COMPOSITION_STATS}", composition_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())
         .replace("{GENDER_STATS}", gender_stats_text.strip())
         .replace("{OCCUPATION_STATS}", occupation_stats_text.strip())
