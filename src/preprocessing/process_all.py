@@ -146,6 +146,23 @@ def process_un_age_group(global_dir: Path, registry: UNCountryRegistry):
     except Exception as e:
         print(f"❌ Error processing age_group.csv: {e}")
 
+REQUIRED_FILES = {"age_group.csv", "household_composition.csv", "household_size.csv"}
+
+def cleanup_incomplete_outputs(output_dir: Path):
+    print("\n🧹 Cleaning up incomplete country directories...")
+    for country_dir in output_dir.iterdir():
+        if not country_dir.is_dir():
+            continue
+
+        existing_files = {f.name for f in country_dir.glob("*.csv")}
+        missing = REQUIRED_FILES - existing_files
+
+        if missing:
+            print(f"🗑 Deleting {country_dir.name} (missing: {', '.join(missing)})")
+            for file in country_dir.glob("*"):
+                file.unlink()
+            country_dir.rmdir()
+
 
 def main():
     registry = UNCountryRegistry()
@@ -159,6 +176,8 @@ def main():
             process_un_household(location_dir, registry)
         else:
             process_uk_location(location_dir)
+
+    cleanup_incomplete_outputs(OUTPUT_DIR)
 
 if __name__ == "__main__":
     main()
