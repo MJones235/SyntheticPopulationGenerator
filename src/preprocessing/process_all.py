@@ -1,10 +1,14 @@
 from pathlib import Path
 import pandas as pd
 from config import RAW_DATA_DIR, OUTPUT_DIR
+from src.preprocessing.utils.un_country_registry import UNCountryRegistry
+from src.preprocessing.utils.registry_utils import register_un_countries_from_age_group
 from src.preprocessing.loaders.uk_census_loader import UKCensusLoader
 from src.preprocessing.loaders.un_household_loader import UNHouseholdLoader
 from src.preprocessing.transformers.un_household_transformer import UNHouseholdTransformer
 from src.preprocessing.transformers.uk_census_transformer import UKCensusTransformer
+from src.preprocessing.loaders.un_age_group_loader import UNAgeGroupLoader
+from src.preprocessing.transformers.un_age_group_transformer import UNAgeGroupTransformer
 from utils.io import save_processed
 
 def clean_age_labels(df: pd.DataFrame) -> pd.DataFrame:
@@ -95,8 +99,8 @@ def process_uk_location(location_dir: Path):
         except Exception as e:
             print(f"❌ Error processing {filename}: {e}")
 
-def process_un_global(global_dir: Path):
-    print("\n🌍 Processing UN Global data...")
+def process_un_household(global_dir: Path, registry: UNCountryRegistry):
+    print("\n🌍 Processing UN Global household data...")
     xlsx_path = global_dir / "hh_size_composition.xlsx"
     loader = UNHouseholdLoader(str(xlsx_path))
 
@@ -104,22 +108,55 @@ def process_un_global(global_dir: Path):
         try:
             df_raw = loader.load_file(filename)  # This will return country-wide table
             for country in df_raw["Country"].unique():
-                country_df = df_raw[df_raw["Country"] == country]
-                df_processed = transformer.transform(country_df)
-                country_dir = OUTPUT_DIR / country.lower().replace(" ", "_")
-                save_processed(df_processed, country_dir, filename)
-                print(f"✅ Processed {filename} for {country}")
+                if not registry.has_population_over(country):
+                    continue
+
+                df_country = df_raw[df_raw["Country"] == country]
+                df_processed = transformer.transform(df_country)
+                canonical = registry.get_canonical(country)
+                output_dir = OUTPUT_DIR / canonical.lower().replace(" ", "_")
+                save_processed(df_processed, output_dir, filename)
+                print(f"✅ Processed {filename} for {canonical}")
         except Exception as e:
             print(f"❌ Error processing {filename}: {e}")
 
 
+def process_un_age_group(global_dir: Path, registry: UNCountryRegistry):
+    print("\n🌍 Processing UN Global age group data...")
+
+    male_path = global_dir / "age_male.xlsx"
+    female_path = global_dir / "age_female.xlsx"
+
+    loader = UNAgeGroupLoader(male_path, female_path)
+    transformer = UNAgeGroupTransformer()
+
+    try:
+        df_raw = loader.load_file("age_group.csv")
+        register_un_countries_from_age_group(df_raw, registry)
+        for country in df_raw["Country"].unique():
+            if not registry.has_population_over(country):
+                continue
+
+            df_country = df_raw[df_raw["Country"] == country]
+            df_processed = transformer.transform(df_country)
+            canonical = registry.get_canonical(country)
+            output_dir = OUTPUT_DIR / canonical.lower().replace(" ", "_")
+            save_processed(df_processed, output_dir, "age_group.csv")
+            print(f"✅ Processed age_group.csv for {canonical}")
+    except Exception as e:
+        print(f"❌ Error processing age_group.csv: {e}")
+
+
 def main():
+    registry = UNCountryRegistry()
+
     for location_dir in RAW_DATA_DIR.iterdir():
         if not location_dir.is_dir():
             continue
 
         if location_dir.name == "global":
-            process_un_global(location_dir)
+            process_un_age_group(location_dir, registry)
+            process_un_household(location_dir, registry)
         else:
             process_uk_location(location_dir)
 
