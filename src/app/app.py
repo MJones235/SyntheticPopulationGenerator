@@ -37,8 +37,12 @@ else:
     experiment_dict = {f"{p['timestamp']} - {p['model']} - {p['location']} - {'stats, ' if bool(p['include_stats']) else ''}{'guidance, ' if bool(p['include_guidance']) else ''}{'target, ' if bool(p['include_target']) else ''}{'microdata, ' if bool(p['use_microdata']) else ''}{'fixed household size, ' if bool(p['compute_household_size']) else ''}{'no occupation, ' if bool(p['no_occupation']) else ''} {'no household composition, ' if bool(p['no_household_composition']) else ''}": p['experiment_id'] for p in experiments}
     selected_exp_label = st.selectbox("Select an Experiment:", list(experiment_dict.keys()))
     selected_experiment_id = experiment_dict[selected_exp_label]
+    selected_experiment = experiment_service.get_by_id(selected_experiment_id)
+    hh_type_classifier = UNHouseholdCompositionClassifier() if selected_experiment["hh_type_classifier"] == "un_global" else UKHouseholdCompositionClassifier()
+    hh_size_classifier = UNHouseholdSizeClassifier() if selected_experiment["hh_size_classifier"] == "un_global" else UKHouseholdSizeClassifier()
 
     runs = experiment_runs_service.get_by_experiment_id(selected_experiment_id)
+
 
     if not runs:
         st.warning("No runs found for this experiment")
@@ -50,14 +54,11 @@ else:
 
         aggregate_tab, tab1, tab2, tab3 = st.tabs(["Aggregate Stats", "Metadata & population table", "Exploratory data analysis", "Comparison"])
 
-        hh_type_classifier = UNHouseholdCompositionClassifier() if experiments[0]["hh_type_classifier"] == "un_global" else UKHouseholdCompositionClassifier()
-        hh_size_classifier = UNHouseholdSizeClassifier() if experiments[0]["hh_size_classifier"] == "un_global" else UKHouseholdSizeClassifier()
-
         with aggregate_tab:
             st.subheader("📊 Aggregate Metrics for Experiment")
 
             population_ids = [r["population_id"] for r in runs]
-            location = experiments[0]["location"]
+            location = selected_experiment["location"]
 
             # Load all populations
             population_dfs = []
@@ -68,13 +69,13 @@ else:
                     df = pd.DataFrame(population_service.get_by_id(pid))
                     population_dfs.append(df)
                     hh_size_distributions.append(hh_size_classifier.compute_observed_distribution(df))
-                    if not experiments[0]['no_occupation']: occupation_distributions.append(compute_occupation_distribution(df))
+                    if not selected_experiment['no_occupation']: occupation_distributions.append(compute_occupation_distribution(df))
                 except Exception as e:
                     st.warning(f"Failed to load run {pid}: {e}")
 
             # Show metrics
             if population_dfs:
-                agg_metrics = compute_aggregate_metrics(population_dfs, location, not experiments[0]['no_occupation'], hh_type_classifier, hh_size_classifier)
+                agg_metrics = compute_aggregate_metrics(population_dfs, location, not selected_experiment['no_occupation'], hh_type_classifier, hh_size_classifier)
                 st.dataframe(agg_metrics)
 
                 census_household = file_service.load_household_size(location)

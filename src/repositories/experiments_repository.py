@@ -14,3 +14,6 @@ class ExperimentsRepository(BaseRepository):
     def get_all_experiments(self) -> List[Tuple]:
         """Fetches all experiment IDs and timestamps, sorted by newest first."""
         return self.fetch_all("1=1 ORDER BY timestamp DESC", ())
+    
+    def get_by_id(self, experiment_id: str) -> Tuple:
+        return self.fetch_one("experiment_id = ?", (experiment_id,))

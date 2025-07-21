@@ -11,7 +11,7 @@ from src.analysis.similarity_metrics import get_census_age_pyramid, get_syntheti
 
 
 def plot_household_size(synthetic: Dict, census: Dict):
-    all_sizes = sorted(set(synthetic.keys()).union(set(census.keys())))
+    all_sizes = sorted(set().union(synthetic.keys(), census.keys()))
     synthetic = {size: synthetic.get(size, 0.0) for size in all_sizes}
     census = {size: census.get(size, 0.0) for size in all_sizes}
 

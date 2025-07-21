@@ -13,9 +13,7 @@ class UKHouseholdSizeClassifier(HouseholdSizeClassifier):
         size_counts = household_sizes.value_counts().to_dict()
         total = sum(size_counts.values())
         return {
-            str(size): round((size_counts.get(size, 0) / total) * 100, 2) if total > 0 else 0.00
-            for size in range(1, 8)
-        } | {
-            "8+": round((size_counts.get(8, 0) / total) * 100, 2) if total > 0 else 0.00
-        }
+            size: round((size_counts.get(size, 0) / total) * 100, 2) if total > 0 else 0.00
+            for size in range(1, 9)
+        } 
 
