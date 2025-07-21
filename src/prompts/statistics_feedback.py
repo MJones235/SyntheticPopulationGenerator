@@ -86,7 +86,7 @@ def _build_guidance_text(use_microdata: bool, include_stats: bool, include_targe
         if use_microdata:
             return f"""
 The following statistics show the current state of the synthetic population.
-Each section displays the distribution of individuals so far, alongside target percentages from the 2021 Census.
+Each section displays the distribution of individuals so far, alongside target percentages from Census data.
 Your primary task is to preserve the known characteristics of the anchor person and build a plausible household around them.
 This includes retaining their age, gender, and other known attributes as given.
 Where additional household members must be generated, you should use the census data, where possible, to nudge the overall population toward the target distributions.
@@ -96,29 +96,29 @@ Ensure that the household structure remains realistic.
             if include_target:
                 return f"""
 The following statistics show the current state of the synthetic population.
-Each section shows the current distribution of generated individuals or households, along with the target percentage from Census 2021 data.
+Each section shows the current distribution of generated individuals or households, along with the target percentage from Census data.
 Your task is to generate a household that nudges the distribution toward the target.
 Ensure that the household structure remains realistic.
 """
             else:
                 return f"""
 The following statistics describe the current distribution of individuals and households in the synthetic population.
-Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
-Use your knowledge of UK demographics to identify which values appear over- or underrepresented, and adjust accordingly.
+Your task is to generate one new household that helps bring this population closer in line with typical population patterns, as reported in Census data.
+Use your knowledge of population demographics to identify which values appear over- or underrepresented, and adjust accordingly.
 Ensure that the household structure remains realistic.
 """
     elif include_guidance:
         if use_microdata:
             return f"""
-The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
+The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census data.
 Your first priority is to preserve the known attributes of the anchor person and construct a plausible household around them.
 Where additional household members must be generated, you should use the census data, where possible, to nudge the overall population toward the target distributions.
 Ensure that the household structure remains realistic.
 """
         else:
             return f"""
-The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census 2021 data.
-Your task is to generate one new household that helps bring this population closer in line with typical UK population patterns, as reported in the 2021 Census.
+The following guidance shows the changes needed to improve the realism and diversity of the entire population, based on Census data.
+Your task is to generate one new household that helps bring this population closer in line with typical population patterns, as reported in Census data.
 Ensure that the household structure remains realistic.
 """
 

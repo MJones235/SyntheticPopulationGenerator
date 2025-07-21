@@ -33,7 +33,7 @@ You must first choose:
   - `"Couple"`
   - `"Couple with dependent children"`
   - `"Couple with non-dependent children"`
-  - `"Other"` (e.g. 2+ unrelated housemates)
+  - `"Other"` (e.g. 2+ unrelated housemates, extended family)
 
 Each individual within the household must be represented as an object with the following fields:
 
@@ -41,7 +41,7 @@ Each individual within the household must be represented as an object with the f
 - `"gender"`: a string, either `"Male"` or `"Female"`  
 - `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
   - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`.  The head should be an adult.  
-  - Other valid values are: `"Partner"`, `"Child"`, `"Grandchild"`, `"Parent"`, `"Housemate"`, `"Other"`
+  - Other valid values are: `"Spouse"`, `"Partner"`, `"Child"`, `"Parent"`, `"Sibling"`, `"Grandchild"`, `"Grandparent"`, `"Housemate"`, `"Lodger"`, `"Aunt"`, `"Uncle"`, `"Nephew"`, `"Niece"`, `"Cousin"`, `"Child-in-law"`, `"Parent-in-law"`, `"Sibling-in-law"`
 - `occupation_category`: a number from 1 to 10 representing the standard occupational cateogry:
   1. Managers, directors and senior officials  
   2. Professional occupations  

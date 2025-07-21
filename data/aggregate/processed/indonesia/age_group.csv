@@ -3,8 +3,6 @@ Category_1,Category_2,Percentage
 0-4,Male,4.1
 10-14,Female,4.2
 10-14,Male,4.4
-100+,Female,0.0
-100+,Male,0.0
 15-19,Female,4.0
 15-19,Male,4.2
 20-24,Female,3.8
@@ -35,9 +33,5 @@ Category_1,Category_2,Percentage
 75-79,Male,0.5
 80-84,Female,0.4
 80-84,Male,0.3
-85-89,Female,0.2
-85-89,Male,0.1
-90-94,Female,0.0
-90-94,Male,0.0
-95-99,Female,0.0
-95-99,Male,0.0
+85+,Female,0.2
+85+,Male,0.1

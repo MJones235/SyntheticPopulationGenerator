@@ -27,20 +27,20 @@ experiment_run_service = ExperimentRunService()
 # model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
 
-model = AzureModel(
-    model_name="grok-3-mini",
-    api_key=os.getenv("AZURE_API_KEY"),
-    temperature=0.7,
-    top_p=0.85,
-    top_k=100,
-)
-#model = OpenAIModel(
-#    model_name="o3-mini",
-#    api_key=os.getenv("OPENAI_API_KEY"),
+#model = AzureModel(
+#    model_name="grok-3",
+#    api_key=os.getenv("AZURE_API_KEY"),
 #    temperature=0.7,
 #    top_p=0.85,
-#    top_k=100
+#    top_k=100,
 #)
+model = OpenAIModel(
+    model_name="o1-mini",
+    api_key=os.getenv("OPENAI_API_KEY"),
+    temperature=0.7,
+    top_p=0.85,
+    top_k=100
+)
 
 location = "Newcastle, UK"
 region = "E12000001"
@@ -61,7 +61,7 @@ elif compute_household_size:
 elif no_occupation:
     prompt_file = "no_occupation.txt"
 else:
-    prompt_file = "minimal_prompt.txt"
+    prompt_file = "standard_prompt.txt"
 
 prompt = file_service.load_prompt(
     prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}

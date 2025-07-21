@@ -1,13 +1,19 @@
+import re
 from .base_transformer import BaseTransformer
 import pandas as pd
 
 
 class UNAgeGroupTransformer(BaseTransformer):
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Expects a DataFrame with columns: Age group, Sex, Population
-        Outputs a DataFrame with Category_1 (age), Category_2 (sex), Percentage
-        """
+        # Collapse all age groups 85+ into "85+"
+        def normalize_age_group(label):
+            match = re.match(r"(\d+)", label)
+            if match and int(match.group(1)) >= 85:
+                return "85+"
+            return label
+
+        df = df.copy()
+        df["Age group"] = df["Age group"].apply(normalize_age_group)
 
         grouped = df.groupby(["Age group", "Sex"], as_index=False)["Population"].sum()
 

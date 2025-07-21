@@ -37,6 +37,8 @@ class AzureModel(BaseLLM):
             temperature=self.temperature,
             top_p=self.top_p
         )
+
+        print(response.usage)
         
         raw_output = response.choices[0].message.content.strip()
         return re.sub(r"<think>.*?</think>", "", raw_output, flags=re.DOTALL).strip()
