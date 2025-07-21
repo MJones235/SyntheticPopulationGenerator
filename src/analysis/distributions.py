@@ -2,18 +2,6 @@ import pandas as pd
 
 from src.utils.age_bands import assign_age_band
 
-
-def compute_household_size_distribution(df: pd.DataFrame) -> dict:
-    household_sizes = df.groupby("household_id").size()
-    size_counts = household_sizes.value_counts().to_dict()
-    total = sum(size_counts.values())
-
-    return {
-        size: round((size_counts.get(size, 0) / total) * 100, 2) if total > 0 else 0.00
-        for size in range(1, 9)
-    }
-
-
 def compute_gender_distribution(df: pd.DataFrame) -> dict:
     dist = df["gender"].str.capitalize().value_counts(normalize=True) * 100
     return dist.round(1).to_dict()

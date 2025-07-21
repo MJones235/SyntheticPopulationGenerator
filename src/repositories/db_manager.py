@@ -70,13 +70,8 @@ class DBManager:
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
             no_household_composition BOOLEAN,
-            hh_type_classifier TEXT
-        );
-
-        CREATE TABLE IF NOT EXISTS analysis (
-            population_id TEXT PRIMARY KEY,
-            household_size_distribution TEXT,
-            FOREIGN KEY (population_id) REFERENCES metadata (population_id) ON DELETE CASCADE
+            hh_type_classifier TEXT,
+            hh_size_classifier TEXT
         );
 
         CREATE TABLE IF NOT EXISTS estimation_metadata (
@@ -121,7 +116,8 @@ class DBManager:
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
             no_household_composition BOOLEAN,
-            hh_type_classifier TEXT
+            hh_type_classifier TEXT,
+            hh_size_classifier TEXT
         );
 
         CREATE TABLE IF NOT EXISTS experiment_runs (

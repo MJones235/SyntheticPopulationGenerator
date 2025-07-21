@@ -4,12 +4,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 
 def plot_household_size_aggregate(synthetic_runs: list[dict], census: dict):
     # Collect all keys
     all_keys = sorted(set().union(*[set(d.keys()) for d in synthetic_runs], set(census.keys())))
-    all_keys = list(map(int, all_keys))
 
     # Normalize and align
     data = []
@@ -174,10 +173,9 @@ def plot_occupations_aggregate(synthetic_dicts: list[dict], census: dict):
 
 
 def plot_household_structure_bar_aggregate(
-    dfs: list[pd.DataFrame], census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
+    dfs: list[pd.DataFrame], census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier()
 ) -> plt.Figure:
     label_order = hh_type_classifier.get_label_order()
-
     # Get synthetic composition for each run
     run_distributions = []
     for df in dfs:

@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
+from src.classifiers.household_type.un_global import UNHouseholdCompositionClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from llm_interface.azure_model import AzureModel
 from llm_interface.openai_model import OpenAIModel
 from src.services.experiment_run_service import ExperimentRunService
@@ -41,8 +43,9 @@ model = OpenAIModel(
     top_k=100
 )
 
-hh_type_classifier = UKCensusClassifier()
-location = "Newcastle, UK"
+hh_type_classifier = UNHouseholdCompositionClassifier()
+hh_size_classifier = UNHouseholdSizeClassifier()
+location = "Afghanistan"
 region = "E12000001"
 n_households = 100
 batch_size = 10
@@ -54,7 +57,9 @@ use_microdata = False
 no_occupation = True
 no_household_composition = True
 
-if use_microdata:
+if hh_type_classifier.get_name() == "un_global":
+    prompt_file = "global.txt"
+elif use_microdata:
     prompt_file = "microdata.txt"
 elif compute_household_size:
     prompt_file = "fixed_household_size.txt"
@@ -67,7 +72,9 @@ prompt = file_service.load_prompt(
     prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}
 )
 
-if no_occupation:
+if hh_type_classifier.get_name() == "un_global":
+    schema = file_service.load_schema("household_schema_global.json")
+elif no_occupation:
     schema = file_service.load_schema("household_schema_no_occupation.json")
 else:
     schema = file_service.load_schema("household_schema.json")
@@ -97,7 +104,9 @@ for run in range(n_runs):
             include_target,
             no_occupation,
             run+1,
-            no_household_composition
+            no_household_composition,
+            hh_type_classifier,
+            hh_size_classifier
         )
         execution_time = time.time() - start_time
 
@@ -122,7 +131,8 @@ for run in range(n_runs):
             "compute_household_size": compute_household_size,
             "no_occupation": no_occupation,
             "no_household_composition": no_household_composition,
-            "hh_type_classifier": hh_type_classifier.get_name()
+            "hh_type_classifier": hh_type_classifier.get_name(),
+            "hh_size_classifier": hh_size_classifier.get_name()
         }
 
         run = {
@@ -156,7 +166,8 @@ experiment = {
     "compute_household_size": compute_household_size,
     "no_occupation": no_occupation,
     "no_household_composition": no_household_composition,
-    "hh_type_classifier": hh_type_classifier.get_name()
+    "hh_type_classifier": hh_type_classifier.get_name(),
+    "hh_size_classifier": hh_size_classifier.get_name()
 }
 
 experiments_service.save_experiment(experiment)

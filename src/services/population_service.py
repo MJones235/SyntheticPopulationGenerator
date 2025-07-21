@@ -1,8 +1,10 @@
 from typing import Any, Dict, List, Optional
 import random
 import pandas as pd
+from src.classifiers.household_size.base import HouseholdSizeClassifier
+from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.prompts.statistics_feedback import update_prompt_with_statistics as prepare_prompt
 from src.services.file_service import FileService
 from src.repositories.population_repository import PopulationRepository
@@ -35,7 +37,8 @@ class PopulationService:
         no_occupation: bool = False,
         n_run: int = 1,
         no_household_composition: bool = False,
-        hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
+        hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(),
+        hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()
     ) -> List[Dict[str, Any]]:
         
         households = []
@@ -56,7 +59,8 @@ class PopulationService:
             include_target=include_target,
             no_occupation=no_occupation,
             no_household_composition=no_household_composition,
-            hh_type_classifier=hh_type_classifier
+            hh_type_classifier=hh_type_classifier,
+            hh_size_classifier=hh_size_classifier
         )
 
         for i in range(0, n_households, batch_size):
@@ -92,7 +96,8 @@ class PopulationService:
                     include_target=include_target,
                     no_occupation=no_occupation,
                     no_household_composition=no_household_composition,
-                    hh_type_classifier=hh_type_classifier
+                    hh_type_classifier=hh_type_classifier,
+                    hh_size_classifier=hh_size_classifier
                 )
 
         return households

@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid
 
 
@@ -169,7 +169,7 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
 
 def plot_household_structure_bar(
-    df: pd.DataFrame, census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
+    df: pd.DataFrame, census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier()
 ) -> plt.Figure:
     label_order = hh_type_classifier.get_label_order()
     synthetic_counts = hh_type_classifier.compute_observed_distribution(df)

@@ -3,7 +3,7 @@ from typing import Dict
 import pandas as pd
 
 
-class UNGlobalClassifier(HouseholdCompositionClassifier):
+class UNHouseholdCompositionClassifier(HouseholdCompositionClassifier):
     def get_name(self):
         return 'un_global'
 

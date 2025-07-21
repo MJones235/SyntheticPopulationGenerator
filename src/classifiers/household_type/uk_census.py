@@ -3,7 +3,7 @@ from typing import Dict
 import pandas as pd
 
 
-class UKCensusClassifier(HouseholdCompositionClassifier):
+class UKHouseholdCompositionClassifier(HouseholdCompositionClassifier):
     def get_name(self):
         return 'uk_census'
 

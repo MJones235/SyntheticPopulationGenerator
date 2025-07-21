@@ -2,10 +2,12 @@ from scipy.spatial.distance import jensenshannon
 import numpy as np
 import pandas as pd
 
+from src.classifiers.household_size.base import HouseholdSizeClassifier
+from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.services.file_service import FileService
-from src.analysis.distributions import compute_household_size_distribution, compute_occupation_distribution
+from src.analysis.distributions import compute_occupation_distribution
 from src.utils.age_bands import assign_age_band, get_age_band_labels
 
 
@@ -60,8 +62,8 @@ def get_census_age_pyramid(df: pd.DataFrame):
 
     return grouped
 
-def compute_similarity_metrics(df: pd.DataFrame, location: str, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()):
-    hh_size_synth = list(compute_household_size_distribution(df).values())
+def compute_similarity_metrics(df: pd.DataFrame, location: str, include_occupation: bool, hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(), hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()):
+    hh_size_synth = list(hh_size_classifier.compute_observed_distribution(df).values())
     hh_size_census = list(FileService().load_household_size(location).values())
     hh_size_result = compute_metrics(hh_size_synth, hh_size_census)
     
@@ -69,13 +71,13 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, hh_type_classifi
     age_census = get_census_age_pyramid(FileService().load_age_pyramid(location)).stack().to_list()
     age_result = compute_metrics(age_synth, age_census)
 
-    occupation_synth_dict = compute_occupation_distribution(df)
-    occupation_census_dict = FileService().load_occupation_distribution(location)
-    all_categories = sorted(set(occupation_synth_dict.keys()).union(set(occupation_census_dict.keys())))
-    occupation_synth = list({size: occupation_synth_dict.get(size, 0.0) for size in all_categories}.values())
-    occupation_census = list({size: occupation_census_dict.get(size, 0.0) for size in all_categories}.values())
-
-    occupation_result = compute_metrics(occupation_synth, occupation_census)
+    if include_occupation:
+        occupation_synth_dict = compute_occupation_distribution(df)
+        occupation_census_dict = FileService().load_occupation_distribution(location)
+        all_categories = sorted(set(occupation_synth_dict.keys()).union(set(occupation_census_dict.keys())))
+        occupation_synth = list({size: occupation_synth_dict.get(size, 0.0) for size in all_categories}.values())
+        occupation_census = list({size: occupation_census_dict.get(size, 0.0) for size in all_categories}.values())
+        occupation_result = compute_metrics(occupation_synth, occupation_census)
 
     hh_type_synth = hh_type_classifier.compute_observed_distribution(df)
     hh_type_census = FileService().load_household_composition(location)
@@ -87,20 +89,24 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, hh_type_classifi
     combined = combined.loc[[label for label in label_order if label in combined.index]]
     hh_type_result = compute_metrics(combined['Synthetic'].tolist(), combined['Census'].tolist())
 
-    return pd.DataFrame([
+    results = [
         {'Variable': 'Household Size', **hh_size_result},
         {'Variable': 'Age/Gender Pyramid', **age_result},
-        {'Variable': 'Occupation', **occupation_result},
         {'Variable': 'Household Composition', **hh_type_result}
-    ])
+    ]
+
+    if include_occupation:
+        results.append({'Variable': 'Occupation', **occupation_result})
+
+    return pd.DataFrame(results)
 
 
-def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()) -> pd.DataFrame:
+def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str, include_occupation: bool,  hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(), hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()) -> pd.DataFrame:
     all_metrics = []
 
     for df in populations:
         try:
-            metrics = compute_similarity_metrics(df, location, hh_type_classifier)
+            metrics = compute_similarity_metrics(df, location, include_occupation, hh_type_classifier, hh_size_classifier)
             all_metrics.append(metrics.set_index("Variable"))
         except Exception:
             continue
@@ -127,19 +133,19 @@ def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str, hh
     return result
 
 
-def compute_convergence_curve(df, location, step=200, max_points=10000, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()):
+def compute_convergence_curve(df, location, step=200, max_points=10000, include_occupation: bool = True, hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(), hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()):
     results = []
 
     for i in range(step, min(len(df), max_points), step):
         partial_df = df.iloc[:i]
         try:
-            metrics_df = compute_similarity_metrics(partial_df, location, hh_type_classifier)
+            metrics_df = compute_similarity_metrics(partial_df, location, include_occupation, hh_type_classifier, hh_size_classifier)
             metrics_df["n_individuals"] = i
             results.append(metrics_df)
         except Exception as e:
-            print(f"Error at {i} individuals: {e}")
-
+            #print(f"Error at {i} individuals: {e}")
+            pass
     if not results:
         return pd.DataFrame()
-
+    
     return pd.concat(results).reset_index(drop=True)

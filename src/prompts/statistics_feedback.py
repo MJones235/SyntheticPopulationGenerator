@@ -2,13 +2,14 @@ import re
 from typing import Any, Callable
 import pandas as pd
 
+from src.classifiers.household_size.base import HouseholdSizeClassifier
+from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
-from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.services.file_service import FileService
 from src.analysis.distributions import (
     compute_age_distribution,
     compute_gender_distribution,
-    compute_household_size_distribution,
     compute_occupation_distribution,
     compute_target_age_distribution,
 )
@@ -138,7 +139,8 @@ def update_prompt_with_statistics(
     include_target: bool = True,
     no_occupation: bool = False,
     no_household_composition: bool = False,
-    hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
+    hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(),
+    hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()
 ) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
@@ -171,7 +173,7 @@ def update_prompt_with_statistics(
     fs = FileService()
 
     size_stats_text = build_dist(
-        lambda: compute_household_size_distribution(synthetic_df),
+        lambda: hh_size_classifier.compute_observed_distribution(synthetic_df),
         lambda: fs.load_household_size(location),
         lambda size: f"{size}-person",
         "Household Size",
