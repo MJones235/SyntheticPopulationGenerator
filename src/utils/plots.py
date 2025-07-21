@@ -5,13 +5,12 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid, get_synthetic_household_composition
-from src.analysis.classifiers import  household_type_labels
+from src.classifiers.household_type.base import HouseholdCompositionClassifier
+from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid
 
 
-def plot_household_size(synthetic: str, census: Dict):
-    synthetic = json.loads(synthetic)
-    synthetic = {int(k): v for k, v in synthetic.items()}
+def plot_household_size(synthetic: Dict, census: Dict):
     all_sizes = sorted(set(synthetic.keys()).union(set(census.keys())))
     synthetic = {size: synthetic.get(size, 0.0) for size in all_sizes}
     census = {size: census.get(size, 0.0) for size in all_sizes}
@@ -170,10 +169,10 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
 
 def plot_household_structure_bar(
-    df: pd.DataFrame, census_df: pd.DataFrame
+    df: pd.DataFrame, census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
 ) -> plt.Figure:
-    _, label_order = household_type_labels()
-    synthetic_counts = get_synthetic_household_composition(df)
+    label_order = hh_type_classifier.get_label_order()
+    synthetic_counts = hh_type_classifier.compute_observed_distribution(df)
 
     combined = pd.DataFrame(
         {"Synthetic": synthetic_counts, "Census": census_df}

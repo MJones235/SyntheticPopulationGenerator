@@ -1,10 +1,11 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+from src.classifiers.household_type.uk_census import UKCensusClassifier
+from src.classifiers.household_type.un_global import UNGlobalClassifier
 from src.services.experiment_run_service import ExperimentRunService
 from src.services.experiments_service import ExperimentService
-from src.analysis.distributions import compute_occupation_distribution
-from src.services.analysis_service import AnalysisService
+from src.analysis.distributions import compute_household_size_distribution, compute_occupation_distribution
 from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
@@ -21,7 +22,6 @@ st.set_page_config(layout="wide")
 file_service = FileService()
 metadata_service = MetadataService()
 population_service = PopulationService()
-analysis_service = AnalysisService()
 experiment_service = ExperimentService()
 experiment_runs_service = ExperimentRunService()
 
@@ -48,6 +48,8 @@ else:
 
         aggregate_tab, tab1, tab2, tab3 = st.tabs(["Aggregate Stats", "Metadata & population table", "Exploratory data analysis", "Comparison"])
 
+        hh_type_classifier = UNGlobalClassifier() if experiments[0]["hh_type_classifier"] == "un_global" else UKCensusClassifier()
+
         with aggregate_tab:
             st.subheader("📊 Aggregate Metrics for Experiment")
 
@@ -62,15 +64,14 @@ else:
                 try:
                     df = pd.DataFrame(population_service.get_by_id(pid))
                     population_dfs.append(df)
-                    analysis = analysis_service.get_by_id(pid)
-                    hh_size_distributions.append(analysis["household_size_distribution"])
+                    hh_size_distributions.append(compute_household_size_distribution(df))
                     occupation_distributions.append(compute_occupation_distribution(df))
                 except Exception as e:
                     st.warning(f"Failed to load run {pid}: {e}")
 
             # Show metrics
             if population_dfs:
-                agg_metrics = compute_aggregate_metrics(population_dfs, location)
+                agg_metrics = compute_aggregate_metrics(population_dfs, location, hh_type_classifier)
                 st.dataframe(agg_metrics)
 
                 census_household = file_service.load_household_size(location)
@@ -113,14 +114,13 @@ else:
             st.title("Metrics")
             if not df.empty:
                 try:
-                    results = compute_similarity_metrics(df, metadata["location"])
+                    results = compute_similarity_metrics(df, metadata["location"], hh_type_classifier)
                     st.dataframe(results)
                 except Exception as e:
                     st.error(f"Failed to compute similarity metrics: {e}")
             
             st.title("Household Size Comparison")
-            analysis = analysis_service.get_by_id(selected_population_id)
-            st.pyplot(plot_household_size(analysis['household_size_distribution'], file_service.load_household_size(metadata['location'])))
+            st.pyplot(plot_household_size(compute_household_size_distribution(df), file_service.load_household_size(metadata['location'])))
         
 
             st.title("Age Distribution Comparison")
@@ -159,7 +159,7 @@ else:
             st.title("Convergence Curve")
             if not df.empty:
                 try:
-                    convergence_df = compute_convergence_curve(df, metadata["location"], 20)
+                    convergence_df = compute_convergence_curve(df, metadata["location"], 20, 10000, hh_type_classifier)
                     convergence_long = convergence_df.melt(
                         id_vars=["Variable", "n_individuals"],
                         value_vars=["JSD"], 

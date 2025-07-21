@@ -1,10 +1,10 @@
 import os
 from dotenv import load_dotenv
+from src.classifiers.household_type.uk_census import UKCensusClassifier
 from llm_interface.azure_model import AzureModel
 from llm_interface.openai_model import OpenAIModel
 from src.services.experiment_run_service import ExperimentRunService
 from src.services.experiments_service import ExperimentService
-from src.services.analysis_service import AnalysisService
 from src.services.metadata_service import MetadataService
 from src.services.report_service import ReportService
 from src.services.population_service import PopulationService
@@ -20,7 +20,6 @@ file_service = FileService()
 population_service = PopulationService()
 report_service = ReportService()
 metadata_service = MetadataService()
-analysis_service = AnalysisService()
 experiments_service = ExperimentService()
 experiment_run_service = ExperimentRunService()
 
@@ -35,13 +34,14 @@ load_dotenv("secrets.env")
 #    top_k=100,
 #)
 model = OpenAIModel(
-    model_name="o1-mini",
+    model_name="gpt-4o-mini",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
     top_k=100
 )
 
+hh_type_classifier = UKCensusClassifier()
 location = "Newcastle, UK"
 region = "E12000001"
 n_households = 100
@@ -71,7 +71,6 @@ if no_occupation:
     schema = file_service.load_schema("household_schema_no_occupation.json")
 else:
     schema = file_service.load_schema("household_schema.json")
-
 
 n_runs = 1
 experiment_id = str(uuid.uuid4())
@@ -123,6 +122,7 @@ for run in range(n_runs):
             "compute_household_size": compute_household_size,
             "no_occupation": no_occupation,
             "no_household_composition": no_household_composition,
+            "hh_type_classifier": hh_type_classifier.get_name()
         }
 
         run = {
@@ -134,7 +134,6 @@ for run in range(n_runs):
 
         metadata_service.save_metadata(metadata)
         population_service.save_population(population_id, households)
-        analysis_service.save_analysis(population_id)
         experiment_run_service.save_run(run)
 
     except Exception as e:
@@ -157,6 +156,7 @@ experiment = {
     "compute_household_size": compute_household_size,
     "no_occupation": no_occupation,
     "no_household_composition": no_household_composition,
+    "hh_type_classifier": hh_type_classifier.get_name()
 }
 
 experiments_service.save_experiment(experiment)

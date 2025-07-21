@@ -3,25 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def plot_household_size_aggregate(synthetic_runs: list[str], census: dict):
-    parsed_runs = []
-    for run in synthetic_runs:
-        try:
-            d = json.loads(run)
-            parsed_runs.append({int(k): v for k, v in d.items()})
-        except (json.JSONDecodeError, ValueError):
-            continue  # skip malformed
-    
-    if not parsed_runs:
-        raise ValueError("No valid household size data to aggregate.")
+from src.classifiers.household_type.base import HouseholdCompositionClassifier
+from src.classifiers.household_type.uk_census import UKCensusClassifier
 
+def plot_household_size_aggregate(synthetic_runs: list[dict], census: dict):
     # Collect all keys
-    all_keys = sorted(set().union(*[set(d.keys()) for d in parsed_runs], set(census.keys())))
+    all_keys = sorted(set().union(*[set(d.keys()) for d in synthetic_runs], set(census.keys())))
     all_keys = list(map(int, all_keys))
 
     # Normalize and align
     data = []
-    for run in parsed_runs:
+    for run in synthetic_runs:
         normed = {k: run.get(k, 0.0) for k in all_keys}
         data.append([normed[k] for k in all_keys])
 
@@ -182,24 +174,20 @@ def plot_occupations_aggregate(synthetic_dicts: list[dict], census: dict):
 
 
 def plot_household_structure_bar_aggregate(
-    dfs: list[pd.DataFrame], census_df: pd.DataFrame
+    dfs: list[pd.DataFrame], census_df: pd.DataFrame, hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
 ) -> plt.Figure:
-    from src.analysis.similarity_metrics import get_synthetic_household_composition
-    from src.analysis.classifiers import household_type_labels
-
-    _, label_order = household_type_labels()
+    label_order = hh_type_classifier.get_label_order()
 
     # Get synthetic composition for each run
     run_distributions = []
     for df in dfs:
         try:
-            dist = get_synthetic_household_composition(df)
+            dist = hh_type_classifier.compute_observed_distribution(df)
             run_distributions.append(dist)
         except Exception:
             continue
 
     # Align all distributions to the same label set
-    all_labels = set(label_order)
     aligned = []
     for dist in run_distributions:
         row = [dist.get(label, 0.0) for label in label_order]

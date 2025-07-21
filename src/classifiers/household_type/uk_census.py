@@ -4,12 +4,15 @@ import pandas as pd
 
 
 class UKCensusClassifier(HouseholdCompositionClassifier):
-    def compute_observed_distribution(self, synthetic_df: pd.DataFrame) -> Dict[str, float]:
-        label_map, _ = self.household_type_labels()
+    def get_name(self):
+        return 'uk_census'
+
+    def compute_observed_distribution(self, synthetic_df: pd.DataFrame, relationship_col: str = "relationship") -> Dict[str, float]:
+        label_map = self.label_map()
 
         # Compute household-level classifications
         household_labels = synthetic_df.groupby("household_id").apply(
-            lambda x: self.classify_household_structure(x)
+            lambda x: self.classify_household_structure(x, relationship_col)
         )
         synthetic_counts = household_labels.value_counts(normalize=True) * 100
 
@@ -65,19 +68,9 @@ class UKCensusClassifier(HouseholdCompositionClassifier):
                 return "Other household types"
 
         return "Other household types"
-
-    def household_type_labels():
-        label_map = {
-            "One-person household: Aged 66 years and over": "One-person aged 66+ years",
-            "One-person household: Other": "One-person aged <66 years",
-            "Single family household: Lone parent household": "Lone parent",
-            "Single family household: Couple family household: No children": "Couple",
-            "Single family household: Couple family household: Dependent children": "Couple with dependent children",
-            "Single family household: Couple family household: All children non-dependent": "Couple with non-dependent children",
-            "Other household types": "Other",
-        }
-
-        label_order = [
+    
+    def get_label_order(self):
+        return [
             "One-person aged <66 years",
             "One-person aged 66+ years",
             "Lone parent",
@@ -87,5 +80,13 @@ class UKCensusClassifier(HouseholdCompositionClassifier):
             "Other",
         ]
 
-        return label_map, label_order
-
+    def label_map(self):
+        return {
+            "One-person household: Aged 66 years and over": "One-person aged 66+ years",
+            "One-person household: Other": "One-person aged <66 years",
+            "Single family household: Lone parent household": "Lone parent",
+            "Single family household: Couple family household: No children": "Couple",
+            "Single family household: Couple family household: Dependent children": "Couple with dependent children",
+            "Single family household: Couple family household: All children non-dependent": "Couple with non-dependent children",
+            "Other household types": "Other",
+        }

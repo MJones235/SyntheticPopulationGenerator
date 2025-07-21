@@ -69,7 +69,8 @@ class DBManager:
             compute_household_size BOOLEAN,
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
-            no_household_composition BOOLEAN
+            no_household_composition BOOLEAN,
+            hh_type_classifier TEXT
         );
 
         CREATE TABLE IF NOT EXISTS analysis (
@@ -119,7 +120,8 @@ class DBManager:
             compute_household_size BOOLEAN,
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
-            no_household_composition BOOLEAN
+            no_household_composition BOOLEAN,
+            hh_type_classifier TEXT
         );
 
         CREATE TABLE IF NOT EXISTS experiment_runs (

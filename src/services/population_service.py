@@ -1,6 +1,8 @@
 from typing import Any, Dict, List, Optional
 import random
 import pandas as pd
+from src.classifiers.household_type.base import HouseholdCompositionClassifier
+from src.classifiers.household_type.uk_census import UKCensusClassifier
 from src.prompts.statistics_feedback import update_prompt_with_statistics as prepare_prompt
 from src.services.file_service import FileService
 from src.repositories.population_repository import PopulationRepository
@@ -32,7 +34,8 @@ class PopulationService:
         include_target: bool = True,
         no_occupation: bool = False,
         n_run: int = 1,
-        no_household_composition: bool = False
+        no_household_composition: bool = False,
+        hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
     ) -> List[Dict[str, Any]]:
         
         households = []
@@ -52,7 +55,8 @@ class PopulationService:
             use_microdata=use_microdata,
             include_target=include_target,
             no_occupation=no_occupation,
-            no_household_composition=no_household_composition
+            no_household_composition=no_household_composition,
+            hh_type_classifier=hh_type_classifier
         )
 
         for i in range(0, n_households, batch_size):
@@ -87,7 +91,8 @@ class PopulationService:
                     use_microdata=use_microdata,
                     include_target=include_target,
                     no_occupation=no_occupation,
-                    no_household_composition=no_household_composition
+                    no_household_composition=no_household_composition,
+                    hh_type_classifier=hh_type_classifier
                 )
 
         return households

@@ -2,7 +2,8 @@ import re
 from typing import Any, Callable
 import pandas as pd
 
-from src.analysis.similarity_metrics import get_synthetic_household_composition
+from src.classifiers.household_type.base import HouseholdCompositionClassifier
+from src.classifiers.household_type.uk_census import UKCensusClassifier
 from src.services.file_service import FileService
 from src.analysis.distributions import (
     compute_age_distribution,
@@ -137,7 +138,7 @@ def update_prompt_with_statistics(
     include_target: bool = True,
     no_occupation: bool = False,
     no_household_composition: bool = False,
-
+    hh_type_classifier: HouseholdCompositionClassifier = UKCensusClassifier()
 ) -> str:
     """Updates the LLM prompt to incorporate feedback from previous batches."""
     if synthetic_df is None:
@@ -180,7 +181,7 @@ def update_prompt_with_statistics(
     composition_stats_text = ""
     if not no_household_composition:
         composition_stats_text = build_dist(
-            lambda: get_synthetic_household_composition(synthetic_df, "relationship_to_head").to_dict(),
+            lambda: hh_type_classifier.compute_observed_distribution(synthetic_df, "relationship_to_head"),
             lambda: fs.load_household_composition(location),
             lambda composition: composition,
             "Household Composition",

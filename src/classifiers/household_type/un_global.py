@@ -4,8 +4,11 @@ import pandas as pd
 
 
 class UNGlobalClassifier(HouseholdCompositionClassifier):
-    def compute_observed_distribution(self, synthetic_df: pd.DataFrame) -> Dict[str, float]:
-        household_labels = synthetic_df.groupby("household_id").apply(self.classify_household_structure)
+    def get_name(self):
+        return 'un_global'
+
+    def compute_observed_distribution(self, synthetic_df: pd.DataFrame, relationship_col: str = "relationship") -> Dict[str, float]:
+        household_labels = synthetic_df.groupby("household_id").apply(lambda x: self.classify_household_structure(x, relationship_col))
         counts = household_labels.value_counts(normalize=True) * 100
         return counts.to_dict()
 
@@ -55,3 +58,13 @@ class UNGlobalClassifier(HouseholdCompositionClassifier):
             return "Extended family"
 
         return "Non-relatives"
+    
+    def get_label_order(self):
+        return [
+            "One-person",
+            "Lone parent",
+            "Couple",
+            "Couple with children",
+            "Extended family",
+            "Non-relatives"
+        ]
