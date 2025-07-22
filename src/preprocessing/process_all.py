@@ -138,15 +138,19 @@ def process_un_age_group(global_dir: Path, registry: UNCountryRegistry):
                 continue
 
             df_country = df_raw[df_raw["Country"] == country]
-            df_processed = transformer.transform(df_country)
+            df_age_group = transformer.transform(df_country)
+            df_sex = transformer.extract_sex_distribution(df_country)
+
             canonical = registry.get_canonical(country)
             output_dir = OUTPUT_DIR / canonical.lower().replace(" ", "_")
-            save_processed(df_processed, output_dir, "age_group.csv")
-            print(f"✅ Processed age_group.csv for {canonical}")
+
+            save_processed(df_age_group, output_dir, "age_group.csv")
+            save_processed(df_sex, output_dir, "sex.csv")
+            print(f"✅ Processed age_group.csv and sex.csv for {canonical}")
     except Exception as e:
         print(f"❌ Error processing age_group.csv: {e}")
 
-REQUIRED_FILES = {"age_group.csv", "household_composition.csv", "household_size.csv"}
+REQUIRED_FILES = {"age_group.csv", "sex.csv", "household_composition.csv", "household_size.csv"}
 
 def cleanup_incomplete_outputs(output_dir: Path):
     print("\n🧹 Cleaning up incomplete country directories...")

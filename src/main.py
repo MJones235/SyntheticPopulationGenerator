@@ -36,7 +36,7 @@ load_dotenv("secrets.env")
 #    top_k=100,
 #)
 model = OpenAIModel(
-    model_name="gpt-4o-mini",
+    model_name="o3-mini",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
@@ -50,12 +50,12 @@ region = "E12000001"
 n_households = 100
 batch_size = 10
 include_stats = True
-include_target = False
+include_target = True
 include_guidance = False
 compute_household_size = False
 use_microdata = False
 no_occupation = True
-no_household_composition = True
+no_household_composition = False
 
 if hh_type_classifier.get_name() == "un_global":
     prompt_file = "global.txt"

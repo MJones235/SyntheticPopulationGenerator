@@ -24,3 +24,14 @@ class UNAgeGroupTransformer(BaseTransformer):
             "Age group": "Category_1",
             "Sex": "Category_2"
         })[["Category_1", "Category_2", "Percentage"]]
+
+
+    def extract_sex_distribution(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Expects columns: Age group, Sex, Population
+        Outputs: Category_1 (Sex), Percentage
+        """
+        sex_totals = df.groupby("Sex", as_index=False)["Population"].sum()
+        total = sex_totals["Population"].sum()
+        sex_totals["Percentage"] = (sex_totals["Population"] / total * 100).round(1)
+        return sex_totals.rename(columns={"Sex": "Category_1"})[["Category_1", "Percentage"]]
