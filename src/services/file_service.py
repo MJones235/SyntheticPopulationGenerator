@@ -47,7 +47,7 @@ class FileService:
 
     def load_age_pyramid(self, location: str) -> pd.DataFrame:
         try:
-            path = os.path.join(self.CENSUS_DATA, location.split(",")[0].strip().lower(), "age_group.csv")
+            path = os.path.join(self.CENSUS_DATA, location.split(",")[0].replace(" ", "_").strip().lower(), "age_group.csv")
             df = pd.read_csv(path)
 
             pyramid_df = df.pivot_table(
@@ -100,11 +100,22 @@ class FileService:
         except Exception as e:
             print(f"Error loading microdata for {region}: {e}")
             return pd.DataFrame()
+        
+    def load_avg_household_size(self, location: str) -> float:
+        try:
+            df = pd.read_csv(os.path.join(self.CENSUS_DATA, location.split(",")[0].replace(" ", "_").strip().lower(), "avg_household_size.csv"))
+            if "Value" in df.columns:
+                return df["Value"].iloc[0]
+            else:
+                raise KeyError("Expected column 'Value' not found in avg_household_size.csv")
+        except Exception as e:
+            print(f"Error loading average household size for {location}: {e}")
+            return 0.0
     
     def _load_csv(self, location: str, filename: str, exclude_category_1: Optional[Union[str, int, float]] = None) -> pd.DataFrame:
         path = os.path.join(
             self.CENSUS_DATA,
-            location.split(",")[0].strip().lower(),
+            location.split(",")[0].replace(" ", "_").strip().lower(),
             filename
         )
         df = pd.read_csv(path)

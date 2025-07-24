@@ -1,11 +1,13 @@
 from pathlib import Path
 import pandas as pd
 from config import RAW_DATA_DIR, OUTPUT_DIR
+from src.preprocessing.loaders.dar_es_salaam_loader import DarEsSalaamLoader
+from src.preprocessing.transformers.dar_es_salaam_transformer import DarEsSalaamAgeTransformer, DarEsSalaamSexTransformer
 from src.preprocessing.utils.un_country_registry import UNCountryRegistry
 from src.preprocessing.utils.registry_utils import register_un_countries_from_age_group
-from src.preprocessing.loaders.uk_census_loader import UKCensusLoader
+from src.preprocessing.loaders.uk_loader import UKCensusLoader
 from src.preprocessing.loaders.un_household_loader import UNHouseholdLoader
-from src.preprocessing.transformers.un_household_transformer import UNHouseholdTransformer
+from src.preprocessing.transformers.un_household_transformer import UNHouseholdSizeTransformer, UNHouseholdTransformer
 from src.preprocessing.transformers.uk_census_transformer import UKCensusTransformer
 from src.preprocessing.loaders.un_age_group_loader import UNAgeGroupLoader
 from src.preprocessing.transformers.un_age_group_transformer import UNAgeGroupTransformer
@@ -80,6 +82,7 @@ UK_TRANSFORMERS = {
 UN_TRANSFORMERS = {
     "household_size.csv": UNHouseholdTransformer(),
     "household_composition.csv": UNHouseholdTransformer(),
+    "avg_household_size.csv": UNHouseholdSizeTransformer()
 }
 
 
@@ -167,6 +170,31 @@ def cleanup_incomplete_outputs(output_dir: Path):
                 file.unlink()
             country_dir.rmdir()
 
+def process_dar_es_salaam(file_path: Path):
+    print("\n📍 Processing Dar es Salaam (Tanzania)...")
+    file_path = file_path / "age_group.xlsx"
+    loader = DarEsSalaamLoader(file_path)
+    output_dir = OUTPUT_DIR / "dar_es_salaam"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Process age group
+    try:
+        df_raw = loader.load_file("age_group.csv")
+        df_processed = DarEsSalaamAgeTransformer().transform(df_raw)
+        save_processed(df_processed, output_dir, "age_group.csv")
+        print("✅ Processed age_group.csv")
+    except Exception as e:
+        print(f"❌ Error processing age_group.csv: {e}")
+
+    # Process sex
+    try:
+        df_raw = loader.load_file("sex.csv")
+        df_processed = DarEsSalaamSexTransformer().transform(df_raw)
+        save_processed(df_processed, output_dir, "sex.csv")
+        print("✅ Processed sex.csv")
+    except Exception as e:
+        print(f"❌ Error processing sex.csv: {e}")
+
 
 def main():
     registry = UNCountryRegistry()
@@ -178,8 +206,12 @@ def main():
         if location_dir.name == "global":
             process_un_age_group(location_dir, registry)
             process_un_household(location_dir, registry)
+            pass
+        elif location_dir.name == "dar_es_salaam":
+            process_dar_es_salaam(location_dir)
         else:
             process_uk_location(location_dir)
+            pass
 
     cleanup_incomplete_outputs(OUTPUT_DIR)
 

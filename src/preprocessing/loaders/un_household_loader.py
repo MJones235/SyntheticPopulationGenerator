@@ -1,8 +1,6 @@
 from .base_loader import BaseLoader
 import pandas as pd
-import numpy as np
 from typing import List
-from datetime import datetime
 
 
 class UNHouseholdLoader(BaseLoader):
@@ -62,13 +60,19 @@ class UNHouseholdLoader(BaseLoader):
         if filename == "household_size.csv":
             required_columns = list(self.HOUSEHOLD_SIZE_COLUMNS.keys())
             mapping = self.HOUSEHOLD_SIZE_COLUMNS
+            return self._extract_latest_entries(required_columns, mapping)
+
         elif filename == "household_composition.csv":
             required_columns = list(self.HOUSEHOLD_COMPOSITION_COLUMNS.keys())
             mapping = self.HOUSEHOLD_COMPOSITION_COLUMNS
+            return self._extract_latest_entries(required_columns, mapping)
+
+        elif filename == "avg_household_size.csv":
+            return self._extract_avg_household_size()
+
         else:
             raise ValueError(f"Unsupported file type: {filename}")
 
-        return self._extract_latest_entries(required_columns, mapping)
 
     def _extract_latest_entries(self, required_columns: List[str], mapping: dict) -> pd.DataFrame:
         # Keep only rows where all required columns are present
@@ -90,6 +94,27 @@ class UNHouseholdLoader(BaseLoader):
                     rows.append((country, label, float(row[col])))
 
         return pd.DataFrame(rows, columns=["Country", "Category_1", "Percentage"])
+    
+    def _extract_avg_household_size(self) -> pd.DataFrame:
+        col = "Unnamed: 4_level_0 Average household size (number of members)"
+        if col not in self.df.columns:
+            raise KeyError(f"Expected column '{col}' not found.")
+        
+        df_valid = self.df.dropna(subset=["Country or area", "Reference date (dd/mm/yyyy)", col])
+
+        most_recent = (
+            df_valid.sort_values("Reference date (dd/mm/yyyy)", ascending=False)
+            .groupby("Country or area", as_index=False)
+            .first()
+        )
+
+        return most_recent[["Country or area", col]].rename(
+            columns={
+                "Country or area": "Country",
+                col: "Value"
+            }
+        ).assign(Category_1="Average household size")[["Country", "Category_1", "Value"]]
+
 
     HOUSEHOLD_SIZE_COLUMNS = {
         "Households by size (percentage ) 1 member": "1",

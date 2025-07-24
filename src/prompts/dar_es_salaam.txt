@@ -1,0 +1,60 @@
+You are generating a realistic synthetic population for Dar es Salaam, Tanzania.
+
+The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
+
+{GUIDANCE}
+
+--------------------------------
+
+Household Context:
+
+{AVERAGE_HOUSEHOLD_SIZE}
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+--------------------------------
+
+Individual-Level Context:
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+--------------------------------
+
+You must first choose:
+- `"household_size"`: An integer value
+- `"household_type"`:
+  - `"One-person"`
+  - `"Lone parent"`,
+  - `"Couple"`,
+  - `"Couple with children"`,
+  - `"Extended family"`,
+  - `"Non-relatives"`
+
+Each individual within the household must be represented as an object with the following fields:
+
+- `"age"`: an integer 
+- `"gender"`: a string, either `"Male"` or `"Female"`  
+- `"relationship_to_head"`: a string describing the person's relationship to the head of the household  
+  - The first person listed is the head of the household and must have `"relationship_to_head": "Head"`.  The head should be an adult.  
+  - Other valid values are: `"Spouse"`, `"Partner"`, `"Child"`, `"Parent"`, `"Sibling"`, `"Grandchild"`, `"Grandparent"`, `"Housemate"`, `"Lodger"`, `"Aunt"`, `"Uncle"`, `"Nephew"`, `"Niece"`, `"Cousin"`, `"Child-in-law"`, `"Parent-in-law"`, `"Sibling-in-law"`
+
+Return a JSON object with the following structure:
+
+```json
+{
+  "household_size": ...,
+  "household_type": "...",
+  "household": [
+    {
+      "age": ...,
+      "gender": "...",
+      "relationship_to_head": "...",
+    }
+  ]
+}
+
+Output only the JSON object — do not include markdown formatting, code fences, or backticks.

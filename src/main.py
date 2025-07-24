@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
+from src.classifiers.household_size.dar_es_salaam import DarEsSalaamHouseholdSizeClassifier
 from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
 from src.classifiers.household_type.un_global import UNHouseholdCompositionClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
@@ -29,25 +31,25 @@ experiment_run_service = ExperimentRunService()
 load_dotenv("secrets.env")
 
 #model = AzureModel(
-#    model_name="grok-3",
+#    model_name="DeepSeek-R1-0528",
 #    api_key=os.getenv("AZURE_API_KEY"),
 #    temperature=0.7,
 #    top_p=0.85,
 #    top_k=100,
 #)
 model = OpenAIModel(
-    model_name="o3-mini",
+    model_name="gpt-4o",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
     top_k=100
 )
 
-hh_type_classifier = UNHouseholdCompositionClassifier()
-hh_size_classifier = UNHouseholdSizeClassifier()
-location = "Afghanistan"
+hh_type_classifier = UKHouseholdCompositionClassifier()
+hh_size_classifier = UKHouseholdSizeClassifier()
+location = "Newcastle, UK"
 region = "E12000001"
-n_households = 100
+n_households = 300
 batch_size = 10
 include_stats = True
 include_target = True
@@ -56,8 +58,13 @@ compute_household_size = False
 use_microdata = False
 no_occupation = True
 no_household_composition = False
+include_avg_household_size = True
+custom_guidance = None
 
-if hh_type_classifier.get_name() == "un_global":
+if location == "Dar es Salaam":
+    prompt_file = "dar_es_salaam.txt"
+    custom_guidance = file_service.load_prompt("dar_es_salaam_guidance.txt") if include_target else None
+elif hh_type_classifier.get_name() == "un_global":
     prompt_file = "global.txt"
 elif use_microdata:
     prompt_file = "microdata.txt"
@@ -105,6 +112,8 @@ for run in range(n_runs):
             no_occupation,
             run+1,
             no_household_composition,
+            include_avg_household_size,
+            custom_guidance,
             hh_type_classifier,
             hh_size_classifier
         )
@@ -131,6 +140,7 @@ for run in range(n_runs):
             "compute_household_size": compute_household_size,
             "no_occupation": no_occupation,
             "no_household_composition": no_household_composition,
+            "include_avg_household_size": include_avg_household_size,
             "hh_type_classifier": hh_type_classifier.get_name(),
             "hh_size_classifier": hh_size_classifier.get_name()
         }
@@ -166,6 +176,7 @@ experiment = {
     "compute_household_size": compute_household_size,
     "no_occupation": no_occupation,
     "no_household_composition": no_household_composition,
+    "include_avg_household_size": include_avg_household_size,
     "hh_type_classifier": hh_type_classifier.get_name(),
     "hh_size_classifier": hh_size_classifier.get_name()
 }

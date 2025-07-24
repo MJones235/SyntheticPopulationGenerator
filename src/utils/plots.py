@@ -126,43 +126,57 @@ def plot_occupations(synthetic: dict, census: dict):
     return fig
 
 
+def get_age_of_partner_of_sex(sex: str, head: pd.DataFrame, partners: pd.DataFrame) -> pd.Series:
+    if not head.empty and head.iloc[0]["gender"] == sex:
+        return head.iloc[0]["age"]
+    elif not partners.empty and partners.iloc[0]["gender"] == sex:
+        return partners.iloc[0]["age"]
+    else: return None
+
+
 def plot_age_diff(synthetic_df: pd.DataFrame):
-    head_child_diffs = []
-    head_partner_diffs = []
+    mother_child_diffs = []
+    father_child_diffs = []
+    husband_wife_diffs = []
 
     for _, group in synthetic_df.groupby("household_id"):
         head = group[group["relationship"] == "Head"]
         children = group[group["relationship"] == "Child"]
         partners = group[group["relationship"].isin(["Partner", "Spouse"])]
 
-        if not head.empty:
-            head_age = head.iloc[0]["age"]
+        if head.empty:
+            continue
 
-            # Head–Child
-            for _, child in children.iterrows():
-                diff = head_age - child["age"]
-                head_child_diffs.append(diff)
+        husband = get_age_of_partner_of_sex("Male", head, partners)
+        wife = get_age_of_partner_of_sex("Female", head, partners)
+        eldest_child = children.sort_values(by="age", ascending=False).iloc[0]["age"] if not children.empty else None
 
-            # Head–Partner
-            for _, partner in partners.iterrows():
-                diff = head_age - partner["age"]
-                head_partner_diffs.append(diff)
+        if husband is not None and eldest_child is not None:
+            father_child_diffs.append(husband - eldest_child)
+        if wife is not None and eldest_child is not None:
+            mother_child_diffs.append(wife - eldest_child)
+        if husband is not None and wife is not None:
+            husband_wife_diffs.append(husband - wife)
 
-    # Create the figure with subplots
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
 
-    axes[0].hist(head_child_diffs, bins=15, color="lightblue", edgecolor="black")
-    axes[0].set_title("Head–Child Age Differences")
+    axes[0].hist(mother_child_diffs, bins=15, color="lightgreen", edgecolor="black")
+    axes[0].set_title("Mother – Eldest Child Age Difference")
     axes[0].set_xlabel("Years")
     axes[0].set_ylabel("Count")
     axes[0].grid(True)
 
-    axes[1].hist(head_partner_diffs, bins=15, color="salmon", edgecolor="black")
-    axes[1].set_title("Head-Partner Age Differences")
+    axes[1].hist(father_child_diffs, bins=15, color="lightblue", edgecolor="black")
+    axes[1].set_title("Father – Eldest Child Age Difference")
     axes[1].set_xlabel("Years")
     axes[1].grid(True)
 
-    fig.suptitle("Intra-Household Age Differences")
+    axes[2].hist(husband_wife_diffs, bins=15, color="salmon", edgecolor="black")
+    axes[2].set_title("Husband – Wife Age Difference")
+    axes[2].set_xlabel("Years")
+    axes[2].grid(True)
+
+    fig.suptitle("Parental and Spousal Age Differences")
     fig.tight_layout()
 
     return fig

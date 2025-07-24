@@ -16,4 +16,3 @@ class UKHouseholdSizeClassifier(HouseholdSizeClassifier):
             size: round((size_counts.get(size, 0) / total) * 100, 2) if total > 0 else 0.00
             for size in range(1, 9)
         } 
-

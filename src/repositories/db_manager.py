@@ -70,6 +70,7 @@ class DBManager:
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
             no_household_composition BOOLEAN,
+            include_avg_household_size BOOLEAN,
             hh_type_classifier TEXT,
             hh_size_classifier TEXT
         );
@@ -116,6 +117,7 @@ class DBManager:
             use_microdata BOOLEAN,
             no_occupation BOOLEAN,
             no_household_composition BOOLEAN,
+            include_avg_household_size BOOLEAN,
             hh_type_classifier TEXT,
             hh_size_classifier TEXT
         );

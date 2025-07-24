@@ -37,6 +37,8 @@ class PopulationService:
         no_occupation: bool = False,
         n_run: int = 1,
         no_household_composition: bool = False,
+        include_avg_household_size: bool = False,
+        custom_guidance: Optional[str] = None,
         hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(),
         hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()
     ) -> List[Dict[str, Any]]:
@@ -59,6 +61,8 @@ class PopulationService:
             include_target=include_target,
             no_occupation=no_occupation,
             no_household_composition=no_household_composition,
+            include_avg_household_size=include_avg_household_size,
+            custom_guidance=custom_guidance,
             hh_type_classifier=hh_type_classifier,
             hh_size_classifier=hh_size_classifier
         )
@@ -96,6 +100,8 @@ class PopulationService:
                     include_target=include_target,
                     no_occupation=no_occupation,
                     no_household_composition=no_household_composition,
+                    include_avg_household_size=include_avg_household_size,
+                    custom_guidance=custom_guidance,
                     hh_type_classifier=hh_type_classifier,
                     hh_size_classifier=hh_size_classifier
                 )

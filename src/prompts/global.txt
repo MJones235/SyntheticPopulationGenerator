@@ -2,15 +2,9 @@ You are generating a realistic synthetic population for {LOCATION}.
 
 The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
 
+The household should contain {NUM_PEOPLE}.
+
 {GUIDANCE}
-
---------------------------------
-
-Household Context:
-
-{HOUSEHOLD_SIZE_STATS}
-
-{HOUSEHOLD_COMPOSITION_STATS}
 
 --------------------------------
 
@@ -21,16 +15,6 @@ Individual-Level Context:
 {GENDER_STATS}
 
 --------------------------------
-
-You must first choose:
-- `"household_size"`: An integer value
-- `"household_type"`:
-  - `"One-person"`
-  - `"Lone parent"`,
-  - `"Couple"`,
-  - `"Couple with children"`,
-  - `"Extended family"`,
-  - `"Non-relatives"`
 
 Each individual within the household must be represented as an object with the following fields:
 
@@ -44,8 +28,6 @@ Return a JSON object with the following structure:
 
 ```json
 {
-  "household_size": ...,
-  "household_type": "...",
   "household": [
     {
       "age": ...,

@@ -1,5 +1,5 @@
 import re
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 import pandas as pd
 
 from src.classifiers.household_size.base import HouseholdSizeClassifier
@@ -83,6 +83,45 @@ def generate_distribution_prompt(
         feedback_lines + [""] + suggestions if feedback_lines else suggestions
     ).strip()
 
+def generate_scalar_prompt(
+    actual_value: float,
+    target_value: float,
+    label: str,
+    guidance_label: str,
+    unit: str = "",
+    threshold: float = 0.25,
+    include_stats: bool = True,
+    include_target: bool = True,
+    include_guidance: bool = True,
+) -> str:
+    """
+    Generates a feedback and guidance string for a scalar quantity (e.g., average household size).
+    """
+    unit_suffix = f" {unit}".strip()
+
+    feedback_lines = []
+    guidance_lines = []
+
+    if include_stats:
+        stats_line = f"{label}:\n- Current: {actual_value:.2f}"
+        if include_target:
+            stats_line += f"\n- Target: {target_value:.2f}"
+        feedback_lines.append(stats_line)
+
+    diff = actual_value - target_value
+    if include_guidance and abs(diff) >= threshold:
+        direction = "decrease" if diff > 0 else "increase"
+        guidance_lines.append(
+            f"Your household should help {direction} the average {guidance_label.lower()} toward the target of {target_value:.2f}{unit_suffix}, while remaining realistic."
+        )
+    elif include_guidance:
+        guidance_lines.append(
+            f"The average {guidance_label.lower()} is close to the target. Focus on realism."
+        )
+
+    return "\n\n".join(feedback_lines + guidance_lines).strip()
+
+
 def _build_guidance_text(use_microdata: bool, include_stats: bool, include_target: bool, include_guidance: bool, no_occupation: bool) -> str:
     if include_stats:
         if use_microdata:
@@ -139,6 +178,8 @@ def update_prompt_with_statistics(
     include_target: bool = True,
     no_occupation: bool = False,
     no_household_composition: bool = False,
+    include_avg_household_size: bool = False,
+    custom_guidance: Optional[str] = None,
     hh_type_classifier: HouseholdCompositionClassifier = UKHouseholdCompositionClassifier(),
     hh_size_classifier: HouseholdSizeClassifier = UKHouseholdSizeClassifier()
 ) -> str:
@@ -147,6 +188,7 @@ def update_prompt_with_statistics(
         prompt = (
             base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
             .replace("{GUIDANCE}", "")
+            .replace("{AVERAGE_HOUSEHOLD_SIZE}", "")
             .replace("{HOUSEHOLD_SIZE_STATS}", "")
             .replace("{HOUSEHOLD_COMPOSITION_STATS}", "")
             .replace("{AGE_STATS}", "")
@@ -156,7 +198,7 @@ def update_prompt_with_statistics(
 
         return re.sub(r"\n\s*\n+", "\n\n", prompt).strip()
 
-    guidance_text = _build_guidance_text(use_microdata, include_stats, include_target, include_guidance, no_occupation)
+    guidance_text = custom_guidance if custom_guidance else _build_guidance_text(use_microdata, include_stats, include_target, include_guidance, no_occupation)
 
     def build_dist(obs_fn, tgt_fn, label_fn, label, threshold):
         return generate_distribution_prompt(
@@ -216,9 +258,26 @@ def update_prompt_with_statistics(
             0.5,
         )
 
+    avg_household_size_text = ""
+    if include_avg_household_size:
+        avg_household_size_text = generate_scalar_prompt(
+            actual_value=hh_size_classifier.compute_average_household_size(synthetic_df),
+            target_value=fs.load_avg_household_size(location),
+            label="Average Household Size",
+            guidance_label="Household Size",
+            unit="persons",
+            threshold=0.3,
+            include_stats=include_stats,
+            include_guidance=include_guidance,
+            include_target=include_target
+        )
+
+
+
     prompt = (
         base_prompt.replace("{N_HOUSEHOLDS}", str(n_households_generated))
         .replace("{GUIDANCE}", guidance_text.strip())
+        .replace("{AVERAGE_HOUSEHOLD_SIZE}", avg_household_size_text.strip())
         .replace("{HOUSEHOLD_SIZE_STATS}", size_stats_text.strip())
         .replace("{HOUSEHOLD_COMPOSITION_STATS}", composition_stats_text.strip())
         .replace("{AGE_STATS}", age_stats_text.strip())

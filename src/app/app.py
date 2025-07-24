@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+from src.classifiers.household_size.dar_es_salaam import DarEsSalaamHouseholdSizeClassifier
 from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
@@ -18,6 +19,15 @@ import altair as alt
 
 from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_convergence_curve, compute_similarity_metrics
 from src.utils.aggregate_plots import plot_age_pyramid_aggregate, plot_household_size_aggregate, plot_household_structure_bar_aggregate, plot_occupations_aggregate
+
+def get_household_size_classifier(experiment):
+    if experiment['hh_size_classifier'] == 'un_global':
+        return UNHouseholdSizeClassifier()
+    elif experiment['hh_size_classifier'] == 'dar_es_salaam':
+        return DarEsSalaamHouseholdSizeClassifier()
+    else:
+        return UKHouseholdSizeClassifier()
+
 
 st.set_page_config(layout="wide")
 
@@ -39,8 +49,8 @@ else:
     selected_experiment_id = experiment_dict[selected_exp_label]
     selected_experiment = experiment_service.get_by_id(selected_experiment_id)
     hh_type_classifier = UNHouseholdCompositionClassifier() if selected_experiment["hh_type_classifier"] == "un_global" else UKHouseholdCompositionClassifier()
-    hh_size_classifier = UNHouseholdSizeClassifier() if selected_experiment["hh_size_classifier"] == "un_global" else UKHouseholdSizeClassifier()
-
+    hh_size_classifier = get_household_size_classifier(selected_experiment)
+    location = selected_experiment["location"].replace(" ", "_")
     runs = experiment_runs_service.get_by_experiment_id(selected_experiment_id)
 
 
@@ -58,7 +68,6 @@ else:
             st.subheader("📊 Aggregate Metrics for Experiment")
 
             population_ids = [r["population_id"] for r in runs]
-            location = selected_experiment["location"]
 
             # Load all populations
             population_dfs = []
@@ -119,19 +128,19 @@ else:
             st.title("Metrics")
             if not df.empty:
                 try:
-                    results = compute_similarity_metrics(df, metadata["location"], not metadata['no_occupation'], hh_type_classifier, hh_size_classifier)
+                    results = compute_similarity_metrics(df, location, not metadata['no_occupation'], hh_type_classifier, hh_size_classifier)
                     st.dataframe(results)
                 except Exception as e:
                     st.error(f"Failed to compute similarity metrics: {e}")
             
             st.title("Household Size Comparison")
-            st.pyplot(plot_household_size(hh_size_classifier.compute_observed_distribution(df), file_service.load_household_size(metadata['location'])))
+            st.pyplot(plot_household_size(hh_size_classifier.compute_observed_distribution(df), file_service.load_household_size(location)))
         
 
             st.title("Age Distribution Comparison")
             if not df.empty:
                 try:
-                    census_age_df = file_service.load_age_pyramid(metadata["location"])
+                    census_age_df = file_service.load_age_pyramid(location)
                     st.pyplot(plot_age_pyramid(df, census_age_df))
                 except Exception as e:
                     st.error(f"Failed to load or plot age pyramid: {e}")
@@ -140,7 +149,7 @@ else:
                 st.title("Occupation Comparison")
                 if not df.empty:
                     try:
-                        census_occupation = file_service.load_occupation_distribution(metadata["location"])
+                        census_occupation = file_service.load_occupation_distribution(location)
                         synthetic_occupation = compute_occupation_distribution(df)
                         st.pyplot(plot_occupations(synthetic_occupation, census_occupation))
                         st.pyplot(plot_occupation_titles(df))
@@ -157,7 +166,7 @@ else:
             st.title("Household Composition")
             if not df.empty:
                 try:
-                    census_composition_df = file_service.load_household_composition(metadata["location"])
+                    census_composition_df = file_service.load_household_composition(location)
                     st.pyplot(plot_household_structure_bar(df, census_composition_df, hh_type_classifier))
                 except Exception as e:
                     st.error(f"Failed to load or plot household composition: {e}")
@@ -165,7 +174,7 @@ else:
             st.title("Convergence Curve")
             if not df.empty:
                 try:
-                    convergence_df = compute_convergence_curve(df, metadata["location"], 20, 10000, not metadata["no_occupation"], hh_type_classifier, hh_size_classifier)
+                    convergence_df = compute_convergence_curve(df, location, 20, 10000, not metadata["no_occupation"], hh_type_classifier, hh_size_classifier)
                     convergence_long = convergence_df.melt(
                         id_vars=["Variable", "n_individuals"],
                         value_vars=["JSD"], 

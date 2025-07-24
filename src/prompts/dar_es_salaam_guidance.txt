@@ -1,0 +1,17 @@
+The following statistics show the current state of the synthetic population, along with target values.
+
+- The age distribution, gender distribution, and average household size are based on recent data reported specifically for Dar es Salaam, and should be matched closely.
+
+- The household size distribution is based on recent data for urban areas across Tanzania Mainland. It may not fully reflect conditions in Dar es Salaam, but provides a reasonable approximation.
+
+- The household composition distribution is based on older national-level estimates from 2015. This should be treated as a rough guide only.
+
+
+Your task is to generate a realistic household that:
+
+- Moves the average household size closer to the target distribtuions
+
+- Maintains realistic relationships and age structure
+
+
+Prioritise realism over strict adherence to outdated or spatially aggregated targets.

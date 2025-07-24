@@ -28,34 +28,36 @@ experiment_run_service = ExperimentRunService()
 # model = OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
 load_dotenv("secrets.env")
 
-model = AzureModel(
-    model_name="DeepSeek-R1-0528",
-    api_key=os.getenv("AZURE_API_KEY"),
-    temperature=0.7,
-    top_p=0.85,
-    top_k=100,
-)
-#model = OpenAIModel(
-#    model_name="gpt-4o-mini",
-#    api_key=os.getenv("OPENAI_API_KEY"),
+#model = AzureModel(
+#    model_name="DeepSeek-R1-0528",
+#    api_key=os.getenv("AZURE_API_KEY"),
 #    temperature=0.7,
 #    top_p=0.85,
-#    top_k=100
+#    top_k=100,
 #)
+model = OpenAIModel(
+    model_name="gpt-4o",
+    api_key=os.getenv("OPENAI_API_KEY"),
+    temperature=0.7,
+    top_p=0.85,
+    top_k=100
+)
 
 hh_type_classifier = UNHouseholdCompositionClassifier()
 hh_size_classifier = UNHouseholdSizeClassifier()
-locations = ["Afghanistan", "Bangladesh", "Canada", "Djibouti", "Spain"]
+locations = ["Afghanistan", "Bangladesh", "Canada", "Djibouti", "United Kingdom", "Spain"]
 region = "E12000001"
-n_households = 100
+n_households = 300
 batch_size = 10
 include_stats = True
-include_target = False
+include_target = True
 include_guidance = False
-compute_household_size = False
+compute_household_size = True
 use_microdata = False
 no_occupation = True
 no_household_composition = False
+include_avg_household_size = False
+custom_guidance = None
 
 if hh_type_classifier.get_name() == "un_global":
     prompt_file = "global.txt"
@@ -107,6 +109,8 @@ for location in locations:
                 no_occupation,
                 run+1,
                 no_household_composition,
+                include_avg_household_size,
+                custom_guidance,
                 hh_type_classifier,
                 hh_size_classifier
             )
@@ -133,6 +137,7 @@ for location in locations:
                 "compute_household_size": compute_household_size,
                 "no_occupation": no_occupation,
                 "no_household_composition": no_household_composition,
+                "include_avg_household_size": include_avg_household_size,
                 "hh_type_classifier": hh_type_classifier.get_name(),
                 "hh_size_classifier": hh_size_classifier.get_name()
             }
@@ -168,6 +173,7 @@ for location in locations:
         "compute_household_size": compute_household_size,
         "no_occupation": no_occupation,
         "no_household_composition": no_household_composition,
+        "include_avg_household_size": include_avg_household_size,
         "hh_type_classifier": hh_type_classifier.get_name(),
         "hh_size_classifier": hh_size_classifier.get_name()
     }
