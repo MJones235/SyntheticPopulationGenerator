@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
+from src.classifiers.household_size.dar_es_salaam import DarEsSalaamHouseholdSizeClassifier
 from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
 from src.classifiers.household_type.un_global import UNHouseholdCompositionClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
@@ -29,37 +31,72 @@ experiment_run_service = ExperimentRunService()
 load_dotenv("secrets.env")
 
 #model = AzureModel(
-#    model_name="DeepSeek-R1-0528", 
+#    model_name="DeepSeek-R1-0528",
 #    api_key=os.getenv("AZURE_API_KEY"),
 #    temperature=0.7,
 #    top_p=0.85,
 #    top_k=100,
 #)
-model = OpenAIModel(
-    model_name="o3-mini",
-    api_key=os.getenv("OPENAI_API_KEY"),
-    temperature=0.7,
-    top_p=0.85,
-    top_k=100
-)
+#model = OpenAIModel(
+#    model_name="gpt-4o",
+#    api_key=os.getenv("OPENAI_API_KEY"),
+#    temperature=0.7,
+#    top_p=0.85,
+#    top_k=100
+#)
+
+models = [
+    #OpenAIModel(
+    #    model_name="gpt-4o-mini",
+    #    api_key=os.getenv("OPENAI_API_KEY"),
+    #    temperature=0.7,
+    #    top_p=0.85,
+    #    top_k=100
+    #),
+    #AzureModel(
+    #    model_name="DeepSeek-R1-0528",
+    #    api_key=os.getenv("AZURE_API_KEY"),
+    #    temperature=0.7,
+    #    top_p=0.85,
+    #    top_k=100,
+    #),
+    #OpenAIModel(
+    #    model_name="gpt-4o",
+    #    api_key=os.getenv("OPENAI_API_KEY"),
+    #    temperature=0.7,
+    #    top_p=0.85,
+    #    top_k=100
+    #),
+    OpenAIModel(
+        model_name="o3-mini",
+        api_key=os.getenv("OPENAI_API_KEY"),
+        temperature=0.7,
+        top_p=0.85,
+        top_k=100
+    ),
+    OllamaModel("llama3.1:8b", temperature=0.7, top_p=0.85, top_k=100)
+]
 
 hh_type_classifier = UNHouseholdCompositionClassifier()
-hh_size_classifier = UNHouseholdSizeClassifier()
-locations = ["Afghanistan", "Bangladesh", "Canada", "Djibouti", "United Kingdom", "United States of America", "Spain"]
+hh_size_classifier = DarEsSalaamHouseholdSizeClassifier()
+location = "Dar es Salaam"
 region = "E12000001"
-n_households = 100
+n_households = 500
 batch_size = 10
 include_stats = True
-include_target = True
+include_target = False
 include_guidance = False
-compute_household_size = True
+compute_household_size = False
 use_microdata = False
 no_occupation = True
 no_household_composition = False
-include_avg_household_size = False
+include_avg_household_size = True
 custom_guidance = None
 
-if hh_type_classifier.get_name() == "un_global":
+if location == "Dar es Salaam":
+    prompt_file = "dar_es_salaam.txt"
+    # custom_guidance = file_service.load_prompt("dar_es_salaam_guidance.txt") if include_target else None
+elif hh_type_classifier.get_name() == "un_global":
     prompt_file = "global.txt"
 elif use_microdata:
     prompt_file = "microdata.txt"
@@ -70,19 +107,21 @@ elif no_occupation:
 else:
     prompt_file = "standard_prompt.txt"
 
-if hh_type_classifier.get_name() == "un_global":
+prompt = file_service.load_prompt(
+    prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}
+)
+
+if location == "Dar es Salaam":
+    schema = file_service.load_schema("household_schema_dar_es_salaam.json")
+elif hh_type_classifier.get_name() == "un_global":
     schema = file_service.load_schema("household_schema_global.json")
 elif no_occupation:
     schema = file_service.load_schema("household_schema_no_occupation.json")
 else:
     schema = file_service.load_schema("household_schema.json")
 
-for location in locations:
-
-    prompt = file_service.load_prompt(
-        prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}
-    )
-
+custom_guidance = file_service.load_prompt("dar_es_salaam_guidance.txt") if include_target else None
+for model in models:
     n_runs = 1
     experiment_id = str(uuid.uuid4())
     experiment_start_time = time.time()

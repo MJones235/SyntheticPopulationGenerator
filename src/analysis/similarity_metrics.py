@@ -7,7 +7,7 @@ from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.services.file_service import FileService
-from src.analysis.distributions import compute_occupation_distribution
+from src.analysis.distributions import compute_occupation_distribution, compute_partner_age_diff_distribution
 from src.utils.age_bands import assign_age_band, get_age_band_labels
 
 
@@ -78,6 +78,15 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, include_occupati
         occupation_synth = list({size: occupation_synth_dict.get(size, 0.0) for size in all_categories}.values())
         occupation_census = list({size: occupation_census_dict.get(size, 0.0) for size in all_categories}.values())
         occupation_result = compute_metrics(occupation_synth, occupation_census)
+    
+    if "Newcastle" in location:
+        # For Newcastle, we also compute partner age differences
+        partner_age_diff_census = FileService().load_partner_age_diff(location)
+        partner_age_diff_synth = compute_partner_age_diff_distribution(df)
+        partner_age_diff_result = compute_metrics(
+            list(partner_age_diff_synth.values()),
+            list(partner_age_diff_census.values())
+        )
 
     hh_type_synth = hh_type_classifier.compute_observed_distribution(df)
     hh_type_census = FileService().load_household_composition(location)
@@ -97,6 +106,9 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, include_occupati
 
     if include_occupation:
         results.append({'Variable': 'Occupation', **occupation_result})
+    
+    if "Newcastle" in location:
+        results.append({'Variable': 'Partner Age Difference', **partner_age_diff_result})
 
     return pd.DataFrame(results)
 

@@ -111,6 +111,9 @@ class FileService:
         except Exception as e:
             print(f"Error loading average household size for {location}: {e}")
             return 0.0
+        
+    def load_partner_age_diff(self, location: str) -> dict:
+        return self._load_csv(location, "partner_age_diff.csv")
     
     def _load_csv(self, location: str, filename: str, exclude_category_1: Optional[Union[str, int, float]] = None) -> pd.DataFrame:
         path = os.path.join(

@@ -1,6 +1,7 @@
 from pathlib import Path
 import pandas as pd
 from config import RAW_DATA_DIR, OUTPUT_DIR
+from src.preprocessing.transformers.uk_age_diff_transformer import UKPartnerAgeDiffTransformer
 from src.preprocessing.loaders.dar_es_salaam_loader import DarEsSalaamLoader
 from src.preprocessing.transformers.dar_es_salaam_transformer import DarEsSalaamAgeTransformer, DarEsSalaamSexTransformer
 from src.preprocessing.utils.un_country_registry import UNCountryRegistry
@@ -77,6 +78,7 @@ UK_TRANSFORMERS = {
         rename_func=clean_household_size_labels
     ),
     "occupation.csv": UKCensusTransformer(category_columns=["Occupation (current) (10 categories) Code"]),
+    
 }
 
 UN_TRANSFORMERS = {
@@ -100,7 +102,19 @@ def process_uk_location(location_dir: Path):
         except FileNotFoundError:
             print(f"⚠️  Missing file: {filename}")
         except Exception as e:
-            print(f"❌ Error processing {filename}: {e}")
+            print(f"❌ Error processing {filename}: {e}")        
+
+    try:
+        partner_path = location_dir / "partner_age_diff.xlsx"
+        df_partner = pd.read_excel(partner_path, sheet_name="Figure 9", skiprows=10)
+        transformer = UKPartnerAgeDiffTransformer()
+        df_processed = transformer.transform(df_partner)
+        save_processed(df_processed, location_output_dir, "partner_age_diff.csv")
+        print("✅ Processed partner_age_diff.xlsx")
+    except FileNotFoundError:
+        print("⚠️  Missing file: partner_age_diff.xlsx")
+    except Exception as e:
+        print(f"❌ Error processing partner_age_diff.xlsx: {e}")        
 
 def process_un_household(global_dir: Path, registry: UNCountryRegistry):
     print("\n🌍 Processing UN Global household data...")

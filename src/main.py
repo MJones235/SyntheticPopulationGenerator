@@ -49,7 +49,7 @@ hh_type_classifier = UKHouseholdCompositionClassifier()
 hh_size_classifier = UKHouseholdSizeClassifier()
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 300
+n_households = 500
 batch_size = 10
 include_stats = True
 include_target = True
@@ -58,7 +58,7 @@ compute_household_size = False
 use_microdata = False
 no_occupation = True
 no_household_composition = False
-include_avg_household_size = True
+include_avg_household_size = False
 custom_guidance = None
 
 if location == "Dar es Salaam":

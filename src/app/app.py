@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+from src.analysis.diversity_and_validity import compute_generation_validity, compute_household_structure_diversity, compute_individual_diversity
 from src.classifiers.household_size.dar_es_salaam import DarEsSalaamHouseholdSizeClassifier
 from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
@@ -132,7 +133,47 @@ else:
                     st.dataframe(results)
                 except Exception as e:
                     st.error(f"Failed to compute similarity metrics: {e}")
-            
+
+            if selected_experiment.get("include_avg_household_size", False):
+                st.title("Average Household Size")
+
+                try:
+                    census_avg = file_service.load_avg_household_size(location)
+                    synthetic_avg = hh_size_classifier.compute_average_household_size(df)
+
+                    percentage_error = 100 * abs(synthetic_avg - census_avg) / census_avg
+
+                    st.markdown(f"**Census Average:** {census_avg:.2f}")
+                    st.markdown(f"**Synthetic Average:** {synthetic_avg:.2f}")
+                    st.markdown(f"**Percentage Error:** {percentage_error:.1f}%")
+                except Exception as e:
+                    st.error(f"Failed to compute average household size: {e}")
+
+            st.title("Diversity")
+
+            try:
+                diversity_cols = ["age", "gender", "relationship"]
+                if not metadata.get("no_occupation", False):
+                    diversity_cols.append("occupation")
+                
+                individual_diversity = compute_individual_diversity(df, diversity_cols)
+                household_diversity = compute_household_structure_diversity(df)
+                st.markdown(f"**Individual Diversity Score:** {individual_diversity:.1f}%")
+                st.markdown(f"**Household Diversity Score:** {household_diversity:.1f}%")
+
+            except Exception as e:
+                st.error(f"Failed to compute diversity score: {e}")
+
+
+            st.title("Generation Validity")
+
+            try:
+                validity = compute_generation_validity(df, metadata["num_households"])
+                st.markdown(f"**Validity Score:** {validity:.1f}%")
+            except Exception as e:
+                st.error(f"Failed to compute generation validity: {e}")
+
+
             st.title("Household Size Comparison")
             st.pyplot(plot_household_size(hh_size_classifier.compute_observed_distribution(df), file_service.load_household_size(location)))
         
@@ -159,7 +200,11 @@ else:
             st.title("Parent-Child Age Difference")
             if not df.empty:
                 try:
-                    st.pyplot(plot_age_diff(df))
+                    fig, mean_mother_birth_age, mean_father_birth_age = plot_age_diff(df)
+                    st.pyplot(fig)
+                    st.markdown(f"**Mean mother birth age:** {mean_mother_birth_age:.1f}")
+                    st.markdown(f"**Mean father birth age:** {mean_father_birth_age:.1f}")
+
                 except Exception as e:
                     st.error(f"Failed to load or plot age diff: {e}")
 

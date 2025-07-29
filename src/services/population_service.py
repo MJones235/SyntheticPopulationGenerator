@@ -146,7 +146,7 @@ class PopulationService:
     
     def _run_batch(self, model: BaseLLM, prompts: List[str], schema: str) -> List[Dict[str, Any]]:
         try:
-            return model.generate_batch_json(prompts, schema, max_parallel=1, timeout=45)
+            return model.generate_batch_json(prompts, schema, max_parallel=1, timeout=60)
         except Exception as e:
             print(f"[ERROR] Batch generation failed: {e}")
             return []

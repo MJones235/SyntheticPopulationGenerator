@@ -149,14 +149,14 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
         husband = get_age_of_partner_of_sex("Male", head, partners)
         wife = get_age_of_partner_of_sex("Female", head, partners)
-        eldest_child = children.sort_values(by="age", ascending=False).iloc[0]["age"] if not children.empty else None
 
-        if husband is not None and eldest_child is not None:
-            father_child_diffs.append(husband - eldest_child)
-        if wife is not None and eldest_child is not None:
-            mother_child_diffs.append(wife - eldest_child)
-        if husband is not None and wife is not None:
-            husband_wife_diffs.append(husband - wife)
+        for _, child in children.iterrows():
+            if husband is not None:
+                father_child_diffs.append(husband - child["age"])
+            if wife is not None:
+                mother_child_diffs.append(wife - child["age"])
+            if husband is not None and wife is not None:
+                husband_wife_diffs.append(husband - wife)
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
 
@@ -179,7 +179,11 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
     fig.suptitle("Parental and Spousal Age Differences")
     fig.tight_layout()
 
-    return fig
+    mean_mother_birth_age = round(np.mean(mother_child_diffs), 1) if mother_child_diffs else None
+    mean_father_birth_age = round(np.mean(father_child_diffs), 1) if father_child_diffs else None
+
+    return fig, mean_mother_birth_age, mean_father_birth_age
+
 
 
 def plot_household_structure_bar(

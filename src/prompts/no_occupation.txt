@@ -32,8 +32,14 @@ You must first choose:
   - `"Couple with dependent children"`
   - `"Couple with non-dependent children"`
   - `"Other"` (e.g. 2+ unrelated housemates, extended family)
+def compute_individual_diversity(df: pd.DataFrame, columns: list[str]) -> float:
+    """Returns the percentage of unique individuals in the DataFrame based on selected columns."""
+    if df.empty:
+        return 0.0
 
-Each individual within the household must be represented as an object with the following fields:
+    unique_rows = df[columns].drop_duplicates()
+    diversity_percent = 100 * len(unique_rows) / len(df)
+    return diversity_percent
 
 - `"age"`: an integer 
 - `"gender"`: a string, either `"Male"` or `"Female"`  
