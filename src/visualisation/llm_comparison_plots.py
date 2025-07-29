@@ -4,16 +4,19 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
+from src.classifiers.household_size.dar_es_salaam import DarEsSalaamHouseholdSizeClassifier
+from src.classifiers.household_size.un_global import UNHouseholdSizeClassifier
+from src.classifiers.household_type.un_global import UNHouseholdCompositionClassifier
 from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid
 from src.services.file_service import FileService
 from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.services.population_service import PopulationService
 
-location = "Newcastle"
-experiement_name = f"{location}_method_c"
-hh_size_classifier = UKHouseholdSizeClassifier()
-hh_type_classifier = UKHouseholdCompositionClassifier()#
+location = "Dar es Salaam"
+experiement_name = f"{location.replace(" ", "")}_method_b"
+hh_size_classifier = DarEsSalaamHouseholdSizeClassifier()
+hh_type_classifier = UNHouseholdCompositionClassifier()
 population_service = PopulationService()
 file_service = FileService()
 
@@ -31,6 +34,18 @@ file_service = FileService()
 #LLM_MODEL_TO_POPULATION_ID = {
 #    "gpt-4o": "04794b00-8fa5-4308-9414-e477b49ee18d",
 #    "DeepSeek-R1-0528": "c09bf2ce-fc0b-4d0e-ae9c-20e6d19462c2",
+#}
+
+# Dar es Salaam Method B
+LLM_MODEL_TO_POPULATION_ID = {
+    "gpt-4o": "8052f98d-8a0f-4b38-b6c2-b310138eb8b4",
+    "DeepSeek-R1-0528": "2f6df1ba-c312-4a8b-b278-998221d38efa",
+}
+
+# Dar es Salaam Method C
+#LLM_MODEL_TO_POPULATION_ID = {
+#    "gpt-4o": "129a2f40-2c94-4e55-91ed-2af141b06f8c",
+#    "DeepSeek-R1-0528": "93e307e9-6727-4228-bba3-2c04b895ea06",
 #}
 
 def plot_categorical_distributions(

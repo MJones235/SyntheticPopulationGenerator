@@ -4,7 +4,7 @@ from src.llm_interface.base_llm import BaseLLM
 class OpenAIModel(BaseLLM):
     is_local = False
 
-    def __init__(self, model_name: str = "gpt-4", api_key: str = None, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, **kwargs):
+    def __init__(self, model_name: str = "gpt-4o", api_key: str = None, temperature: float = 0.7, top_p: float = 0.95, top_k: int = 40, **kwargs):
         self.model_name = model_name
         self.client = AzureOpenAI(
             api_version="2024-12-01-preview",
@@ -28,7 +28,7 @@ class OpenAIModel(BaseLLM):
         response = self.client.chat.completions.create(
             model=self.model_name,
             messages=[{"role": "user", "content": prompt}],
-            #temperature=self.temperature,
+            temperature=self.temperature,
             timeout=timeout
         )
         return response.choices[0].message.content.strip()

@@ -2,19 +2,11 @@ You are generating a realistic synthetic population for {LOCATION}.
 
 The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
 
-The household should contain {NUM_PEOPLE}.
-
 {GUIDANCE}
-
---------------------------------
-
-Individual-Level Context:
 
 {AGE_STATS}
 
 {GENDER_STATS}
-
---------------------------------
 
 Each individual within the household must be represented as an object with the following fields:
 

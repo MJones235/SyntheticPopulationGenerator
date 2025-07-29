@@ -136,6 +136,7 @@ def get_age_of_partner_of_sex(sex: str, head: pd.DataFrame, partners: pd.DataFra
 
 def plot_age_diff(synthetic_df: pd.DataFrame):
     mother_child_diffs = []
+    mother_eldest_child_diffs = []
     father_child_diffs = []
     husband_wife_diffs = []
 
@@ -149,6 +150,10 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
         husband = get_age_of_partner_of_sex("Male", head, partners)
         wife = get_age_of_partner_of_sex("Female", head, partners)
+
+        if wife is not None and not children.empty:
+            eldest_child_age = children["age"].max()
+            mother_eldest_child_diffs.append(wife - eldest_child_age)
 
         for _, child in children.iterrows():
             if husband is not None:
@@ -181,8 +186,9 @@ def plot_age_diff(synthetic_df: pd.DataFrame):
 
     mean_mother_birth_age = round(np.mean(mother_child_diffs), 1) if mother_child_diffs else None
     mean_father_birth_age = round(np.mean(father_child_diffs), 1) if father_child_diffs else None
+    median_mother_first_birth_age = round(np.median(mother_eldest_child_diffs), 1) if mother_eldest_child_diffs else None
 
-    return fig, mean_mother_birth_age, mean_father_birth_age
+    return fig, mean_mother_birth_age, mean_father_birth_age, median_mother_first_birth_age
 
 
 

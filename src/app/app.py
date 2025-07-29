@@ -92,7 +92,7 @@ else:
                 st.pyplot(plot_household_size_aggregate(hh_size_distributions, census_household))
                 census_age_df = file_service.load_age_pyramid(location)
                 st.pyplot(plot_age_pyramid_aggregate(population_dfs, census_age_df))
-                if not experiments[0]['no_occupation']:
+                if not selected_experiment['no_occupation']:
                     census_occupation = file_service.load_occupation_distribution(location)
                     st.pyplot(plot_occupations_aggregate(occupation_distributions, census_occupation))
                 census_composition_df = file_service.load_household_composition(location)
@@ -200,10 +200,11 @@ else:
             st.title("Parent-Child Age Difference")
             if not df.empty:
                 try:
-                    fig, mean_mother_birth_age, mean_father_birth_age = plot_age_diff(df)
+                    fig, mean_mother_birth_age, mean_father_birth_age, median_mother_first_birth_age = plot_age_diff(df)
                     st.pyplot(fig)
                     st.markdown(f"**Mean mother birth age:** {mean_mother_birth_age:.1f}")
                     st.markdown(f"**Mean father birth age:** {mean_father_birth_age:.1f}")
+                    st.markdown(f"**Median mother age at first birth:** {median_mother_first_birth_age:.1f}")
 
                 except Exception as e:
                     st.error(f"Failed to load or plot age diff: {e}")

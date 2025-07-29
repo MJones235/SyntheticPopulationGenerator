@@ -36,7 +36,7 @@ load_dotenv("secrets.env")
 #    top_k=100,
 #)
 model = OpenAIModel(
-    model_name="o3-mini",
+    model_name="gpt-4o",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
@@ -45,17 +45,17 @@ model = OpenAIModel(
 
 hh_type_classifier = UNHouseholdCompositionClassifier()
 hh_size_classifier = UNHouseholdSizeClassifier()
-locations = ["Afghanistan", "Bangladesh", "Canada", "Djibouti", "United Kingdom", "United States of America", "Spain"]
+locations = ["Fiji", "United Kingdom"]
 region = "E12000001"
-n_households = 100
+n_households = 300
 batch_size = 10
 include_stats = True
 include_target = True
 include_guidance = False
-compute_household_size = True
+compute_household_size = False
 use_microdata = False
 no_occupation = True
-no_household_composition = False
+no_household_composition = True
 include_avg_household_size = False
 custom_guidance = None
 
