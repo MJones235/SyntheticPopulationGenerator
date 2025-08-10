@@ -21,8 +21,9 @@ def compute_metrics(synthetic_counts, census_counts):
     jsd = jensenshannon(P, Q, base=2) ** 2
     tvd = 0.5 * np.abs(P - Q).sum()
     rmse = np.sqrt(np.mean((P - Q) ** 2))
+    max_abs_error = np.max(np.abs(P - Q)) * 100
 
-    return {'JSD': jsd, 'TVD': tvd, 'RMSE': rmse}
+    return {'JSD': jsd, 'TVD': tvd, 'RMSE': rmse, 'MaxAbsError': max_abs_error}
 
 def get_synthetic_age_pyramid(df: pd.DataFrame):
     synthetic_df = df.copy()
@@ -131,6 +132,7 @@ def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str, in
     jsd_matrix = pd.DataFrame([m["JSD"] for m in all_metrics])
     tvd_matrix = pd.DataFrame([m["TVD"] for m in all_metrics])
     rmse_matrix = pd.DataFrame([m["RMSE"] for m in all_metrics])
+    max_abs_err_matrix = pd.DataFrame([m["MaxAbsError"] for m in all_metrics])
 
     result = pd.DataFrame({
         "Variable": jsd_matrix.columns,
@@ -140,6 +142,8 @@ def compute_aggregate_metrics(populations: list[pd.DataFrame], location: str, in
         "95% CI TVD": 1.96 * tvd_matrix.std() / np.sqrt(len(tvd_matrix)),
         "Mean RMSE": rmse_matrix.mean(),
         "95% CI RMSE": 1.96 * rmse_matrix.std() / np.sqrt(len(rmse_matrix)),
+        "Mean MaxAbsError": max_abs_err_matrix.mean(),
+        "95% CI MaxAbsError": 1.96 * max_abs_err_matrix.std() / np.sqrt(len(max_abs_err_matrix)),
     }).reset_index(drop=True)
 
     return result

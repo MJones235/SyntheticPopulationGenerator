@@ -1,0 +1,83 @@
+You are a prompt engineer tasked with designing 10 distinct prompt strategies or styles for instructing a large language model (LLM) to generate synthetic household data.
+
+# Objective  
+Each prompt strategy should guide the LLM to generate a realistic household to be added to a synthetic population. The generated household should help nudge the population toward target distributions derived from official census data or demographic statistics.
+
+# Constraints and Requirements  
+Each strategy must:
+
+1. Clearly instruct the LLM to generate one household to be added to a larger synthetic population.
+
+2. Include the following placeholders, written exactly as shown:
+
+{TOTAL_HOUSEHOLDS} — total number of households to be generated  
+{N_HOUSEHOLDS} — number of households already generated  
+{LOCATION} — the name of the location for which the population is being generated  
+{HOUSEHOLD_SIZE_STATS}  
+{HOUSEHOLD_COMPOSITION_STATS}  
+{AGE_STATS}  
+{GENDER_STATS}
+
+These will be filled at runtime.  The stats placeholders will be replaced with details of the current synthetic population distribution and the corresponding target values for each variable. Use the literal placeholder strings — do not insert sample values.
+
+HOUSEHOLD_COMPOSITION_STATS contains a number of categories.  Most are self-explanatory.  Other definitions are as follows:
+"Couple with non-dependent children" refers to a couple living with one or more adult children (typically aged 18+).  
+  "Other" households include any structure beyond head, spouse/partner, and child. These may involve extended family (e.g. grandparents, siblings, grandchildren) or unrelated adults living together (e.g. university students or young professionals in shared houses).
+
+The stats for each variable will be structured as in the following example for {AGE_STATS}
+Age Group Distribution:
+- 0–9 years: current = 13.9%, target = 10.8%
+- 10-19 years: current = 12.4%, target = 13.2%
+- 20-29 years: current = 25.8%, target = 20.0%
+- 30-39 years: current = 13.1%, target = 13.7%
+- 40-49 years: current = 9.8%, target = 11.0%
+- 50-59 years: current = 9.2%, target = 11.4%
+- 60-69 years: current = 9.5%, target = 9.4%
+- 70-79 years: current = 6.0%, target = 6.5%
+- 80+ years: current = 0.4%, target = 4.1%
+
+
+3. Specify that the model should return a JSON object with the following structure:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+- The "household" array must contain at least one person.
+- The first person must have "relationship_to_head": "Head" and be a plausible adult.
+- The prompt should instruct the model to return only the JSON, with no surrounding explanation or formatting.
+
+4. Each prompt must explicitly explain how the model should use the statistics:
+- The statistics compare the current synthetic population to target demographic values.
+- The model’s role is to generate a new household that nudges the current distributions toward the targets.
+- The model should:
+  - Select from underrepresented categories (e.g., age groups, household sizes, genders)
+  - Avoid further inflating overrepresented categories
+  - Maintain a plausible and realistic household structure
+
+This instruction may be embedded in formal prose, structured steps, bullet points, or technical guidance — but must be unambiguous in every prompt.
+
+# Your Task  
+Generate a numbered list of 10 distinct prompt strategies, each offering a structurally or conceptually different way to guide the LLM in generating the household.
+
+You are encouraged to explore variation in:
+- Guidance level (from minimal to detailed, step-by-step instruction)
+- Prompt structure (e.g., numbered steps, bullet points, markdown-style headers, detailed paragraphs)
+- Output specification:
+  - Some prompts should include a full JSON schema (as shown above)
+  - Others should describe the required output fields and format using structured text
+  - Optionally, prompts may include a worked example of valid JSON output
+- Which demographic dimensions are emphasised (e.g., age-first, gender-focused, household-size-first)
+- Prompt length (some succinct and focused, others longer and more comprehensive)
+
+Now generate the 10 prompts.

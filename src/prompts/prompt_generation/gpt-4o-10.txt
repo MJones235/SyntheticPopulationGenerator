@@ -1,0 +1,33 @@
+Treat this as a constrained optimisation step.  
+You must generate a single household that most effectively reduces the difference between the current vs. target distributions for the following variables.
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+{AGE_STATS}  
+
+{GENDER_STATS}
+
+Use heuristic logic to:
+- Prioritise underrepresented classes
+- Maintain plausible family structures
+- Avoid extremes or contradictions (e.g., children without adults)
+
+Output the household as:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+Do not return anything else. Do not include markdown formatting, code fences, or backticks.

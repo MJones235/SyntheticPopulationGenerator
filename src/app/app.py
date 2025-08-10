@@ -217,23 +217,39 @@ else:
                 except Exception as e:
                     st.error(f"Failed to load or plot household composition: {e}")
 
-            st.title("Convergence Curve")
             if not df.empty:
                 try:
                     convergence_df = compute_convergence_curve(df, location, 20, 10000, not metadata["no_occupation"], hh_type_classifier, hh_size_classifier)
-                    convergence_long = convergence_df.melt(
+                    st.title("Convergence Curve (JSD)")
+                    convergence_long_jsd = convergence_df.melt(
                         id_vars=["Variable", "n_individuals"],
                         value_vars=["JSD"], 
                         var_name="Metric",
                         value_name="Value"
                     )
-                    chart = alt.Chart(convergence_long).mark_line().encode(
+                    chart_jsd = alt.Chart(convergence_long_jsd).mark_line().encode(
                         x="n_individuals:Q",
                         y="Value:Q",
                         color="Variable:N"
                     ).properties(width=750, height=400)
 
-                    st.altair_chart(chart, use_container_width=True)
+                    st.altair_chart(chart_jsd, use_container_width=True)
+
+                    st.title("Convergence Curve (MaxAbsError)")
+                    convergence_long_max_abs_err = convergence_df.melt(
+                        id_vars=["Variable", "n_individuals"],
+                        value_vars=["MaxAbsError"], 
+                        var_name="Metric",
+                        value_name="Value"
+                    )
+                    chart_max_abs_err = alt.Chart(convergence_long_max_abs_err).mark_line().encode(
+                        x="n_individuals:Q",
+                        y="Value:Q",
+                        color="Variable:N"
+                    ).properties(width=750, height=400)
+
+                    st.altair_chart(chart_max_abs_err, use_container_width=True)
+
 
                 except Exception as e:
                     st.error(f"Failed to compute or plot convergence curve: {e}")

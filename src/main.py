@@ -49,15 +49,15 @@ hh_type_classifier = UKHouseholdCompositionClassifier()
 hh_size_classifier = UKHouseholdSizeClassifier()
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 300
+n_households = 500
 batch_size = 10
 include_stats = True
 include_target = True
 include_guidance = False
 compute_household_size = False
 use_microdata = False
-no_occupation = False
-no_household_composition = False
+no_occupation = True
+no_household_composition = True
 include_avg_household_size = False
 custom_guidance = None
 
@@ -71,9 +71,9 @@ elif use_microdata:
 elif compute_household_size:
     prompt_file = "fixed_household_size.txt"
 elif no_occupation:
-    prompt_file = "no_occupation.txt"
+    prompt_file = "no_occupation_old.txt"
 else:
-    prompt_file = "standard_prompt.txt"
+    prompt_file = "old.txt"
 
 prompt = file_service.load_prompt(
     prompt_file, {"LOCATION": location, "TOTAL_HOUSEHOLDS": str(n_households)}
@@ -82,9 +82,9 @@ prompt = file_service.load_prompt(
 if hh_type_classifier.get_name() == "un_global":
     schema = file_service.load_schema("household_schema_global.json")
 elif no_occupation:
-    schema = file_service.load_schema("household_schema_no_occupation.json")
+    schema = file_service.load_schema("household_schema_no_occupation_old.json")
 else:
-    schema = file_service.load_schema("household_schema.json")
+    schema = file_service.load_schema("household_schema_old.json")
 
 n_runs = 1
 experiment_id = str(uuid.uuid4())

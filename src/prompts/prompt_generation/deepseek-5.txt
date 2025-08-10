@@ -1,0 +1,27 @@
+## HOUSEHOLD GENERATION INSTRUCTIONS
+**Objective**: Create household to nudge {LOCATION} toward targets  
+**Key Statistics**:  
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+**Validation Rules**:  
+1. Relationships EXACTLY one of:  
+   Head, Spouse, Child, Child-in-law, Parent, Parent-in-law, Sibling, Sibling-in-law, Grandchild, Grandparent, Aunt, Uncle, Nephew, Niece, Cousin, Partner, Housemate, Lodger  
+2. "Head" must be first and ≥18 years  
+3. For "Other" households: Use extended relationships (e.g., Niece, Housemate)  
+
+**Output**:  
+```json
+{
+  "household": [
+    {"age": 45, "gender": "Male", "relationship_to_head": "Head"},
+    // Add members...
+  ]
+}
+No metadata. Only JSON output. Do not include markdown formatting, code fences, or backticks.

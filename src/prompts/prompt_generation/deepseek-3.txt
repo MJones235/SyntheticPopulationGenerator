@@ -1,0 +1,22 @@
+# SYNTHETIC HOUSEHOLD PROTOCOL
+**Location**: {LOCATION}  
+**Progress**: {N_HOUSEHOLDS}/{TOTAL_HOUSEHOLDS}  
+**Demographic Targets**:  
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+**Generation Rules**:  
+1. Maximize reduction in largest statistical gap  
+2. Relationship_to_head ∈ [Head, Spouse, Child, Child-in-law, Parent, Parent-in-law, Sibling, Sibling-in-law, Grandchild, Grandparent, Aunt, Uncle, Nephew, Niece, Cousin, Partner, Housemate, Lodger]  
+3. Head must be adult (age ≥18)  
+
+**Output**:  
+```json
+{"household": [{"age": 28, "gender": "Female", "relationship_to_head": "Head"}, ...]}
+No additional text. Do not include markdown formatting, code fences, or backticks.

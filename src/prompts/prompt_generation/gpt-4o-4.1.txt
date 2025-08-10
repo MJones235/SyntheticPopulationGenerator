@@ -1,0 +1,35 @@
+### Context  
+Generate a new household for {LOCATION}.  
+Current progress: {N_HOUSEHOLDS} of {TOTAL_HOUSEHOLDS} generated.
+
+### Statistical Guidance  
+Demographic targets vs. current values:  
+
+{GENDER_STATS}  
+
+{AGE_STATS}  
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Focus on improving alignment with census distributions across all dimensions.  
+In particular:
+- Prioritise categories that are currently underrepresented.
+- Avoid further increasing categories that are already overrepresented.
+- Ensure household structures remain plausible and internally consistent.
+
+### Output  
+Return only a JSON object with one array field:
+
+{
+  "household": [
+    {
+      "age": INTEGER,
+      "gender": "Male" or "Female",
+      "relationship_to_head": "..."
+    }
+  ]
+}
+
+Do not include explanation or additional text.  Do not include markdown formatting, code fences, or backticks.

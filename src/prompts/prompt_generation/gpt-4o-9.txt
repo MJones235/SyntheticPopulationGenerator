@@ -1,0 +1,35 @@
+Let’s add one more household to our synthetic population for {LOCATION}.  
+We’ve already created {N_HOUSEHOLDS} of {TOTAL_HOUSEHOLDS}.
+
+Based on our current gaps:
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+Please:
+- Choose underrepresented combinations of age, gender, and relationships.
+- Avoid inflating overrepresented types.
+- Keep households realistic (e.g., no 12-year-old Heads, no 30-year-old grandparents).
+
+Your response must be a JSON object:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+No preamble. No notes. Just JSON — do not include markdown formatting, code fences, or backticks.

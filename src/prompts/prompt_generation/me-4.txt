@@ -1,0 +1,30 @@
+You are generating a realistic synthetic population for {LOCATION}.
+
+The full population will consist of {TOTAL_HOUSEHOLDS} households. So far, {N_HOUSEHOLDS} have been generated. You will now generate one new household to add to this population.
+
+Use the following statistics to select individiuals that nudge the current distributions towards the targets.  
+
+Begin by selecting a household size where the current value is lower than the target.  
+
+Then select a valid household composition where the current value is lower than the target.
+1-person households contain a single adult of any age
+2-person households can contain a couple, a lone parent or unrelated housemates
+3+ person households can contain contain couples or lone parents with children, extended family or unrelated housemates.
+Non-dependent children are aged 18+.
+
+Select individuals from under-represented age groups where the current value is lower than the target.
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+Output a JSON object with a "household" array of people, each with:
+- age (0–120)  
+- gender ("Male" or "Female")  
+- relationship_to_head (first person must be "Head".  The head should be an adult. Other valid values are: "Spouse", "Partner", "Child", "Parent", "Sibling", "Grandchild", "Grandparent", "Housemate", "Lodger", "Aunt", "Uncle", "Nephew", "Niece", "Cousin", "Child-in-law", "Parent-in-law", "Sibling-in-law")  
+
+Output only the JSON object — do not include markdown formatting, code fences, or backticks.

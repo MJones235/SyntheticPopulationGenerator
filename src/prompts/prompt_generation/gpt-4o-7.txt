@@ -1,0 +1,38 @@
+Use the following logic to generate a household for {LOCATION}:
+
+- IF young adults (18–30) are underrepresented → consider shared household or young couple.
+- IF large households are below target → include multi-generational families or multiple children.
+- IF female representation is low → increase number of females, but within realistic compositions.
+
+Always:
+- Begin with a plausible adult Head.
+- Assign realistic relationships.
+- Ensure consistency with household composition norms.
+
+Stats:  
+
+{AGE_STATS} 
+
+{GENDER_STATS} 
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Output the result as:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+JSON only — do not include markdown formatting, code fences, or backticks. No extra text.

@@ -1,0 +1,28 @@
+**Generate household {N_HOUSEHOLDS} of {TOTAL_HOUSEHOLDS} for {LOCATION}:**
+
+1. Analyze gaps between current and target distributions:
+
+   {HOUSEHOLD_SIZE_STATS}
+   
+   {HOUSEHOLD_COMPOSITION_STATS}
+
+   {AGE_STATS}
+
+   {GENDER_STATS}
+
+2. Prioritize underrepresented categories (largest gap first)
+
+3. Build household with:
+   - First member as "Head" (age ≥18)
+   - Valid relationships ONLY: Head, Spouse, Child, Child-in-law, Parent, Parent-in-law, Sibling, Sibling-in-law, Grandchild, Grandparent, Aunt, Uncle, Nephew, Niece, Cousin, Partner, Housemate, Lodger
+
+4. Return pure JSON:
+```json
+{
+  "household": [
+    {"age": 35, "gender": "Male", "relationship_to_head": "Head"},
+    // ...other members
+  ]
+}
+
+No explanations. Use precise relationship terms. Do not include markdown formatting, code fences, or backticks.

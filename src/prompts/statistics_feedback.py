@@ -56,8 +56,13 @@ def generate_distribution_prompt(
         label = label_func(key)
         if include_stats:
             if include_target:
+                if abs(obs_pct - tgt_pct) >= threshold:
+                    underrepresented = obs_pct < tgt_pct
+                    guidance_text = "(under-represented)" if underrepresented else "(over-represented)"
+                else:
+                    guidance_text = ""
                 feedback_lines.append(
-                    f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}%"
+                    f"- {label}: current = {obs_pct:.1f}%, target = {tgt_pct:.1f}% {guidance_text}"
                 )
             else:
                 feedback_lines.append(f"- {label}: current = {obs_pct:.1f}%")
@@ -137,8 +142,11 @@ Ensure that the household structure remains realistic.
             if include_target:
                 return f"""
 The following statistics show the current state of the synthetic population.
-Each section shows the current distribution of generated individuals or households, along with the target percentage from Census data.
+Each section shows the current distribution of generated individuals or households, along with the target percentage from official statistics.
 Your task is to generate a household that nudges the distribution toward the target.
+Select a household size that is currently underrepresented.
+Include individuals from underrepresented age groups. 
+Maintain an even gender balance across the full population.
 Ensure that the household structure remains realistic.
 """
             else:

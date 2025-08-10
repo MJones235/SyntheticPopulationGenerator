@@ -1,0 +1,39 @@
+Add one household to a synthetic population for {LOCATION}, following these constraints:
+
+- Only select household sizes that are currently underrepresented
+
+{HOUSEHOLD_SIZE_STATS}
+
+- Age brackets currently overrepresented in the synthetic population must be avoided unless required.
+
+{AGE_STATS}
+
+- Balance genders per the following stats; prefer underrepresented gender in ambiguous cases.
+
+{GENDER_STATS}
+
+- Use household composition stats to guide relationship structure.
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Structure:
+- A "household" array of at least one person.
+- First person must be "Head" and plausibly aged 18+.
+
+Output only:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+Do not include markdown formatting, code fences, or backticks.

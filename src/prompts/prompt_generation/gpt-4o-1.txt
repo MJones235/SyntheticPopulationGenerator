@@ -1,0 +1,35 @@
+Generate a single realistic household to be added to a synthetic population for {LOCATION}.  
+Use the following demographic statistics to guide your generation:
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+These compare the current state (based on {N_HOUSEHOLDS} households) to the target values.  
+Your task is to **nudge the distributions toward the targets** by:
+
+- Favoring underrepresented age groups, genders, and household sizes.
+- Avoiding overrepresented demographic segments.
+- Ensuring the structure of the household is realistic and demographically plausible.
+
+Return a JSON object only in the following format:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}
+
+The first person must be the Head of household and a plausible adult. Output nothing else — do not include markdown formatting, code fences, or backticks.

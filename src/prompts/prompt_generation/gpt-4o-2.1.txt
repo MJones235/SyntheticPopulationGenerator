@@ -1,0 +1,22 @@
+Add one plausible household to a growing synthetic population for {LOCATION}.  
+Current stats (based on {N_HOUSEHOLDS} out of {TOTAL_HOUSEHOLDS}): 
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Use household composition stats to guide plausible relationship structures.  
+"Couple with non-dependent children" refers to a couple living with one or more adult children (aged 18+).  
+"Other" households include any structure beyond head, partner, and child. These may involve extended family (e.g. grandparents, siblings, grandchildren) or unrelated adults living together (e.g. university students or young professionals in shared houses).
+
+Choose underrepresented attributes. Avoid oversampling already dominant categories.  
+Output a JSON object with a "household" array of people, each with:
+- age (0–120)  
+- gender ("Male" or "Female")  
+- relationship_to_head (first person must be "Head")  
+
+Return only the JSON — do not include markdown formatting, code fences, or backticks.

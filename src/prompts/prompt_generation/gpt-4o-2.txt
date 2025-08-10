@@ -1,0 +1,18 @@
+Add one plausible household to a growing synthetic population for {LOCATION}.  
+Current stats (based on {N_HOUSEHOLDS} out of {TOTAL_HOUSEHOLDS}): 
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Choose underrepresented attributes. Avoid oversampling already dominant categories.  
+Output a JSON object with a "household" array of people, each with:
+- age (0–120)  
+- gender ("Male" or "Female")  
+- relationship_to_head (first person must be "Head")  
+
+Return only the JSON — do not include markdown formatting, code fences, or backticks.

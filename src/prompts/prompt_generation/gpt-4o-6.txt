@@ -1,0 +1,23 @@
+Example of a valid output:
+
+{
+  "household": [
+    { "age": 42, "gender": "Female", "relationship_to_head": "Head" },
+    { "age": 15, "gender": "Male", "relationship_to_head": "Child" }
+  ]
+}
+
+Now generate a new household for {LOCATION}, using the following information:
+
+- {N_HOUSEHOLDS} of {TOTAL_HOUSEHOLDS} households generated
+- Current vs. target stats: 
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+Increase representation in under-target age brackets. Avoid oversampling any age group. Ensure age-appropriate family relationships. Return JSON only — do not include markdown formatting, code fences, or backticks.

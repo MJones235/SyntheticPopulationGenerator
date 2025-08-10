@@ -1,0 +1,24 @@
+**Generate household for {LOCATION} using priority order:**  
+
+1. **SIZE**: Select from most underrepresented in:  
+   {HOUSEHOLD_SIZE_STATS}  
+2. **COMPOSITION**: Match least-represented feasible type:  
+   {HOUSEHOLD_COMPOSITION_STATS}  
+3. **MEMBERS**:  
+   - Ages: Prioritize largest gaps from {AGE_STATS}  
+   - Genders: Balance using {GENDER_STATS}  
+   - Relationships: STRICTLY use official terms (e.g., "Child" not "Son")  
+
+**JSON Requirements**:  
+- First member: "Head"  
+- Valid relationships ONLY (reference: Head, Spouse, Child, Child-in-law, Parent, Parent-in-law, Sibling, Sibling-in-law, Grandchild, Grandparent, Aunt, Uncle, Nephew, Niece, Cousin, Partner, Housemate, Lodger)  
+- Example valid "Other" household:  
+```json
+{
+  "household": [
+    {"age": 32, "gender": "Female", "relationship_to_head": "Head"},
+    {"age": 25, "gender": "Male", "relationship_to_head": "Housemate"}
+  ]
+}
+
+Do not include markdown formatting, code fences, or backticks.

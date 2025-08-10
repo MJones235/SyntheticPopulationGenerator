@@ -1,0 +1,26 @@
+**Generate household adhering to:**
+
+- **HARD RELATIONSHIPS**: Use ONLY: Head, Spouse, Child, Child-in-law, Parent, Parent-in-law, Sibling, Sibling-in-law, Grandchild, Grandparent, Aunt, Uncle, Nephew, Niece, Cousin, Partner, Housemate, Lodger
+
+- **PRIMARY CONSTRAINT**: Household composition from most underrepresented category:
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+- **SECONDARY CONSTRAINTS**:
+
+{HOUSEHOLD_SIZE_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+**Output JSON structure**:
+{
+  "household": [ 
+    {"age": INTEGER, "gender": "Male"|"Female", "relationship_to_head": "Head"}, 
+    // Additional members with valid relationships
+  ]
+}
+
+*Ensure: Head first, plausible ages, no invented relationships.*
+Do not include markdown formatting, code fences, or backticks.

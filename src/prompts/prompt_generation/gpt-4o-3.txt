@@ -1,0 +1,34 @@
+Please construct one new household for {LOCATION}, using the following procedure:
+
+1. Examine the difference between current and target values in the following distributions:
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{HOUSEHOLD_SIZE_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+2. Identify which household types and member characteristics are underrepresented.
+3. Select a household structure that increases representation in those areas.
+4. Populate the household with realistic individuals:
+   - First member must be the Head (adult).
+   - Assign plausible relationships (e.g., Spouse, Child, Lodger).
+5. Maintain realism in age relationships (e.g., parents older than children).
+
+Output only a JSON object with this structure — do not include markdown formatting, code fences, or backticks:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": one of [
+        "Head", "Spouse", "Child", "Child-in-law", "Parent", "Parent-in-law",
+        "Sibling", "Sibling-in-law", "Grandchild", "Grandparent", "Aunt", "Uncle",
+        "Nephew", "Niece", "Cousin", "Partner", "Housemate", "Lodger"
+      ]
+    }
+  ]
+}

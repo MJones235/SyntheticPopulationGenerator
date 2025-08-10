@@ -1,0 +1,25 @@
+Please return a JSON object matching the following structure:
+
+{
+  "household": [
+    {
+      "age": INTEGER (0–120),
+      "gender": "Male" or "Female",
+      "relationship_to_head": "Head" | "Spouse" | "Child" | ...
+    }
+  ]
+}
+
+This household will be part of a synthetic population for {LOCATION}.  
+{N_HOUSEHOLDS} out of {TOTAL_HOUSEHOLDS} have been generated.  
+Use the following distribution statistics to guide your choices:
+
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+Select a household size and structure that are underrepresented. Avoid inflating segments already above target. Prioritise plausible combinations (e.g., parents with children, lodgers in shared households). Output only valid JSON — do not include markdown formatting, code fences, or backticks.
