@@ -109,6 +109,8 @@ class DBManager:
             top_k INTEGER,
             execution_time REAL,
             prompt TEXT,
+            prompt_name TEXT,
+            num_households INTEGER,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             include_stats BOOLEAN,
             include_guidance BOOLEAN,

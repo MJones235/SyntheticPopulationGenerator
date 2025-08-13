@@ -30,7 +30,7 @@ experiment_run_service = ExperimentRunService()
 load_dotenv("secrets.env")
 
 model = OpenAIModel(
-    model_name="gpt-4o-mini",
+    model_name="gpt-4o",
     api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.7,
     top_p=0.85,
@@ -53,10 +53,10 @@ no_household_composition = False
 include_avg_household_size = False
 custom_guidance = None
 schema = file_service.load_schema("household_schema_no_occupation_old.json")
-prompt_files = [f"prompt_generation/me-6.txt"]
+prompt_files = [f"prompt_generation/variant-2.1.txt"]
 
 for prompt_file in prompt_files:
-    n_runs = 1
+    n_runs = 5
     experiment_id = str(uuid.uuid4())
     experiment_start_time = time.time()
     prompt = file_service.load_prompt(

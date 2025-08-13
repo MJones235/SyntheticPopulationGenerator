@@ -1,0 +1,30 @@
+Generate one new household for {LOCATION}.
+
+Rules:  
+- Use the provided data on household size, composition, age, and gender to identify which categories are under-represented.  
+- Select a household size and composition to improve distribution balance:  
+  1-person → single adult  
+  2-person → couple, lone parent + child, or unrelated  
+  3+ person → family, extended family, or unrelated  
+  (Non-dependent child = 18+)  
+- Choose individuals that also correct age/gender imbalances.  
+- Each person must include:  
+  age (0–120)  
+  gender ("Male" or "Female")  
+  relationship_to_head (first is adult "Head"; choose from: Spouse, Partner, Child, Parent, Sibling, Grandchild, Grandparent, Housemate, Lodger, Aunt, Uncle, Nephew, Niece, Cousin, Child-in-law, Parent-in-law, Sibling-in-law).  
+
+Return only JSON:  
+{"household": [...]}
+
+Do not include markdown, formatting, or explanations.
+
+Data:  
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+GENERATED HOUSEHOLD:

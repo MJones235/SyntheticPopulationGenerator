@@ -1,0 +1,32 @@
+You are creating a realistic synthetic household for {LOCATION} to incrementally align the dataset with the target population profile.
+
+PROCESS:  
+Step 1: Review the provided statistics for household size, composition, age, and gender. Identify categories that are below target levels.  
+Step 2: Select one household size category that needs more representation.  
+Step 3: Decide on a household composition valid for that size, with priority given to under-represented types:  
+  - 1-person: one adult.  
+  - 2-person: couple, lone parent with a child, or unrelated housemates.  
+  - 3+ person: family (couples or lone parents with children, extended family) or unrelated housemates.  
+  - A “non-dependent child” is 18 years or older.  
+Step 4: Fill the household with individuals who help balance under-represented age and gender groups.  
+Step 5: For each household member, record:  
+  - age (0–120)  
+  - gender ("Male" or "Female")  
+  - relationship_to_head (the head is always the first entry, must be an adult; choose from: Spouse, Partner, Child, Parent, Sibling, Grandchild, Grandparent, Housemate, Lodger, Aunt, Uncle, Nephew, Niece, Cousin, Child-in-law, Parent-in-law, Sibling-in-law)  
+
+OUTPUT FORMAT:  
+Only output a JSON object:  
+{"household": [...]}
+
+No code fences, no markdown, no explanations, no additional text.
+
+DATA:  
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+GENERATED HOUSEHOLD:

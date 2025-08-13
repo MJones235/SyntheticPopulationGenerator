@@ -28,7 +28,7 @@ class OpenAIModel(BaseLLM):
         response = self.client.chat.completions.create(
             model=self.model_name,
             messages=[{"role": "user", "content": prompt}],
-            temperature=self.temperature,
+            #temperature=self.temperature,
             timeout=timeout
         )
         return response.choices[0].message.content.strip()

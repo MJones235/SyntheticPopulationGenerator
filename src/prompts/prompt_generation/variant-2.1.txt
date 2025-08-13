@@ -1,0 +1,38 @@
+TASK:  
+Generate one new household for {LOCATION} so the overall synthetic population moves closer to the target demographic distributions.
+
+---
+
+GUIDELINES:  
+1. Examine the provided household size, composition, age, and gender data.  
+2. Pick a household size that is currently under target.  
+3. Choose a valid composition for that size, giving preference to under-represented categories:  
+   - 1-person: single adult.  
+   - 2-person: couple, lone parent + child, or unrelated housemates.  
+   - 3+ person: family, extended family, or unrelated housemates.  
+   - "Non-dependent children" are aged 18+.  
+4. Fill the household with individuals from under-represented age/gender groups.  
+5. Each person must have:  
+   - age (0–120)  
+   - gender ("Male" or "Female")  
+   - relationship_to_head (first person = "Head", must be adult) from allowed values: Spouse, Partner, Child, Parent, Sibling, Grandchild, Grandparent, Housemate, Lodger, Aunt, Uncle, Nephew, Niece, Cousin, Child-in-law, Parent-in-law, Sibling-in-law.  
+
+---
+
+OUTPUT:  
+Return only JSON with `"household"` as an array of people. No code fences, no markdown, no explanations, no additional text.
+
+---
+
+DATA:  
+{HOUSEHOLD_SIZE_STATS}  
+
+{HOUSEHOLD_COMPOSITION_STATS}  
+
+{AGE_STATS}  
+
+{GENDER_STATS}  
+
+---
+
+GENERATED HOUSEHOLD:
