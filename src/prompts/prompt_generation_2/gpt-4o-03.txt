@@ -1,0 +1,28 @@
+TASK:
+Construct one additional household for the synthetic dataset in {LOCATION}. Match the population to the target distributions.
+
+SUBTASKS:
+A. Review distributions: household size, composition, age, gender.
+B. Find a household size category needing more households.
+C. Choose a matching household composition under-represented in that size.
+D. Populate the household with individuals, favouring under-supplied ages and genders.
+E. Ensure valid relationships to the head. First entry = "Head" (adult).
+
+VALID HOUSEHOLD TYPES:
+- One-person = one adult only.
+- Two-person = couple, lone parent with child, or unrelated housemates.
+- Three+ = family, extended family, or housemates.
+- Adult children = ≥18.
+
+OUTPUT FORMAT:
+Plain JSON, no commentary. Example:
+{"household":[{...},{...}]}
+
+INPUT DATA:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+FINAL DELIVERABLE:
+Return a single JSON object for the generated household.

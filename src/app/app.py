@@ -14,11 +14,11 @@ from src.services.population_service import PopulationService
 from src.services.metadata_service import MetadataService
 from src.services.file_service import FileService
 from src.utils.colour_generator import assign_household_colors
-from src.utils.plots import plot_age_pyramid, plot_household_size, plot_household_structure_bar, plot_occupation_titles, plot_occupations, plot_age_diff
+from src.utils.plots import plot_age_pyramid, plot_categories, plot_household_structure_bar, plot_occupation_titles, plot_age_diff
 import os
 import altair as alt
 
-from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_convergence_curve, compute_similarity_metrics
+from src.analysis.similarity_metrics import compute_aggregate_metrics, compute_convergence_curve, compute_similarity_metrics, get_census_age_pyramid, get_synthetic_age_pyramid
 from src.utils.aggregate_plots import plot_age_pyramid_aggregate, plot_household_size_aggregate, plot_household_structure_bar_aggregate, plot_occupations_aggregate
 
 def get_household_size_classifier(experiment):
@@ -175,13 +175,18 @@ else:
 
 
             st.title("Household Size Comparison")
-            st.pyplot(plot_household_size(hh_size_classifier.compute_observed_distribution(df), file_service.load_household_size(location)))
-        
+            st.pyplot(plot_categories(hh_size_classifier.compute_observed_distribution(df), file_service.load_household_size(location), "Household Size", "Household Size Comparison"))
 
             st.title("Age Distribution Comparison")
             if not df.empty:
                 try:
+                    age_dist_synth_pyramid = get_synthetic_age_pyramid(df)
+                    age_dist_census_pyramid = get_census_age_pyramid(FileService().load_age_pyramid(location))
+                    age_dist_synth = (age_dist_synth_pyramid.sum(axis=1)).to_dict()
+                    age_dist_census = (age_dist_census_pyramid.sum(axis=1)).to_dict()
+
                     census_age_df = file_service.load_age_pyramid(location)
+                    st.pyplot(plot_categories(age_dist_synth, age_dist_census, "Age Group", "Age Distribution Comparison"))
                     st.pyplot(plot_age_pyramid(df, census_age_df))
                 except Exception as e:
                     st.error(f"Failed to load or plot age pyramid: {e}")
@@ -192,7 +197,7 @@ else:
                     try:
                         census_occupation = file_service.load_occupation_distribution(location)
                         synthetic_occupation = compute_occupation_distribution(df)
-                        st.pyplot(plot_occupations(synthetic_occupation, census_occupation))
+                        st.pyplot(plot_categories(synthetic_occupation, census_occupation, "Standard Occupation Category", "Occupation Comparison"))
                         st.pyplot(plot_occupation_titles(df))
                     except Exception as e:
                         st.error(f"Failed to load or plot occupation: {e}")
@@ -219,7 +224,7 @@ else:
 
             if not df.empty:
                 try:
-                    convergence_df = compute_convergence_curve(df, location, 20, 10000, not metadata["no_occupation"], hh_type_classifier, hh_size_classifier)
+                    convergence_df = compute_convergence_curve(df, location, 100, 10000, not metadata["no_occupation"], hh_type_classifier, hh_size_classifier)
                     st.title("Convergence Curve (JSD)")
                     convergence_long_jsd = convergence_df.melt(
                         id_vars=["Variable", "n_individuals"],

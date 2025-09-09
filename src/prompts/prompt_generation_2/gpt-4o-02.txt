@@ -1,0 +1,28 @@
+INSTRUCTION:
+As the AI system, you must synthesise exactly one additional household for {LOCATION}. The objective is to iteratively construct a population that conforms to the given statistical targets.
+
+PROCEDURE:
+- Step 1: Analyse household size statistics and select a category with a shortfall.
+- Step 2: Within that size, pick a valid composition type that is under-represented.
+- Step 3: Define the individuals, making sure to balance under-represented ages and genders.
+- Step 4: Allocate each person an age, gender, and relationship_to_head. The first listed must be "Head" and must be aged ≥18.
+
+ALLOWED RELATIONSHIP VALUES:
+"Head", "Spouse", "Partner", "Child", "Parent", "Sibling", "Grandchild", "Grandparent", "Housemate", "Lodger", "Aunt", "Uncle", "Nephew", "Niece", "Cousin", "Child-in-law", "Parent-in-law", "Sibling-in-law".
+
+OUTPUT REQUIREMENT:
+Produce only raw JSON. Structure:
+{
+  "household": [
+    {"age": int, "gender": "Male/Female", "relationship_to_head": string},
+    ...
+  ]
+}
+
+REFERENCE DATA:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+END OF TASK: Generate the household now.

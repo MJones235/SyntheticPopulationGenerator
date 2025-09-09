@@ -41,7 +41,7 @@ hh_type_classifier = UKHouseholdCompositionClassifier()
 hh_size_classifier = UKHouseholdSizeClassifier()
 location = "Newcastle, UK"
 region = "E12000001"
-n_households = 500
+n_households = 2500
 batch_size = 10
 include_stats = True
 include_target = True
@@ -53,10 +53,10 @@ no_household_composition = False
 include_avg_household_size = False
 custom_guidance = None
 schema = file_service.load_schema("household_schema_no_occupation_old.json")
-prompt_files = [f"prompt_generation/variant-2.1.txt"]
+prompt_files = [f"prompt_generation/gpt-4o-1.txt"]
 
 for prompt_file in prompt_files:
-    n_runs = 5
+    n_runs = 1
     experiment_id = str(uuid.uuid4())
     experiment_start_time = time.time()
     prompt = file_service.load_prompt(

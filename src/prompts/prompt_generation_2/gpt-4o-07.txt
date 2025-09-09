@@ -1,0 +1,24 @@
+TASK: Synthesize one household for the {LOCATION} dataset.
+
+CHECKLIST:
+[ ] Look at household size statistics. Select a size below target.
+[ ] Choose a composition within that size that is under-supplied.
+[ ] Assign people, filling deficits in age and gender groups.
+[ ] First person = adult Head.
+[ ] Validate roles using the allowed list.
+[ ] Non-dependent children = 18+.
+
+ALLOWED COMPOSITIONS:
+- 1-person = one adult
+- 2-person = couple, lone parent+child, housemates
+- 3+ = family, extended family, or housemates
+
+OUTPUT:
+Only return JSON:
+{"household":[...]}
+
+REFERENCE STATS:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}

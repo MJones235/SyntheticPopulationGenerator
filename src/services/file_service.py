@@ -42,6 +42,20 @@ class FileService:
     def load_household_size(self, location: str) -> dict:
         return self._load_csv(location, "household_size.csv", 0)
         
+    def load_age_distribution(self, location: str) -> dict:
+        """Loads age distribution data aggregated across genders."""
+        try:
+            path = os.path.join(self.CENSUS_DATA, location.split(",")[0].replace(" ", "_").strip().lower(), "age_group.csv")
+            df = pd.read_csv(path)
+            
+            # Aggregate percentages by age group (Category_1), summing across genders
+            age_dist = df.groupby("Category_1")["Percentage"].sum().to_dict()
+            
+            return age_dist
+        except Exception as e:
+            print(f"Error loading age distribution for {location}: {e}")
+            return {}
+        
     def load_household_composition(self, location: str) -> dict:
         return self._load_csv(location, "household_composition.csv")
 

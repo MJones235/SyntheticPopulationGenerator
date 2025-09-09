@@ -9,44 +9,6 @@ from src.classifiers.household_type.base import HouseholdCompositionClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.analysis.similarity_metrics import get_census_age_pyramid, get_synthetic_age_pyramid
 
-
-def plot_household_size(synthetic: Dict, census: Dict):
-    all_sizes = sorted(set().union(synthetic.keys(), census.keys()))
-    synthetic = {size: synthetic.get(size, 0.0) for size in all_sizes}
-    census = {size: census.get(size, 0.0) for size in all_sizes}
-
-    fig, ax = plt.subplots(figsize=(8, 3))
-
-    bar_width = 0.4
-    indices = np.arange(len(all_sizes))
-
-    ax.bar(
-        indices - bar_width / 2,
-        census.values(),
-        bar_width,
-        label="Census Data",
-        color="blue",
-        alpha=0.6,
-    )
-    ax.bar(
-        indices + bar_width / 2,
-        synthetic.values(),
-        bar_width,
-        label="Synthetic Data",
-        color="orange",
-        alpha=0.6,
-    )
-
-    ax.set_xlabel("Household Size")
-    ax.set_ylabel("Percentage (%)")
-    ax.set_title("Comparison of Household Size Distribution")
-    ax.set_xticks(indices)
-    ax.set_xticklabels(all_sizes)
-    ax.legend()
-
-    return fig
-
-
 def plot_age_pyramid(synthetic_df: pd.DataFrame, census_df: pd.DataFrame):
 
     syn_pct = get_synthetic_age_pyramid(synthetic_df)
@@ -89,7 +51,7 @@ def plot_age_pyramid(synthetic_df: pd.DataFrame, census_df: pd.DataFrame):
     return fig
 
 
-def plot_occupations(synthetic: dict, census: dict):
+def plot_categories(synthetic: dict, census: dict, x_label: str, title: str):
     all_categories = sorted(set(synthetic.keys()).union(set(census.keys())))
     synthetic = {size: synthetic.get(size, 0.0) for size in all_categories}
     census = {size: census.get(size, 0.0) for size in all_categories}
@@ -116,9 +78,9 @@ def plot_occupations(synthetic: dict, census: dict):
         alpha=0.6,
     )
 
-    ax.set_xlabel("Standard Occupation Category")
+    ax.set_xlabel(x_label)
     ax.set_ylabel("Percentage (%)")
-    ax.set_title("Comparison of Occupation Distribution")
+    ax.set_title(title)
     ax.set_xticks(indices)
     ax.set_xticklabels(all_categories)
     ax.legend()

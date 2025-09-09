@@ -1,0 +1,17 @@
+GOAL: Add exactly one household to the {LOCATION} dataset so that size, composition, age, and gender distributions approach targets.
+
+METHOD:
+- Select a household size below target.
+- Pick an under-represented composition within that size.
+- Create individuals that balance age and gender counts.
+- Ensure first entry = "Head" (adult).
+- Respect role rules.
+
+OUTPUT: JSON only, no commentary.
+{"household":[...]}
+
+DATA:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}

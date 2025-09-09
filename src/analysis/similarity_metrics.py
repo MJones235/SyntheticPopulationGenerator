@@ -7,7 +7,7 @@ from src.classifiers.household_size.uk_census import UKHouseholdSizeClassifier
 from src.classifiers.household_type.base import HouseholdCompositionClassifier
 from src.classifiers.household_type.uk_census import UKHouseholdCompositionClassifier
 from src.services.file_service import FileService
-from src.analysis.distributions import compute_occupation_distribution, compute_partner_age_diff_distribution
+from src.analysis.distributions import compute_occupation_distribution, compute_partner_age_diff_distribution, compute_age_distribution, compute_gender_distribution
 from src.utils.age_bands import assign_age_band, get_age_band_labels
 
 
@@ -71,6 +71,27 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, include_occupati
     age_synth = get_synthetic_age_pyramid(df).stack().to_list()
     age_census = get_census_age_pyramid(FileService().load_age_pyramid(location)).stack().to_list()
     age_result = compute_metrics(age_synth, age_census)
+    
+    # Compute separate age distribution metrics (aggregated across genders)
+    # Reuse the age pyramid data but sum across genders
+    age_dist_synth_pyramid = get_synthetic_age_pyramid(df)
+    age_dist_census_pyramid = get_census_age_pyramid(FileService().load_age_pyramid(location))
+    
+    age_dist_synth_dict = (age_dist_synth_pyramid.sum(axis=1)).to_dict()
+    age_dist_census_dict = (age_dist_census_pyramid.sum(axis=1)).to_dict()
+    
+    all_age_categories = sorted(set(age_dist_synth_dict.keys()).union(set(age_dist_census_dict.keys())))
+    age_dist_synth = list({category: age_dist_synth_dict.get(category, 0.0) for category in all_age_categories}.values())
+    age_dist_census = list({category: age_dist_census_dict.get(category, 0.0) for category in all_age_categories}.values())
+    age_dist_result = compute_metrics(age_dist_synth, age_dist_census)
+    
+    # Compute sex distribution metrics
+    sex_synth_dict = compute_gender_distribution(df)
+    sex_census_dict = FileService().load_sex_distribution(location)
+    all_sex_categories = sorted(set(sex_synth_dict.keys()).union(set(sex_census_dict.keys())))
+    sex_synth = list({category: sex_synth_dict.get(category, 0.0) for category in all_sex_categories}.values())
+    sex_census = list({category: sex_census_dict.get(category, 0.0) for category in all_sex_categories}.values())
+    sex_result = compute_metrics(sex_synth, sex_census)
 
     if include_occupation:
         occupation_synth_dict = compute_occupation_distribution(df)
@@ -102,6 +123,8 @@ def compute_similarity_metrics(df: pd.DataFrame, location: str, include_occupati
     results = [
         {'Variable': 'Household Size', **hh_size_result},
         {'Variable': 'Age/Gender Pyramid', **age_result},
+        {'Variable': 'Age Distribution', **age_dist_result},
+        {'Variable': 'Sex Distribution', **sex_result},
         {'Variable': 'Household Composition', **hh_type_result}
     ]
 

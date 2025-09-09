@@ -1,0 +1,26 @@
+OUTPUT SPECIFICATION:
+You must provide a single JSON object with the key "household". It should contain an array of people, each with:
+- "age": integer 0–120
+- "gender": "Male" or "Female"
+- "relationship_to_head": valid string (first must be "Head", an adult)
+
+TASK DESCRIPTION:
+Generate one additional household for the synthetic population of {LOCATION}, aiming to reduce deviation from target distributions.
+
+RULES:
+- Always check household size distribution first; select a category below target.
+- Within that size, choose a composition type that is under-represented.
+- Draw individuals from under-supplied age and gender categories.
+- Conform to composition rules:
+   * 1-person = single adult
+   * 2-person = couple, lone parent+child, or unrelated housemates
+   * 3+ = family, extended family, or housemates
+   * 18+ = non-dependent child
+
+REFERENCE INPUTS:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+END: Return only the JSON household.

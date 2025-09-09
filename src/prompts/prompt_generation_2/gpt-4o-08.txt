@@ -1,0 +1,31 @@
+TASK CONTEXT:
+We are constructing a synthetic population for {LOCATION}. Your role is to generate one new household at a time until the dataset matches statistical distributions. You are currently tasked with producing a single household.
+
+WORKFLOW:
+1. Review the supplied distributions of household size, household composition, age, and gender.
+2. Identify a shortfall in household size.
+3. Select a suitable household composition from that size, prioritising those least represented.
+4. Generate individuals, ensuring that under-represented ages and genders are chosen first.
+5. Ensure the household conforms to logical rules:
+   - Single-person households contain one adult.
+   - Two-person households can be couple, lone parent+child, or housemates.
+   - Three+ households can be family, extended family, or housemates.
+   - All children aged 18+ are classified as non-dependent.
+   - First person must be "Head" and aged 18+.
+
+OUTPUT STRUCTURE:
+JSON only:
+{
+ "household": [
+   {"age": X, "gender": "Male/Female", "relationship_to_head": "Head"},
+   ...
+ ]
+}
+
+DATA AVAILABLE:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+PRODUCE HOUSEHOLD NOW.

@@ -1,0 +1,24 @@
+TASK: Add one household to the {LOCATION} synthetic dataset.
+
+RULES:
+- Choose a size category below target.
+- Pick a composition type under-represented in that size.
+- One-person = adult only.
+- Two-person = couple, lone parent+child, or housemates.
+- Three+ = family, extended family, or housemates.
+- Head must be adult; other allowed roles are listed below.
+- Balance age and gender to match targets.
+
+RELATIONSHIP OPTIONS:
+Head, Spouse, Partner, Child, Parent, Sibling, Grandchild, Grandparent, Housemate, Lodger, Aunt, Uncle, Nephew, Niece, Cousin, Child-in-law, Parent-in-law, Sibling-in-law.
+
+OUTPUT FORMAT:
+{"household":[{age:int, gender:"Male/Female", relationship_to_head:string}, ...]}
+
+INPUT DATA:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+GENERATE NOW.

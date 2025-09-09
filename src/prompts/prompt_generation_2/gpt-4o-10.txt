@@ -1,0 +1,27 @@
+TASK INSTRUCTION:
+You must generate one household for {LOCATION}. The aim is to close the gap between current and target distributions.
+
+MANDATORY STEPS:
+1. You must examine household size distribution and select a category under target.
+2. You must select a household composition under-represented in that size.
+3. You must populate the household with individuals, filling gaps in age and gender groups.
+4. You must list the "Head" first (adult only).
+5. You must restrict roles to the following: Head, Spouse, Partner, Child, Parent, Sibling, Grandchild, Grandparent, Housemate, Lodger, Aunt, Uncle, Nephew, Niece, Cousin, Child-in-law, Parent-in-law, Sibling-in-law.
+
+COMPOSITION RULES:
+- One-person = adult only.
+- Two-person = couple, lone parent+child, or unrelated housemates.
+- Three+ = family, extended family, or housemates.
+- Children aged 18+ = non-dependent.
+
+OUTPUT FORMAT:
+JSON object only:
+{"household":[{age, gender, relationship_to_head}, ...]}
+
+DATA INPUT:
+{HOUSEHOLD_SIZE_STATS}
+{HOUSEHOLD_COMPOSITION_STATS}
+{AGE_STATS}
+{GENDER_STATS}
+
+END OF INSTRUCTION: Generate household now.

@@ -1,0 +1,49 @@
+You are an expert prompt engineer.
+
+# TASK:
+Given the following base prompt, generate 10 distinct variants of this prompt, each differing in wording, structure, order of information, or level of detail, while preserving the core task and meaning.  
+
+Adhere to best-practice guidelines, such as:
+1. Start with clear instructions
+2. Repeat instructions at the end
+3. Prime the output
+4. Add clear syntax
+5. Break the task down
+6. Specify the output structure
+
+# BASE PROMPT:
+TASK:
+You are an AI assistant generating a realistic synthetic population for {LOCATION}.
+Your goal is to add one new household to a growing dataset, so that the generated population matches target distributions.
+
+---
+
+INSTRUCTIONS:
+1. Review the current and target distributions for household size, composition, age, and gender (provided below).
+2. Select a household size category where the current count is below its target.
+3. Choose a valid household composition for the selected size, prioritizing categories that are currently under-represented.
+    - 1-person: contains a single adult of any age.
+    - 2-person: can be either a couple, a lone parent with a child, or unrelated housemates.
+    - 3+ person: can be a family (couples or lone parents with children, extended family), or unrelated housemates.
+    - Non-dependent children are aged 18 or older.
+4. Select individuals for the household, prioritizing under-represented age groups and genders.
+5. For each person, include:
+    - age (0–120)
+    - gender ("Male" or "Female")
+    - relationship_to_head (first must be "Head" and be an adult; valid values: "Spouse", "Partner", "Child", "Parent", "Sibling", "Grandchild", "Grandparent", "Housemate", "Lodger", "Aunt", "Uncle", "Nephew", "Niece", "Cousin", "Child-in-law", "Parent-in-law", "Sibling-in-law")
+6. Output only a JSON object with a "household" array containing these individuals. Do not include markdown, formatting, or explanations.
+
+---
+
+DATA:
+{HOUSEHOLD_SIZE_STATS}
+
+{HOUSEHOLD_COMPOSITION_STATS}
+
+{AGE_STATS}
+
+{GENDER_STATS}
+
+---
+
+GENERATED HOUSEHOLD:
